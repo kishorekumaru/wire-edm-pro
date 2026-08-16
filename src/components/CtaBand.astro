@@ -1,0 +1,64 @@
+---
+interface Props {
+  heading?: string;
+  body?: string;
+}
+const {
+  heading = "Send us the drawing.",
+  body = "Email a drawing, STEP file or sketch and we'll come back with an honest answer on feasibility, lead time and price.",
+} = Astro.props;
+---
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div data-reveal>
+      <h2>{heading}</h2>
+      <p>{body}</p>
+    </div>
+    <a class="btn cta-band__btn" href="/contact/" data-reveal style="--reveal-i: 1">Get a quote</a>
+  </div>
+</section>
+
+<style>
+  /* Denim blue band, white type */
+  .cta-band {
+    padding-block: var(--space-2xl);
+    background: var(--color-accent);
+  }
+  .cta-band__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+  }
+  .cta-band h2 { font-size: var(--text-xl); color: #ffffff; }
+  .cta-band p {
+    margin-top: var(--space-xs);
+    color: #ffffff;
+    max-width: 48ch;
+  }
+  /* White-on-blue, matching the band's type: ghost button, fills white on hover */
+  .cta-band__btn {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    background-image: linear-gradient(#ffffff, #ffffff);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 0% 100%;
+    transition: background-size 320ms var(--ease-out),
+                color 200ms var(--ease-out),
+                transform 100ms var(--ease-out);
+  }
+  .cta-band__btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #ffffff;
+  }
+  .cta-band__btn:hover { background-size: 100% 100%; color: var(--color-accent); transform: translateY(-1.5px); }
+  .cta-band__btn:active { transform: translateY(0); }
+</style>

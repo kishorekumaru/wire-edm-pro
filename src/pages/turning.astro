@@ -1,0 +1,40 @@
+---
+import ServicePage from "../components/ServicePage.astro";
+
+const specs = [
+  { name: "General tolerance", value: "±0.01 mm", note: "typical on critical turned diameters" },
+  { name: "Batch size", value: "1 – repeat production", note: "single spares through scheduled batches" },
+  { name: "Threading", value: "metric, imperial, custom", note: "single-point threaded to gauge" },
+  { name: "Materials", value: "steels, stainless, alloys", note: "including titanium and heat-resistant grades" },
+  { name: "Finishing", value: "in-house EDM follow-up", note: "hardened keyways and flats added after heat treatment by EDM" },
+];
+
+const applications = [
+  {
+    name: "Shafts, pins & bushes",
+    body: "Drive shafts, locating pins, wear bushes and rollers turned to drawing. Including hardened-and-ground replacements measured from worn originals.",
+  },
+  {
+    name: "Threaded & mating components",
+    body: "Adaptors, nuts, spindles and custom fasteners single-point threaded to gauge, so mating parts assemble by hand and lock under load.",
+  },
+  {
+    name: "Mining & plant spares",
+    body: "Turned wear components in abrasion-resistant and stainless grades, quoted from a drawing or a worn sample when the OEM lead time is measured in months.",
+  },
+];
+---
+<ServicePage
+  title="CNC Turning Solutions, Sydney | Wire EDM Pro"
+  description="CNC turning in Sydney: shafts, bushes, pins and threaded components in steels, stainless and exotic alloys. From single spares to repeat production, with EDM finishing in-house."
+  heroKicker="CNC turning"
+  heroTitle="Round parts, straight answers."
+  heroImage="/images/workshop-floor"
+  heroImageAlt="Wire EDM Pro workshop floor in Sydney with CNC machines"
+  heroLede="Turned components sit in almost every assembly we see. Shafts, bushes, pins, adaptors and custom fasteners. We turn them to drawing in steels, stainless and exotic alloys, and when a hardened keyway or flat is needed afterwards, our EDM machines add it without softening the part."
+  specs={specs}
+  specNote="Capacity and tolerance depend on part geometry and material; both are confirmed when we quote your drawing."
+  applications={applications}
+  ctaHeading="From worn sample to new part."
+  ctaBody="No drawing? Send the worn component. We measure, draw and machine the replacement."
+/>

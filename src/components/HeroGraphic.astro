@@ -1,0 +1,195 @@
+---
+/**
+ * Full-width hero background: XYZ coordinate grid + a wire-EDM sample part
+ * that tilts in 3D and parallaxes "inside out" on mouse move. The innermost
+ * cut form floats deepest, callouts ride above it. Vanilla JS pointer
+ * tracking, CSS 3D transforms, no libraries.
+ *
+ * PLACEHOLDER IMAGE: /images/hero-sample-part.webp is a manufacturer's photo
+ * supplied by the client as a stand-in. Listed in CONTENT-TODO.md for
+ * replacement with the client's own part photography before go-live.
+ */
+---
+<div class="hg" id="hero-graphic" aria-hidden="true">
+  <svg class="hg__bg" viewBox="0 0 1600 640" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="hg-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+        <path d="M 26 0 L 0 0 0 26" fill="none" class="hg__gridline" />
+      </pattern>
+      <marker id="hg-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 8 4 L 0 8 z" class="hg__arrowhead" />
+      </marker>
+    </defs>
+    <!-- Graph-paper backdrop (hero only) -->
+    <rect width="1600" height="640" fill="url(#hg-grid)" />
+    <!-- Axes behind the 3D part: compact origin marker at half opacity -->
+    <g class="hg__axes" opacity="0.5">
+      <line x1="1120" y1="370" x2="1165" y2="393" marker-end="url(#hg-arrow)" />
+      <line x1="1120" y1="370" x2="1078" y2="392" marker-end="url(#hg-arrow)" />
+      <line x1="1120" y1="370" x2="1120" y2="307" marker-end="url(#hg-arrow)" />
+      <text x="1173" y="404" class="hg__axis-label">X</text>
+      <text x="1061" y="404" class="hg__axis-label">Y</text>
+      <text x="1115" y="296" class="hg__axis-label">Z</text>
+    </g>
+  </svg>
+
+<!-- DRO-style coordinate readout. HTML overlay so viewBox cropping never hides it -->
+  <div class="hg__dro" aria-hidden="true">
+    <span id="dro-x">X&#8199;142.500</span>
+    <span id="dro-y">Y&#8199;036.250</span>
+    <span id="dro-z">Z&#8199;084.000</span>
+  </div>
+
+  <div class="hg__stage">
+    <div class="hg__part3d" id="hero-part"></div>
+    <span class="hg__tag" style="top: 8%; left: -4%;">inner form · ±0.005&nbsp;mm</span>
+    <span class="hg__tag" style="top: 48%; right: -8%;">three profiles, one blank</span>
+    <span class="hg__tag" style="bottom: 4%; left: 6%;">cut after hardening</span>
+  </div>
+</div>
+
+<style>
+  .hg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .hg__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: translate(calc(var(--mx, 0) * -10px), calc(var(--my, 0) * -7px));
+    transition: transform 200ms var(--ease-out);
+  }
+
+  .hg__gridline { stroke: var(--color-paper-3); stroke-width: 1; stroke-opacity: 0.4; }
+  .hg__axes line { stroke: var(--color-accent); stroke-width: 1.75; }
+  .hg__arrowhead { fill: var(--color-accent); }
+  .hg__axis-label {
+    font-family: var(--font-outlier);
+    font-size: 12px;
+    fill: var(--color-accent);
+  }
+  .hg__dro {
+    position: absolute;
+    top: var(--space-xl);
+    right: var(--page-gutter);
+    display: grid;
+    gap: 0.2rem;
+    justify-items: end;
+    font-family: var(--font-outlier);
+    font-size: 13px;
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hg__stage {
+    position: absolute;
+    top: 47%;
+    right: max(13vw, calc((100vw - 100rem) / 2 + 9vw));
+    transform: translateY(-50%);
+    width: clamp(19rem, 31vw, 32rem);
+  }
+  .hg__part3d {
+    position: relative;
+    aspect-ratio: 1 / 1.02;
+    pointer-events: auto; /* receives touch drags; mouse events bubble to the hero */
+  }
+  @media (pointer: coarse) {
+    .hg__part3d { touch-action: none; } /* drags on the prop rotate it; page scrolls elsewhere */
+  }
+  .hg__part3d :global(.hg__canvas) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hg__tag {
+    position: absolute;
+    background: var(--color-paper);
+    border: 1px solid var(--color-accent-soft);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    font-family: var(--font-outlier);
+    font-size: 12px;
+    color: var(--color-accent);
+    white-space: nowrap;
+    box-shadow: 0 4px 14px -8px oklch(25% 0.06 255 / 0.4);
+    opacity: 0;
+    transition: opacity var(--dur-long) var(--ease-out);
+  }
+  .hg__part3d[data-live] ~ .hg__tag { opacity: 1; }
+
+  @media (max-width: 68rem) {
+    /* Stack the prop under the copy: centred near the bottom of the hero */
+    .hg__stage {
+      top: auto;
+      bottom: 3%;
+      right: 50%;
+      transform: translateX(50%);
+      width: min(19rem, 74vw);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hg__bg, .hg__tilt { transform: none !important; transition: none; }
+  }
+</style>
+
+<script>
+  const hg = document.getElementById("hero-graphic");
+  const hero = hg?.closest("section");
+  const partHost = document.getElementById("hero-part");
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Background grid parallax + live DRO readout tracking the pointer
+  if (hg && hero && fine && !still) {
+    const droX = document.getElementById("dro-x");
+    const droY = document.getElementById("dro-y");
+    const droZ = document.getElementById("dro-z");
+    const FIGURE_SPACE = " ";
+    const fmt = (v: number) => v.toFixed(3).padStart(7, "0");
+    let raf = 0;
+    let nx = 0, ny = 0;
+    const apply = () => {
+      raf = 0;
+      hg.style.setProperty("--mx", nx.toFixed(3));
+      hg.style.setProperty("--my", ny.toFixed(3));
+      // Machine-style coordinates: centre of travel matches the resting values
+      // (X 142.500 / Y 036.250 / Z 084.000)
+      if (droX) droX.textContent = `X${FIGURE_SPACE}${fmt(((nx + 1) / 2) * 285)}`;
+      if (droY) droY.textContent = `Y${FIGURE_SPACE}${fmt(((1 - ny) / 2) * 72.5)}`;
+      if (droZ) droZ.textContent = `Z${FIGURE_SPACE}${fmt(((1 - ny) / 2) * 168)}`;
+    };
+    hero.addEventListener("pointermove", (e) => {
+      const r = hero.getBoundingClientRect();
+      nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    hero.addEventListener("pointerleave", () => {
+      nx = 0; ny = 0;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+  }
+
+  // 3D sample part: lazy-load Three.js only when the hero is near the viewport
+  if (partHost && hero) {
+    const load = async () => {
+      const { initSamplePart } = await import("../scripts/samplePart3d");
+      initSamplePart(partHost, hero);
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          load();
+        }
+      },
+      { rootMargin: "240px" },
+    );
+    io.observe(partHost);
+  }
+</script>

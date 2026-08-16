@@ -1,0 +1,452 @@
+---
+import { industries } from "../data/industries";
+
+const solutions = [
+  {
+    href: "/wire-edm/",
+    label: "Wire EDM & wire cutting",
+    note: "±0.005 mm profiles in hardened metal",
+    icon: '<path d="M12 2.5v11"/><rect x="4" y="13.5" width="16" height="7" rx="1"/><path d="M9 10.5l-2-1.5M15 10.5l2-1.5M9.5 7L8 6M14.5 7L16 6"/>',
+  },
+  {
+    href: "/wire-edm/",
+    label: "EDM cutting",
+    note: "spark erosion for features tooling can't reach",
+    icon: '<path d="M6 3.5h12M12 3.5v4"/><path d="M12 7.5l-2.5 4h5L12 15.5"/><path d="M5 20.5h14"/>',
+  },
+  {
+    href: "/milling/",
+    label: "Milling solutions",
+    note: "jigs, fixtures, die sets and spares",
+    icon: '<rect x="9" y="3" width="6" height="9" rx="1"/><path d="M9 12l3 8.5 3-8.5"/><path d="M12 3v9"/>',
+  },
+  {
+    href: "/turning/",
+    label: "Turning solutions",
+    note: "shafts, bushes, pins and threads",
+    icon: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2"/><path d="M12 3.5v4M4.6 16.2l3.5-2M19.4 16.2l-3.5-2"/>',
+  },
+];
+const pages = [
+  { href: "/about/", label: "About us" },
+  { href: "/faqs/", label: "FAQs" },
+];
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => path === href;
+const onSolutions = ["/wire-edm/", "/milling/", "/turning/"].includes(path);
+const onIndustries = path.startsWith("/industries/");
+---
+<header class="nav" id="site-nav">
+  <div class="nav__inner container">
+    <a class="nav__brand" href="/" aria-label="Wire EDM Pro. Home">
+      Wire<span class="nav__brand-accent">EDM</span>&nbsp;Pro
+    </a>
+    <nav class="nav__center" aria-label="Primary">
+      <div class="nav__item nav__item--menu">
+        <button
+          class="nav__link nav__link--menu"
+          type="button"
+          aria-expanded="false"
+          aria-controls="solutions-menu"
+          aria-current={onSolutions ? "true" : undefined}
+        >
+          Solutions
+          <svg class="nav__caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+            <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+        </button>
+        <div class="nav__dropdown" id="solutions-menu">
+          <div class="nav__dropdown-inner container">
+            <p class="nav__drophead">Four processes, one workshop</p>
+            <div class="nav__dropgrid nav__dropgrid--solutions">
+              {solutions.map((s) => (
+                <a class="nav__dropitem" href={s.href} aria-current={isCurrent(s.href) ? "page" : undefined}>
+                  <svg class="nav__dropicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={s.icon} />
+                  <span class="nav__dropitem-text">
+                    <b>{s.label}</b>
+                    <i>{s.note}</i>
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div class="nav__dropfoot">
+              <p>Every job is quoted, programmed and machined here. No brokering, no freight between shops.</p>
+              <div class="nav__dropfoot-links">
+                <a class="mono" href="tel:+61290000000">+61 2 9000 0000</a>
+                <a href="/contact/">Get a quote →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item nav__item--menu">
+        <button
+          class="nav__link nav__link--menu"
+          type="button"
+          aria-expanded="false"
+          aria-controls="industries-menu"
+          aria-current={onIndustries ? "true" : undefined}
+        >
+          Industries
+          <svg class="nav__caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+            <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+        </button>
+        <div class="nav__dropdown" id="industries-menu">
+          <div class="nav__dropdown-inner container">
+            <p class="nav__drophead">Solutions for every industry</p>
+            <div class="nav__dropgrid nav__dropgrid--industries">
+              {industries.map((ind) => (
+                <a
+                  class="nav__dropitem nav__dropitem--compact"
+                  href={`/industries/${ind.slug}/`}
+                  aria-current={isCurrent(`/industries/${ind.slug}/`) ? "page" : undefined}
+                >
+                  <svg class="nav__dropicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ind.icon} />
+                  <span class="nav__dropitem-text"><b>{ind.name}</b></span>
+                </a>
+              ))}
+            </div>
+            <div class="nav__dropfoot">
+              <p>Industry not listed? If the part is metal and the drawing is exact, it's probably our kind of work.</p>
+              <div class="nav__dropfoot-links">
+                <a href="/industries/">All industries →</a>
+                <a href="/contact/">Get a quote →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {pages.map((p) => (
+        <a class="nav__link" href={p.href} aria-current={isCurrent(p.href) ? "page" : undefined}>{p.label}</a>
+      ))}
+    </nav>
+    <div class="nav__right">
+      <a class="btn btn--fill nav__cta" href="/contact/">Contact us</a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile sheet -->
+  <nav class="nav__sheet" id="mobile-menu" aria-label="Primary, mobile" hidden>
+    <a class="nav__sheet-link" href="/" aria-current={path === "/" ? "page" : undefined}>Home</a>
+    <p class="nav__sheet-group">Solutions</p>
+    {solutions.map((s) => (
+      <a class="nav__sheet-link nav__sheet-link--sub" href={s.href} aria-current={isCurrent(s.href) ? "page" : undefined}>{s.label}</a>
+    ))}
+    <p class="nav__sheet-group">Industries</p>
+    <a class="nav__sheet-link nav__sheet-link--sub" href="/industries/" aria-current={path === "/industries/" ? "page" : undefined}>All industries</a>
+    {industries.map((ind) => (
+      <a class="nav__sheet-link nav__sheet-link--sub" href={`/industries/${ind.slug}/`} aria-current={isCurrent(`/industries/${ind.slug}/`) ? "page" : undefined}>{ind.name}</a>
+    ))}
+    {pages.map((p) => (
+      <a class="nav__sheet-link" href={p.href} aria-current={isCurrent(p.href) ? "page" : undefined}>{p.label}</a>
+    ))}
+    <a class="nav__sheet-link" href="/contact/" aria-current={path === "/contact/" ? "page" : undefined}>Contact us</a>
+  </nav>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    background: var(--color-surface);
+    border-bottom: 1px solid oklch(91% 0.012 258); /* neutral hairline, no blue cast */
+    transition: box-shadow 240ms var(--ease-out);
+  }
+  .nav.is-scrolled {
+    box-shadow: 0 2px 8px oklch(20% 0.01 251 / 0.07);
+  }
+
+  .nav__inner {
+    height: 64px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+  .nav__brand {
+    justify-self: start;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-md);
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav__brand-accent { color: var(--color-accent); }
+
+  .nav__center {
+    justify-self: center;
+    display: flex;
+    align-items: stretch;
+    align-self: stretch;
+    gap: 0;
+  }
+  /* Celled nav (template-inspired): full-height cells with hairline dividers */
+  .nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-base);
+    color: var(--color-ink-2);
+    text-decoration: none;
+    white-space: nowrap;
+    height: 100%;
+    padding-inline: var(--space-xl);
+    border: 0;
+    border-left: var(--rule-hairline);
+    background: none;
+    cursor: pointer;
+    transition: color var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+  }
+  .nav__center > a.nav__link:last-of-type { border-right: var(--rule-hairline); }
+  .nav__link:hover { color: var(--color-accent); background: var(--color-surface-2); }
+  .nav__link[aria-current] {
+    color: var(--color-accent);
+    background: var(--color-surface-2);
+    box-shadow: inset 0 2px 0 var(--color-accent-bright);
+  }
+  .nav__caret { transition: transform var(--dur-micro) var(--ease-out); }
+  .nav__item--menu:hover .nav__caret,
+  .nav__item--menu:focus-within .nav__caret { transform: rotate(180deg); }
+
+  /* Full-width mega panels, anchored to the header */
+  .nav__item--menu { position: static; display: flex; align-items: stretch; }
+  .nav__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    box-shadow: 0 24px 48px -28px oklch(25% 0.06 255 / 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 180ms var(--ease-out), transform 200ms var(--ease-out), visibility 180ms;
+    z-index: var(--z-dropdown);
+  }
+  .nav__item--menu:hover .nav__dropdown,
+  .nav__item--menu:focus-within .nav__dropdown,
+  .nav__dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .nav__dropdown-inner {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding: var(--space-2xl) var(--page-gutter) 0;
+  }
+  .nav__drophead {
+    font-family: var(--font-outlier);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    margin-bottom: var(--space-xl);
+  }
+  .nav__dropgrid {
+    display: grid;
+    column-gap: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+  }
+  .nav__dropgrid--solutions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: var(--space-2xl);
+  }
+  .nav__dropgrid--industries {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: var(--space-lg);
+  }
+
+  .nav__dropitem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    margin: calc(var(--space-sm) * -1) calc(var(--space-md) * -1);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background-color var(--dur-micro) var(--ease-out);
+  }
+  .nav__dropitem:hover { background: var(--color-surface-2); }
+  .nav__dropicon {
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    color: var(--color-accent);
+  }
+  .nav__dropitem-text { display: grid; gap: 0.1rem; min-width: 0; }
+  .nav__dropitem b {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .nav__dropitem i {
+    font-style: normal;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+  .nav__dropitem[aria-current="page"] b { color: var(--color-accent); }
+  .nav__dropitem--compact { align-items: center; }
+  .nav__dropitem--compact b { font-weight: 500; }
+
+  /* Info strip at the bottom of each panel */
+  .nav__dropfoot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+    margin-top: 0;
+    padding-block: var(--space-lg) var(--space-xl);
+    border-top: var(--rule-hairline);
+  }
+  .nav__dropfoot p {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    max-width: 58ch;
+  }
+  .nav__dropfoot-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+  .nav__dropfoot-links a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav__dropfoot-links a:hover { color: var(--color-ink); }
+  .nav__dropfoot-links a.mono { font-family: var(--font-outlier); font-weight: 400; }
+
+  .nav__right {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .nav__toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background: none;
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .nav__toggle-bar {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--color-ink);
+    transition: transform var(--dur-short) var(--ease-in-out);
+  }
+  .nav__toggle[aria-expanded="true"] .nav__toggle-bar:first-child { transform: translateY(3.5px) rotate(45deg); }
+  .nav__toggle[aria-expanded="true"] .nav__toggle-bar:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+  .nav__sheet {
+    display: none;
+    flex-direction: column;
+    padding: var(--space-md) var(--page-gutter) var(--space-lg);
+    background: var(--color-surface);
+    border-bottom: var(--rule-hairline);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+  }
+  .nav__sheet:not([hidden]) { display: flex; }
+  .nav__sheet-group {
+    font-family: var(--font-outlier);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    padding-block: var(--space-sm) var(--space-2xs);
+  }
+  .nav__sheet-link {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-md);
+    color: var(--color-ink);
+    text-decoration: none;
+    padding-block: var(--space-sm);
+    border-bottom: 1px solid var(--color-rule-2);
+  }
+  .nav__sheet-link--sub {
+    font-weight: 400;
+    font-size: var(--text-base);
+    padding-left: var(--space-md);
+  }
+  .nav__sheet-link[aria-current="page"] { color: var(--color-accent); }
+
+  @media (max-width: 56rem) {
+    .nav__center { display: none; }
+    .nav__toggle { display: flex; }
+    .nav__inner { grid-template-columns: auto 1fr; }
+    .nav__right { grid-column: 2; }
+  }
+  @media (max-width: 26rem) {
+    .nav__cta { display: none; }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById("site-nav")!;
+  const toggle = nav.querySelector<HTMLButtonElement>(".nav__toggle")!;
+  const sheet = nav.querySelector<HTMLElement>(".nav__sheet")!;
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      nav.classList.toggle("is-scrolled", window.scrollY > 24);
+      ticking = false;
+    });
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    toggle.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+    sheet.hidden = open;
+  });
+
+  // Click support for every dropdown menu (hover/focus handled in CSS)
+  const menus = Array.from(nav.querySelectorAll<HTMLElement>(".nav__item--menu")).map((item) => ({
+    btn: item.querySelector<HTMLButtonElement>(".nav__link--menu")!,
+    panel: item.querySelector<HTMLElement>(".nav__dropdown")!,
+  }));
+  const closeAll = () => {
+    for (const m of menus) {
+      m.btn.setAttribute("aria-expanded", "false");
+      m.panel.classList.remove("is-open");
+    }
+  };
+  for (const m of menus) {
+    m.btn.addEventListener("click", () => {
+      const open = m.btn.getAttribute("aria-expanded") === "true";
+      closeAll();
+      m.btn.setAttribute("aria-expanded", String(!open));
+      m.panel.classList.toggle("is-open", !open);
+    });
+  }
+  document.addEventListener("click", (e) => {
+    if (!(e.target as HTMLElement).closest(".nav__item--menu")) closeAll();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAll();
+  });
+</script>

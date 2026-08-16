@@ -1,0 +1,100 @@
+---
+import ServicePage from "../components/ServicePage.astro";
+
+const specs = [
+  { name: "Positional tolerance", value: "±0.005 mm", note: "typical for finish passes on stable material" },
+  { name: "Kerf width", value: "≈ 0.25–0.33 mm", note: "wire diameter plus spark gap" },
+  { name: "Hardness", value: "to 60+ HRC", note: "cuts fully hardened material. No annealing, no re-heat-treat" },
+  { name: "Surface finish", value: "to Ra 0.4 µm", note: "with multiple skim passes" },
+  { name: "Cutting force", value: "0 N", note: "non-contact erosion. Thin walls and delicate features stay flat" },
+  { name: "Materials", value: "any conductive metal", note: "tool steel, stainless, titanium, carbide, copper, exotic alloys" },
+];
+
+const applications = [
+  {
+    name: "Press tools & dies",
+    body: "Punches, dies and die sections cut after heat treatment, so the profile you receive is the profile that runs. Matched punch-and-die sets from the same program guarantee clearance.",
+  },
+  {
+    name: "Splines, keyways & internal forms",
+    body: "Forms a broach can't justify and a mill can't reach: internal splines, hexes, keyways and irregular apertures, started from a wire-threading hole anywhere in the part.",
+  },
+  {
+    name: "Medical & instrumentation components",
+    body: "Burr-free edges and no mechanical stress on small stainless and titanium parts. The wire never pushes on the work, so 0.3 mm walls come off the machine straight.",
+  },
+  {
+    name: "Repair & modification of hardened parts",
+    body: "Opening a hardened bore, splitting a seized assembly, or adding a keyway to a finished shaft. EDM works on parts that are already too hard to machine conventionally.",
+  },
+];
+---
+<ServicePage
+  title="Wire EDM & Wire Cutting Services, Sydney | Wire EDM Pro"
+  description="CNC wire EDM and wire cutting in Sydney: ±0.005 mm tolerances, hardened steel to 60+ HRC, burr-free profiles in any conductive metal. Quotes from drawings or STEP files."
+  heroKicker="wire EDM · wire cutting · EDM cutting"
+  heroTitle="The wire never touches the work."
+  heroImage="/images/fanuc-robocut-0id"
+  heroImageAlt="Fanuc Robocut α-0iD wire EDM machine at Wire EDM Pro, Sydney"
+  heroLede="Wire EDM erodes metal with a spark, not a cutting edge. A charged brass wire, ≈0.25 mm thin, traces the programmed profile while dielectric water flushes the gap. So hardened steel cuts as readily as aluminium, and the part feels no force at all."
+  specs={specs}
+  specNote="Figures are typical wire EDM process capability; tolerance and finish for your part depend on geometry, material and thickness. We confirm both at quote."
+  applications={applications}
+  ctaHeading="Hardened, thin or awkward?"
+  ctaBody="Those are the jobs wire EDM was built for. Send the drawing and we'll tell you if there's a cheaper way. Or if this is the only way."
+>
+  <section slot="deep" class="edm-vs section">
+    <div class="container edm-vs__grid">
+      <div>
+        <h2>When wire EDM beats the mill</h2>
+        <p class="edm-vs__body">
+          Milling and turning remove metal by force; EDM removes it by spark erosion. That
+          difference decides which process your part wants. Cut <em>after</em> hardening and the
+          profile can't move in heat treatment. Cut without contact and thin webs don't deflect.
+          Cut with a wire and an inside corner needs only the kerf's radius. Not a cutter's.
+        </p>
+      </div>
+      <ul class="edm-vs__list">
+        <li>Part is already hardened, or must not be re-heat-treated</li>
+        <li>Inside corners tighter than any available cutter radius</li>
+        <li>Walls or webs too thin to survive clamping and cutting force</li>
+        <li>Profile accuracy matters more than removal rate</li>
+        <li>Burrs are unacceptable and hand-finishing is not an option</li>
+      </ul>
+    </div>
+  </section>
+</ServicePage>
+
+<style>
+  .edm-vs { padding-block: var(--space-2xl); }
+  .edm-vs__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .edm-vs h2 { font-size: var(--text-xl); max-width: 22ch; }
+  .edm-vs__body { margin-top: var(--space-md); color: var(--color-muted); }
+  .edm-vs__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .edm-vs__list li {
+    padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+    border-bottom: var(--rule-hairline);
+    position: relative;
+  }
+  .edm-vs__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.15em;
+    width: 0.55rem;
+    height: 2px;
+    background: var(--color-accent);
+  }
+  @media (max-width: 56rem) {
+    .edm-vs__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+  }
+</style>

@@ -1,0 +1,82 @@
+/* Hallmark · macrostructure: Split Studio (revised: photo/3D-led corporate)
+ * theme: custom · vibe: "industrial precision, cool, technical" · paper: oklch(98.5% 0.006 239) · accent: oklch(59.8% 0.093 242)
+ * palette: Denim Dreams — Deep Indigo #1E3A8A · Soft Sky #BFDBFE · Vibrant #3B82F6 · Light #60A5FA (client revision 3, 2026-08-16)
+ * display+body: Open Sans (client request) · outlier: JetBrains Mono (technical figures) · axes: light / grotesk-sans / cool
+ * nav: mega-menu two-panel · footer: Ft1 · enrichment: procedural Three.js sample part · studied: no · context: user-provided
+ */
+
+:root {
+  /* Client palette (2026-08-16, third revision) — "Denim Dreams":
+     Deep Indigo #1E3A8A · Soft Sky #BFDBFE · Vibrant Blue #3B82F6 · Light Blue #60A5FA */
+  --color-paper:      oklch(98.5% 0.005 262);        /* near-white, sky-tinted */
+  --color-surface:    #ffffff;                        /* chrome surfaces: header, menus */
+  --color-surface-2:  oklch(97.3% 0.004 262);         /* menu-item hover */
+  --color-paper-2:    oklch(88.2% 0.057 254.1);      /* #BFDBFE Soft Sky — panels, elevation */
+  --color-paper-3:    oklch(83% 0.070 254);          /* deeper panel tint */
+  --color-rule:       oklch(85% 0.045 256);          /* hairlines on light */
+  --color-rule-2:     oklch(90% 0.030 258);
+  --color-muted:      oklch(46% 0.050 262);          /* indigo-grey secondary text */
+  --color-neutral:    oklch(56% 0.070 260);
+  --color-ink:        oklch(37.9% 0.138 265.5);      /* #1E3A8A Deep Indigo — primary text, deep band */
+  --color-ink-2:      oklch(44% 0.115 264);
+  --color-accent:     oklch(48% 0.170 260);          /* Vibrant Blue, deepened for AA text/fills */
+  --color-accent-bright: oklch(62.3% 0.188 259.8);   /* #3B82F6 Vibrant Blue — large text, icons, graphics */
+  --color-accent-soft: oklch(71.4% 0.143 254.6);     /* #60A5FA Light Blue — marks on dark, soft borders */
+  --color-accent-deep: oklch(40% 0.150 262);        /* hover shade for filled buttons */
+  --color-focus:      oklch(52% 0.180 260);
+  /* On the deep band (#1E3A8A surfaces) */
+  --color-deep:       oklch(37.9% 0.138 265.5);
+  --color-deep-2:     oklch(44% 0.125 264);          /* elevation on dark = lighter */
+  --color-on-deep:    oklch(88.2% 0.057 254.1);
+  --color-on-deep-muted: oklch(80% 0.055 256);
+
+  /* Type — Open Sans at the user's request (display + body); mono for technical figures */
+  --font-display: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: "JetBrains Mono", ui-monospace, monospace; /* technical figures only */
+
+  /* Scale — tightened overall (≈12% smaller steps above base) */
+  --text-sm:   0.8rem;
+  --text-base: 1rem;
+  --text-md:   1.125rem;
+  --text-lg:   1.375rem;
+  --text-xl:   1.75rem;
+  --text-2xl:  2.1rem;
+  --text-3xl:  2.6rem;
+  --text-display-s: clamp(1.9rem, 2.8vw + 0.7rem, 2.9rem);
+  --text-display:   clamp(2.4rem, 4vw + 0.9rem, 4.2rem);
+
+  /* Spacing — 4pt scale */
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+
+  /* Structure — full-width corporate layout */
+  --page-max: 100rem;
+  --page-gutter: clamp(1.25rem, 4.5vw, 4.5rem);
+  --rule-hairline: 1px solid var(--color-rule);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Z scale */
+  --z-base: 1;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 400;
+  --z-toast: 500;
+}

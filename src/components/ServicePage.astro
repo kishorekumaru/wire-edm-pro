@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "./CtaBand.astro";
+
+interface Spec {
+  name: string;
+  value: string;
+  note?: string;
+}
+interface Application {
+  name: string;
+  body: string;
+}
+interface Props {
+  title: string;
+  description: string;
+  heroKicker: string;
+  heroTitle: string;
+  heroLede: string;
+  heroImage?: string;
+  heroImageAlt?: string;
+  specs: Spec[];
+  specNote?: string;
+  applications: Application[];
+  ctaHeading?: string;
+  ctaBody?: string;
+}
+const {
+  title, description, heroKicker, heroTitle, heroLede,
+  heroImage, heroImageAlt,
+  specs, specNote, applications, ctaHeading, ctaBody,
+} = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <section class="svc-hero">
+    <div class="container svc-hero__grid">
+      <div>
+        <p class="svc-hero__kicker mono">{heroKicker}</p>
+        <h1>{heroTitle}</h1>
+        <p class="svc-hero__lede">{heroLede}</p>
+        <div class="svc-hero__actions">
+          <a class="btn btn--fill" href="/contact/">Get a quote</a>
+        </div>
+      </div>
+      {heroImage && (
+        <figure class="svc-hero__media">
+          <img
+            class="photo"
+            src={`${heroImage}.jpg`}
+            srcset={`${heroImage}-800.jpg 800w, ${heroImage}.jpg 1600w`}
+            sizes="(max-width: 56rem) 100vw, 45vw"
+            width="1600" height="900"
+            alt={heroImageAlt}
+            fetchpriority="high"
+          />
+        </figure>
+      )}
+    </div>
+  </section>
+
+  <slot name="deep" />
+
+  <section class="section section--panel">
+    <div class="container">
+      <div class="section-head">
+        <h2>Capability</h2>
+        <p>What this process holds, cuts and finishes.</p>
+      </div>
+      <table class="spec-sheet tnum">
+        <caption class="visually-hidden">{heroTitle}. Capability specification</caption>
+        <tbody>
+          {specs.map((s) => (
+            <tr>
+              <th scope="row">{s.name}</th>
+              <td class="mono">{s.value}</td>
+              <td class="spec-sheet__note">{s.note}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {specNote && <p class="spec-sheet__foot">{specNote}</p>}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Where it earns its keep</h2>
+      </div>
+      <div class="apps">
+        {applications.map((a) => (
+          <div class="apps__row">
+            <h3>{a.name}</h3>
+            <p>{a.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading={ctaHeading} body={ctaBody} />
+</BaseLayout>
+
+<style>
+  .svc-hero { padding-block: var(--space-2xl); }
+  .svc-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  .svc-hero__kicker {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .svc-hero h1 {
+    font-size: var(--text-display-s);
+    max-width: 20ch;
+  }
+  .svc-hero__lede {
+    margin-top: var(--space-lg);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 58ch;
+  }
+  .svc-hero__actions { margin-top: var(--space-xl); }
+  .svc-hero__media { margin: 0; }
+  .svc-hero__media img { aspect-ratio: 16 / 10; }
+  @media (max-width: 56rem) {
+    .svc-hero__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+  }
+
+  .spec-sheet {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .spec-sheet th, .spec-sheet td {
+    text-align: left;
+    padding: var(--space-sm) var(--space-lg) var(--space-sm) 0;
+    border-bottom: var(--rule-hairline);
+    vertical-align: top;
+  }
+  .spec-sheet th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    width: 14rem;
+  }
+  .spec-sheet td.mono { white-space: nowrap; }
+  .spec-sheet__note { color: var(--color-muted); }
+  .spec-sheet__foot {
+    margin-top: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .apps__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr);
+    gap: var(--space-lg);
+    padding-block: var(--space-lg);
+    border-top: var(--rule-hairline);
+  }
+  .apps__row:last-child { border-bottom: var(--rule-hairline); }
+  .apps__row h3 { font-size: var(--text-lg); }
+  .apps__row p { color: var(--color-muted); }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  @media (max-width: 56rem) {
+    .apps__row { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
+    .spec-sheet__note { display: none; }
+    .spec-sheet th { width: auto; }
+  }
+</style>

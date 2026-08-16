@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Page not found | Wire EDM Pro"
+  description="That page doesn't exist. Find Wire EDM Pro's machining services from the home page."
+>
+  <section class="nf section">
+    <div class="container">
+      <p class="nf__code mono">404</p>
+      <h1>That page isn't here.</h1>
+      <p class="nf__body">The address may have changed, or the link was mistyped. Everything we do is reachable from the home page.</p>
+      <a class="btn btn--fill" href="/">Go to the home page</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf__code { color: var(--color-accent); font-size: var(--text-md); }
+  .nf h1 { font-size: var(--text-2xl); margin-top: var(--space-xs); }
+  .nf__body { margin-block: var(--space-md) var(--space-xl); color: var(--color-muted); }
+</style>

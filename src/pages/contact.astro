@@ -1,0 +1,289 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Configure at build time: PUBLIC_FORM_ENDPOINT=https://formspree.io/f/XXXX npm run build
+// When unset, the form falls back to mailto: so enquiries still reach the workshop.
+const formEndpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? "";
+const contactEmail = "enquiries@wireedmpro.com.au";
+---
+<BaseLayout
+  title="Contact Wire EDM Pro | Quotes & Enquiries, Sydney"
+  description="Get a machining quote from Wire EDM Pro in Sydney. Send a drawing, STEP file or sketch for wire EDM, EDM cutting, CNC milling or CNC turning work."
+>
+  <section class="contact section--tight">
+    <div class="container">
+      <h1>Send us the job.</h1>
+      <p class="contact__lede">
+        A drawing, a STEP file, a photo of a worn part. Whatever you have, send it.
+        We quote from real information, so the price we give is the price you pay.
+      </p>
+
+      <div class="contact__grid">
+        <div class="contact__info">
+          <dl class="contact__details">
+            <div>
+              <dt>Workshop</dt>
+              <dd>Sydney, New South Wales, Australia</dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd><a href="tel:+61290000000" class="mono">+61 2 9000 0000</a></dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><a href={`mailto:${contactEmail}`}>{contactEmail}</a></dd>
+            </div>
+            <div>
+              <dt>Hours</dt>
+              <dd>Monday–Friday, 7:00&nbsp;am – 4:00&nbsp;pm</dd>
+            </div>
+          </dl>
+
+          <figure class="contact__map">
+            <img
+              class="photo"
+              src="/images/building-exterior-800.jpg"
+              srcset="/images/building-exterior-800.jpg 800w, /images/building-exterior.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 35vw"
+              width="800" height="450"
+              alt="The Wire EDM Pro premises in Sydney. Unit 16, with signage above the roller door"
+              loading="lazy"
+            />
+            <figcaption>Full street address supplied with every quotation.</figcaption>
+          </figure>
+        </div>
+
+        <form
+          class="enquiry"
+          id="enquiry-form"
+          method="POST"
+          action={formEndpoint || `mailto:${contactEmail}`}
+          data-endpoint={formEndpoint}
+          novalidate
+        >
+          <div class="enquiry__row">
+            <div class="enquiry__field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required />
+              <p class="enquiry__error" data-error-for="f-name" hidden>Enter your name so we know who to reply to.</p>
+            </div>
+            <div class="enquiry__field">
+              <label for="f-company">Company <span class="muted">(optional)</span></label>
+              <input id="f-company" name="company" type="text" autocomplete="organization" />
+            </div>
+          </div>
+          <div class="enquiry__row">
+            <div class="enquiry__field">
+              <label for="f-email">Email address</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required />
+              <p class="enquiry__error" data-error-for="f-email" hidden>That email address doesn't look complete. Check it and try again.</p>
+            </div>
+            <div class="enquiry__field">
+              <label for="f-phone">Phone <span class="muted">(optional)</span></label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="enquiry__field">
+            <label for="f-service">Service of interest</label>
+            <select id="f-service" name="service" required>
+              <option value="">Choose a service</option>
+              <option>Wire EDM / wire cutting</option>
+              <option>EDM cutting</option>
+              <option>CNC milling</option>
+              <option>CNC turning</option>
+              <option>Not sure. Advise me</option>
+            </select>
+            <p class="enquiry__error" data-error-for="f-service" hidden>Pick the closest service. "not sure" is a fine answer.</p>
+          </div>
+          <div class="enquiry__field">
+            <label for="f-message">About the job</label>
+            <textarea id="f-message" name="message" rows="5" required placeholder="Material, quantity, timeframe. And attach the drawing to our reply email."></textarea>
+            <p class="enquiry__error" data-error-for="f-message" hidden>Tell us a little about the job. Material, quantity and timeframe are the useful bits.</p>
+          </div>
+          <!-- Honeypot: real visitors never see or fill this -->
+          <div class="enquiry__hp" aria-hidden="true">
+            <label for="f-website">Website</label>
+            <input id="f-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <button class="btn btn--fill" type="submit">Send enquiry</button>
+          <p class="enquiry__status" data-status role="status" aria-live="polite" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact { padding-block: var(--space-2xl) var(--space-3xl); }
+  .contact h1 { font-size: var(--text-display-s); }
+  .contact__lede {
+    margin-top: var(--space-md);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 54ch;
+  }
+  .contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-2xl);
+    margin-top: var(--space-2xl);
+    align-items: start;
+  }
+  .contact__details {
+    margin: 0;
+    display: grid;
+    gap: var(--space-md);
+  }
+  .contact__details dt {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+  .contact__details dd {
+    margin: var(--space-2xs) 0 0;
+    font-weight: 500;
+  }
+  .contact__map { margin: var(--space-xl) 0 0; }
+  .contact__map svg { width: 100%; border-radius: var(--radius-md); }
+  .contact__map figcaption {
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .enquiry {
+    background: var(--color-paper-2);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    display: grid;
+    gap: var(--space-lg);
+  }
+  .enquiry__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+  }
+  .enquiry__field { display: grid; gap: var(--space-2xs); }
+  .enquiry__field label {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--text-sm);
+  }
+  .enquiry__field input,
+  .enquiry__field select,
+  .enquiry__field textarea {
+    font: inherit;
+    color: var(--color-ink);
+    background: var(--color-paper);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.75rem;
+    min-height: 44px;
+    transition: border-color var(--dur-short) var(--ease-out);
+  }
+  .enquiry__field textarea { resize: vertical; min-height: 7rem; }
+  .enquiry__field input:hover,
+  .enquiry__field select:hover,
+  .enquiry__field textarea:hover { border-color: var(--color-neutral); }
+  .enquiry__field input:focus-visible,
+  .enquiry__field select:focus-visible,
+  .enquiry__field textarea:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 1px;
+    border-color: var(--color-accent);
+  }
+  .enquiry__field .is-invalid {
+    border-color: oklch(50% 0.16 25);
+  }
+  .enquiry__error {
+    font-size: var(--text-sm);
+    color: oklch(45% 0.16 25);
+  }
+  .enquiry__hp {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .enquiry__status { font-weight: 500; }
+  .enquiry__status.is-ok { color: var(--color-accent); }
+  .enquiry__status.is-fail { color: oklch(45% 0.16 25); }
+
+  @media (max-width: 56rem) {
+    .contact__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+    .enquiry { padding: var(--space-lg); }
+    .enquiry__row { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>
+
+<script>
+  const form = document.getElementById("enquiry-form") as HTMLFormElement | null;
+
+  if (form) {
+    const endpoint = form.dataset.endpoint || "";
+    const status = form.querySelector<HTMLElement>("[data-status]")!;
+    const fields = ["f-name", "f-email", "f-service", "f-message"].map(
+      (id) => document.getElementById(id) as HTMLInputElement,
+    );
+
+    const validateField = (el: HTMLInputElement): boolean => {
+      const error = form.querySelector<HTMLElement>(`[data-error-for="${el.id}"]`);
+      const ok = el.checkValidity();
+      el.classList.toggle("is-invalid", !ok);
+      el.setAttribute("aria-invalid", String(!ok));
+      if (error) error.hidden = ok;
+      return ok;
+    };
+
+    // Validate on blur after first touch, then live
+    for (const el of fields) {
+      let touched = false;
+      el.addEventListener("blur", () => {
+        touched = true;
+        validateField(el);
+      });
+      el.addEventListener("input", () => {
+        if (touched) validateField(el);
+      });
+    }
+
+    form.addEventListener("submit", async (e) => {
+      const allValid = fields.map(validateField).every(Boolean);
+      if (!allValid) {
+        e.preventDefault();
+        fields.find((f) => f.classList.contains("is-invalid"))?.focus();
+        return;
+      }
+      // Honeypot filled → silently drop
+      if ((form.elements.namedItem("_gotcha") as HTMLInputElement)?.value) {
+        e.preventDefault();
+        return;
+      }
+      if (!endpoint) return; // mailto fallback: let the browser handle the action
+
+      e.preventDefault();
+      const button = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+      button.disabled = true;
+      button.textContent = "Sending…";
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        status.hidden = false;
+        status.className = "enquiry__status is-ok";
+        status.textContent = "Enquiry sent. We'll reply within one business day. Attach your drawing to our reply email.";
+        button.textContent = "Send enquiry";
+        button.disabled = false;
+      } catch {
+        status.hidden = false;
+        status.className = "enquiry__status is-fail";
+        status.innerHTML = `The enquiry didn't send. The form service may be briefly unavailable. Email us directly at <a href="mailto:enquiries@wireedmpro.com.au">enquiries@wireedmpro.com.au</a> instead.`;
+        button.textContent = "Send enquiry";
+        button.disabled = false;
+      }
+    });
+  }
+</script>

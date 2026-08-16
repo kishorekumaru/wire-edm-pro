@@ -1,0 +1,221 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+---
+<BaseLayout
+  title="About Wire EDM Pro | 25+ Years of Precision Machining in Sydney"
+  description="Wire EDM Pro has machined precision components in Sydney since the late 1990s. Wire EDM, EDM cutting, CNC milling and turning for manufacturing, mining and medical customers."
+>
+  <section class="about-hero section--tight">
+    <div class="container">
+      <p class="about-hero__kicker mono">About us</p>
+      <h1>A workshop that answers the phone.</h1>
+      <p class="about-hero__lede">
+        Wire EDM Pro has run from Sydney since the late&nbsp;1990s. We're a precision machining
+        workshop. Wire EDM, EDM cutting, CNC milling and CNC turning. Serving Australian
+        manufacturing, mining and medical businesses that need exact parts and straight answers.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--panel purpose">
+    <div class="container purpose__grid">
+      <div>
+        <h2>Our purpose: keep your production moving.</h2>
+        <p class="purpose__body">
+          Most of what leaves this workshop is the part another business is waiting on. A die
+          section for a stopped press line, a hardened spare the OEM quotes in months, a medical
+          component that can't carry a burr. That shapes how we work: we quote honestly, we flag
+          risk before we cut, and when a job is on the machine you can get us on the phone.
+        </p>
+        <div class="purpose__values">
+          <div>
+            <h3>Reliable, honest service</h3>
+            <p>The price we quote is the price you pay. If a job carries risk, such as thin walls, unproven material or an ambitious tolerance, we say so before we start, not after.</p>
+          </div>
+          <div>
+            <h3>Precision backed by experience</h3>
+            <p>More than 25 years on the wire teaches you what a drawing doesn't say. We machine to drawing, and we ask the right questions when the drawing leaves room for doubt.</p>
+          </div>
+        </div>
+      </div>
+      <div class="purpose__photos">
+        <img
+          class="photo purpose__photo-main"
+          src="/images/workshop-mezzanine-800.jpg"
+          srcset="/images/workshop-mezzanine-800.jpg 800w, /images/workshop-mezzanine.jpg 1600w"
+          sizes="(max-width: 56rem) 100vw, 40vw"
+          width="800" height="450"
+          alt="Inside the Wire EDM Pro workshop in Sydney"
+          loading="lazy"
+        />
+        <img
+          class="photo purpose__photo-offset"
+          src="/images/building-exterior-800.jpg"
+          srcset="/images/building-exterior-800.jpg 800w, /images/building-exterior.jpg 1600w"
+          sizes="(max-width: 56rem) 60vw, 25vw"
+          width="800" height="450"
+          alt="The Wire EDM Pro premises, unit 16, Sydney"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section machines">
+    <div class="container">
+      <div class="section-head">
+        <h2>The machines on the floor.</h2>
+        <p>Wire EDM is the core of the workshop; milling and turning carry the work that surrounds it.</p>
+      </div>
+      <div class="machines__grid">
+        <figure class="machines__card">
+          <img
+            src="/images/fanuc-robocut-c600ia-800.jpg"
+            srcset="/images/fanuc-robocut-c600ia-800.jpg 800w, /images/fanuc-robocut-c600ia.jpg 1600w"
+            sizes="(max-width: 56rem) 100vw, 33vw"
+            width="800" height="450"
+            alt="Fanuc Robocut α-C600iA wire EDM machine"
+            loading="lazy"
+          />
+          <figcaption>
+            <b>Fanuc Robocut wire EDMs</b>
+            <span>α-C600<span class="mono">i</span>A and α-0<span class="mono">i</span>D. The profile and production wire-cutting workhorses.</span>
+          </figcaption>
+        </figure>
+        <figure class="machines__card">
+          <img
+            src="/images/makino-wire-edm-800.jpg"
+            srcset="/images/makino-wire-edm-800.jpg 800w, /images/makino-wire-edm.jpg 1600w"
+            sizes="(max-width: 56rem) 100vw, 33vw"
+            width="800" height="450"
+            alt="Makino U-series wire EDM machine"
+            loading="lazy"
+          />
+          <figcaption>
+            <b>Makino U-series wire EDM</b>
+            <span>Fine-finish wire cutting for the work where surface and edge quality decide the job.</span>
+          </figcaption>
+        </figure>
+        <figure class="machines__card">
+          <img
+            src="/images/ecomill-600v-800.jpg"
+            srcset="/images/ecomill-600v-800.jpg 800w, /images/ecomill-600v.jpg 1600w"
+            sizes="(max-width: 56rem) 100vw, 33vw"
+            width="800" height="450"
+            alt="DMG ecoMill 600 V vertical machining centre"
+            loading="lazy"
+          />
+          <figcaption>
+            <b>DMG ecoMill 600&nbsp;V</b>
+            <span>Vertical machining centre for the jigs, fixtures, die sets and spares around the EDM work.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight history">
+    <div class="container history__grid">
+      <h2>Three industries, one habit.</h2>
+      <div class="history__cols">
+        <p>
+          <b>Manufacturing</b> sends us press tools, dies and fixtures. The tooling their tooling
+          depends on. <b>Mining</b> sends hardened wear parts and drive components that can't wait
+          months for OEM spares. <b>Medical</b> sends small stainless and titanium components where
+          burr-free edges are not negotiable.
+        </p>
+        <p>
+          The habit that keeps them coming back is the same one we started with in the late
+          1990s: say what we can hold, hold it, and hand the part over when we said we would.
+          Most of our work arrives from customers who have been sending drawings for a decade
+          or more.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Put us to work."
+    body="Send a drawing, a STEP file or a photo of the worn part. We'll reply within one business day."
+  />
+</BaseLayout>
+
+<style>
+  .about-hero { padding-block: var(--space-2xl) var(--space-2xl); }
+  .about-hero__kicker {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .about-hero h1 { font-size: var(--text-display-s); max-width: 22ch; }
+  .about-hero__lede {
+    margin-top: var(--space-lg);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 58ch;
+  }
+
+  .purpose__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  .purpose h2 { font-size: var(--text-xl); max-width: 24ch; }
+  .purpose__body { margin-top: var(--space-lg); color: var(--color-muted); max-width: 56ch; }
+  .purpose__values {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+  .purpose__values h3 { font-size: var(--text-base); }
+  .purpose__values p { margin-top: var(--space-xs); font-size: var(--text-sm); color: var(--color-muted); }
+  .purpose__photos { position: relative; display: grid; }
+  .purpose__photo-main { aspect-ratio: 16 / 11; }
+  .purpose__photo-offset {
+    width: 55%;
+    aspect-ratio: 4 / 3;
+    justify-self: end;
+    margin-top: calc(var(--space-2xl) * -1);
+    margin-right: calc(var(--space-xl) * -0.5);
+    box-shadow: 0 1px 2px oklch(20% 0.01 251 / 0.08);
+  }
+
+  .machines__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-lg);
+  }
+  .machines__card {
+    margin: 0;
+    border: var(--rule-hairline);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-paper);
+  }
+  .machines__card img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+  .machines__card figcaption { padding: var(--space-md) var(--space-lg) var(--space-lg); display: grid; gap: var(--space-2xs); }
+  .machines__card b { font-family: var(--font-display); }
+  .machines__card span { font-size: var(--text-sm); color: var(--color-muted); }
+
+  .history { border-top: var(--rule-hairline); }
+  .history__grid { display: grid; gap: var(--space-lg); }
+  .history h2 { font-size: var(--text-xl); }
+  .history__cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+  .history__cols p { color: var(--color-muted); }
+  .history__cols b { color: var(--color-ink); font-weight: 600; }
+
+  @media (max-width: 56rem) {
+    .purpose__grid { grid-template-columns: minmax(0, 1fr); }
+    .purpose__values { grid-template-columns: minmax(0, 1fr); }
+    .purpose__photo-offset { margin-right: 0; }
+    .machines__grid { grid-template-columns: minmax(0, 1fr); }
+    .history__cols { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
+  }
+</style>

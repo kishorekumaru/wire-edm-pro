@@ -1,0 +1,40 @@
+---
+import ServicePage from "../components/ServicePage.astro";
+
+const specs = [
+  { name: "Work envelope", value: "to suit most tooling", note: "confirmed against your part at quote" },
+  { name: "General tolerance", value: "±0.01 mm", note: "typical on critical milled features" },
+  { name: "Batch size", value: "1 – repeat production", note: "prototypes, spares and scheduled batches" },
+  { name: "Materials", value: "steels, stainless, alloys", note: "aluminium, brass, tool steel, pre-hard and exotic grades" },
+  { name: "Finishing", value: "in-house EDM follow-up", note: "hardened features finished by wire or spark erosion after milling" },
+];
+
+const applications = [
+  {
+    name: "Jigs, fixtures & tooling plates",
+    body: "Location faces, dowel patterns and clamping details machined square and to position, so your assembly or inspection fixture repeats every time it's loaded.",
+  },
+  {
+    name: "Die sets & mould components",
+    body: "Pockets, shoes and bolster work milled soft, then hardened details finished by EDM in the same workshop. One purchase order, one accountable machinist.",
+  },
+  {
+    name: "Machine spares & one-offs",
+    body: "Obsolete or unavailable parts re-made from a sample or a sketch. We reverse-measure, draw and machine replacements that fit the first time.",
+  },
+];
+---
+<ServicePage
+  title="CNC Milling Solutions, Sydney | Wire EDM Pro"
+  description="CNC milling in Sydney: jigs, fixtures, die sets and machine spares in steels, stainless and exotic alloys. One-offs through repeat batches, with in-house EDM finishing."
+  heroKicker="CNC milling"
+  heroTitle="Milled to drawing. Finished in-house."
+  heroImage="/images/ecomill-600v"
+  heroImageAlt="DMG ecoMill 600 V vertical machining centre at Wire EDM Pro, Sydney"
+  heroLede="Our CNC mills carry the general machining that surrounds precision EDM work. Jigs, fixtures, die sets and spares in everything from aluminium to pre-hardened tool steel. Because milling and EDM share a workshop, parts that need both never leave the building."
+  specs={specs}
+  specNote="Envelope and tolerance depend on part geometry and material; both are confirmed when we quote your drawing."
+  applications={applications}
+  ctaHeading="One drawing, both processes."
+  ctaBody="If your part needs milling and EDM, quote it once. We sequence the operations under one roof."
+/>

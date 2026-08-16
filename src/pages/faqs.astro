@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const faqs = [
+  {
+    q: "How do I get a quote?",
+    a: "Send whatever you have. A STEP or IGES file, a DXF/DWG, a PDF drawing, or even a photo of the worn part. Through the contact form or by email. We reply within one business day with feasibility, lead time and price. The price we quote is the price you pay.",
+  },
+  {
+    q: "What file formats do you accept?",
+    a: "STEP and IGES are ideal for 3D work; DXF/DWG suit wire EDM profiles; PDF drawings are fine for quoting. No CAD file at all? Send the physical part. We reverse-measure and draw it.",
+  },
+  {
+    q: "What tolerances can you hold?",
+    a: "Wire EDM typically holds ±0.005 mm positional tolerance on finish passes, with surface finishes to Ra 0.4 µm using skim cuts. Milled and turned features typically hold ±0.01 mm. The achievable figure always depends on geometry, material and thickness. We confirm it on your quote rather than promise a blanket number.",
+  },
+  {
+    q: "Can you machine hardened material?",
+    a: "Yes. That's the core of what wire EDM is for. Spark erosion doesn't care about hardness, so we cut fully hardened tool steel beyond 60 HRC without annealing or re-heat-treating. Profiles cut after hardening can't distort in heat treatment.",
+  },
+  {
+    q: "What materials do you work with?",
+    a: "Any conductive metal for EDM: tool steels, stainless, titanium, copper, brass, carbide and exotic alloys. Milling and turning cover the same range plus aluminium and pre-hardened grades.",
+  },
+  {
+    q: "Do you take one-off jobs?",
+    a: "Yes. One part is a normal order here. A single die section, one replacement gear, one modified shaft. We also run repeat production batches; most customers do both.",
+  },
+  {
+    q: "What are your lead times?",
+    a: "Quoted per job, honestly. It depends on the work already on the machines. Tell us if a job is a breakdown: urgent work for a stopped line gets a straight answer about what's genuinely possible, by phone.",
+  },
+  {
+    q: "Can you work from a worn part with no drawing?",
+    a: "Yes. Send or drop off the component. We measure it, draw it, and machine a replacement. This is common for obsolete machine spares and mining components with long OEM lead times.",
+  },
+  {
+    q: "Where are you, and do you deliver?",
+    a: "The workshop is in Sydney, NSW. Local pickup and delivery can be arranged, and we freight Australia-wide. The full street address comes with every quotation.",
+  },
+  {
+    q: "Do you do design work?",
+    a: "We machine to drawing rather than offer design services. But we'll flag manufacturability issues before cutting, and suggest changes when a small tweak to a corner radius or tolerance will save you real money.",
+  },
+];
+---
+<BaseLayout
+  title="FAQs | Wire EDM Pro, Sydney Precision Machining"
+  description="Common questions about Wire EDM Pro's machining services: quoting, file formats, tolerances, hardened materials, lead times, one-off parts and delivery across Australia."
+>
+  <section class="faq section--tight">
+    <div class="container">
+      <p class="faq__kicker mono">FAQs</p>
+      <h1>Asked before you ask.</h1>
+      <p class="faq__lede">
+        The questions most drawings arrive with. If yours isn't here,
+        <a href="/contact/">send it through</a>. A person answers, not a form letter.
+      </p>
+
+      <div class="faq__list">
+        {faqs.map((f, i) => (
+          <details class="faq__item" open={i === 0}>
+            <summary class="faq__q">
+              {f.q}
+              <span class="faq__marker" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__a"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Still deciding?"
+    body="A two-minute phone call usually settles whether a part suits wire EDM. Send the drawing or call the workshop."
+  />
+</BaseLayout>
+
+<style>
+  .faq { padding-block: var(--space-2xl) var(--space-3xl); }
+  .faq__kicker {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .faq h1 { font-size: var(--text-display-s); }
+  .faq__lede {
+    margin-top: var(--space-md);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 52ch;
+  }
+
+  .faq__list {
+    margin-top: var(--space-2xl);
+    max-width: 52rem;
+    border-top: var(--rule-hairline);
+  }
+  .faq__item { border-bottom: var(--rule-hairline); }
+  .faq__q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-block: var(--space-lg);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-md);
+    cursor: pointer;
+    list-style: none;
+    transition: color var(--dur-micro) var(--ease-out);
+  }
+  .faq__q::-webkit-details-marker { display: none; }
+  .faq__q:hover { color: var(--color-accent); }
+  .faq__marker {
+    position: relative;
+    flex: 0 0 auto;
+    width: 14px;
+    height: 14px;
+  }
+  .faq__marker::before,
+  .faq__marker::after {
+    content: "";
+    position: absolute;
+    inset: 6px 0;
+    background: var(--color-accent);
+    transition: transform var(--dur-short) var(--ease-in-out);
+  }
+  .faq__marker::after { transform: rotate(90deg); }
+  .faq__item[open] .faq__marker::after { transform: rotate(0deg); }
+  .faq__a { padding-bottom: var(--space-lg); }
+  .faq__a p { color: var(--color-muted); max-width: 62ch; }
+</style>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { industries } from "../../data/industries";
+
+export function getStaticPaths() {
+  return industries.map((ind) => ({ params: { slug: ind.slug }, props: { ind } }));
+}
+
+const { ind } = Astro.props;
+
+const services = [
+  { href: "/wire-edm/", name: "Wire EDM & wire cutting", note: "±0.005 mm profiles in hardened metal, zero cutting force" },
+  { href: "/milling/", name: "CNC milling", note: "jigs, fixtures, die sets and machined details" },
+  { href: "/turning/", name: "CNC turning", note: "shafts, bushes, pins and threaded components" },
+];
+---
+<BaseLayout
+  title={`${ind.name} Machining | Wire EDM Pro, Sydney`}
+  description={`${ind.short}. Precision wire EDM, EDM cutting, CNC milling and turning for the ${ind.name.toLowerCase()} industry, from our Sydney workshop.`}
+>
+  <section class="ind section--tight">
+    <div class="container">
+      <p class="ind__kicker mono"><a href="/industries/">Industries</a> · {ind.name}</p>
+      <h1>{ind.name}</h1>
+      <p class="ind__lede">{ind.lede}</p>
+    </div>
+  </section>
+
+  <section class="section section--panel">
+    <div class="container ind__grid">
+      <div>
+        <h2>What we machine</h2>
+        <ul class="ind__list">
+          {ind.machined.map((m) => <li>{m}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>Why the process fits</h2>
+        <p class="ind__fit">{ind.fit}</p>
+        <div class="ind__services">
+          {services.map((s) => (
+            <a class="ind__service" href={s.href}>
+              <b>{s.name}</b>
+              <span>{s.note}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Send us the drawing."
+    body={`We quote ${ind.name.toLowerCase()} work from real information. A drawing, STEP file or the worn part itself. And reply within one business day.`}
+  />
+</BaseLayout>
+
+<style>
+  .ind { padding-block: var(--space-2xl) var(--space-2xl); }
+  .ind__kicker {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .ind__kicker a {
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+  .ind__kicker a:hover { color: var(--color-accent); }
+  .ind h1 { font-size: var(--text-display-s); max-width: 20ch; }
+  .ind__lede {
+    margin-top: var(--space-lg);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 58ch;
+  }
+
+  .ind__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .ind__grid h2 { font-size: var(--text-lg); }
+  .ind__list {
+    margin: var(--space-lg) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ind__list li {
+    padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+    border-bottom: var(--rule-hairline);
+    position: relative;
+  }
+  .ind__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.15em;
+    width: 0.55rem;
+    height: 2px;
+    background: var(--color-accent);
+  }
+  .ind__fit { margin-top: var(--space-lg); color: var(--color-muted); max-width: 52ch; }
+  .ind__services {
+    margin-top: var(--space-xl);
+    display: grid;
+    gap: var(--space-sm);
+  }
+  .ind__service {
+    display: grid;
+    gap: 0.15rem;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-paper);
+    border: var(--rule-hairline);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: border-color var(--dur-short) var(--ease-out);
+  }
+  .ind__service:hover { border-color: var(--color-accent); }
+  .ind__service b { font-family: var(--font-display); color: var(--color-ink); }
+  .ind__service span { font-size: var(--text-sm); color: var(--color-muted); }
+
+  @media (max-width: 56rem) {
+    .ind__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  <div class="container">
+    <p class="foot__wordmark">Wire<span class="foot__accent">EDM</span> Pro</p>
+    <p class="foot__tagline">Precision machining in Sydney for more than 25&nbsp;years. Wire EDM, wire cutting, EDM cutting, CNC milling and CNC turning for manufacturing, mining and medical work.</p>
+    <nav class="foot__links" aria-label="Footer">
+      <a class="foot__link" href="/wire-edm/">Wire EDM &amp; wire cutting</a>
+      <a class="foot__link" href="/milling/">Milling solutions</a>
+      <a class="foot__link" href="/turning/">Turning solutions</a>
+      <a class="foot__link" href="/industries/">Industries</a>
+      <a class="foot__link" href="/about/">About us</a>
+      <a class="foot__link" href="/faqs/">FAQs</a>
+      <a class="foot__link" href="/contact/">Contact us</a>
+    </nav>
+    <div class="foot__meta">
+      <p>Sydney, New South Wales, Australia</p>
+      <p><a class="foot__meta-link" href="tel:+61290000000">+61 2 9000 0000</a> · <a class="foot__meta-link" href="mailto:enquiries@wireedmpro.com.au">enquiries@wireedmpro.com.au</a></p>
+      <p class="foot__copyright">© {year} Wire EDM Pro. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Deep slate-teal band (derived from Juniper's hue). Dark close to the page */
+  .foot {
+    padding-block: var(--space-2xl) var(--space-xl);
+    background: var(--color-deep);
+    color: #ffffff;
+  }
+  .foot__wordmark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-xl);
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+  .foot__accent { color: var(--color-accent-soft); }
+  .foot__tagline {
+    margin-top: var(--space-sm);
+    max-width: 52ch;
+    color: #ffffff;
+  }
+  .foot__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-lg);
+    margin-block: var(--space-lg);
+    padding-block: var(--space-md);
+    border-block: 1px solid var(--color-deep-2);
+  }
+  .foot__link {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .foot__link:hover { color: var(--color-accent-soft); }
+  .foot__meta p { color: #ffffff; font-size: var(--text-sm); }
+  .foot__meta p + p { margin-top: var(--space-2xs); }
+  .foot__meta-link { color: #ffffff; text-decoration: none; }
+  .foot__meta-link:hover { color: var(--color-accent-soft); }
+  .foot__copyright { margin-top: var(--space-md); }
+</style>
