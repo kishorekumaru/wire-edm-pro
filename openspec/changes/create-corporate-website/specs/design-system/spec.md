@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Brand palette
-The site SHALL use the client's palette as its only brand colors, defined once as design tokens (CSS custom properties). *(Revised twice on 2026-08-16 — current set:)* `#61828A` Juniper (accent; deepened one lightness step where used as small text or button fill to meet AA), `#DFE9EB` Mystic (panels), `#ABC3CD` Casper (hairline/border family), `#A9CCCF` Jungle Mist (soft accents on dark). The palette has no dark anchor, so primary text and the dark bands use a deep slate-teal derived from Juniper's hue. All components MUST reference tokens rather than hard-coded hex values.
+The site SHALL use the client's palette as its only brand colors, defined once as design tokens (CSS custom properties). *(Current set, revision 4, 2026-08-17:)* `#e7ecef` Platinum (panels), `#274c77` Dusk Blue (primary text / deep bands), `#6096ba` Steel Blue (accent; deepened one lightness step where used as small text or button fill to meet AA), `#a3cef1` Icy Blue (soft accents), `#8b8c89` Grey Olive (secondary text, deepened for AA). All components MUST reference tokens rather than hard-coded hex values.
 
 #### Scenario: Tokens are the single source of color
 - **WHEN** any page or component applies a brand color

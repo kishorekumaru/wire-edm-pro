@@ -1,0 +1,194 @@
+---
+/**
+ * The turnkey lifecycle: idea to delivered part, quick turnaround.
+ * Centred vertical timeline with a dotted rail, icon nodes and alternating
+ * cards. Shared between the Home page and the Reverse Engineering page.
+ */
+interface Props {
+  heading?: string;
+  sub?: string;
+}
+const {
+  heading = "Turnkey, end to end",
+  sub = "From idea to delivered part. Quick turnaround at every step.",
+} = Astro.props;
+
+const steps = [
+  {
+    name: "Your proposal",
+    body: "Bring an idea, a sketch or just a conversation. A verbal flow is enough to start.",
+    icon: '<path d="M4 5h16v11H9.5L4.5 20V5z"/><path d="M8 9.5h8M8 12.5h5"/>',
+  },
+  {
+    name: "Design in Mastercam",
+    body: "We turn the idea into a machinable design and toolpaths in Mastercam.",
+    icon: '<path d="M4.5 19.5c4.5-1 4.5-4.5 6.5-8.5s4.5-5.5 8.5-6.5"/><circle cx="4.5" cy="19.5" r="1.7"/><circle cx="19.5" cy="4.5" r="1.7"/>',
+  },
+  {
+    name: "Design approval",
+    body: "You review and sign off the design before anything is cut.",
+    icon: '<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9.5 4.5V3h5v1.5"/><path d="M9.5 13.5l2 2 3.5-4.5"/>',
+  },
+  {
+    name: "Material procurement",
+    body: "We source the right grade, certified, at the size the job needs.",
+    icon: '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>',
+  },
+  {
+    name: "Manufacturing",
+    body: "Wire EDM, milling and turning, sequenced under one roof.",
+    icon: '<circle cx="12" cy="12" r="3.2"/><path d="M12 5.2V2.8M12 21.2v-2.4M18.8 12h2.4M2.8 12h2.4M16.8 7.2l1.7-1.7M5.5 18.5l1.7-1.7M16.8 16.8l1.7 1.7M5.5 5.5l1.7 1.7"/>',
+  },
+  {
+    name: "Quality control",
+    body: "Dimensions, finish and fit verified against the approved design.",
+    icon: '<path d="M12 3l7 3v5c0 4.5-3 8-7 9.5C8 19 5 15.5 5 11V6l7-3z"/><path d="M9 11.5l2.2 2.2L15.5 9"/>',
+  },
+  {
+    name: "Delivery",
+    body: "The finished part, on the date we quoted.",
+    icon: '<path d="M2.5 6.5h11v9.5h-11z"/><path d="M13.5 9.5h3.5l3.5 3v3.5h-7"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/>',
+  },
+];
+---
+<section class="tk section--tight">
+  <div class="container">
+    <div class="section-head tk__head" data-reveal>
+      <h2>{heading} <span class="section-head__sub">{sub}</span></h2>
+    </div>
+    <ol class="tk__flow">
+      {steps.map((s, i) => (
+        <li class="tk__step" data-reveal style={`--reveal-i: ${i % 2}`}>
+          <span class="tk__node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={s.icon} />
+          </span>
+          <div class="tk__card">
+            <span class="tk__num mono">Step {String(i + 1).padStart(2, "0")}</span>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .tk { padding-block: var(--space-3xl) var(--space-2xl); }
+  .tk__head {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  /* Centred vertical timeline with a dotted rail */
+  .tk__flow {
+    list-style: none;
+    margin: 0 auto;
+    padding: var(--space-md) 0;
+    position: relative;
+    max-width: 62rem;
+  }
+  .tk__flow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    border-left: 2px dotted var(--color-accent-soft);
+    transform: translateX(-50%);
+  }
+
+  .tk__step {
+    position: relative;
+    width: calc(50% - 3.5rem);
+    margin-bottom: var(--space-lg);
+  }
+  .tk__step:last-child { margin-bottom: 0; }
+  /* Alternating sides */
+  .tk__step:nth-child(odd) { margin-right: auto; }
+  .tk__step:nth-child(even) { margin-left: auto; }
+
+  /* Icon node sitting on the rail */
+  .tk__node {
+    position: absolute;
+    top: 0.4rem;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-paper);
+    border: 2px dotted var(--color-accent-bright);
+    border-radius: 50%;
+    color: var(--color-accent);
+  }
+  .tk__node svg { width: 22px; height: 22px; }
+  .tk__step:nth-child(odd) .tk__node { right: -5rem; }
+  .tk__step:nth-child(even) .tk__node { left: -5rem; }
+  /* Final node: solid fill marks the finish */
+  .tk__step:last-child .tk__node {
+    background: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    color: #ffffff;
+  }
+
+  /* Alternating card patterns: odd = outlined on white, even = tinted panel */
+  .tk__card {
+    border: 1px dashed var(--color-rule);
+    background: var(--color-paper);
+    padding: var(--space-lg);
+  }
+  .tk__step:nth-child(even) .tk__card {
+    border: var(--rule-hairline);
+    border-left: 3px solid var(--color-accent-bright);
+    background: var(--color-paper-2);
+  }
+  .tk__step:nth-child(odd) .tk__card {
+    border-right: 3px solid var(--color-accent-soft);
+  }
+
+  .tk__num {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-2xs);
+  }
+  .tk__card h3 { font-size: var(--text-md); }
+  .tk__card p {
+    margin-top: var(--space-xs);
+    font-size: var(--text-base);
+    color: var(--color-muted);
+  }
+
+  /* Responsive: single column, rail on the left */
+  @media (max-width: 60rem) {
+    .tk__flow { max-width: 40rem; }
+    .tk__flow::before {
+      left: 1.5rem;
+      transform: none;
+    }
+    .tk__step,
+    .tk__step:nth-child(odd),
+    .tk__step:nth-child(even) {
+      width: auto;
+      margin: 0 0 var(--space-lg) 0;
+      padding-left: 4.6rem;
+    }
+    .tk__step:last-child { margin-bottom: 0; }
+    .tk__step:nth-child(odd) .tk__node,
+    .tk__step:nth-child(even) .tk__node {
+      left: 0;
+      right: auto;
+    }
+  }
+  @media (max-width: 40rem) {
+    .tk__flow::before { left: 1.25rem; }
+    .tk__node { width: 2.5rem; height: 2.5rem; }
+    .tk__node svg { width: 18px; height: 18px; }
+    .tk__step,
+    .tk__step:nth-child(odd),
+    .tk__step:nth-child(even) { padding-left: 3.8rem; }
+    .tk__card { padding: var(--space-md); }
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import TurnkeyFlow from "../components/TurnkeyFlow.astro";
+
+const steps = [
+  {
+    name: "Bring the sample",
+    body: "Drop off or send the part. Worn, broken or obsolete is fine. No drawing needed, no CAD file, no documentation.",
+  },
+  {
+    name: "We measure every dimension",
+    body: "The part is measured on our inspection equipment: critical fits, profiles, threads and tolerances captured from the physical component.",
+  },
+  {
+    name: "We create the design",
+    body: "The measurements become a complete design and toolpaths in Mastercam. You review and approve it before anything is cut.",
+  },
+];
+---
+<BaseLayout
+  title="Reverse Engineering, Sydney | Wire EDM Pro"
+  description="No drawing? Bring the part. Wire EDM Pro measures your sample, creates the design in Mastercam, and manufactures the replacement turnkey: design approval, material procurement, machining, QC and delivery."
+>
+  <section class="re section--tight">
+    <div class="container">
+      <p class="re__kicker mono">Solutions · Reverse Engineering</p>
+      <h1>No drawing? Bring the part.</h1>
+      <p class="re__lede">
+        Obsolete spares, worn components, parts whose supplier disappeared decades ago.
+        We measure the sample, rebuild the design, and manufacture the replacement.
+        The drawing you never had comes back with the part.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--panel">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Sample to spec <span class="section-head__sub">Three steps from physical part to approved design</span></h2>
+      </div>
+      <div class="re__steps">
+        {steps.map((s, i) => (
+          <div class="re__step" data-reveal style={`--reveal-i: ${i}`}>
+            <span class="re__num mono">{String(i + 1).padStart(2, "0")}</span>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="re__note" data-reveal>
+        From the approved design onward, the job runs through the same turnkey lifecycle as
+        every other part we make:
+      </p>
+    </div>
+  </section>
+
+  <TurnkeyFlow
+    heading="Then turnkey to delivery"
+    sub="The approved design runs the full lifecycle. Quick turnaround."
+  />
+
+  <CtaBand
+    heading="Got the part but not the drawing?"
+    body="Send a photo of the component to start, or drop the sample at the workshop. We'll tell you the same day whether we can rebuild it."
+  />
+</BaseLayout>
+
+<style>
+  .re { padding-block: var(--space-2xl); }
+  .re__kicker {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .re h1 { font-size: var(--text-display-s); max-width: 20ch; }
+  .re__lede {
+    margin-top: var(--space-lg);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 58ch;
+  }
+  .re__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2xl);
+  }
+  .re__step {
+    padding-top: var(--space-md);
+    border-top: 2px solid var(--color-rule);
+    position: relative;
+  }
+  .re__step::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 2rem;
+    height: 2px;
+    background: var(--color-accent-bright);
+  }
+  .re__num {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-xs);
+  }
+  .re__step h3 { font-size: var(--text-md); }
+  .re__step p { margin-top: var(--space-xs); color: var(--color-muted); }
+  .re__note {
+    margin-top: var(--space-2xl);
+    color: var(--color-muted);
+    max-width: 56ch;
+  }
+  @media (max-width: 56rem) {
+    .re__steps { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  }
+</style>

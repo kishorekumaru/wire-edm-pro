@@ -121,13 +121,13 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
   // Ground shadow disc (fake, cheap)
   const shadow = new THREE.Mesh(
     new THREE.CircleGeometry(1.35, 40),
-    new THREE.MeshBasicMaterial({ color: 0x1e3a8a, transparent: true, opacity: 0.10 }),
+    new THREE.MeshBasicMaterial({ color: 0x274c77, transparent: true, opacity: 0.10 }),
   );
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = -BLANK_HEIGHT / 2 - 0.02;
   scene.add(shadow);
 
-  scene.add(new THREE.HemisphereLight(0xbfdbfe, 0x3b82f6, 0.3));
+  scene.add(new THREE.HemisphereLight(0xe7ecef, 0x6096ba, 0.3));
   const key = new THREE.DirectionalLight(0xffffff, 0.65);
   key.position.set(3, 5, 2);
   scene.add(key);

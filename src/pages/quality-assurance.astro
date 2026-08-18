@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+// QC equipment list is industry-typical; flagged in CONTENT-TODO for client confirmation.
+const equipment = [
+  { name: "Coordinate measuring machine (CMM)", verifies: "3D positional accuracy of features against the approved design" },
+  { name: "Profile projector / optical comparator", verifies: "Wire-cut profiles, radii and fine geometry at magnification" },
+  { name: "Surface roughness tester", verifies: "Finish quality (Ra) on EDM and machined surfaces" },
+  { name: "Height gauges & surface plate", verifies: "Datum-referenced heights, steps and parallelism" },
+  { name: "Micrometers & bore gauges", verifies: "Diameters, bores and thicknesses to the micron" },
+  { name: "Thread gauges", verifies: "Internal and external threads to gauge fit" },
+  { name: "Hardness tester", verifies: "Material condition before and after processing" },
+];
+
+const checks = [
+  { name: "Dimensions", body: "Every critical dimension is measured against the approved design before a part leaves. Not a sample. Every critical dimension." },
+  { name: "Surface finish", body: "EDM and machined surfaces verified to the specified Ra where the drawing calls for it." },
+  { name: "Material & hardness", body: "Certified material in, hardness verified through processing, so the part performs the way the drawing assumes." },
+];
+---
+<BaseLayout
+  title="Quality Assurance, Sydney | Wire EDM Pro"
+  description="Every part measured before delivery: CMM, optical comparator, surface roughness and hardness testing. Wire EDM Pro's quality assurance equipment and process."
+>
+  <section class="qa section--tight">
+    <div class="container">
+      <p class="qa__kicker mono">Solutions · Quality Assurance</p>
+      <h1>Measured before it leaves.</h1>
+      <p class="qa__lede">
+        A tolerance you can't verify is a guess. Every job is inspected against its approved
+        design before delivery, on instruments maintained for exactly that purpose.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--panel">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>The inspection equipment <span class="section-head__sub">What checks your part before you see it</span></h2>
+      </div>
+      <table class="qa__sheet">
+        <caption class="visually-hidden">Quality control equipment and what each verifies</caption>
+        <thead>
+          <tr><th scope="col">Instrument</th><th scope="col">What it verifies</th></tr>
+        </thead>
+        <tbody>
+          {equipment.map((e) => (
+            <tr>
+              <th scope="row">{e.name}</th>
+              <td>{e.verifies}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>What gets checked <span class="section-head__sub">Dimensions · finish · material</span></h2>
+      </div>
+      <div class="qa__checks">
+        {checks.map((c, i) => (
+          <div class="qa__check" data-reveal style={`--reveal-i: ${i}`}>
+            <h3>{c.name}</h3>
+            <p>{c.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Need documented inspection?"
+    body="Tell us on the drawing or at quote. Inspection reports for critical dimensions can be supplied with the delivered part."
+  />
+</BaseLayout>
+
+<style>
+  .qa { padding-block: var(--space-2xl); }
+  .qa__kicker {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .qa h1 { font-size: var(--text-display-s); max-width: 20ch; }
+  .qa__lede {
+    margin-top: var(--space-lg);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 56ch;
+  }
+  .qa__sheet {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .qa__sheet th, .qa__sheet td {
+    text-align: left;
+    padding: var(--space-sm) var(--space-lg) var(--space-sm) 0;
+    border-bottom: var(--rule-hairline);
+    vertical-align: top;
+  }
+  .qa__sheet thead th {
+    font-family: var(--font-outlier);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .qa__sheet tbody th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    width: 20rem;
+  }
+  .qa__sheet td { color: var(--color-muted); }
+  .qa__checks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2xl);
+  }
+  .qa__check h3 {
+    font-size: var(--text-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .qa__check h3::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    background: var(--color-accent-bright);
+  }
+  .qa__check p { margin-top: var(--space-md); color: var(--color-muted); }
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  @media (max-width: 56rem) {
+    .qa__checks { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+    .qa__sheet tbody th { width: auto; }
+  }
+</style>

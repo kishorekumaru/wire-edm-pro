@@ -21,7 +21,10 @@ Confirm or replace each one, then delete it from this list.
 
 ## Missing assets / decisions
 - [ ] **Logo** — a typographic wordmark is used; supply artwork if one exists.
-- [ ] **Form service** — set `PUBLIC_FORM_ENDPOINT` (see `.env.example`) before go-live; until then the form uses a mailto: fallback.
+- [x] ~~Form service~~ — the enquiry form was removed at the client's direction (2026-08-17); contact is by phone/email.
+- [ ] **Maximum part size 420 mm** — shown on the home facts strip per client direction (2026-08-17); confirm which process/axis this applies to.
+- [ ] **QC equipment list** — the Quality Assurance page lists industry-typical instruments (CMM, comparator, roughness tester, height/thread gauges, hardness tester); confirm against the actual inspection room.
+- [ ] **Mastercam** — the turnkey and reverse-engineering pages state design is done in Mastercam per client direction; confirm licence/wording.
 - [ ] **Certifications** (ISO 9001 etc.) — none claimed; add only if genuinely held.
 - [ ] **Machine models** — copy lists Fanuc Robocut α-C600iA, Fanuc Robocut α-0iD, Makino U-series, DMG ecoMill 600 V as read from the workshop photos; confirm exact models/branding with the client.
 - [x] **Photography** — client supplied real workshop photos (in `images/`, web-optimized copies in `public/images/`).

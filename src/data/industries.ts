@@ -32,6 +32,21 @@ export const industries: Industry[] = [
     fit: "Cutting after hardening removes the distortion risk of heat treatment, and a wire-cut clearance is uniform around the whole profile. The difference between a die that runs and a die that burrs.",
   },
   {
+    slug: "sheet-metal-components",
+    icon: '<path d="M3 17.5h10.5L20.5 11"/><path d="M3 13h8.5L18 6.5"/><path d="M3 13v4.5M20.5 11v-4.5h-2.5"/>',
+    name: "Sheet Metal Components",
+    short: "Press tooling and wire-cut profiles for sheet metal work",
+    lede: "Sheet metal manufacturing lives or dies on its tooling and its prototypes. We machine the punches, dies and form tools that shape sheet metal, and we wire-cut finished component profiles directly from stacked blanks when the quantity doesn't justify a press tool.",
+    machined: [
+      "Punch-and-die sets for blanking, piercing and forming",
+      "Prototype and low-volume profiles wire-cut from stacked sheets, burr-free",
+      "Press-brake tooling, form blocks and bend fixtures",
+      "Locating jigs and welding fixtures for fabricated assemblies",
+      "Regrinds and clearance corrections on worn press tooling",
+    ],
+    fit: "A wire cut leaves a square, burr-free edge on stacked blanks, so small quantities ship without waiting for a press tool. When volumes grow, the same profile programs become the punch and die.",
+  },
+  {
     slug: "aerospace-defence",
     icon: '<path d="M21.5 2.5L11 13"/><path d="M21.5 2.5l-6.5 19-3.5-8.5L3 9.5l18.5-7z"/>',
     name: "Aerospace & Defence",
@@ -142,6 +157,21 @@ export const industries: Industry[] = [
       "Prototype-to-batch mechanical components",
     ],
     fit: "Wire EDM holds the positional accuracy automated assemblies depend on, and repeats it identically from the first part to the fiftieth.",
+  },
+  {
+    slug: "manufacturers",
+    icon: '<path d="M3.5 20.5v-8l5 3v-3l5 3v-3l7 4v4h-17z"/><path d="M5.5 12.5v-8h3v8"/>',
+    name: "Manufacturers",
+    short: "Food lid containers, packaging tooling and production parts",
+    lede: "Production manufacturers run on tooling that repeats. Food lid containers, packaging formats and consumer products all come off dies, moulds and change parts that we machine, maintain and replace.",
+    machined: [
+      "Forming and blanking dies for food lid containers and packaging",
+      "Mould inserts, cores and cavity details for container tooling",
+      "Filling and sealing line change parts, cut to the product format",
+      "Cutting, crimping and scoring tools for lids and closures",
+      "Replacement production spares reverse-measured from worn parts",
+    ],
+    fit: "Container tooling wears in high-volume production. Wire EDM re-cuts hardened dies and mould details without re-heat-treatment, so a worn format goes back on the line as the profile it started with.",
   },
   {
     slug: "general-engineering",

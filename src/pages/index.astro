@@ -2,11 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
 import HeroGraphic from "../components/HeroGraphic.astro";
+import TurnkeyFlow from "../components/TurnkeyFlow.astro";
 
 const services = [
   {
     href: "/wire-edm/",
-    name: "Wire EDM & wire cutting",
+    name: "EDM Wire Cutting Solution",
     body: "A 0.25 mm charged wire erodes hardened metal along a programmed path. Zero cutting force. Corners as tight as the kerf allows.",
     img: "/images/wire-edm-cutting",
     alt: "Wire EDM machine cutting a steel workpiece, sparks at the wire in dielectric fluid",
@@ -83,8 +84,8 @@ const industries = [
           <dd class="mono" data-count="0.005" data-decimals="3" data-prefix="±" data-suffix="&#8199;mm">±0.005&nbsp;mm</dd>
         </div>
         <div class="stats__item" data-reveal style="--reveal-i: 1">
-          <dt>Cuts hardened steel to</dt>
-          <dd class="mono" data-count="60" data-suffix="+&#8199;HRC">60+&nbsp;HRC</dd>
+          <dt>Maximum part size</dt>
+          <dd class="mono" data-count="420" data-suffix="&#8199;mm">420&nbsp;mm</dd>
         </div>
         <div class="stats__item" data-reveal style="--reveal-i: 2">
           <dt>Cutting force on the part</dt>
@@ -128,6 +129,9 @@ const industries = [
       </div>
     </div>
   </section>
+
+  <!-- Turnkey lifecycle -->
+  <TurnkeyFlow />
 
   <!-- Credibility. Workshop photos, partnership tone -->
   <section class="section cred">
@@ -300,9 +304,9 @@ const industries = [
   .cred {
     background-image:
       linear-gradient(90deg,
-        oklch(37.9% 0.138 265.5 / 0.96) 0%,
-        oklch(37.9% 0.138 265.5 / 0.82) 44%,
-        oklch(37.9% 0.138 265.5 / 0.20) 100%),
+        oklch(41.1% 0.084 253.5 / 0.96) 0%,
+        oklch(41.1% 0.084 253.5 / 0.82) 44%,
+        oklch(41.1% 0.084 253.5 / 0.20) 100%),
       url("/images/wire-edm-office.jpg");
     background-size: cover;
     background-position: center right;
@@ -372,7 +376,7 @@ const industries = [
     }
     .cred {
       background-image:
-        linear-gradient(oklch(37.9% 0.138 265.5 / 0.93), oklch(37.9% 0.138 265.5 / 0.93)),
+        linear-gradient(oklch(41.1% 0.084 253.5 / 0.93), oklch(41.1% 0.084 253.5 / 0.93)),
         url("/images/wire-edm-office.jpg");
       min-height: 0;
     }

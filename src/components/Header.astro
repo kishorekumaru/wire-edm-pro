@@ -4,7 +4,7 @@ import { industries } from "../data/industries";
 const solutions = [
   {
     href: "/wire-edm/",
-    label: "Wire EDM & wire cutting",
+    label: "EDM Wire Cutting Solution",
     note: "±0.005 mm profiles in hardened metal",
     icon: '<path d="M12 2.5v11"/><rect x="4" y="13.5" width="16" height="7" rx="1"/><path d="M9 10.5l-2-1.5M15 10.5l2-1.5M9.5 7L8 6M14.5 7L16 6"/>',
   },
@@ -26,14 +26,25 @@ const solutions = [
     note: "shafts, bushes, pins and threads",
     icon: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2"/><path d="M12 3.5v4M4.6 16.2l3.5-2M19.4 16.2l-3.5-2"/>',
   },
+  {
+    href: "/reverse-engineering/",
+    label: "Reverse Engineering",
+    note: "bring the sample, we measure, design and deliver",
+    icon: '<path d="M4 8.5L12 4l8 4.5-8 4.5-8-4.5z"/><path d="M4 8.5V15l8 4.5 8-4.5V8.5"/><path d="M12 13v6.5"/>',
+  },
+  {
+    href: "/quality-assurance/",
+    label: "Quality Assurance",
+    note: "measured, verified and documented before delivery",
+    icon: '<path d="M12 3l7 3v5c0 4.5-3 8-7 9.5C8 19 5 15.5 5 11V6l7-3z"/><path d="M9 11.5l2.2 2.2L15.5 9"/>',
+  },
 ];
 const pages = [
   { href: "/about/", label: "About us" },
-  { href: "/faqs/", label: "FAQs" },
 ];
 const path = Astro.url.pathname;
 const isCurrent = (href: string) => path === href;
-const onSolutions = ["/wire-edm/", "/milling/", "/turning/"].includes(path);
+const onSolutions = ["/wire-edm/", "/milling/", "/turning/", "/reverse-engineering/", "/quality-assurance/"].includes(path);
 const onIndustries = path.startsWith("/industries/");
 ---
 <header class="nav" id="site-nav">
@@ -57,7 +68,7 @@ const onIndustries = path.startsWith("/industries/");
         </button>
         <div class="nav__dropdown" id="solutions-menu">
           <div class="nav__dropdown-inner container">
-            <p class="nav__drophead">Four processes, one workshop</p>
+            <p class="nav__drophead">Six solutions, one workshop</p>
             <div class="nav__dropgrid nav__dropgrid--solutions">
               {solutions.map((s) => (
                 <a class="nav__dropitem" href={s.href} aria-current={isCurrent(s.href) ? "page" : undefined}>
@@ -155,7 +166,7 @@ const onIndustries = path.startsWith("/industries/");
     top: 0;
     z-index: var(--z-sticky);
     background: var(--color-surface);
-    border-bottom: 1px solid oklch(91% 0.012 258); /* neutral hairline, no blue cast */
+    border-bottom: 1px solid oklch(91% 0.008 235); /* neutral hairline, no blue cast */
     transition: box-shadow 240ms var(--ease-out);
   }
   .nav.is-scrolled {
