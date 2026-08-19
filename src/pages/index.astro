@@ -5,6 +5,8 @@
  * index.astro) at launch.
  */
 import "../styles/global.css";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
+import ConsentBanner from "../components/ConsentBanner.astro";
 ---
 <!doctype html>
 <html lang="en-AU">
@@ -15,6 +17,7 @@ import "../styles/global.css";
     <meta name="description" content="Wire EDM Pro, Sydney precision machining. Our new website is on its way." />
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <GoogleAnalytics />
   </head>
   <body class="cs">
     <main class="cs__main">
@@ -31,6 +34,7 @@ import "../styles/global.css";
         <a href="mailto:wireedmpro@gmail.com">wireedmpro@gmail.com</a>
       </div>
     </main>
+    <ConsentBanner />
     <style>
       .cs {
         min-height: 100dvh;

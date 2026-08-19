@@ -1,0 +1,112 @@
+---
+/**
+ * Cookie-consent window for Google Analytics. Shown once per browser until a
+ * choice is made; the choice is stored in localStorage ("wep-consent") and
+ * applied through Google Consent Mode v2 (see GoogleAnalytics.astro).
+ * Shown in dev builds too so the window can be previewed; the GA script
+ * itself (GoogleAnalytics.astro) still only loads in production.
+ */
+import { GA_MEASUREMENT_ID } from "../config";
+
+const enabled = GA_MEASUREMENT_ID.startsWith("G-");
+---
+{enabled && (
+  <aside class="consent" id="consent-banner" hidden role="dialog" aria-live="polite" aria-label="Cookie consent">
+    <p class="consent__text">
+      We use Google Analytics cookies to understand how visitors use this site.
+      Nothing is stored until you choose.
+    </p>
+    <div class="consent__actions">
+      <button class="consent__btn consent__btn--accept" id="consent-accept" type="button">Accept</button>
+      <button class="consent__btn consent__btn--decline" id="consent-decline" type="button">Decline</button>
+    </div>
+  </aside>
+)}
+
+<style>
+  .consent {
+    position: fixed;
+    left: var(--space-md);
+    bottom: var(--space-md);
+    z-index: var(--z-toast);
+    max-width: 26rem;
+    padding: var(--space-lg);
+    background: #ffffff;
+    color: var(--color-ink);
+    border: var(--rule-hairline);
+    border-left: 4px solid var(--color-accent-2);
+    box-shadow: 0 12px 32px -12px oklch(15% 0.05 270 / 0.35);
+  }
+  .consent[hidden] { display: none; }
+  .consent__text {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    max-width: none;
+  }
+  .consent__actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+  .consent__btn {
+    min-height: 40px;
+    padding: 0.45rem 1.2rem;
+    border-radius: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color var(--dur-short) var(--ease-out),
+                color var(--dur-short) var(--ease-out);
+  }
+  .consent__btn--accept {
+    background: var(--color-accent);
+    color: #ffffff;
+    border: 1px solid var(--color-accent);
+  }
+  .consent__btn--accept:hover {
+    background: #ffffff;
+    color: var(--color-accent);
+  }
+  .consent__btn--decline {
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-rule);
+  }
+  .consent__btn--decline:hover {
+    background: var(--color-ink);
+    color: #ffffff;
+  }
+  @media (max-width: 40rem) {
+    .consent {
+      left: var(--space-sm);
+      right: var(--space-sm);
+      bottom: var(--space-sm);
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+  const KEY = "wep-consent";
+  const banner = document.getElementById("consent-banner");
+  if (banner) {
+    let stored: string | null = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) { /* storage blocked */ }
+    if (!stored) banner.hidden = false;
+
+    const choose = (value: "granted" | "denied") => {
+      try { localStorage.setItem(KEY, value); } catch (e) { /* storage blocked */ }
+      banner.hidden = true;
+      const g = (window as any).gtag;
+      if (value === "granted" && typeof g === "function") {
+        g("consent", "update", { analytics_storage: "granted" });
+      }
+    };
+    document.getElementById("consent-accept")?.addEventListener("click", () => choose("granted"));
+    document.getElementById("consent-decline")?.addEventListener("click", () => choose("denied"));
+  }
+</script>

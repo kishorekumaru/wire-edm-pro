@@ -1,0 +1,36 @@
+---
+/**
+ * Google Analytics 4 (gtag.js) with Consent Mode v2. Renders nothing unless a
+ * measurement ID is configured in src/config.ts AND this is a production
+ * build, so local dev servers never send hits.
+ *
+ * Consent defaults to denied; the ConsentBanner component upgrades it when
+ * the visitor accepts (choice remembered in localStorage as "wep-consent").
+ */
+import { GA_MEASUREMENT_ID } from "../config";
+
+const enabled = import.meta.env.PROD && GA_MEASUREMENT_ID.startsWith("G-");
+---
+{enabled && (
+  <script is:inline define:vars={{ id: GA_MEASUREMENT_ID }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag("consent", "default", {
+      analytics_storage: "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
+    try {
+      if (localStorage.getItem("wep-consent") === "granted") {
+        gtag("consent", "update", { analytics_storage: "granted" });
+      }
+    } catch (e) { /* storage blocked: stay denied */ }
+    gtag("js", new Date());
+    gtag("config", id);
+  </script>
+)}
+{enabled && (
+  <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+)}

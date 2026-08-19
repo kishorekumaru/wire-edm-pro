@@ -28,3 +28,4 @@ Confirm or replace each one, then delete it from this list.
 - [ ] **Certifications** (ISO 9001 etc.). None claimed; add only if genuinely held.
 - [ ] **Machine models**: copy lists Fanuc Robocut α-C600iA, Fanuc Robocut α-0iD, Makino U-series, DMG ecoMill 600 V as read from the workshop photos; confirm exact models/branding with the client.
 - [x] **Photography**: client supplied real workshop photos (in `images/`, web-optimized copies in `public/images/`).
+- [x] **Google Analytics measurement ID**: GA4 tag live on every page with G-LWG4BVB87J (stream "Landing Page", https://wireedmpro.com.au). Configured in `src/config.ts`; production builds only, never local dev.
