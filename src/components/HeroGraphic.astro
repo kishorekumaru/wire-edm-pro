@@ -16,12 +16,20 @@
       <pattern id="hg-grid" width="26" height="26" patternUnits="userSpaceOnUse">
         <path d="M 26 0 L 0 0 0 26" fill="none" class="hg__gridline" />
       </pattern>
+      <linearGradient id="hg-grid-fade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
+        <stop offset="0.38" stop-color="#ffffff" stop-opacity="0.15" />
+        <stop offset="1" stop-color="#ffffff" stop-opacity="1" />
+      </linearGradient>
+      <mask id="hg-grid-mask">
+        <rect width="1600" height="640" fill="url(#hg-grid-fade)" />
+      </mask>
       <marker id="hg-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M 0 0 L 8 4 L 0 8 z" class="hg__arrowhead" />
       </marker>
     </defs>
-    <!-- Graph-paper backdrop (hero only) -->
-    <rect width="1600" height="640" fill="url(#hg-grid)" />
+    <!-- Graph-paper backdrop, strongest on the right and fading out to the left -->
+    <rect width="1600" height="640" fill="url(#hg-grid)" mask="url(#hg-grid-mask)" />
     <!-- Axes behind the 3D part: compact origin marker at half opacity -->
     <g class="hg__axes" opacity="0.5">
       <line x1="1120" y1="370" x2="1165" y2="393" marker-end="url(#hg-arrow)" />
@@ -64,13 +72,13 @@
     transition: transform 200ms var(--ease-out);
   }
 
-  .hg__gridline { stroke: var(--color-paper-3); stroke-width: 1; stroke-opacity: 0.4; }
-  .hg__axes line { stroke: var(--color-accent); stroke-width: 1.75; }
-  .hg__arrowhead { fill: var(--color-accent); }
+  .hg__gridline { stroke: #ffffff; stroke-width: 1; stroke-opacity: 0.22; }
+  .hg__axes line { stroke: var(--color-accent-soft); stroke-width: 1.75; }
+  .hg__arrowhead { fill: var(--color-accent-soft); }
   .hg__axis-label {
     font-family: var(--font-outlier);
     font-size: 12px;
-    fill: var(--color-accent);
+    fill: var(--color-accent-soft);
   }
   .hg__dro {
     position: absolute;
@@ -81,7 +89,7 @@
     justify-items: end;
     font-family: var(--font-outlier);
     font-size: 13px;
-    color: var(--color-muted);
+    color: var(--color-on-deep);
     font-variant-numeric: tabular-nums;
   }
 
@@ -105,6 +113,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
+    filter: drop-shadow(0 16px 22px oklch(19% 0.06 268 / 0.5));
   }
   .hg__tag {
     position: absolute;

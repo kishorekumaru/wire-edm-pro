@@ -1,41 +1,44 @@
 /* Hallmark · macrostructure: Split Studio (revised: photo/3D-led corporate)
  * theme: custom · vibe: "industrial precision, cool, technical" · paper: oklch(98.5% 0.006 239) · accent: oklch(59.8% 0.093 242)
- * palette: Platinum #e7ecef · Dusk Blue #274c77 · Steel Blue #6096ba · Icy Blue #a3cef1 · Grey Olive #8b8c89 (client revision 4, 2026-08-17)
+ * palette: logo blues #172043 #243153 #25406b + logo purple #592a7a #3f1273, with Platinum/Steel/Icy light roles retained (client revision 5, 2026-08-19)
  * display+body: Open Sans (client request) · outlier: JetBrains Mono (technical figures) · axes: light / grotesk-sans / cool
  * nav: mega-menu two-panel · footer: Ft1 · enrichment: procedural Three.js sample part · studied: no · context: user-provided
  */
 
 :root {
-  /* Client palette (2026-08-17, fourth revision):
-     Platinum #e7ecef · Dusk Blue #274c77 · Steel Blue #6096ba · Icy Blue #a3cef1 · Grey Olive #8b8c89 */
+  /* Client palette (2026-08-19, fifth revision), sampled from the logo:
+     #172043 deepest navy · #243153 dark navy · #25406b brand blue · #592a7a / #3f1273 purple accents.
+     Light roles keep Platinum #e7ecef, Steel Blue #6096ba and Icy Blue #a3cef1. */
   --color-paper:      oklch(98.5% 0.003 235);        /* near-white, platinum-tinted */
   --color-surface:    #ffffff;                        /* chrome surfaces: header, menus */
   --color-surface-2:  oklch(97.3% 0.003 233);         /* menu-item hover */
-  --color-paper-2:    oklch(94.0% 0.007 233.6);      /* #e7ecef Platinum — panels, elevation */
+  --color-paper-2:    oklch(94.0% 0.007 233.6);      /* #e7ecef Platinum - panels, elevation */
   --color-paper-3:    oklch(89% 0.012 235);          /* deeper panel tint */
   --color-rule:       oklch(85% 0.012 235);          /* hairlines on light */
   --color-rule-2:     oklch(90% 0.008 234);
   --color-muted:      oklch(46% 0.008 122);          /* Grey Olive, deepened for AA text */
   --color-neutral:    oklch(56% 0.006 122);          /* #8b8c89 Grey Olive family */
-  --color-ink:        oklch(41.1% 0.084 253.5);      /* #274c77 Dusk Blue — primary text, deep band */
-  --color-ink-2:      oklch(47% 0.070 252);
-  --color-accent:     oklch(50% 0.090 245);          /* Steel Blue, deepened for AA text/fills */
-  --color-accent-bright: oklch(65.0% 0.079 238.8);   /* #6096ba Steel Blue — large text, icons, graphics */
-  --color-accent-soft: oklch(83.3% 0.067 243.2);     /* #a3cef1 Icy Blue — marks on dark, soft borders */
-  --color-accent-deep: oklch(42% 0.085 248);        /* hover shade for filled buttons */
-  --color-focus:      oklch(52% 0.100 243);
-  /* On the deep band (#274c77 surfaces) */
-  --color-deep:       oklch(41.1% 0.084 253.5);
-  --color-deep-2:     oklch(47% 0.080 252);          /* elevation on dark = lighter */
+  --color-ink:        oklch(31.9% 0.063 267);        /* #243153 dark navy - primary text */
+  --color-ink-2:      oklch(38% 0.060 265);
+  --color-accent:     oklch(37.3% 0.081 259);        /* #25406b brand blue - buttons, links, fills */
+  --color-accent-bright: oklch(65.0% 0.079 238.8);   /* #6096ba Steel Blue - large text, icons, graphics */
+  --color-accent-soft: oklch(83.3% 0.067 243.2);     /* #a3cef1 Icy Blue - marks on dark, soft borders */
+  --color-accent-deep: oklch(31.9% 0.063 267);      /* #243153 hover shade */
+  --color-accent-2:   oklch(38.9% 0.134 308);        /* #592a7a logo purple - sparing highlights */
+  --color-accent-2-deep: oklch(32% 0.150 298);       /* #3f1273 deep violet */
+  --color-focus:      oklch(38.9% 0.134 308);        /* purple ring, echoes the logo spark */
+  /* On the deep band (#172043 surfaces) */
+  --color-deep:       oklch(25.6% 0.067 270);        /* #172043 deepest navy - footer, dark bands */
+  --color-deep-2:     oklch(31.9% 0.063 267);        /* #243153 elevation on dark = lighter */
   --color-on-deep:    oklch(94.0% 0.007 233.6);
   --color-on-deep-muted: oklch(82% 0.030 240);
 
-  /* Type — Open Sans at the user's request (display + body); mono for technical figures */
+  /* Type - Open Sans at the user's request (display + body); mono for technical figures */
   --font-display: "Open Sans", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Open Sans", ui-sans-serif, system-ui, sans-serif;
   --font-outlier: "JetBrains Mono", ui-monospace, monospace; /* technical figures only */
 
-  /* Scale — tightened overall (≈12% smaller steps above base) */
+  /* Scale - tightened overall (≈12% smaller steps above base) */
   --text-sm:   0.8rem;
   --text-base: 1rem;
   --text-md:   1.125rem;
@@ -46,7 +49,7 @@
   --text-display-s: clamp(1.9rem, 2.8vw + 0.7rem, 2.9rem);
   --text-display:   clamp(2.4rem, 4vw + 0.9rem, 4.2rem);
 
-  /* Spacing — 4pt scale */
+  /* Spacing - 4pt scale */
   --space-2xs: 0.25rem;
   --space-xs:  0.5rem;
   --space-sm:  0.75rem;
@@ -65,7 +68,7 @@
   --dur-short: 220ms;
   --dur-long:  420ms;
 
-  /* Structure — full-width corporate layout */
+  /* Structure - full-width corporate layout */
   --page-max: 100rem;
   --page-gutter: clamp(1.25rem, 4.5vw, 4.5rem);
   --rule-hairline: 1px solid var(--color-rule);

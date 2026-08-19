@@ -1,7 +1,7 @@
 /**
  * Interactive 3D model of a wire-EDM sample part, built procedurally to match
- * the client's reference photo: three concentric profiles — outer spline ring,
- * gear ring, star core — cut from one hardened blank.
+ * the client's reference photo: three concentric profiles - outer spline ring,
+ * gear ring, star core - cut from one hardened blank.
  *
  * Interaction: moving the mouse over the hero rotates/tilts the part and
  * telescopes the nested pieces "inside out" (the innermost cut lifts the
@@ -93,14 +93,14 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
   // Soft studio reflections so the steel reads as steel
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environmentIntensity = 0.55; // keep reflections but stop the highlights blowing out
+  scene.environmentIntensity = 0.35; // low ambient so the white part keeps facet shading
 
-  // One shared steel material — identical colour on every piece so the
+  // One shared steel material - identical colour on every piece so the
   // assembled part reads as a single solid blank with no visible layers.
   const steel = new THREE.MeshStandardMaterial({
-    color: new THREE.Color().setHSL(0.58, 0.02, 0.45),
-    metalness: 0.55,
-    roughness: 0.42,
+    color: 0xffffff, // pure white, pops on the blue hero
+    metalness: 0.3,
+    roughness: 0.5,
   });
 
   // The three concentric wire-cut pieces
@@ -121,18 +121,18 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
   // Ground shadow disc (fake, cheap)
   const shadow = new THREE.Mesh(
     new THREE.CircleGeometry(1.35, 40),
-    new THREE.MeshBasicMaterial({ color: 0x274c77, transparent: true, opacity: 0.10 }),
+    new THREE.MeshBasicMaterial({ color: 0x10162e, transparent: true, opacity: 0.28 }),
   );
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = -BLANK_HEIGHT / 2 - 0.02;
   scene.add(shadow);
 
-  scene.add(new THREE.HemisphereLight(0xe7ecef, 0x6096ba, 0.3));
-  const key = new THREE.DirectionalLight(0xffffff, 0.65);
-  key.position.set(3, 5, 2);
+  scene.add(new THREE.HemisphereLight(0xe7ecef, 0x25406b, 0.35));
+  const key = new THREE.DirectionalLight(0xffffff, 1.1);
+  key.position.set(4, 6, 2);
   scene.add(key);
 
-  // Mount — swap fallback image for canvas
+  // Mount - swap fallback image for canvas
   renderer.domElement.className = "hg__canvas";
   renderer.domElement.setAttribute("aria-hidden", "true");
   host.appendChild(renderer.domElement);
@@ -163,7 +163,7 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
       const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
       const ny = ((e.clientY - r.top) / r.height) * 2 - 1;
       // X movement rotates the part; Y movement telescopes it inside-out
-      // (mouse at the top = fully extended, at the bottom = flush — one piece)
+      // (mouse at the top = fully extended, at the bottom = flush - one piece)
       // and tilts the part slightly with the pointer.
       targetRotY = 0.35 + nx * 1.3;
       targetExplode = Math.max(0, ((1 - ny) / 2) * 1.05 - 0.05);
@@ -177,7 +177,7 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
     });
   }
 
-  // Touch devices: drag the prop itself — horizontal drag rotates,
+  // Touch devices: drag the prop itself - horizontal drag rotates,
   // vertical drag telescopes the pieces in and out.
   if (!finePointer && !reducedMotion) {
     let dragging = false;
@@ -215,7 +215,7 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
 
   const applyExplode = (e: number) => {
     // "Inside out": the innermost cut travels furthest. At e = 0 every offset
-    // is exactly zero so the three pieces sit flush — one solid blank.
+    // is exactly zero so the three pieces sit flush - one solid blank.
     starCore.position.y = e * 1.5;
     gearRing.position.y = e * 0.72;
     starCore.rotation.y = -e * 0.45;
