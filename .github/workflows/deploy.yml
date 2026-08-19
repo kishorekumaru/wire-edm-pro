@@ -35,14 +35,14 @@ jobs:
       # Astro writes fingerprinted CSS/JS chunks to dist/_assets — safe to cache forever
       - name: Deploy hashed assets (immutable cache)
         run: |
-          aws s3 sync dist/_assets s3://wireedmpro.com.au/_assets \
+          aws s3 sync dist/_assets s3://wireedmpro.com.au-032331960224-ap-southeast-2-an/_assets \
             --delete \
             --cache-control "public, max-age=31536000, immutable"
 
       # Images and fonts are not fingerprinted — 7-day cache
       - name: Deploy images & fonts (7-day cache)
         run: |
-          aws s3 sync dist/ s3://wireedmpro.com.au/ \
+          aws s3 sync dist/ s3://wireedmpro.com.au-032331960224-ap-southeast-2-an/ \
             --exclude "*" \
             --include "*.webp" \
             --include "*.png" \
@@ -55,7 +55,7 @@ jobs:
 
       - name: Deploy HTML (must-revalidate)
         run: |
-          aws s3 sync dist/ s3://wireedmpro.com.au/ \
+          aws s3 sync dist/ s3://wireedmpro.com.au-032331960224-ap-southeast-2-an/ \
             --exclude "*" \
             --include "*.html" \
             --cache-control "public, max-age=0, must-revalidate"
@@ -63,7 +63,7 @@ jobs:
       # Everything else (sitemap.xml, robots.txt, …) + cleanup of removed files
       - name: Deploy remaining files
         run: |
-          aws s3 sync dist/ s3://wireedmpro.com.au/ \
+          aws s3 sync dist/ s3://wireedmpro.com.au-032331960224-ap-southeast-2-an/ \
             --delete \
             --exclude "_assets/*" \
             --cache-control "public, max-age=86400"
