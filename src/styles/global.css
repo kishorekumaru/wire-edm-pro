@@ -16,6 +16,14 @@
   src: url("/fonts/open-sans-italic-var.woff2") format("woff2");
 }
 @font-face {
+  /* Logo-matching face for the hero wordmark only (latin subset, 9KB) */
+  font-family: "Rajdhani";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/rajdhani-700.woff2") format("woff2");
+}
+@font-face {
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 100 800;

@@ -60,12 +60,13 @@ const industries = [
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="container hero__content">
       <div class="hero__copy">
-        <p class="hero__kicker mono reveal" style="--i: 0">Sydney · est. early 2000s</p>
-        <h1 class="reveal" style="--i: 0">We cut hardened steel to <span class="hero__accent">five microns</span>.</h1>
+        <p class="hero__kicker mono reveal" style="--i: 0">Australian owned &amp; operated · Sydney · est. early 2000s</p>
+        <h1 class="reveal" style="--i: 0"><span class="hero__brand"><span class="hero__brand-wire">WIRE</span> <span class="hero__brand-edm">EDM</span> <span class="hero__brand-pro">PRO</span></span> cuts hardened steel to <span class="hero__accent">five&nbsp;microns</span>.</h1>
+        <p class="hero__trust reveal" style="--i: 1">Trusted by Australian industry for 25 years.</p>
         <p class="hero__lede reveal" style="--i: 1">
-          25 years committed to the most demanding, high-end precision jobs in Australia.
-          Tool steel, titanium and hardened dies for manufacturing, mining and medical
-          businesses. Machined to drawing, without compromise.
+          A local Sydney workshop machining tool steel, titanium and hardened dies for the
+          country's manufacturing, mining and medical businesses. The most demanding,
+          high-end precision jobs. Machined to drawing, without compromise.
         </p>
         <div class="hero__actions reveal" style="--i: 2">
           <a class="btn btn--fill" href="/contact/">Get in touch</a>
@@ -211,8 +212,35 @@ const industries = [
     color: #ffffff;
   }
   .hero__accent { color: var(--color-accent-soft); }
-  .hero__lede {
+  /* Wordmark treatment: heavy caps in the logo's three tones, lightened for the dark hero */
+  .hero__brand {
+    font-family: "Rajdhani", var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    font-size: 1.12em; /* Rajdhani runs narrow; nudge up to sit level with Open Sans */
+    white-space: nowrap;
+  }
+  /* Exact logo colors, client-supplied. The letters are darker than the hero,
+     so a thin white outline plus a soft halo separates them from the background */
+  .hero__brand span,
+  .hero__brand-wire, .hero__brand-edm, .hero__brand-pro {
+    -webkit-text-stroke: 1.25px rgba(255, 255, 255, 0.92);
+    paint-order: stroke fill;
+  }
+  .hero__brand-wire { color: #2c3d5f; }
+  .hero__brand-edm { color: #562d73; }
+  .hero__brand-pro { color: #646464; }
+  .hero__trust {
     margin-top: var(--space-lg);
+    font-size: var(--text-md);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    border-left: 3px solid var(--color-accent-soft);
+    padding-left: var(--space-sm);
+  }
+  .hero__lede {
+    margin-top: var(--space-md);
     font-size: var(--text-md);
     color: var(--color-on-deep);
     max-width: 52ch;

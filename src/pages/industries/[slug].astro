@@ -19,11 +19,16 @@ const services = [
   title={`${ind.name} Machining | Wire EDM Pro, Sydney`}
   description={`${ind.short}. Precision wire EDM, EDM cutting, CNC milling and turning for the ${ind.name.toLowerCase()} industry, from our Sydney workshop.`}
 >
-  <section class="ind section--tight">
-    <div class="container">
-      <p class="ind__kicker mono"><a href="/industries/">Industries</a> · {ind.name}</p>
-      <h1>{ind.name}</h1>
-      <p class="ind__lede">{ind.lede}</p>
+  <section class="ind section--tight" id="ind-hero">
+    <div class="container ind__wrap">
+      <div>
+        <p class="ind__kicker mono"><a href="/industries/">Industries</a> · {ind.name}</p>
+        <h1>{ind.name}</h1>
+        <p class="ind__lede">{ind.lede}</p>
+      </div>
+      <div class="ind__badge" id="ind-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={ind.icon} />
+      </div>
     </div>
   </section>
 
@@ -56,8 +61,72 @@ const services = [
   />
 </BaseLayout>
 
+<style is:global>
+  /* Industries pages: white hero banner, matching the solutions pages */
+  body { background: var(--color-paper-2); }
+  main > .ind { background: #ffffff; border-bottom: var(--rule-hairline); }
+  main > .section:not(.section--panel) { background: var(--color-paper); }
+</style>
+
+
 <style>
-  .ind { padding-block: var(--space-2xl) var(--space-2xl); }
+  .ind {
+    padding-block: calc(var(--space-3xl) + var(--space-md));
+    overflow: hidden;
+  }
+  .ind__wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  /* Stacked-plate "3D border" tile carrying the industry icon; JS nudges
+     --bx/--by from mouse position for a light parallax tilt */
+  .ind__badge {
+    width: clamp(9rem, 14vw, 12rem);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    color: var(--color-accent);
+    background: #ffffff;
+    border: 1.5px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    position: relative;
+    margin-right: var(--space-xl);
+    transform: translate(calc(var(--bx, 0) * 10px), calc(var(--by, 0) * 8px))
+               rotateX(calc(var(--by, 0) * -6deg)) rotateY(calc(var(--bx, 0) * 8deg));
+    transform-style: preserve-3d;
+    transition: transform 180ms var(--ease-out);
+    will-change: transform;
+  }
+  .ind__badge::before,
+  .ind__badge::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+    z-index: -1;
+  }
+  .ind__badge::before {
+    border: 1.5px solid var(--color-accent-soft);
+    transform: translate(0.55rem, 0.55rem);
+  }
+  .ind__badge::after {
+    border: 1.5px solid var(--color-rule);
+    transform: translate(1.1rem, 1.1rem);
+  }
+  .ind__badge svg {
+    width: 52%;
+    height: 52%;
+    transform: translateZ(18px);
+  }
+  @media (max-width: 56rem) {
+    .ind__wrap { grid-template-columns: minmax(0, 1fr); }
+    .ind__badge { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ind__badge { transform: none !important; transition: none; }
+  }
   .ind__kicker {
     font-size: var(--text-sm);
     color: var(--color-accent);
@@ -126,3 +195,29 @@ const services = [
     .ind__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
   }
 </style>
+
+<script>
+  // Light mouse parallax on the hero badge
+  const hero = document.getElementById("ind-hero");
+  const badge = document.getElementById("ind-badge");
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (hero && badge && fine && !still) {
+    let raf = 0, nx = 0, ny = 0;
+    const apply = () => {
+      raf = 0;
+      badge.style.setProperty("--bx", nx.toFixed(3));
+      badge.style.setProperty("--by", ny.toFixed(3));
+    };
+    hero.addEventListener("pointermove", (e) => {
+      const r = hero.getBoundingClientRect();
+      nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    hero.addEventListener("pointerleave", () => {
+      nx = 0; ny = 0;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+  }
+</script>

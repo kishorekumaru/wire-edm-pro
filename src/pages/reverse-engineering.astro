@@ -66,6 +66,15 @@ const steps = [
   />
 </BaseLayout>
 
+<style is:global>
+  /* Solutions pages: white hero banner; the sections after it keep the
+     palette's light blue tints (client request) */
+  body { background: var(--color-paper-2); }
+  main > .re { background: #ffffff; border-bottom: var(--rule-hairline); }
+  main > .section:not(.section--panel) { background: var(--color-paper); }
+</style>
+
+
 <style>
   .re { padding-block: var(--space-2xl); }
   .re__kicker {

@@ -35,6 +35,14 @@ import { industries } from "../../data/industries";
   />
 </BaseLayout>
 
+<style is:global>
+  /* Industries pages: white hero banner, matching the solutions pages */
+  body { background: var(--color-paper-2); }
+  main > .ind-hub { background: #ffffff; border-bottom: var(--rule-hairline); }
+  main > .section:not(.section--panel) { background: var(--color-paper); }
+</style>
+
+
 <style>
   .ind-hub { padding-block: var(--space-2xl) var(--space-3xl); }
   .ind-hub__kicker {

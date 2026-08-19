@@ -78,6 +78,15 @@ const checks = [
   />
 </BaseLayout>
 
+<style is:global>
+  /* Solutions pages: white hero banner; the sections after it keep the
+     palette's light blue tints (client request) */
+  body { background: var(--color-paper-2); }
+  main > .qa { background: #ffffff; border-bottom: var(--rule-hairline); }
+  main > .section:not(.section--panel) { background: var(--color-paper); }
+</style>
+
+
 <style>
   .qa { padding-block: var(--space-2xl); }
   .qa__kicker {
