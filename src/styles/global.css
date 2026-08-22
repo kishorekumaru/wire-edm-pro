@@ -45,6 +45,14 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.6;
+  /* No forced grayscale smoothing: it renders thin and ragged on 1x displays.
+     Browser-default smoothing keeps text crisp on both retina and standard screens */
+  font-synthesis: none;
+}
+
+/* Light-on-dark text is the one place grayscale smoothing helps: without it,
+   white glyphs on navy bloom and look rough. Applied to the dark surfaces only */
+.hero, .foot, .cred, .cta-band {
   -webkit-font-smoothing: antialiased;
 }
 

@@ -7,17 +7,17 @@ import TurnkeyFlow from "../components/TurnkeyFlow.astro";
 const services = [
   {
     href: "/wire-edm/",
-    name: "EDM Wire Cutting Solution",
+    name: "EDM Wire Solution",
     body: "A 0.25 mm charged wire erodes hardened metal along a programmed path. Zero cutting force. Corners as tight as the kerf allows.",
-    img: "/images/wire-edm-cutting",
-    alt: "Wire EDM machine cutting a steel workpiece, sparks at the wire in dielectric fluid",
+    img: "/images/fanuc-robocut-c600ia",
+    alt: "Fanuc Robocut α-C600iA wire EDM machine at Wire EDM Pro, Sydney",
   },
   {
-    href: "/wire-edm/",
-    name: "EDM cutting",
+    href: "/edm-cutting/",
+    name: "EDM Cutting Solution",
     body: "Spark erosion reaches what tooling can't: hardened dies, splines, keyways and fine detail. After heat treatment, not before.",
-    img: "/images/edm-spark-closeup",
-    alt: "Close-up of EDM spark erosion cutting through a steel block",
+    img: "/images/fanuc-robocut-0id",
+    alt: "Fanuc Robocut α-0iD wire EDM machine at Wire EDM Pro, Sydney",
   },
   {
     href: "/milling/",
@@ -100,30 +100,30 @@ const industries = [
     </div>
   </section>
 
-  <!-- Services. Photo-led solution tiles -->
-  <section class="section">
+  <!-- Services. Alternating splits on a blueprint-tinted panel -->
+  <section class="section proc-section">
     <div class="container">
       <div class="section-head" data-reveal>
         <h2>Four processes <span class="section-head__sub">One workshop. No brokering. No freight between shops.</span></h2>
       </div>
-      <div class="services">
+      <div class="proc">
         {services.map((s, i) => (
-          <a class="services__card" href={s.href} data-reveal style={`--reveal-i: ${i}`}>
-            <div class="services__figure">
+          <a class="proc__row" href={s.href} data-reveal style={`--reveal-i: ${i % 2}`}>
+            <div class="proc__figure">
               <img
-                class="services__img"
+                class="proc__img"
                 src={`${s.img}-800.jpg`}
                 srcset={`${s.img}-800.jpg 800w, ${s.img}.jpg 1600w`}
-                sizes="(max-width: 56rem) 100vw, 25vw"
+                sizes="(max-width: 56rem) 100vw, 42vw"
                 width="800" height="450"
                 alt={s.alt}
                 loading="lazy"
               />
             </div>
-            <div class="services__body">
+            <div class="proc__text">
               <h3>{s.name}</h3>
               <p>{s.body}</p>
-              <span class="services__more" aria-hidden="true">View capability →</span>
+              <span class="proc__more" aria-hidden="true">View capability →</span>
             </div>
           </a>
         ))}
@@ -224,7 +224,7 @@ const industries = [
      so a thin white outline plus a soft halo separates them from the background */
   .hero__brand span,
   .hero__brand-wire, .hero__brand-edm, .hero__brand-pro {
-    -webkit-text-stroke: 1.25px rgba(255, 255, 255, 0.92);
+    -webkit-text-stroke: 3px rgba(255, 255, 255, 0.92);
     paint-order: stroke fill;
   }
   .hero__brand-wire { color: #2c3d5f; }
@@ -263,6 +263,8 @@ const industries = [
   .hero__textlink:hover { color: var(--color-accent-soft); }
 
   .stats { border-block: var(--rule-hairline); padding-block: var(--space-lg); }
+  /* Figures bold so the mono face renders crisp at this size */
+  .stats__item dd { font-weight: 700; }
   .stats__strip {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -280,55 +282,66 @@ const industries = [
     color: var(--color-accent);
   }
 
-  .services {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-lg);
+  .proc-section { background: #ffffff; }
+  /* Rows rise in from the bottom as they scroll into view */
+  .proc__row[data-reveal] {
+    transform: translateY(72px);
+    transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
   }
-  .services__card {
-    display: flex;
-    flex-direction: column;
-    background: var(--color-paper);
-    border: var(--rule-hairline);
-    border-radius: var(--radius-md);
-    overflow: hidden;
+  .proc__row[data-reveal].is-revealed { transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .proc__row[data-reveal] { transform: none; transition: none; }
+  }
+
+  /* Four processes: alternating zigzag splits, image and copy swap sides */
+  .proc { display: grid; gap: var(--space-2xl); }
+  .proc__row {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-2xl);
+    align-items: center;
     text-decoration: none;
     color: inherit;
-    transition: border-color 300ms var(--ease-out);
   }
-  .services__card:hover { border-color: var(--color-accent); }
-  .services__card:hover .services__more { transform: translateX(6px); }
-  .services__card:hover h3 { color: var(--color-accent); }
-  .services__card h3 { transition: color 300ms var(--ease-out); }
-  .services__figure {
-    overflow: hidden; /* contains the image zoom */
-    aspect-ratio: 4 / 3;
-  }
-  /* Hover animation: the image zoom only */
-  .services__img {
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    width: 100%;
-    will-change: transform;
-    transform: translateZ(0);
-    transition: transform 700ms var(--ease-out);
-  }
-  .services__card:hover .services__img { transform: scale(1.06) translateZ(0); }
-  @media (prefers-reduced-motion: reduce) {
-    .services__img { will-change: auto; }
-    .services__card:hover .services__img { transform: none; }
-  }
-  .services__body { padding: var(--space-lg); display: flex; flex-direction: column; flex: 1; }
-  .services__body h3 { font-size: var(--text-md); }
-  .services__body p { margin-top: var(--space-sm); color: var(--color-muted); font-size: var(--text-sm); flex: 1; }
-  .services__more {
+  .proc__row:nth-child(even) .proc__figure { order: 2; }
+  .proc__row:nth-child(even) .proc__text { order: 1; }
+  .proc__text h3 { font-size: var(--text-xl); transition: color 300ms var(--ease-out); }
+  .proc__row:hover .proc__text h3 { color: var(--color-accent); }
+  .proc__text p { margin-top: var(--space-sm); color: var(--color-muted); max-width: 52ch; }
+  .proc__more {
     display: inline-block;
     margin-top: var(--space-md);
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: var(--text-sm);
     color: var(--color-accent);
     white-space: nowrap;
     transition: transform 220ms var(--ease-out);
+  }
+  .proc__row:hover .proc__more { transform: translateX(6px); }
+  .proc__figure {
+    overflow: hidden; /* contains the image zoom */
+    border-radius: var(--radius-md);
+    aspect-ratio: 16 / 9;
+  }
+  /* Image oversized inside its mask; --py (set on scroll) drifts it for a
+     parallax depth effect. Hover still adds the zoom, nothing else moves */
+  .proc__img {
+    width: 100%;
+    height: 122%;
+    margin-top: -11%;
+    object-fit: cover;
+    will-change: transform;
+    transform: translate3d(0, var(--py, 0px), 0);
+    transition: transform 120ms linear;
+  }
+  .proc__row:hover .proc__img {
+    transform: translate3d(0, var(--py, 0px), 0) scale(1.06);
+    transition: transform 700ms var(--ease-out);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .proc__img { will-change: auto; height: 100%; margin-top: 0; transform: none; }
+    .proc__row:hover .proc__img { transform: none; }
   }
 
   /* Full-bleed machine-floor photo behind an indigo scrim; copy sits on the solid side */
@@ -412,16 +425,43 @@ const industries = [
       min-height: 0;
     }
     .stats__strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .services { grid-template-columns: minmax(0, 1fr); }
+    .proc__row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
+    .proc__row:nth-child(even) .proc__figure { order: 0; }
+    .proc__row:nth-child(even) .proc__text { order: 0; }
     .industries { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
   }
   @media (min-width: 56rem) and (max-width: 80rem) {
-    .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .proc__row { gap: var(--space-xl); }
   }
 </style>
 
 <script>
   // Count-up stat numerals on first view (template-inspired), reduced-motion aware
+  // Parallax drift on the process photos: each image slides subtly against
+  // the scroll while its row crosses the viewport
+  {
+    const imgs = Array.from(document.querySelectorAll(".proc__img"));
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (imgs.length && !still) {
+      let raf = 0;
+      const update = () => {
+        raf = 0;
+        const vh = window.innerHeight;
+        for (const img of imgs) {
+          const host = img.parentElement;
+          if (!host) continue;
+          const r = host.getBoundingClientRect();
+          if (r.bottom < -120 || r.top > vh + 120) continue;
+          const progress = (r.top + r.height / 2 - vh / 2) / vh; // ~-0.7 .. 0.7
+          (img as HTMLElement).style.setProperty("--py", `${(progress * -34).toFixed(1)}px`);
+        }
+      };
+      window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+      window.addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+      update();
+    }
+  }
+
   const dds = document.querySelectorAll(".stats__item dd[data-count]");
   const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (dds.length && !still && "IntersectionObserver" in window) {

@@ -1,0 +1,100 @@
+---
+import ServicePage from "../components/ServicePage.astro";
+
+const specs = [
+  { name: "Hardness", value: "to 60+ HRC", note: "cuts fully hardened material. No annealing, no re-heat-treat" },
+  { name: "Cutting force", value: "0 N", note: "non-contact erosion. Nothing bends, nothing work-hardens" },
+  { name: "Positional tolerance", value: "±0.005 mm", note: "typical for finish passes on stable material" },
+  { name: "Edge condition", value: "burr-free", note: "spark-eroded edges need no deburring pass" },
+  { name: "Heat-affected zone", value: "minimal", note: "skim passes remove the recast layer where the job demands it" },
+  { name: "Materials", value: "any conductive metal", note: "tool steel, stainless, titanium, carbide, copper, exotic alloys" },
+];
+
+const applications = [
+  {
+    name: "Hardened dies & die sections",
+    body: "Cutting features into dies after heat treatment, so nothing distorts afterwards. Apertures, relief and repairs in material a cutter can't touch.",
+  },
+  {
+    name: "Slitting & segmenting hardened stock",
+    body: "Clean, square, burr-free separation of hardened and delicate material where an abrasive cut-off would burn, burr or bend the part.",
+  },
+  {
+    name: "Keyways & features in finished parts",
+    body: "Adding a keyway, slot or aperture to a component that is already hardened, ground or too valuable to risk on conventional tooling.",
+  },
+  {
+    name: "Splitting seized assemblies",
+    body: "Eroding through a seized or bonded joint without force, so the component that must survive does survive.",
+  },
+];
+---
+<ServicePage
+  title="EDM Cutting Solution, Sydney | Wire EDM Pro"
+  description="EDM cutting in Sydney: spark erosion for hardened dies, slitting, keyways and repairs in material to 60+ HRC. Burr-free, zero cutting force. Quotes from drawings or STEP files."
+  heroKicker="EDM Cutting Solution"
+  heroTitle="Spark erosion reaches what tooling can't."
+  heroImage="/images/fanuc-robocut-0id"
+  heroImageAlt="Fanuc Robocut α-0iD EDM machine at Wire EDM Pro, Sydney"
+  heroLede="EDM cutting removes metal with controlled sparks, not force. Hardened dies, splines, keyways and fine detail. Cut after heat treatment, not before. If the material conducts, we can cut it, at any hardness."
+  specs={specs}
+  specNote="Figures are typical EDM process capability; tolerance and finish for your part depend on geometry, material and thickness. We confirm both at quote."
+  applications={applications}
+  ctaHeading="Too hard? That's the point."
+  ctaBody="EDM cutting exists for the jobs conventional tooling gave up on. Send the drawing, or the seized part itself, and we'll quote it."
+>
+  <section slot="deep" class="edm-vs section">
+    <div class="container edm-vs__grid">
+      <div>
+        <h2>When EDM cutting beats a cutter or a cut-off wheel</h2>
+        <p class="edm-vs__body">
+          A cutter pushes on the work; a cut-off wheel burns it. Spark erosion does neither.
+          The part sits unclamped by force, the edge comes off square and burr-free, and
+          hardness is irrelevant. That makes EDM the last resort that should often be the
+          first choice on hardened, delicate or finished components.
+        </p>
+      </div>
+      <ul class="edm-vs__list">
+        <li>Material is hardened, and must stay hardened</li>
+        <li>The part is finished, and one slip would scrap it</li>
+        <li>Edges must come off square, clean and burr-free</li>
+        <li>The feature sits where a cutter physically can't reach</li>
+        <li>Carbide or exotic alloys that destroy conventional tooling</li>
+      </ul>
+    </div>
+  </section>
+</ServicePage>
+
+<style>
+  .edm-vs { padding-block: var(--space-2xl); }
+  .edm-vs__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .edm-vs h2 { font-size: var(--text-xl); max-width: 22ch; }
+  .edm-vs__body { margin-top: var(--space-md); color: var(--color-muted); }
+  .edm-vs__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .edm-vs__list li {
+    padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+    border-bottom: var(--rule-hairline);
+    position: relative;
+  }
+  .edm-vs__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.15em;
+    width: 0.55rem;
+    height: 2px;
+    background: var(--color-accent);
+  }
+  @media (max-width: 56rem) {
+    .edm-vs__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+  }
+</style>

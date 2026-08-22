@@ -1,6 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
+import { industries } from "../data/industries";
+
+const icon = (slug: string) => industries.find((i) => i.slug === slug)?.icon ?? "";
+const trio = [
+  {
+    href: "/industries/tooling-diemaking/",
+    icon: icon("tooling-diemaking"),
+    name: "Manufacturing",
+    body: "Press tools, dies and fixtures. The tooling their tooling depends on.",
+  },
+  {
+    href: "/industries/mining/",
+    icon: icon("mining"),
+    name: "Mining",
+    body: "Hardened wear parts and drive components that can't wait months for OEM spares.",
+  },
+  {
+    href: "/industries/medical-dental/",
+    icon: icon("medical-dental"),
+    name: "Medical",
+    body: "Small stainless and titanium components where burr-free edges are not negotiable.",
+  },
+];
 ---
 <BaseLayout
   title="About Wire EDM Pro | 25+ Years of Precision Machining in Sydney"
@@ -42,8 +65,8 @@ import CtaBand from "../components/CtaBand.astro";
       <div class="purpose__photos">
         <img
           class="photo purpose__photo-main"
-          src="/images/workshop-mezzanine-800.jpg"
-          srcset="/images/workshop-mezzanine-800.jpg 800w, /images/workshop-mezzanine.jpg 1600w"
+          src="/images/wire-edm-office-800.jpg"
+          srcset="/images/wire-edm-office-800.jpg 800w, /images/wire-edm-office.jpg 1600w"
           sizes="(max-width: 56rem) 100vw, 40vw"
           width="800" height="450"
           alt="Inside the Wire EDM Pro workshop in Sydney"
@@ -68,45 +91,54 @@ import CtaBand from "../components/CtaBand.astro";
         <h2>The machines on the floor.</h2>
         <p>Wire EDM is the core of the workshop; milling and turning carry the work that surrounds it.</p>
       </div>
-      <div class="machines__grid">
-        <figure class="machines__card">
-          <img
-            src="/images/fanuc-robocut-c600ia-800.jpg"
-            srcset="/images/fanuc-robocut-c600ia-800.jpg 800w, /images/fanuc-robocut-c600ia.jpg 1600w"
-            sizes="(max-width: 56rem) 100vw, 33vw"
-            width="800" height="450"
-            alt="Fanuc Robocut α-C600iA wire EDM machine"
-            loading="lazy"
-          />
+      <div class="machines__list">
+        <figure class="machines__row" data-reveal>
+          <div class="machines__frame"><div class="machines__media">
+            <img
+              src="/images/fanuc-robocut-c600ia.jpg"
+              srcset="/images/fanuc-robocut-c600ia-800.jpg 800w, /images/fanuc-robocut-c600ia.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 62vw"
+              width="1600" height="900"
+              alt="Fanuc Robocut α-C600iA wire EDM machine"
+              loading="lazy"
+            />
+          </div></div>
           <figcaption>
+            <span class="machines__tag mono">M-01</span>
             <b>Fanuc Robocut wire EDMs</b>
             <span>α-C600<span class="mono">i</span>A and α-0<span class="mono">i</span>D. The profile and production wire-cutting workhorses.</span>
           </figcaption>
         </figure>
-        <figure class="machines__card">
-          <img
-            src="/images/makino-wire-edm-800.jpg"
-            srcset="/images/makino-wire-edm-800.jpg 800w, /images/makino-wire-edm.jpg 1600w"
-            sizes="(max-width: 56rem) 100vw, 33vw"
-            width="800" height="450"
-            alt="Makino U-series wire EDM machine"
-            loading="lazy"
-          />
+        <figure class="machines__row" data-reveal>
+          <div class="machines__frame"><div class="machines__media">
+            <img
+              src="/images/makino-wire-edm.jpg"
+              srcset="/images/makino-wire-edm-800.jpg 800w, /images/makino-wire-edm.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 62vw"
+              width="1600" height="900"
+              alt="Makino U-series wire EDM machine"
+              loading="lazy"
+            />
+          </div></div>
           <figcaption>
+            <span class="machines__tag mono">M-02</span>
             <b>Makino U-series wire EDM</b>
             <span>Fine-finish wire cutting for the work where surface and edge quality decide the job.</span>
           </figcaption>
         </figure>
-        <figure class="machines__card">
-          <img
-            src="/images/ecomill-600v-800.jpg"
-            srcset="/images/ecomill-600v-800.jpg 800w, /images/ecomill-600v.jpg 1600w"
-            sizes="(max-width: 56rem) 100vw, 33vw"
-            width="800" height="450"
-            alt="DMG ecoMill 600 V vertical machining centre"
-            loading="lazy"
-          />
+        <figure class="machines__row" data-reveal>
+          <div class="machines__frame"><div class="machines__media">
+            <img
+              src="/images/ecomill-600v.jpg"
+              srcset="/images/ecomill-600v-800.jpg 800w, /images/ecomill-600v.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 62vw"
+              width="1600" height="900"
+              alt="DMG ecoMill 600 V vertical machining centre"
+              loading="lazy"
+            />
+          </div></div>
           <figcaption>
+            <span class="machines__tag mono">M-03</span>
             <b>DMG ecoMill 600&nbsp;V</b>
             <span>Vertical machining centre for the jigs, fixtures, die sets and spares around the EDM work.</span>
           </figcaption>
@@ -115,23 +147,23 @@ import CtaBand from "../components/CtaBand.astro";
     </div>
   </section>
 
-  <section class="section section--tight history">
-    <div class="container history__grid">
+  <section class="section trio">
+    <div class="container">
       <h2>Three industries, one habit.</h2>
-      <div class="history__cols">
-        <p>
-          <b>Manufacturing</b> sends us press tools, dies and fixtures. The tooling their tooling
-          depends on. <b>Mining</b> sends hardened wear parts and drive components that can't wait
-          months for OEM spares. <b>Medical</b> sends small stainless and titanium components where
-          burr-free edges are not negotiable.
-        </p>
-        <p>
-          The habit that keeps them coming back is the same one we started with in the early
-          2000s: say what we can hold, hold it, and hand the part over when we said we would.
-          Most of our work arrives from customers who have been sending drawings for a decade
-          or more.
-        </p>
+      <div class="trio__grid">
+        {trio.map((t, i) => (
+          <a class="trio__card" href={t.href} data-reveal style={`--reveal-i: ${i}`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={t.icon} />
+            <h3>{t.name}</h3>
+            <p>{t.body}</p>
+          </a>
+        ))}
       </div>
+      <p class="trio__habit" data-reveal>
+        The habit that keeps them coming back is the same one we started with in the early
+        2000s: say what we can hold, hold it, and hand the part over when we said we would.
+        Most of our work arrives from customers who have been sending drawings for a decade or more.
+      </p>
     </div>
   </section>
 
@@ -140,6 +172,30 @@ import CtaBand from "../components/CtaBand.astro";
     body="Send a drawing, a STEP file or a photo of the worn part. We'll reply within one business day."
   />
 </BaseLayout>
+
+<script>
+  // Parallax drift on the machine photos while scrolling (mirrors the landing page)
+  const imgs = Array.from(document.querySelectorAll(".machines__media img"));
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (imgs.length && !still) {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      for (const img of imgs) {
+        const host = img.parentElement;
+        if (!host) continue;
+        const r = host.getBoundingClientRect();
+        if (r.bottom < -120 || r.top > vh + 120) continue;
+        const progress = (r.top + r.height / 2 - vh / 2) / vh;
+        (img as HTMLElement).style.setProperty("--py", `${(progress * -34).toFixed(1)}px`);
+      }
+    };
+    window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    window.addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+    update();
+  }
+</script>
 
 <style>
   .about-hero { padding-block: var(--space-2xl) var(--space-2xl); }
@@ -183,39 +239,156 @@ import CtaBand from "../components/CtaBand.astro";
     box-shadow: 0 1px 2px oklch(20% 0.01 251 / 0.08);
   }
 
-  .machines__grid {
+  /* Machines: wide photo rows with a caption plate overlapping the image,
+     plate side alternating row by row */
+  .machines__list { display: grid; gap: var(--space-2xl); }
+  .machines__row {
+    position: relative;
+    margin: 0;
+    display: grid;
+  }
+  .machines__frame {
+    position: relative;
+    width: 54%;
+  }
+  /* Blueprint offset frame behind each photo */
+  .machines__frame::before {
+    content: "";
+    position: absolute;
+    inset: 0.8rem -0.8rem -0.8rem 0.8rem;
+    border: 1.5px solid var(--color-accent-soft);
+    border-radius: var(--radius-md);
+  }
+  .machines__row:nth-child(even) .machines__frame::before {
+    inset: 0.8rem 0.8rem -0.8rem -0.8rem;
+  }
+  .machines__media {
+    position: relative;
+    aspect-ratio: 16 / 8;
+    overflow: hidden; /* masks the parallax drift */
+    border-radius: var(--radius-md);
+    border: var(--rule-hairline);
+  }
+  .machines__media img {
+    width: 100%;
+    height: 122%;
+    margin-top: -11%;
+    object-fit: cover;
+    will-change: transform;
+    transform: translate3d(0, var(--py, 0px), 0);
+    transition: transform 120ms linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .machines__media img { will-change: auto; height: 100%; margin-top: 0; transform: none; }
+  }
+  .machines__row figcaption {
+    position: absolute;
+    bottom: var(--space-lg);
+    right: 0;
+    width: min(22rem, 38%);
+    background: #ffffff;
+    border: var(--rule-hairline);
+    border-left: 4px solid var(--color-accent);
+    padding: var(--space-lg) var(--space-xl);
+    display: grid;
+    gap: var(--space-2xs);
+    box-shadow: 0 18px 36px -24px oklch(25% 0.06 267 / 0.5);
+  }
+  /* Dashed leader line from the plate to its machine, node dot at the far end */
+  .machines__row figcaption::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 4.5rem;
+    border-top: 2px dashed var(--color-accent-bright);
+  }
+  .machines__row figcaption::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 4.5rem);
+    width: 10px;
+    height: 10px;
+    margin-top: -5px;
+    border-radius: 999px;
+    background: var(--color-accent-bright);
+    box-shadow: 0 0 0 4px oklch(65% 0.079 238.8 / 0.25);
+  }
+  .machines__row:nth-child(even) figcaption::before { right: auto; left: 100%; }
+  .machines__row:nth-child(even) figcaption::after { right: auto; left: calc(100% + 4.5rem); }
+  .machines__tag {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    letter-spacing: 0.08em;
+  }
+  .machines__row:nth-child(even) .machines__frame { justify-self: end; }
+  .machines__row:nth-child(even) figcaption {
+    right: auto;
+    left: 0;
+    border-left: none;
+    border-right: 4px solid var(--color-accent);
+  }
+  .machines__row b { font-family: var(--font-display); font-size: var(--text-md); }
+  .machines__row figcaption span { font-size: var(--text-sm); color: var(--color-muted); }
+
+  /* Three industries: deep navy band, icon panels, the habit line closing it */
+  .trio {
+    background: var(--color-deep);
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+  }
+  .trio h2 { font-size: var(--text-2xl); color: #ffffff; }
+  .trio__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-lg);
+    margin-top: var(--space-xl);
   }
-  .machines__card {
-    margin: 0;
-    border: var(--rule-hairline);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    background: var(--color-paper);
-  }
-  .machines__card img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
-  .machines__card figcaption { padding: var(--space-md) var(--space-lg) var(--space-lg); display: grid; gap: var(--space-2xs); }
-  .machines__card b { font-family: var(--font-display); }
-  .machines__card span { font-size: var(--text-sm); color: var(--color-muted); }
-
-  .history { border-top: var(--rule-hairline); }
-  .history__grid { display: grid; gap: var(--space-lg); }
-  .history h2 { font-size: var(--text-xl); }
-  .history__cols {
+  .trio__card {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-xl);
+    gap: var(--space-sm);
+    align-content: start;
+    padding: var(--space-xl);
+    border: 1px solid oklch(100% 0 0 / 0.16);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
   }
-  .history__cols p { color: var(--color-muted); }
-  .history__cols b { color: var(--color-ink); font-weight: 600; }
+  .trio__card:hover {
+    border-color: var(--color-accent-soft);
+    background: oklch(100% 0 0 / 0.05);
+  }
+  .trio__card svg {
+    width: 34px;
+    height: 34px;
+    color: var(--color-accent-soft);
+  }
+  .trio__card h3 { font-size: var(--text-md); color: #ffffff; }
+  .trio__card p { font-size: var(--text-sm); color: var(--color-on-deep-muted); }
+  .trio__habit {
+    margin-top: var(--space-xl);
+    max-width: 62ch;
+    color: var(--color-on-deep);
+    border-left: 3px solid var(--color-accent-soft);
+    padding-left: var(--space-lg);
+  }
 
   @media (max-width: 56rem) {
     .purpose__grid { grid-template-columns: minmax(0, 1fr); }
     .purpose__values { grid-template-columns: minmax(0, 1fr); }
     .purpose__photo-offset { margin-right: 0; }
-    .machines__grid { grid-template-columns: minmax(0, 1fr); }
-    .history__cols { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
+    .machines__frame { width: 100%; }
+    .machines__frame::before { display: none; }
+    .machines__row figcaption {
+      position: static;
+      width: auto;
+      margin-top: calc(var(--space-lg) * -1);
+      margin-inline: var(--space-md);
+    }
+    .machines__row figcaption::before,
+    .machines__row figcaption::after { display: none; }
+    .trio__grid { grid-template-columns: minmax(0, 1fr); }
   }
 </style>

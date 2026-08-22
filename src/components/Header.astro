@@ -4,13 +4,13 @@ import { industries } from "../data/industries";
 const solutions = [
   {
     href: "/wire-edm/",
-    label: "EDM Wire Cutting Solution",
+    label: "EDM Wire Solution",
     note: "±0.005 mm profiles in hardened metal",
     icon: '<path d="M12 2.5v11"/><rect x="4" y="13.5" width="16" height="7" rx="1"/><path d="M9 10.5l-2-1.5M15 10.5l2-1.5M9.5 7L8 6M14.5 7L16 6"/>',
   },
   {
-    href: "/wire-edm/",
-    label: "EDM cutting",
+    href: "/edm-cutting/",
+    label: "EDM Cutting Solution",
     note: "spark erosion for features tooling can't reach",
     icon: '<path d="M6 3.5h12M12 3.5v4"/><path d="M12 7.5l-2.5 4h5L12 15.5"/><path d="M5 20.5h14"/>',
   },
@@ -44,13 +44,13 @@ const pages = [
 ];
 const path = Astro.url.pathname;
 const isCurrent = (href: string) => path === href;
-const onSolutions = ["/wire-edm/", "/milling/", "/turning/", "/reverse-engineering/", "/quality-assurance/"].includes(path);
+const onSolutions = ["/wire-edm/", "/edm-cutting/", "/milling/", "/turning/", "/reverse-engineering/", "/quality-assurance/"].includes(path);
 const onIndustries = path.startsWith("/industries/");
 ---
 <header class="nav" id="site-nav">
   <div class="nav__inner container">
     <a class="nav__brand" href="/" aria-label="Wire EDM Pro. Home">
-      <img class="nav__logo" src="/images/wire-edm-high-res.png" alt="Wire EDM Pro" width="140" height="48" />
+      <img class="nav__logo" src="/images/wire-edm-high-res.png" alt="Wire EDM Pro" width="152" height="52" />
     </a>
     <nav class="nav__center" aria-label="Primary">
       <div class="nav__item nav__item--menu">
@@ -174,7 +174,7 @@ const onIndustries = path.startsWith("/industries/");
   }
 
   .nav__inner {
-    height: 64px;
+    height: 76px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -186,7 +186,7 @@ const onIndustries = path.startsWith("/industries/");
     text-decoration: none;
   }
   .nav__logo {
-    height: 44px;
+    height: 52px;
     width: auto;
   }
 
@@ -374,7 +374,7 @@ const onIndustries = path.startsWith("/industries/");
     padding: var(--space-md) var(--page-gutter) var(--space-lg);
     background: var(--color-surface);
     border-bottom: var(--rule-hairline);
-    max-height: calc(100dvh - 64px);
+    max-height: calc(100dvh - 76px);
     overflow-y: auto;
   }
   .nav__sheet:not([hidden]) { display: flex; }

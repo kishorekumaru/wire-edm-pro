@@ -29,3 +29,4 @@ Confirm or replace each one, then delete it from this list.
 - [ ] **Machine models**: copy lists Fanuc Robocut α-C600iA, Fanuc Robocut α-0iD, Makino U-series, DMG ecoMill 600 V as read from the workshop photos; confirm exact models/branding with the client.
 - [x] **Photography**: client supplied real workshop photos (in `images/`, web-optimized copies in `public/images/`).
 - [x] **Google Analytics measurement ID**: GA4 tag live on every page with G-LWG4BVB87J (stream "Landing Page", https://wireedmpro.com.au). Configured in `src/config.ts`; production builds only, never local dev.
+- [ ] **EDM Cutting Solution page** (/edm-cutting/, added 2026-08-22): copy describes spark-erosion cutting capability in process-typical terms; confirm the specific claims (hardness, tolerance, recast-layer skim passes) match what the workshop offers as "EDM cutting" distinct from wire EDM.
