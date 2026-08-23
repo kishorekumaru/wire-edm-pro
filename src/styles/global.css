@@ -117,7 +117,7 @@ a:hover { color: var(--color-ink); }
               transform 100ms var(--ease-out);
 }
 .btn--fill {
-  background-color: var(--color-accent);
+  background-color: var(--color-accent-2);
   color: #ffffff;
   /* hover inverts: background and font colours swap (white sweeps in) */
   background-image: linear-gradient(#ffffff, #ffffff);
@@ -135,9 +135,9 @@ a:hover { color: var(--color-ink); }
   top: 0;
   bottom: 0;
   width: 4px;
-  background: var(--color-accent-2); /* logo purple edge, the one purple note on light pages */
+  background: var(--color-accent-bright); /* steel blue edge against the purple fill */
 }
-.btn--fill:hover { background-size: 100% 100%; color: var(--color-accent); transform: translateY(-1.5px); }
+.btn--fill:hover { background-size: 100% 100%; color: var(--color-accent-2); transform: translateY(-1.5px); }
 .btn--fill:active { transform: translateY(0); }
 .btn--outline {
   background-color: transparent;

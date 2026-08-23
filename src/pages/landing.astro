@@ -420,8 +420,8 @@ const industries = [
   .hero__mobileart { display: none; }
   .hero__mobileart-stage {
     position: relative;
-    width: min(17rem, 66vw);
-    aspect-ratio: 1;
+    width: min(18rem, 70vw);
+    aspect-ratio: 640 / 856; /* matches the extended-part capture */
   }
   /* The captured 3D part, drifting with scroll (--py from the parallax driver) */
   .hero__mobileart-part {
@@ -448,7 +448,7 @@ const industries = [
       place-items: center;
       margin-top: var(--space-lg);
     }
-    .hero__content { padding-top: var(--space-xl); padding-bottom: min(24rem, 78vw); }
+    .hero__content { padding-top: var(--space-xl); }
   }
   @media (max-width: 56rem) {
     .hero__scrim {

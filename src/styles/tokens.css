@@ -24,7 +24,7 @@
   --color-accent-bright: oklch(65.0% 0.079 238.8);   /* #6096ba Steel Blue - large text, icons, graphics */
   --color-accent-soft: oklch(83.3% 0.067 243.2);     /* #a3cef1 Icy Blue - marks on dark, soft borders */
   --color-accent-deep: oklch(31.9% 0.063 267);      /* #243153 hover shade */
-  --color-accent-2:   oklch(38.9% 0.134 308);        /* #592a7a logo purple - sparing highlights */
+  --color-accent-2:   #552c72;                       /* logo purple (client pick) - buttons, highlights */
   --color-accent-2-deep: oklch(32% 0.150 298);       /* #3f1273 deep violet */
   --color-focus:      oklch(38.9% 0.134 308);        /* purple ring, echoes the logo spark */
   /* On the deep band (#172043 surfaces) */
