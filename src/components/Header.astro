@@ -144,15 +144,25 @@ const onIndustries = path.startsWith("/industries/");
   <!-- Mobile sheet -->
   <nav class="nav__sheet" id="mobile-menu" aria-label="Primary, mobile" hidden>
     <a class="nav__sheet-link" href="/" aria-current={path === "/" ? "page" : undefined}>Home</a>
-    <p class="nav__sheet-group">Solutions</p>
-    {solutions.map((s) => (
-      <a class="nav__sheet-link nav__sheet-link--sub" href={s.href} aria-current={isCurrent(s.href) ? "page" : undefined}>{s.label}</a>
-    ))}
-    <p class="nav__sheet-group">Industries</p>
-    <a class="nav__sheet-link nav__sheet-link--sub" href="/industries/" aria-current={path === "/industries/" ? "page" : undefined}>All industries</a>
-    {industries.map((ind) => (
-      <a class="nav__sheet-link nav__sheet-link--sub" href={`/industries/${ind.slug}/`} aria-current={isCurrent(`/industries/${ind.slug}/`) ? "page" : undefined}>{ind.name}</a>
-    ))}
+    <button class="nav__sheet-toggle" type="button" aria-expanded="false" aria-controls="sheet-solutions">
+      Solutions
+      <svg class="nav__sheet-caret" width="12" height="7" viewBox="0 0 12 7" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="nav__sheet-panel" id="sheet-solutions" hidden>
+      {solutions.map((s) => (
+        <a class="nav__sheet-link nav__sheet-link--sub" href={s.href} aria-current={isCurrent(s.href) ? "page" : undefined}>{s.label}</a>
+      ))}
+    </div>
+    <button class="nav__sheet-toggle" type="button" aria-expanded="false" aria-controls="sheet-industries">
+      Industries
+      <svg class="nav__sheet-caret" width="12" height="7" viewBox="0 0 12 7" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="nav__sheet-panel" id="sheet-industries" hidden>
+      <a class="nav__sheet-link nav__sheet-link--sub" href="/industries/" aria-current={path === "/industries/" ? "page" : undefined}>All industries</a>
+      {industries.map((ind) => (
+        <a class="nav__sheet-link nav__sheet-link--sub" href={`/industries/${ind.slug}/`} aria-current={isCurrent(`/industries/${ind.slug}/`) ? "page" : undefined}>{ind.name}</a>
+      ))}
+    </div>
     {pages.map((p) => (
       <a class="nav__sheet-link" href={p.href} aria-current={isCurrent(p.href) ? "page" : undefined}>{p.label}</a>
     ))}
@@ -378,12 +388,29 @@ const onIndustries = path.startsWith("/industries/");
     overflow-y: auto;
   }
   .nav__sheet:not([hidden]) { display: flex; }
-  .nav__sheet-group {
-    font-family: var(--font-outlier);
-    font-size: var(--text-sm);
-    color: var(--color-muted);
-    padding-block: var(--space-sm) var(--space-2xs);
+  /* Collapsible group headers in the mobile sheet */
+  .nav__sheet-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--color-rule-2);
+    padding: var(--space-sm) 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-md);
+    color: var(--color-ink);
+    cursor: pointer;
   }
+  .nav__sheet-caret {
+    color: var(--color-muted);
+    transition: transform var(--dur-short) var(--ease-out);
+  }
+  .nav__sheet-toggle[aria-expanded="true"] .nav__sheet-caret { transform: rotate(180deg); }
+  .nav__sheet-panel { display: flex; flex-direction: column; }
+  .nav__sheet-panel[hidden] { display: none; }
   .nav__sheet-link {
     font-family: var(--font-display);
     font-weight: 600;
@@ -413,6 +440,17 @@ const onIndustries = path.startsWith("/industries/");
 
 <script>
   const nav = document.getElementById("site-nav")!;
+  // Mobile sheet accordions: Solutions / Industries expand and collapse
+  nav.querySelectorAll<HTMLButtonElement>(".nav__sheet-toggle").forEach((btn) => {
+    const panel = document.getElementById(btn.getAttribute("aria-controls") ?? "");
+    if (!panel) return;
+    btn.addEventListener("click", () => {
+      const open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      panel.hidden = open;
+    });
+  });
+
   const toggle = nav.querySelector<HTMLButtonElement>(".nav__toggle")!;
   const sheet = nav.querySelector<HTMLElement>(".nav__sheet")!;
   let ticking = false;

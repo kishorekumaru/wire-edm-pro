@@ -9,15 +9,15 @@ const services = [
     href: "/wire-edm/",
     name: "EDM Wire Solution",
     body: "A 0.25 mm charged wire erodes hardened metal along a programmed path. Zero cutting force. Corners as tight as the kerf allows.",
-    img: "/images/fanuc-robocut-c600ia",
-    alt: "Fanuc Robocut α-C600iA wire EDM machine at Wire EDM Pro, Sydney",
+    img: "/images/wire-edm-cutting",
+    alt: "Wire EDM machine cutting a steel workpiece, sparks at the wire in dielectric fluid",
   },
   {
     href: "/edm-cutting/",
     name: "EDM Cutting Solution",
     body: "Spark erosion reaches what tooling can't: hardened dies, splines, keyways and fine detail. After heat treatment, not before.",
-    img: "/images/fanuc-robocut-0id",
-    alt: "Fanuc Robocut α-0iD wire EDM machine at Wire EDM Pro, Sydney",
+    img: "/images/edm-spark-closeup",
+    alt: "Close-up of EDM spark erosion cutting through a steel block",
   },
   {
     href: "/milling/",
@@ -72,6 +72,11 @@ const industries = [
           <a class="btn btn--fill" href="/contact/">Get in touch</a>
           <a class="hero__textlink" href="/wire-edm/">View services</a>
         </div>
+      <div class="hero__mobileart" aria-hidden="true">
+        <div class="hero__mobileart-stage">
+          <img class="hero__mobileart-part" src="/images/sample-part-3d.png" alt="" width="640" height="652" loading="eager" />
+        </div>
+      </div>
       </div>
     </div>
   </section>
@@ -409,9 +414,40 @@ const industries = [
     color: var(--color-muted);
   }
 
+
+  /* Mobile-only hero art: the sample part as a self-drawing blueprint,
+     a spark tracing the gear profile like the wire on its path */
+  .hero__mobileart { display: none; }
+  .hero__mobileart-stage {
+    position: relative;
+    width: min(17rem, 66vw);
+    aspect-ratio: 1;
+  }
+  /* The captured 3D part, drifting with scroll (--py from the parallax driver) */
+  .hero__mobileart-part {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 20px oklch(19% 0.06 268 / 0.5));
+    will-change: transform;
+    transform: translate3d(0, var(--py, 0px), 0);
+    transition: transform 120ms linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__mobileart-part { will-change: auto; transform: none; }
+  }
+
   @media (max-width: 68rem) {
     /* Stacked hero: copy on top, 3D prop below it */
-    .hero { align-items: flex-start; min-height: calc(100svh - 65px); }
+    /* Compact mobile hero: sized by its copy, not the screen */
+    .hero { align-items: center; min-height: 0; padding-block: var(--space-2xl) var(--space-lg); }
+    .hero__mobileart {
+      display: grid;
+      place-items: center;
+      margin-top: var(--space-lg);
+    }
     .hero__content { padding-top: var(--space-xl); padding-bottom: min(24rem, 78vw); }
   }
   @media (max-width: 56rem) {
@@ -440,7 +476,7 @@ const industries = [
   // Parallax drift on the process photos: each image slides subtly against
   // the scroll while its row crosses the viewport
   {
-    const imgs = Array.from(document.querySelectorAll(".proc__img"));
+    const imgs = Array.from(document.querySelectorAll(".proc__img, .hero__mobileart-part"));
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (imgs.length && !still) {
       let raf = 0;
@@ -453,7 +489,9 @@ const industries = [
           const r = host.getBoundingClientRect();
           if (r.bottom < -120 || r.top > vh + 120) continue;
           const progress = (r.top + r.height / 2 - vh / 2) / vh; // ~-0.7 .. 0.7
-          (img as HTMLElement).style.setProperty("--py", `${(progress * -34).toFixed(1)}px`);
+          // hero part rides WITH the scroll direction (reversed), process photos against it
+          const factor = (img as HTMLElement).classList.contains("hero__mobileart-part") ? 48 : -34;
+          (img as HTMLElement).style.setProperty("--py", `${(progress * factor).toFixed(1)}px`);
         }
       };
       window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });

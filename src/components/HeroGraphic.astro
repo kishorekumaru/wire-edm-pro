@@ -132,14 +132,8 @@
   .hg__part3d[data-live] ~ .hg__tag { opacity: 1; }
 
   @media (max-width: 68rem) {
-    /* Stack the prop under the copy: centred near the bottom of the hero */
-    .hg__stage {
-      top: auto;
-      bottom: 3%;
-      right: 50%;
-      transform: translateX(50%);
-      width: min(19rem, 74vw);
-    }
+    /* Mobile hero is compact copy-only: no 3D part, no DRO numbers, no axes */
+    .hg__stage, .hg__dro, .hg__axes { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .hg__bg, .hg__tilt { transform: none !important; transition: none; }
@@ -184,8 +178,10 @@
     });
   }
 
-  // 3D sample part: lazy-load Three.js only when the hero is near the viewport
-  if (partHost && hero) {
+  // 3D sample part: lazy-load Three.js only when the hero is near the viewport,
+  // and never on small screens where the stage is hidden
+  const wide = window.matchMedia("(min-width: 68rem)").matches;
+  if (partHost && hero && wide) {
     const load = async () => {
       const { initSamplePart } = await import("../scripts/samplePart3d");
       initSamplePart(partHost, hero);
