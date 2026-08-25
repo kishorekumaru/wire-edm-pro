@@ -1,13 +1,8 @@
 ---
 /**
- * Full-width hero background: XYZ coordinate grid + a wire-EDM sample part
- * that tilts in 3D and parallaxes "inside out" on mouse move. The innermost
- * cut form floats deepest, callouts ride above it. Vanilla JS pointer
- * tracking, CSS 3D transforms, no libraries.
- *
- * PLACEHOLDER IMAGE: /images/hero-sample-part.webp is a manufacturer's photo
- * supplied by the client as a stand-in. Listed in CONTENT-TODO.md for
- * replacement with the client's own part photography before go-live.
+ * Light variant of HeroGraphic for the white-background landing (v2):
+ * same XYZ grid, DRO readout and interactive 3D sample part, but drawn for a
+ * pure white hero. Loads the 3D part with the polished chrome finish.
  */
 ---
 <div class="hg" id="hero-graphic" aria-hidden="true">
@@ -31,7 +26,7 @@
     <!-- Graph-paper backdrop, strongest on the right and fading out to the left -->
     <rect width="1600" height="640" fill="url(#hg-grid)" mask="url(#hg-grid-mask)" />
     <!-- Axes behind the 3D part: compact origin marker at half opacity -->
-    <g class="hg__axes" opacity="0.5">
+    <g class="hg__axes" opacity="0.6">
       <line x1="1120" y1="370" x2="1165" y2="393" marker-end="url(#hg-arrow)" />
       <line x1="1120" y1="370" x2="1078" y2="392" marker-end="url(#hg-arrow)" />
       <line x1="1120" y1="370" x2="1120" y2="307" marker-end="url(#hg-arrow)" />
@@ -41,7 +36,7 @@
     </g>
   </svg>
 
-<!-- DRO-style coordinate readout. HTML overlay so viewBox cropping never hides it -->
+  <!-- DRO-style coordinate readout. HTML overlay so viewBox cropping never hides it -->
   <div class="hg__dro" aria-hidden="true">
     <span id="dro-x">X&#8199;142.500</span>
     <span id="dro-y">Y&#8199;036.250</span>
@@ -72,13 +67,20 @@
     transition: transform 200ms var(--ease-out);
   }
 
-  .hg__gridline { stroke: #ffffff; stroke-width: 1; stroke-opacity: 0.22; }
-  .hg__axes line { stroke: var(--color-accent-soft); stroke-width: 1.75; }
-  .hg__arrowhead { fill: var(--color-accent-soft); }
+  /* Blueprint lines inverted for the white hero: ink-blue at low opacity */
+  .hg__gridline { stroke: var(--color-accent); stroke-width: 1; stroke-opacity: 0.3; }
+  .hg__waves path {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    stroke-opacity: 0.22;
+  }
+  .hg__axes line { stroke: var(--color-accent); stroke-width: 1.75; }
+  .hg__arrowhead { fill: var(--color-accent); }
   .hg__axis-label {
     font-family: var(--font-outlier);
     font-size: 13px;
-    fill: var(--color-accent-soft);
+    fill: var(--color-accent);
   }
   .hg__dro {
     position: absolute;
@@ -89,14 +91,14 @@
     justify-items: end;
     font-family: var(--font-outlier);
     font-size: 14px;
-    color: var(--color-on-deep);
+    color: var(--color-accent);
     font-variant-numeric: tabular-nums;
   }
 
   .hg__stage {
     position: absolute;
     top: 47%;
-    right: max(13vw, calc((100vw - 100rem) / 2 + 9vw));
+    right: max(10vw, calc((100vw - 100rem) / 2 + 6vw));
     transform: translateY(-50%);
     width: clamp(19rem, 31vw, 32rem);
   }
@@ -113,7 +115,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 16px 22px oklch(19% 0.06 268 / 0.5));
+    filter: drop-shadow(0 16px 24px oklch(35% 0.04 262 / 0.28));
   }
   .hg__tag {
     position: absolute;
@@ -152,7 +154,7 @@
     const droX = document.getElementById("dro-x");
     const droY = document.getElementById("dro-y");
     const droZ = document.getElementById("dro-z");
-    const FIGURE_SPACE = " ";
+    const FIGURE_SPACE = " ";
     const fmt = (v: number) => v.toFixed(3).padStart(7, "0");
     let raf = 0;
     let nx = 0, ny = 0;
@@ -184,7 +186,7 @@
   if (partHost && hero && wide) {
     const load = async () => {
       const { initSamplePart } = await import("../scripts/samplePart3d");
-      initSamplePart(partHost, hero);
+      initSamplePart(partHost, hero, { finish: "chrome" });
     };
     const io = new IntersectionObserver(
       (entries) => {

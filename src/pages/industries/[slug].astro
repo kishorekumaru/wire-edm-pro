@@ -9,16 +9,36 @@ export function getStaticPaths() {
 
 const { ind } = Astro.props;
 
+const breadcrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Industries",
+      item: new URL("/industries/", Astro.site).href,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: ind.name,
+      item: new URL(`/industries/${ind.slug}/`, Astro.site).href,
+    },
+  ],
+};
+
 const services = [
-  { href: "/wire-edm/", name: "EDM Wire Solution", note: "±0.005 mm profiles in hardened metal, zero cutting force" },
-  { href: "/edm-cutting/", name: "EDM Cutting Solution", note: "spark erosion in hardened material, burr-free" },
+  { href: "/edm-wire-cutting/", name: "EDM Wire Cutting Solution", note: "±0.005 mm profiles in hardened metal, zero cutting force" },
   { href: "/milling/", name: "CNC milling", note: "jigs, fixtures, die sets and machined details" },
   { href: "/turning/", name: "CNC turning", note: "shafts, bushes, pins and threaded components" },
+  { href: "/edm-drills/", name: "EDM Drills", note: "small hole EDM from Ø 0.3 mm, burr-free" },
 ];
 ---
 <BaseLayout
   title={`${ind.name} Machining | Wire EDM Pro, Sydney`}
-  description={`${ind.short}. Precision wire EDM, EDM cutting, CNC milling and turning for the ${ind.name.toLowerCase()} industry, from our Sydney workshop.`}
+  description={`${ind.short}. EDM wire cutting, CNC milling and turning for ${ind.name.toLowerCase()}, from our Sydney business.`}
+  jsonLd={breadcrumbs}
 >
   <section class="ind section--tight" id="ind-hero">
     <div class="container ind__wrap">

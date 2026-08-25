@@ -1,32 +1,39 @@
 # Content to confirm with the client before go-live
 
-Every item below currently uses a placeholder or an industry-typical value.
+Every unchecked item below currently uses a placeholder or an industry-typical value.
 Confirm or replace each one, then delete it from this list.
+Items marked done were confirmed by the client, most recently via
+`docs/WIRE EDM PRO-WEB CONTENT.pdf` (received 2026-08-23).
 
-## Business facts (placeholders. Must be replaced)
-- [ ] **Street address**: site currently says only "Sydney, New South Wales". Update `src/components/Footer.astro` and `src/pages/contact.astro`.
-- [ ] **Phone number**: `+61 2 9000 0000` is a placeholder. Same two files.
-- [ ] **Email address**: `enquiries@wireedmpro.com.au` is assumed. Footer, contact page (form fallback + error message).
-- [ ] **Business hours**: "Monday–Friday, 7:00 am – 4:00 pm" is assumed. `src/pages/contact.astro`.
-- [ ] **Domain**: `www.wireedmpro.com.au` is assumed in `astro.config.mjs` (site), `public/robots.txt`, `public/sitemap.xml`.
-- [x] **Founding date**: updated to "since the early 2000s" per client (2026-08-19); "25+ years" retained.
+## Business facts
+- [x] **Street address**: 16/24 Garling Rd, Kings Park NSW 2148 (live on contact page + footer).
+- [x] **Phone number**: 0452 558 052 (live).
+- [x] **Email address**: wireedmpro@gmail.com (live).
+- [x] **Business hours**: client-confirmed 2026-08-25: Monday–Thursday 8:00 am – 4:30 pm, Friday 8:00 am – 12:00 pm. Updated in `src/pages/contact.astro` and in LocalBusiness structured data (`src/layouts/BaseLayout.astro`).
+- [x] **Landline**: 02 8604 8347 added (contact, footer, coming-soon page, structured data) alongside the mobile, 2026-08-25.
+- [x] **Domain**: apex `wireedmpro.com.au` chosen (matches the GA4 stream). `astro.config.mjs` site, `public/robots.txt` and the generated sitemap all aligned, 2026-08-25. The manual `public/sitemap.xml` was replaced by `scripts/gen-sitemap.mjs`, which writes `dist/sitemap.xml` on every build.
+- [x] **Founding date**: "since the early 2000s" per client (2026-08-19); "25+ years" retained and confirmed by the content doc.
 
-## Capability claims (industry-typical. Confirm against actual machines)
-- [ ] Wire EDM positional tolerance **±0.005 mm** (home stat strip + wire-edm page)
-- [ ] Surface finish **Ra 0.4 µm** with skim passes (wire-edm page)
-- [ ] Kerf width **≈0.25–0.33 mm** (wire-edm page)
-- [ ] Milling/turning general tolerance **±0.01 mm** (milling + turning pages)
-- [ ] Work envelopes / maximum part sizes. Deliberately not stated; add once machine list is confirmed
-- [ ] Machine list / axis counts. Deliberately not stated; add if the client wants it public
+## Capability claims
+- [x] **Cutting height 420 mm**: confirmed by the content doc as wire EDM cutting height (Makino with H.E.A.T function). Home stat strip relabelled, wire-edm spec table row added (2026-08-23).
+- [x] **Machine models**: confirmed by the content doc: Makino wire EDM (H.E.A.T), Fanuc RoboCut C600 and C400, DMG MORI ecoMill 600 V, EDM drills Ø 0.3–3.0 mm, CNC lathes and laser cutting. Old photo-derived names (α-C600iA, α-0iD, U-series) replaced site-wide (2026-08-23).
+- [x] **Milling work envelope**: 600 × 560 × 510 mm travel, 600 kg table, 12,000 rpm spindle per the content doc (2026-08-23).
+- [ ] **Tool changer stations**: the content doc says 32 in one place and 30 in two others; the site uses **30** (matches the published ecoMill 600 V spec). Confirm.
+- [ ] Wire EDM positional tolerance **±0.005 mm** (home stat strip + wire-edm page). The doc says only "micron accuracy"; the specific figure is still unconfirmed.
+- [ ] Surface finish **Ra 0.4 µm** with skim passes (wire-edm page). Unconfirmed.
+- [ ] Kerf width **≈0.25–0.33 mm** (wire-edm page). Unconfirmed.
+- [ ] Milling/turning general tolerance **±0.01 mm** (milling + turning pages). Unconfirmed.
+- [ ] **Laser cutting**: promoted on the turning page per the content doc, but no machine brand, power or maximum sheet size is claimed anywhere. Add capacity figures if the client wants them public.
+- [ ] **EDM hole drilling Ø 0.3–3.0 mm**: figure comes from the content doc; confirm it belongs on the EDM Cutting page (currently listed there as a spec row and application).
 
 ## Missing assets / decisions
-- [ ] **Logo**: a typographic wordmark is used; supply artwork if one exists.
+- [x] **Logo**: high-res client logo in use (header, footer, coming-soon).
 - [x] ~~Form service~~. The enquiry form was removed at the client's direction (2026-08-17); contact is by phone/email.
-- [ ] **Maximum part size 420 mm**: shown on the home facts strip per client direction (2026-08-17); confirm which process/axis this applies to.
-- [ ] **QC equipment list**: the Quality Assurance page lists industry-typical instruments (CMM, comparator, roughness tester, height/thread gauges, hardness tester); confirm against the actual inspection room.
+- [x] **QC equipment list**: replaced with the client-confirmed list (optical profile projectors, digital micrometers, vernier calipers, height gauges, bore gauges; first-article + batch inspection) per the content doc (2026-08-23). Former industry-typical items (CMM, roughness tester, thread gauges, hardness tester) removed.
 - [ ] **Mastercam**: the turnkey and reverse-engineering pages state design is done in Mastercam per client direction; confirm licence/wording.
 - [ ] **Certifications** (ISO 9001 etc.). None claimed; add only if genuinely held.
-- [ ] **Machine models**: copy lists Fanuc Robocut α-C600iA, Fanuc Robocut α-0iD, Makino U-series, DMG ecoMill 600 V as read from the workshop photos; confirm exact models/branding with the client.
 - [x] **Photography**: client supplied real workshop photos (in `images/`, web-optimized copies in `public/images/`).
 - [x] **Google Analytics measurement ID**: GA4 tag live on every page with G-LWG4BVB87J (stream "Landing Page", https://wireedmpro.com.au). Configured in `src/config.ts`; production builds only, never local dev.
-- [ ] **EDM Cutting Solution page** (/edm-cutting/, added 2026-08-22): copy describes spark-erosion cutting capability in process-typical terms; confirm the specific claims (hardness, tolerance, recast-layer skim passes) match what the workshop offers as "EDM cutting" distinct from wire EDM.
+- [x] **EDM Cutting Solution page** (/edm-cutting/): hole-drilling capability added from the content doc; remaining spark-erosion claims (hardness, tolerance, recast-layer skim passes) are process-typical. Confirm they match what the workshop offers.
+- [ ] **About page purpose/values**: the slogan "Make Australian Manufacturing Great Again" and the Gandhi customer quote are published verbatim from the client content doc (2026-08-23). Flag to the client that they are now live, in case the wording was aspirational.
+- [ ] **Press tool manufacturing / sheet metal**: the content doc presents these as headline services; currently covered by the Tooling & Diemaking and Sheet Metal Components industry pages rather than dedicated solution pages. Confirm that is sufficient.

@@ -3,10 +3,10 @@
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "Wire EDM Pro — corporate website for Sydney precision machining (Wire EDM, CNC Milling, CNC Turning)",
+  "description": "Wire EDM Pro - corporate website for Sydney precision machining (Wire EDM, CNC Milling, CNC Turning)",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/gen-sitemap.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

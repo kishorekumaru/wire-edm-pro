@@ -6,8 +6,8 @@ import { industries } from "../data/industries";
 const icon = (slug: string) => industries.find((i) => i.slug === slug)?.icon ?? "";
 const trio = [
   {
-    href: "/industries/tooling-diemaking/",
-    icon: icon("tooling-diemaking"),
+    href: "/industries/tool-die-making/",
+    icon: icon("tool-die-making"),
     name: "Manufacturing",
     body: "Press tools, dies and fixtures. The tooling their tooling depends on.",
   },
@@ -18,25 +18,28 @@ const trio = [
     body: "Hardened wear parts and drive components that can't wait months for OEM spares.",
   },
   {
-    href: "/industries/medical-dental/",
-    icon: icon("medical-dental"),
+    href: "/industries/medical/",
+    icon: icon("medical"),
     name: "Medical",
     body: "Small stainless and titanium components where burr-free edges are not negotiable.",
   },
 ];
 ---
 <BaseLayout
-  title="About Wire EDM Pro | 25+ Years of Precision Machining in Sydney"
-  description="Wire EDM Pro has machined precision components in Sydney since the early 2000s. Wire EDM, EDM cutting, CNC milling and turning for manufacturing, mining and medical customers."
+  title="About Wire EDM Pro | Precision Machining, Sydney"
+  description="Precision machining in Sydney since the early 2000s: EDM wire cutting, EDM drilling, CNC milling and turning for defence, medical, mining and engineering."
 >
   <section class="about-hero section--tight">
     <div class="container">
       <p class="about-hero__kicker mono">About us</p>
-      <h1>A workshop that answers the phone.</h1>
+      <h1>A business that answers the phone.</h1>
       <p class="about-hero__lede">
         Wire EDM Pro has run from Sydney since the early&nbsp;2000s. We're a precision machining
-        workshop. Wire EDM, EDM cutting, CNC milling and CNC turning. Serving Australian
-        manufacturing, mining and medical businesses that need exact parts and straight answers.
+        business. EDM wire cutting, CNC milling and CNC turning, backed by press tool
+        manufacturing, EDM hole drilling and laser cutting. A trusted partner for
+        Australian manufacturers across defence, aerospace, medical, mining, automotive,
+        robotics, electrical and general engineering. Businesses that need exact parts
+        and straight answers.
       </p>
     </div>
   </section>
@@ -46,7 +49,7 @@ const trio = [
       <div>
         <h2>Our purpose: keep your production moving.</h2>
         <p class="purpose__body">
-          Most of what leaves this workshop is the part another business is waiting on. A die
+          Most of what leaves this business is the part someone else is waiting on. A die
           section for a stopped press line, a hardened spare the OEM quotes in months, a medical
           component that can't carry a burr. That shapes how we work: we quote honestly, we flag
           risk before we cut, and when a job is on the machine you can get us on the phone.
@@ -54,11 +57,11 @@ const trio = [
         <div class="purpose__values">
           <div>
             <h3>Reliable, honest service</h3>
-            <p>The price we quote is the price you pay. If a job carries risk, such as thin walls, unproven material or an ambitious tolerance, we say so before we start, not after.</p>
+            <p>The price we quote is the price you pay, and we keep it competitive. If a job carries risk, such as thin walls, unproven material or an ambitious tolerance, we say so before we start, not after.</p>
           </div>
           <div>
             <h3>Precision backed by experience</h3>
-            <p>More than 25 years on the wire teaches you what a drawing doesn't say. We machine to drawing, and we ask the right questions when the drawing leaves room for doubt.</p>
+            <p>More than 25 years on the wire teaches you what a drawing doesn't say. Skilled tradespeople with deep industry knowledge machine to drawing, and ask the right questions when the drawing leaves room for doubt.</p>
           </div>
         </div>
       </div>
@@ -69,7 +72,7 @@ const trio = [
           srcset="/images/wire-edm-office-800.jpg 800w, /images/wire-edm-office.jpg 1600w"
           sizes="(max-width: 56rem) 100vw, 40vw"
           width="800" height="450"
-          alt="Inside the Wire EDM Pro workshop in Sydney"
+          alt="Inside Wire EDM Pro in Sydney"
           loading="lazy"
         />
         <img
@@ -85,30 +88,66 @@ const trio = [
     </div>
   </section>
 
+  <section class="section creed">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Why we do it.</h2>
+        <p>Our purpose is simple, and it is rooted in national pride.</p>
+      </div>
+      <blockquote class="creed__slogan" data-reveal>
+        <p>&ldquo;Make Australian Manufacturing Great Again.&rdquo;</p>
+      </blockquote>
+      <p class="creed__body" data-reveal>
+        We believe Australia deserves a strong, competitive, world-class manufacturing sector.
+        Every tool we build and every component we machine strengthens local industry and
+        reduces dependence on overseas production. Our vision is to keep serving that industry
+        while building new partnerships and industrial collaborations across sectors,
+        connecting the market leaders, innovators and manufacturers who make up Australia's
+        production ecosystem. By combining experience, technology and trust, we're working
+        toward a future where Australian manufacturing is back in its golden era, leading
+        the world once again.
+      </p>
+      <div class="creed__values">
+        <div class="creed__value" data-reveal style="--reveal-i: 0">
+          <h3>Customer first. Always.</h3>
+          <p>
+            We follow the philosophy of Mahatma Gandhi: &ldquo;A customer is the most important
+            visitor on our premises... He is not dependent on us. We are dependent on him.&rdquo;
+            That principle guides every decision we make.
+          </p>
+        </div>
+        <div class="creed__value" data-reveal style="--reveal-i: 1">
+          <h3>Precision is our identity</h3>
+          <p>
+            As toolmakers, we understand that every micron matters. Accuracy, consistency and
+            craftsmanship are not goals we chase; they are who we are.
+          </p>
+        </div>
+        <div class="creed__value" data-reveal style="--reveal-i: 2">
+          <h3>Integrity &amp; trust</h3>
+          <p>
+            Design secrets, technical drawings and patented concepts are handled under strict
+            confidentiality. Your intellectual property never travels beyond authorised hands.
+          </p>
+        </div>
+        <div class="creed__value" data-reveal style="--reveal-i: 3">
+          <h3>On-time delivery</h3>
+          <p>
+            Industry runs on deadlines. We deliver on time, every time, without compromising
+            quality.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section machines">
     <div class="container">
       <div class="section-head">
         <h2>The machines on the floor.</h2>
-        <p>Wire EDM is the core of the workshop; milling and turning carry the work that surrounds it.</p>
+        <p>Wire EDM is the core of the business; milling and turning carry the work that surrounds it.</p>
       </div>
       <div class="machines__list">
-        <figure class="machines__row" data-reveal>
-          <div class="machines__frame"><div class="machines__media">
-            <img
-              src="/images/fanuc-robocut-c600ia.jpg"
-              srcset="/images/fanuc-robocut-c600ia-800.jpg 800w, /images/fanuc-robocut-c600ia.jpg 1600w"
-              sizes="(max-width: 56rem) 100vw, 62vw"
-              width="1600" height="900"
-              alt="Fanuc Robocut α-C600iA wire EDM machine"
-              loading="lazy"
-            />
-          </div></div>
-          <figcaption>
-            <span class="machines__tag mono">M-01</span>
-            <b>Fanuc Robocut wire EDMs</b>
-            <span>α-C600<span class="mono">i</span>A and α-0<span class="mono">i</span>D. The profile and production wire-cutting workhorses.</span>
-          </figcaption>
-        </figure>
         <figure class="machines__row" data-reveal>
           <div class="machines__frame"><div class="machines__media">
             <img
@@ -116,14 +155,48 @@ const trio = [
               srcset="/images/makino-wire-edm-800.jpg 800w, /images/makino-wire-edm.jpg 1600w"
               sizes="(max-width: 56rem) 100vw, 62vw"
               width="1600" height="900"
-              alt="Makino U-series wire EDM machine"
+              alt="Makino wire EDM machine"
+              loading="lazy"
+            />
+          </div></div>
+          <figcaption>
+            <span class="machines__tag mono">M-01</span>
+            <b>Makino wire EDM</b>
+            <span>H.E.A.T technology cuts jobs up to 420&nbsp;mm tall. Fine-finish wire cutting where surface and edge quality decide the job.</span>
+          </figcaption>
+        </figure>
+        <figure class="machines__row" data-reveal>
+          <div class="machines__frame"><div class="machines__media">
+            <img
+              src="/images/fanuc-robocut-c600ia.jpg"
+              srcset="/images/fanuc-robocut-c600ia-800.jpg 800w, /images/fanuc-robocut-c600ia.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 62vw"
+              width="1600" height="900"
+              alt="Fanuc RoboCut C600 wire EDM machine"
               loading="lazy"
             />
           </div></div>
           <figcaption>
             <span class="machines__tag mono">M-02</span>
-            <b>Makino U-series wire EDM</b>
-            <span>Fine-finish wire cutting for the work where surface and edge quality decide the job.</span>
+            <b>Fanuc RoboCut C600</b>
+            <span>High-reliability, large-capacity precision wire cutting. The production workhorse for big dies, plates and matched sets.</span>
+          </figcaption>
+        </figure>
+        <figure class="machines__row" data-reveal>
+          <div class="machines__frame"><div class="machines__media">
+            <img
+              src="/images/fanuc-robocut-0id.jpg"
+              srcset="/images/fanuc-robocut-0id-800.jpg 800w, /images/fanuc-robocut-0id.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 62vw"
+              width="1600" height="900"
+              alt="Fanuc RoboCut C400 wire EDM machine"
+              loading="lazy"
+            />
+          </div></div>
+          <figcaption>
+            <span class="machines__tag mono">M-03</span>
+            <b>Fanuc RoboCut C400</b>
+            <span>High-speed, high-accuracy compact wire cutting. Fine profiles, small components and quick turnarounds.</span>
           </figcaption>
         </figure>
         <figure class="machines__row" data-reveal>
@@ -133,16 +206,85 @@ const trio = [
               srcset="/images/ecomill-600v-800.jpg 800w, /images/ecomill-600v.jpg 1600w"
               sizes="(max-width: 56rem) 100vw, 62vw"
               width="1600" height="900"
-              alt="DMG ecoMill 600 V vertical machining centre"
+              alt="DMG MORI ecoMill 600 V vertical machining centre"
               loading="lazy"
             />
           </div></div>
           <figcaption>
-            <span class="machines__tag mono">M-03</span>
-            <b>DMG ecoMill 600&nbsp;V</b>
-            <span>Vertical machining centre for the jigs, fixtures, die sets and spares around the EDM work.</span>
+            <span class="machines__tag mono">M-04</span>
+            <b>DMG MORI ecoMill 600&nbsp;V</b>
+            <span>Vertical machining centre. 12,000&nbsp;rpm spindle and a 600&nbsp;kg table for the jigs, fixtures, die sets and spares around the EDM work.</span>
           </figcaption>
         </figure>
+        <figure class="machines__row" data-reveal>
+          <div class="machines__frame"><div class="machines__media">
+            <img
+              src="/images/edm-drilling.jpg"
+              srcset="/images/edm-drilling-800.jpg 800w, /images/edm-drilling.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 62vw"
+              width="1600" height="900"
+              alt="EDM drilling machine"
+              loading="lazy"
+            />
+          </div></div>
+          <figcaption>
+            <span class="machines__tag mono">M-05</span>
+            <b>EDM drills</b>
+            <span>Fast micro-hole drilling from Ø&nbsp;0.3&nbsp;mm to 3.0&nbsp;mm. Start holes, cooling channels and vents through hardened metal.</span>
+          </figcaption>
+        </figure>
+        <figure class="machines__row" data-reveal>
+          <div class="machines__frame"><div class="machines__media">
+            <img
+              src="/images/cnc-turning.jpg"
+              srcset="/images/cnc-turning-800.jpg 800w, /images/cnc-turning.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 62vw"
+              width="1600" height="900"
+              alt="CNC lathe turning a steel shaft"
+              loading="lazy"
+            />
+          </div></div>
+          <figcaption>
+            <span class="machines__tag mono">M-06</span>
+            <b>CNC lathes &amp; laser</b>
+            <span>Turning and profile cutting. Shafts, bushes, pins and threads to gauge, plus laser-cut sheet metal profiles.</span>
+          </figcaption>
+        </figure>
+        <figure class="machines__row" data-reveal>
+          <div class="machines__frame"><div class="machines__media">
+            <img
+              src="/images/qc-wireedm.jpg"
+              srcset="/images/qc-wireedm-800.jpg 800w, /images/qc-wireedm.jpg 1600w"
+              sizes="(max-width: 56rem) 100vw, 62vw"
+              width="1600" height="900"
+              alt="Starrett optical profile projector in the inspection area"
+              loading="lazy"
+            />
+          </div></div>
+          <figcaption>
+            <span class="machines__tag mono">M-07</span>
+            <b>Quality control</b>
+            <span>Optical profile projectors and calibrated metrology instruments. Every job checked against its approved design before delivery.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--panel holeblow">
+    <div class="container holeblow__grid" data-reveal>
+      <div>
+        <p class="holeblow__kicker mono">Small hole EDM</p>
+        <h2>Hole blowing.</h2>
+      </div>
+      <div>
+        <p class="holeblow__body">
+          Alongside the wire machines sit our EDM drills. The trade calls it hole blowing:
+          spark-eroding small holes from Ø&nbsp;0.3&nbsp;mm to 3.0&nbsp;mm straight through fully
+          hardened metal. Start holes for wire threading, cooling channels and vents in tooling,
+          drilled burr-free after heat treatment.
+          <a href="/edm-drills/">See the EDM Drills capability</a>.
+        </p>
       </div>
     </div>
   </section>
@@ -239,9 +381,54 @@ const trio = [
     box-shadow: 0 1px 2px oklch(20% 0.01 251 / 0.08);
   }
 
+  /* Vision, purpose and values (client copy) */
+  .creed__slogan {
+    margin: var(--space-xl) 0 0;
+    padding-left: var(--space-lg);
+    border-left: 4px solid var(--color-accent-2);
+  }
+  .creed__slogan p {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-2xl);
+    line-height: 1.15;
+    color: var(--color-ink);
+    max-width: 22ch;
+  }
+  .creed__body {
+    margin-top: var(--space-lg);
+    color: var(--color-muted);
+    max-width: 62ch;
+  }
+  .creed__values {
+    margin-top: var(--space-2xl);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl) var(--space-2xl);
+  }
+  .creed__value {
+    padding-top: var(--space-md);
+    border-top: 2px solid var(--color-rule);
+    position: relative;
+  }
+  .creed__value::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 2rem;
+    height: 2px;
+    background: var(--color-accent-bright);
+  }
+  .creed__value h3 { font-size: var(--text-md); }
+  .creed__value p { margin-top: var(--space-sm); color: var(--color-muted); }
+  @media (max-width: 56rem) {
+    .creed__values { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  }
+
   /* Machines: wide photo rows with a caption plate overlapping the image,
      plate side alternating row by row */
-  .machines__list { display: grid; gap: var(--space-2xl); }
+  .machines__list { display: grid; gap: var(--space-xl); }
   .machines__row {
     position: relative;
     margin: 0;
@@ -249,7 +436,7 @@ const trio = [
   }
   .machines__frame {
     position: relative;
-    width: 54%;
+    width: 46%;
   }
   /* Blueprint offset frame behind each photo */
   .machines__frame::before {
@@ -331,6 +518,25 @@ const trio = [
   }
   .machines__row b { font-family: var(--font-display); font-size: var(--text-md); }
   .machines__row figcaption span { font-size: var(--text-sm); color: var(--color-muted); }
+
+  /* Hole blowing: compact two-column band for the small hole EDM capability */
+  .holeblow__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .holeblow__kicker {
+    font-size: var(--text-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent-bright);
+  }
+  .holeblow h2 { font-size: var(--text-xl); margin-top: var(--space-xs); }
+  .holeblow__body { color: var(--color-muted); }
+  @media (max-width: 56rem) {
+    .holeblow__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
+  }
 
   /* Three industries: deep navy band, icon panels, the habit line closing it */
   .trio {

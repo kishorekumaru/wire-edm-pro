@@ -30,8 +30,29 @@ const {
   heroImage, heroImageAlt,
   specs, specNote, applications, ctaHeading, ctaBody,
 } = Astro.props;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: heroKicker,
+  name: heroTitle,
+  description: heroLede,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Wire EDM Pro",
+    url: new URL("/", Astro.site).href,
+  },
+  areaServed: "Sydney",
+};
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={heroImage ? `${heroImage}.jpg` : undefined}
+  ogImageAlt={heroImage ? heroImageAlt : undefined}
+  jsonLd={serviceSchema}
+>
   <section class="svc-hero">
     {heroImage && (
       <div class="svc-hero__bg" aria-hidden="true">

@@ -2,10 +2,11 @@
 import ServicePage from "../components/ServicePage.astro";
 
 const specs = [
-  { name: "General tolerance", value: "±0.01 mm", note: "typical on critical turned diameters" },
-  { name: "Batch size", value: "1 – repeat production", note: "single spares through scheduled batches" },
+  { name: "General tolerance", value: "±0.01 mm", note: "typical on critical turned diameters, with rigid concentricity on mating fits" },
+  { name: "Operations", value: "boring · threading · facing", note: "plus contouring and tapering on complex profiles" },
+  { name: "Batch size", value: "1 – repeat production", note: "single spares through scheduled high-volume batches" },
   { name: "Threading", value: "metric, imperial, custom", note: "single-point threaded to gauge" },
-  { name: "Materials", value: "steels, stainless, alloys", note: "including titanium and heat-resistant grades" },
+  { name: "Materials", value: "steels, stainless, alloys", note: "aluminium, brass, copper, engineering plastics, titanium and heat-resistant grades" },
   { name: "Finishing", value: "in-house EDM follow-up", note: "hardened keyways and flats added after heat treatment by EDM" },
 ];
 
@@ -22,19 +23,78 @@ const applications = [
     name: "Mining & plant spares",
     body: "Turned wear components in abrasion-resistant and stainless grades, quoted from a drawing or a worn sample when the OEM lead time is measured in months.",
   },
+  {
+    name: "Laser-cut sheet metal profiles",
+    body: "Brackets, plates, enclosures and custom profiles cut straight from your CAD file. Clean, burr-free edges with no tooling setup and no minimum quantity.",
+  },
 ];
 ---
 <ServicePage
-  title="CNC Turning Solutions, Sydney | Wire EDM Pro"
-  description="CNC turning in Sydney: shafts, bushes, pins and threaded components in steels, stainless and exotic alloys. From single spares to repeat production, with EDM finishing in-house."
-  heroKicker="CNC turning"
+  title="CNC Turning & Laser Cutting, Sydney | Wire EDM Pro"
+  description="CNC turning and laser cutting in Sydney: shafts, bushes, pins and threaded components, plus laser-cut sheet metal profiles. EDM finishing in-house."
+  heroKicker="CNC turning & laser cutting"
   heroTitle="Round parts, straight answers."
   heroImage="/images/wire-edm-office"
-  heroImageAlt="Inside the Wire EDM Pro workshop in Sydney, CNC machines on the floor"
-  heroLede="Turned components sit in almost every assembly we see. Shafts, bushes, pins, adaptors and custom fasteners. We turn them to drawing in steels, stainless and exotic alloys, and when a hardened keyway or flat is needed afterwards, our EDM machines add it without softening the part."
+  heroImageAlt="Inside Wire EDM Pro in Sydney, CNC machines on the floor"
+  heroLede="Turned components sit in almost every assembly we see. Shafts, bushes, pins, adaptors and custom fasteners. We turn them to drawing in steels, stainless and exotic alloys, and when a hardened keyway or flat is needed afterwards, our EDM machines add it without softening the part. Sheet metal details around the assembly come off our laser, cut clean from the same CAD files."
   specs={specs}
   specNote="Capacity and tolerance depend on part geometry and material; both are confirmed when we quote your drawing."
   applications={applications}
   ctaHeading="From worn sample to new part."
   ctaBody="No drawing? Send the worn component. We measure, draw and machine the replacement."
-/>
+>
+  <section slot="deep" class="laser section">
+    <div class="container laser__grid">
+      <div>
+        <h2>Laser cutting, from CAD file to cut part</h2>
+        <p class="laser__body">
+          Profile cutting for sheet metal without the wait for tooling. Your CAD file drives
+          the cut directly, so intricate profiles, narrow slots and fine detail arrive as drawn,
+          with distortion-free edges that need no secondary deburring. Nesting software packs
+          parts tightly onto every sheet, which keeps material waste down and your price with it.
+        </p>
+      </div>
+      <ul class="laser__list">
+        <li>Clean, burr-free edges straight off the machine</li>
+        <li>Intricate geometries that punching and milling can't follow</li>
+        <li>Smart nesting for maximum material yield on every sheet</li>
+        <li>Multiple gauges of carbon steel, stainless, aluminium and alloys</li>
+        <li>No tooling setup, so one-offs cost like one-offs</li>
+      </ul>
+    </div>
+  </section>
+</ServicePage>
+
+<style>
+  .laser { padding-block: var(--space-2xl); }
+  .laser__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .laser h2 { font-size: var(--text-xl); max-width: 22ch; }
+  .laser__body { margin-top: var(--space-md); color: var(--color-muted); }
+  .laser__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .laser__list li {
+    padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+    border-bottom: var(--rule-hairline);
+    position: relative;
+  }
+  .laser__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.15em;
+    width: 0.55rem;
+    height: 2px;
+    background: var(--color-accent);
+  }
+  @media (max-width: 56rem) {
+    .laser__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+  }
+</style>

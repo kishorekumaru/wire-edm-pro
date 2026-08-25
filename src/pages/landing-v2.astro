@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
-import HeroGraphic from "../components/HeroGraphic.astro";
+import HeroGraphicLight from "../components/HeroGraphicLight.astro";
 import TurnkeyFlow from "../components/TurnkeyFlow.astro";
 
 const fleet = [
@@ -65,17 +65,18 @@ const industries = [
 ];
 ---
 <BaseLayout
-  title="Wire EDM Pro | Precision Wire EDM & CNC Machining, Sydney"
-  description="Sydney precision machining for more than 25 years: EDM wire cutting, EDM drilling, CNC milling, turning and laser cutting for manufacturing, mining and medical."
+  title="Wire EDM Pro | Home V2 Preview"
+  description="White-background preview of the Wire EDM Pro home page. Internal design review only."
+  noindex
 >
   <!-- Hero: full-width animated canvas behind, copy on top -->
   <section class="hero">
-    <HeroGraphic />
+    <HeroGraphicLight />
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="container hero__content">
       <div class="hero__copy">
         <p class="hero__kicker mono reveal" style="--i: 0">Australian owned &amp; operated · Sydney · est. early 2000s</p>
-        <h1 class="reveal" style="--i: 0"><span class="hero__brand"><span class="hero__brand-wire">WIRE</span> <span class="hero__brand-edm">EDM</span> <span class="hero__brand-pro">PRO</span></span>. Multi solutions under <span class="hero__accent">one&nbsp;roof</span>.</h1>
+        <h1 class="reveal" style="--i: 0">Multi solutions under <span class="hero__accent">one&nbsp;roof</span>.</h1>
         <p class="hero__trust reveal" style="--i: 1">Trusted by Australian industry for 25 years.</p>
         <p class="hero__lede reveal" style="--i: 1">
           A local Sydney business machining tool steel, titanium and hardened dies for the
@@ -88,7 +89,7 @@ const industries = [
         </div>
       <div class="hero__mobileart" aria-hidden="true">
         <div class="hero__mobileart-stage">
-          <img class="hero__mobileart-part" src="/images/sample-part-3d.png" alt="" width="640" height="652" loading="eager" />
+          <img class="hero__mobileart-part" src="/images/sample-cube-3d.png" alt="" width="640" height="795" loading="eager" />
         </div>
       </div>
       </div>
@@ -195,15 +196,11 @@ const industries = [
     position: relative;
     min-height: calc(100dvh - 65px); /* full screen below the nav */
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* copy rides at the top, inside the blue slab */
     padding-block: var(--space-2xl);
     overflow: hidden;
-    /* Dusk Blue on the left, easing to Steel Blue on the right. All blue, no white */
-    background: linear-gradient(100deg,
-      oklch(25.6% 0.067 270) 0%,
-      oklch(31.9% 0.063 267) 38%,
-      oklch(37.3% 0.081 259) 72%,
-      oklch(46% 0.085 255) 100%);
+    /* V2: pure white hero, the blueprint grid and chrome part carry the depth */
+    background: #ffffff;
   }
   .hero .container { width: 100%; }
   .hero__scrim {
@@ -215,16 +212,41 @@ const industries = [
   .hero__content { position: relative; }
   .hero__kicker {
     font-size: var(--text-sm);
-    color: var(--color-accent-soft);
+    color: #dbe7fd;
     margin-bottom: var(--space-md);
   }
-  .hero__copy { max-width: 60ch; }
+  .hero__copy {
+    max-width: 60ch;
+    position: relative;
+    z-index: 0;
+    margin-left: calc(1rem - var(--page-gutter)); /* copy sits 1rem off the left edge */
+  }
+  /* Blue slab popping out from the top-left corner, sized by the copy itself:
+     flush with the top of the hero, ending just past the text, closing with a
+     big sweeping curve at the bottom. A grey plate follows behind it */
+  .hero__copy::before {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--space-2xl)) -12rem -9.5rem -100vw;
+    background: #4285F4;
+    border-bottom-right-radius: 46rem 85%;
+    box-shadow: 6px 0 12px oklch(35% 0.09 262 / 0.22);
+    z-index: -1;
+  }
+  .hero__copy::after {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--space-2xl)) -12.4rem -9.9rem -101vw;
+    background: #e1e1e1;
+    border-bottom-right-radius: 46.4rem 85.5%;
+    z-index: -2;
+  }
   .hero__copy h1 {
     font-size: var(--text-display-s); /* hero headline deliberately a step down */
     max-width: 18ch;
     color: #ffffff;
   }
-  .hero__accent { color: var(--color-accent-soft); }
+  .hero__accent { color: #d7e6ff; }
   /* Wordmark treatment: heavy caps in the logo's three tones, lightened for the dark hero */
   .hero__brand {
     font-family: "Rajdhani", var(--font-display);
@@ -233,8 +255,8 @@ const industries = [
     font-size: 1.12em; /* Rajdhani runs narrow; nudge up to sit level with Open Sans */
     white-space: nowrap;
   }
-  /* Exact logo colors, client-supplied. The letters are darker than the hero,
-     so a thin white outline plus a soft halo separates them from the background */
+  /* Exact logo colors, client-supplied. The letters are darker than the blue
+     panel, so a thin white outline separates them from the background */
   .hero__brand span,
   .hero__brand-wire, .hero__brand-edm, .hero__brand-pro {
     -webkit-text-stroke: 3px rgba(255, 255, 255, 0.92);
@@ -249,13 +271,13 @@ const industries = [
     font-weight: 700;
     letter-spacing: 0.01em;
     color: #ffffff;
-    border-left: 3px solid var(--color-accent-soft);
+    border-left: 3px solid #ffffff;
     padding-left: var(--space-sm);
   }
   .hero__lede {
     margin-top: var(--space-md);
     font-size: var(--text-md);
-    color: var(--color-on-deep);
+    color: #e9f0fd;
     max-width: 52ch;
   }
   .hero__actions {
@@ -273,7 +295,7 @@ const industries = [
     text-underline-offset: 5px;
     white-space: nowrap;
   }
-  .hero__textlink:hover { color: var(--color-accent-soft); }
+  .hero__textlink:hover { color: #d7e6ff; }
 
   .stats { border-block: var(--rule-hairline); padding-block: var(--space-lg); }
   /* Figures bold so the mono face renders crisp at this size */
@@ -429,7 +451,7 @@ const industries = [
   .hero__mobileart-stage {
     position: relative;
     width: min(18rem, 70vw);
-    aspect-ratio: 640 / 856; /* matches the extended-part capture */
+    aspect-ratio: 640 / 795; /* matches the cube capture */
   }
   /* The captured 3D part, drifting with scroll (--py from the parallax driver) */
   .hero__mobileart-part {
@@ -438,7 +460,7 @@ const industries = [
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 14px 20px oklch(19% 0.06 268 / 0.5));
+    filter: drop-shadow(0 14px 20px oklch(35% 0.04 262 / 0.28));
     will-change: transform;
     transform: translate3d(0, var(--py, 0px), 0);
     transition: transform 120ms linear;
@@ -449,8 +471,12 @@ const industries = [
 
   @media (max-width: 68rem) {
     /* Stacked hero: copy on top, 3D prop below it */
-    /* Compact mobile hero: sized by its copy, not the screen */
-    .hero { align-items: center; min-height: 0; padding-block: var(--space-2xl) var(--space-lg); }
+    /* Compact mobile hero: sized by its copy, not the screen. The blue slab
+       becomes a solid blue hero so the block never crowds stacked text */
+    .hero { align-items: center; min-height: 0; padding-block: var(--space-2xl) var(--space-lg); background: #4285F4; }
+    .hero__copy::before,
+    .hero__copy::after { display: none; }
+    .hero__copy { margin-left: 0; }
     .hero__mobileart {
       display: grid;
       place-items: center;

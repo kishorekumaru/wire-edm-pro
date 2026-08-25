@@ -2,32 +2,32 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
 
-// QC equipment list is industry-typical; flagged in CONTENT-TODO for client confirmation.
+// Equipment list confirmed by the client content doc (docs/WIRE EDM PRO-WEB CONTENT.pdf).
 const equipment = [
-  { name: "Coordinate measuring machine (CMM)", verifies: "3D positional accuracy of features against the approved design" },
-  { name: "Profile projector / optical comparator", verifies: "Wire-cut profiles, radii and fine geometry at magnification" },
-  { name: "Surface roughness tester", verifies: "Finish quality (Ra) on EDM and machined surfaces" },
-  { name: "Height gauges & surface plate", verifies: "Datum-referenced heights, steps and parallelism" },
-  { name: "Micrometers & bore gauges", verifies: "Diameters, bores and thicknesses to the micron" },
-  { name: "Thread gauges", verifies: "Internal and external threads to gauge fit" },
-  { name: "Hardness tester", verifies: "Material condition before and after processing" },
+  { name: "Optical profile projectors", verifies: "Non-contact measurement of intricate profiles, thread forms and sharp edges at magnification" },
+  { name: "Digital micrometers", verifies: "Calibrated measurement of diameters and thicknesses to the micron" },
+  { name: "Vernier calipers", verifies: "General dimensional checks across every stage of production" },
+  { name: "Height gauges", verifies: "Datum-referenced heights, steps and depths" },
+  { name: "Bore gauges", verifies: "Internal diameters held to exact tolerance" },
 ];
 
 const checks = [
-  { name: "Dimensions", body: "Every critical dimension is measured against the approved design before a part leaves. Not a sample. Every critical dimension." },
-  { name: "Surface finish", body: "EDM and machined surfaces verified to the specified Ra where the drawing calls for it." },
-  { name: "Material & hardness", body: "Certified material in, hardness verified through processing, so the part performs the way the drawing assumes." },
+  { name: "First-article inspection", body: "The very first part off the machine is verified against the approved design before the production run starts. If the first article is wrong, nothing else gets cut." },
+  { name: "Every critical dimension", body: "Every critical dimension is measured against the approved design before a part leaves. Not a sample. Every critical dimension." },
+  { name: "Batch inspection", body: "Every production run gets systematic batch checks through to final packaging, so parts arrive consistent, defect-free and ready to assemble." },
 ];
 ---
 <BaseLayout
   title="Quality Assurance, Sydney | Wire EDM Pro"
-  description="Every part measured before delivery: CMM, optical comparator, surface roughness and hardness testing. Wire EDM Pro's quality assurance equipment and process."
+  description="Quality assurance at Wire EDM Pro, Sydney: optical profile projectors, calibrated metrology instruments, first-article and batch inspection on every job."
+  ogImage="/images/qc-wireedm.jpg"
+  ogImageAlt="Optical profile projector inspecting a machined component at Wire EDM Pro, Sydney"
 >
   <section class="qa section--tight">
     <div class="qa__bg" aria-hidden="true">
       <img
-        src="/images/quality-assurance-banner.jpg"
-        srcset="/images/quality-assurance-banner-800.jpg 800w, /images/quality-assurance-banner.jpg 1600w"
+        src="/images/qc-wireedm.jpg"
+        srcset="/images/qc-wireedm-800.jpg 800w, /images/qc-wireedm.jpg 1600w"
         sizes="(max-width: 56rem) 100vw, 62vw"
         width="1600" height="900"
         alt=""
@@ -38,8 +38,10 @@ const checks = [
       <p class="qa__kicker mono">Solutions · Quality Assurance</p>
       <h1>Measured before it leaves.</h1>
       <p class="qa__lede">
-        A tolerance you can't verify is a guess. Every job is inspected against its approved
-        design before delivery, on instruments maintained for exactly that purpose.
+        A tolerance you can't verify is a guess. Quality is built into every stage of
+        production, from initial setup to final packaging: experienced inspectors check
+        every job against its approved design before delivery, on calibrated metrology
+        instruments maintained for exactly that purpose.
       </p>
     </div>
   </section>
@@ -69,7 +71,7 @@ const checks = [
   <section class="section">
     <div class="container">
       <div class="section-head" data-reveal>
-        <h2>What gets checked <span class="section-head__sub">Dimensions · finish · material</span></h2>
+        <h2>What gets checked <span class="section-head__sub">First article · every dimension · every batch</span></h2>
       </div>
       <div class="qa__checks">
         {checks.map((c, i) => (

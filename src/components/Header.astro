@@ -3,16 +3,10 @@ import { industries } from "../data/industries";
 
 const solutions = [
   {
-    href: "/wire-edm/",
-    label: "EDM Wire Solution",
+    href: "/edm-wire-cutting/",
+    label: "EDM Wire Cutting Solution",
     note: "±0.005 mm profiles in hardened metal",
     icon: '<path d="M12 2.5v11"/><rect x="4" y="13.5" width="16" height="7" rx="1"/><path d="M9 10.5l-2-1.5M15 10.5l2-1.5M9.5 7L8 6M14.5 7L16 6"/>',
-  },
-  {
-    href: "/edm-cutting/",
-    label: "EDM Cutting Solution",
-    note: "spark erosion for features tooling can't reach",
-    icon: '<path d="M6 3.5h12M12 3.5v4"/><path d="M12 7.5l-2.5 4h5L12 15.5"/><path d="M5 20.5h14"/>',
   },
   {
     href: "/milling/",
@@ -25,6 +19,12 @@ const solutions = [
     label: "Turning solutions",
     note: "shafts, bushes, pins and threads",
     icon: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2"/><path d="M12 3.5v4M4.6 16.2l3.5-2M19.4 16.2l-3.5-2"/>',
+  },
+  {
+    href: "/edm-drills/",
+    label: "EDM Drills",
+    note: "small hole EDM from Ø 0.3 mm, burr-free",
+    icon: '<path d="M6 3.5h12M12 3.5v4"/><path d="M12 7.5l-2.5 4h5L12 15.5"/><path d="M5 20.5h14"/>',
   },
   {
     href: "/reverse-engineering/",
@@ -44,7 +44,7 @@ const pages = [
 ];
 const path = Astro.url.pathname;
 const isCurrent = (href: string) => path === href;
-const onSolutions = ["/wire-edm/", "/edm-cutting/", "/milling/", "/turning/", "/reverse-engineering/", "/quality-assurance/"].includes(path);
+const onSolutions = ["/edm-wire-cutting/", "/milling/", "/turning/", "/edm-drills/", "/reverse-engineering/", "/quality-assurance/"].includes(path);
 const onIndustries = path.startsWith("/industries/");
 ---
 <header class="nav" id="site-nav">
@@ -68,7 +68,7 @@ const onIndustries = path.startsWith("/industries/");
         </button>
         <div class="nav__dropdown" id="solutions-menu">
           <div class="nav__dropdown-inner container">
-            <p class="nav__drophead">Six solutions, one workshop</p>
+            <p class="nav__drophead">Six solutions, one business</p>
             <div class="nav__dropgrid nav__dropgrid--solutions">
               {solutions.map((s) => (
                 <a class="nav__dropitem" href={s.href} aria-current={isCurrent(s.href) ? "page" : undefined}>
@@ -81,7 +81,7 @@ const onIndustries = path.startsWith("/industries/");
               ))}
             </div>
             <div class="nav__dropfoot">
-              <p>Every job is quoted, programmed and machined here. No brokering, no freight between shops.</p>
+              <p>Every job is quoted, programmed and machined here, under one roof.</p>
               <div class="nav__dropfoot-links">
                 <a class="mono" href="tel:+61452558052">0452 558 052</a>
                 <a href="/contact/">Get a quote →</a>

@@ -14,13 +14,30 @@ const steps = [
   },
   {
     name: "We create the design",
-    body: "The measurements become a complete design and toolpaths in Mastercam. You review and approve it before anything is cut.",
+    body: "The measurements become an accurate 3D model (STEP/IGES), a 2D manufacturing drawing and toolpaths in Mastercam. You review and approve the design before anything is cut.",
+  },
+];
+
+const capabilities = [
+  {
+    name: "Obsolete part replication",
+    body: "Worn-out, broken or legacy parts recreated when the original drawings or the original manufacturer no longer exist.",
+  },
+  {
+    name: "Design optimisation",
+    body: "While the part is on the bench we can improve it: material efficiency, structural strength or manufacturability, with your approval on every change.",
+  },
+  {
+    name: "Straight into production",
+    body: "Once reversed, the part moves directly into our wire EDM, milling and turning workflows. From a single replacement through to high-volume manufacture.",
   },
 ];
 ---
 <BaseLayout
   title="Reverse Engineering, Sydney | Wire EDM Pro"
-  description="No drawing? Bring the part. Wire EDM Pro measures your sample, creates the design in Mastercam, and manufactures the replacement turnkey: design approval, material procurement, machining, QC and delivery."
+  description="No drawing? Bring the part. Wire EDM Pro in Sydney measures your sample, models it in Mastercam and manufactures the replacement, design to delivery."
+  ogImage="/images/reverse-engineering-banner.jpg"
+  ogImageAlt="Reverse engineering a sample part at Wire EDM Pro, Sydney"
 >
   <section class="re section--tight">
     <div class="re__bg" aria-hidden="true">
@@ -58,6 +75,14 @@ const steps = [
           </div>
         ))}
       </div>
+      <div class="re__caps">
+        {capabilities.map((c, i) => (
+          <div class="re__cap" data-reveal style={`--reveal-i: ${i}`}>
+            <h3>{c.name}</h3>
+            <p>{c.body}</p>
+          </div>
+        ))}
+      </div>
       <p class="re__note" data-reveal>
         From the approved design onward, the job runs through the same turnkey lifecycle as
         every other part we make:
@@ -72,7 +97,7 @@ const steps = [
 
   <CtaBand
     heading="Got the part but not the drawing?"
-    body="Send a photo of the component to start, or drop the sample at the workshop. We'll tell you the same day whether we can rebuild it."
+    body="Send a photo of the component to start, or drop the sample at our door. We'll tell you the same day whether we can rebuild it."
   />
 </BaseLayout>
 
@@ -126,6 +151,26 @@ const steps = [
   }
   .re__step h3 { font-size: var(--text-md); }
   .re__step p { margin-top: var(--space-xs); color: var(--color-muted); }
+  .re__caps {
+    margin-top: var(--space-2xl);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2xl);
+  }
+  .re__cap h3 {
+    font-size: var(--text-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .re__cap h3::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    background: var(--color-accent-bright);
+  }
+  .re__cap p { margin-top: var(--space-sm); color: var(--color-muted); }
   .re__note {
     margin-top: var(--space-2xl);
     color: var(--color-muted);
@@ -133,6 +178,7 @@ const steps = [
   }
   @media (max-width: 56rem) {
     .re__steps { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+    .re__caps { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
   }
   .re {
     position: relative;

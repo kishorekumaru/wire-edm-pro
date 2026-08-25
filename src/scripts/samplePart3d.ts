@@ -54,22 +54,128 @@ function starProfile(
   return p;
 }
 
-function extrudePiece(shape: THREE.Shape, material: THREE.Material): THREE.Mesh {
+/**
+ * High-contrast studio for the chrome finish: dark walls with a few bright
+ * softbox strips. Chrome is pure reflection, so this is what paints the part -
+ * hard white highlights against deep greys - instead of the flat, even
+ * brightness RoomEnvironment gives.
+ */
+function chromeStudio(): THREE.Scene {
+  const s = new THREE.Scene();
+  s.background = new THREE.Color(0x6b727b);
+  const strip = (
+    w: number,
+    h: number,
+    pos: [number, number, number],
+    rot: [number, number, number],
+    brightness: number,
+  ) => {
+    const m = new THREE.Mesh(
+      new THREE.PlaneGeometry(w, h),
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color().setScalar(brightness),
+        side: THREE.DoubleSide,
+      }),
+    );
+    m.position.set(...pos);
+    m.rotation.set(...rot);
+    s.add(m);
+  };
+  strip(12, 5, [0, 7, 0], [-Math.PI / 2, 0, 0], 14); // overhead softbox
+  strip(3.5, 9, [-7, 2, 1], [0, Math.PI / 2, 0], 9); // tall left strip
+  strip(2.5, 7, [6.5, 1, -2], [0, -Math.PI / 2, 0], 7); // dimmer right strip
+  strip(9, 1.4, [0, -0.5, -7], [0, 0, 0], 2.5); // low back fill
+  strip(8, 3, [1, 2, 7], [0, 0, 0], 4); // front fill so camera-facing flats stay silver
+  // Dark floor panel so downward-facing surfaces keep contrast
+  strip(14, 14, [0, -3, 0], [Math.PI / 2, 0, 0], 0.12);
+  return s;
+}
+
+function extrudePiece(
+  shape: THREE.Shape,
+  material: THREE.Material,
+  depth = BLANK_HEIGHT,
+  curveSegments = 6,
+  bevel = 0.015,
+): THREE.Mesh {
   const geo = new THREE.ExtrudeGeometry(shape, {
-    depth: BLANK_HEIGHT,
+    depth,
     bevelEnabled: true,
-    bevelThickness: 0.015,
-    bevelSize: 0.012,
+    bevelThickness: bevel,
+    bevelSize: bevel * 0.8,
     bevelSegments: 1,
-    curveSegments: 6,
+    curveSegments,
   });
   geo.rotateX(-Math.PI / 2); // extrude along +Y (part stands upright)
-  geo.translate(0, -BLANK_HEIGHT / 2, 0);
+  geo.translate(0, -depth / 2, 0);
   const mesh = new THREE.Mesh(geo, material);
   return mesh;
 }
 
-export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement): void {
+/**
+ * Emit a straight seam from (ax,ay) to (bx,by) with one jigsaw knob at the
+ * midpoint - narrow neck opening into a round undercut mushroom head -
+ * bulging to the left (side = 1) or right (side = -1) of the travel
+ * direction. Two pieces sharing a seam traverse it in opposite directions
+ * with opposite sides, tracing the same physical curve, so they interlock
+ * exactly and can only separate along the extrusion axis.
+ */
+function seamWithKnob(
+  p: THREE.Shape,
+  ax: number,
+  ay: number,
+  bx: number,
+  by: number,
+  side: 1 | -1,
+) {
+  const rh = 0.2; // head radius
+  const wn = 0.085; // neck half-width
+  const hd = 0.24; // head centre offset from the seam line
+  const b = Math.asin(wn / rh); // where the neck edges meet the head circle
+  const th = Math.atan2(by - ay, bx - ax);
+  const ux = Math.cos(th);
+  const uy = Math.sin(th);
+  const vx = -uy; // left normal of the travel direction
+  const vy = ux;
+  const mx = (ax + bx) / 2;
+  const my = (ay + by) / 2;
+
+  p.lineTo(mx - ux * wn, my - uy * wn); // run to the near neck edge
+  const a0 = side > 0 ? th + 1.5 * Math.PI - b : th + 0.5 * Math.PI + b;
+  const a1 = side > 0 ? th + 1.5 * Math.PI + b : th + 0.5 * Math.PI - b;
+  // absarc connects the neck edges; side > 0 crowns clockwise, side < 0 counter
+  p.absarc(mx + side * vx * hd, my + side * vy * hd, rh, a0, a1, side > 0);
+  p.lineTo(mx + ux * wn, my + uy * wn); // back down the far neck edge to the seam line
+  p.lineTo(bx, by);
+}
+
+/**
+ * One quadrant of the client's puzzle-cube demo (square-mesh.jpeg): a wire-cut
+ * block whose two inner edges carry a jigsaw tab and the neighbour's notch.
+ * The full cube is this shape rotated into all four quadrants - each piece
+ * grips the next, releasing only along the cutting axis.
+ */
+function puzzleQuadrant(S: number): THREE.Shape {
+  const q = new THREE.Shape();
+  q.moveTo(0, 0);
+  seamWithKnob(q, 0, 0, S, 0, -1); // out to the east rim, neighbour's notch
+  q.lineTo(S, S);
+  q.lineTo(0, S);
+  seamWithKnob(q, 0, S, 0, 0, 1); // back to centre, own tab bulging sideways
+  q.closePath();
+  return q;
+}
+
+export interface SamplePartOptions {
+  /** "white" matte part for the dark hero (default); "chrome" polished steel for light backgrounds. */
+  finish?: "white" | "chrome";
+}
+
+export function initSamplePart(
+  host: HTMLElement,
+  interactionRoot: HTMLElement,
+  opts: SamplePartOptions = {},
+): void {
   try {
     const probe = document.createElement("canvas");
     if (!(probe.getContext("webgl2") ?? probe.getContext("webgl"))) return;
@@ -90,47 +196,106 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
   renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-  // Soft studio reflections so the steel reads as steel
+  const chrome = opts.finish === "chrome";
+
+  // Soft studio reflections so the steel reads as steel. Chrome is almost
+  // entirely reflection-driven, so it gets a high-contrast studio instead of
+  // the evenly-lit room.
   const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environmentIntensity = 0.35; // low ambient so the white part keeps facet shading
+  scene.environment = pmrem.fromScene(chrome ? chromeStudio() : new RoomEnvironment(), 0.04).texture;
+  scene.environmentIntensity = chrome ? 0.85 : 0.35;
 
   // One shared steel material - identical colour on every piece so the
   // assembled part reads as a single solid blank with no visible layers.
-  const steel = new THREE.MeshStandardMaterial({
-    color: 0xffffff, // pure white, pops on the blue hero
-    metalness: 0.3,
-    roughness: 0.5,
-  });
+  const steel = chrome
+    ? new THREE.MeshPhysicalMaterial({
+        // Silver-grey brushed steel, a shade darker than the reference photo
+        color: 0xa8b0b8,
+        metalness: 1.0,
+        roughness: 0.32,
+        clearcoat: 0.25,
+        clearcoatRoughness: 0.3,
+      })
+    : new THREE.MeshStandardMaterial({
+        color: 0xffffff, // pure white, pops on the blue hero
+        metalness: 0.3,
+        roughness: 0.5,
+      });
 
-  // The three concentric wire-cut pieces
-  const splineOuter = toothedProfile(44, 0.93, 1.0, 0.5) as THREE.Shape;
-  splineOuter.holes.push(toothedProfile(16, 0.62, 0.74, 0.42, THREE.Path) as THREE.Path);
-  const splineRing = extrudePiece(splineOuter, steel);
-
-  const gearShape = toothedProfile(16, 0.6, 0.72, 0.42) as THREE.Shape;
-  gearShape.holes.push(starProfile(9, 0.46, 0.15, THREE.Path) as THREE.Path);
-  const gearRing = extrudePiece(gearShape, steel);
-  const starCore = extrudePiece(starProfile(9, 0.44, 0.14) as THREE.Shape, steel);
-
+  // The wire-cut pieces. Chrome (landing v2): a round blank with the classic
+  // puzzle interlock cut through it - sleeve plus sliding core. Default: three
+  // concentric profiles - spline ring, gear ring, star core.
   const part = new THREE.Group();
-  part.add(splineRing, gearRing, starCore);
+  let applyExplode: (e: number) => void;
+
+  if (chrome) {
+    // Puzzle cube: one quadrant block, rotated into all four positions.
+    // Near-zero bevel so the closed cube reads solid, seams as hairlines
+    const template = extrudePiece(puzzleQuadrant(0.92), steel, 1.9, 24, 0.005);
+    const blocks = [0, 1, 2, 3].map((k) => {
+      const m = k === 0 ? template : new THREE.Mesh(template.geometry, steel);
+      m.rotation.y = (k * Math.PI) / 2;
+      return m;
+    });
+    part.add(...blocks);
+    // Each block rides at its own rate: the first races ahead, the last trails
+    const rates = [1.5, 1.0, 0.62, 0.3];
+    applyExplode = (e: number) => {
+      blocks.forEach((block, i) => {
+        block.position.y = e * rates[i];
+      });
+    };
+  } else {
+    const splineOuter = toothedProfile(44, 0.93, 1.0, 0.5) as THREE.Shape;
+    splineOuter.holes.push(toothedProfile(16, 0.62, 0.74, 0.42, THREE.Path) as THREE.Path);
+    const splineRing = extrudePiece(splineOuter, steel);
+
+    const gearShape = toothedProfile(16, 0.6, 0.72, 0.42) as THREE.Shape;
+    gearShape.holes.push(starProfile(9, 0.46, 0.15, THREE.Path) as THREE.Path);
+    const gearRing = extrudePiece(gearShape, steel);
+    const starCore = extrudePiece(starProfile(9, 0.44, 0.14) as THREE.Shape, steel);
+    part.add(splineRing, gearRing, starCore);
+    // "Inside out": the innermost cut travels furthest. At e = 0 every offset
+    // is exactly zero so the three pieces sit flush - one solid blank.
+    applyExplode = (e: number) => {
+      starCore.position.y = e * 1.5;
+      gearRing.position.y = e * 0.72;
+      starCore.rotation.y = -e * 0.45;
+      gearRing.rotation.y = e * 0.26;
+    };
+  }
+
   part.position.y = 0.1;
+  if (chrome) part.scale.setScalar(1.18); // the cube sits a little larger in frame
   scene.add(part);
 
-  // Ground shadow disc (fake, cheap)
+  // Resting yaw: the cube sits turned 45° to the right, corner to the camera
+  const baseRotY = chrome ? 0.35 - Math.PI / 4 : 0.35;
+
+  // Ground shadow (fake, cheap). A square under the cube, matching its resting
+  // yaw and dropped a little below the base; a soft disc under the rings
   const shadow = new THREE.Mesh(
-    new THREE.CircleGeometry(1.35, 40),
-    new THREE.MeshBasicMaterial({ color: 0x10162e, transparent: true, opacity: 0.28 }),
+    chrome ? new THREE.PlaneGeometry(2.5, 2.5) : new THREE.CircleGeometry(1.35, 40),
+    new THREE.MeshBasicMaterial({
+      color: chrome ? 0x0b0e16 : 0x10162e,
+      transparent: true,
+      opacity: chrome ? 0.16 : 0.28,
+    }),
   );
-  shadow.rotation.x = -Math.PI / 2;
-  shadow.position.y = -BLANK_HEIGHT / 2 - 0.02;
+  shadow.rotation.set(-Math.PI / 2, 0, chrome ? baseRotY : 0);
+  shadow.position.y = chrome ? -1.18 : -BLANK_HEIGHT / 2 - 0.02;
   scene.add(shadow);
 
-  scene.add(new THREE.HemisphereLight(0xe7ecef, 0x25406b, 0.35));
-  const key = new THREE.DirectionalLight(0xffffff, 1.1);
+  scene.add(new THREE.HemisphereLight(0xe7ecef, 0x25406b, chrome ? 0.15 : 0.35));
+  const key = new THREE.DirectionalLight(0xffffff, chrome ? 1.4 : 1.1);
   key.position.set(4, 6, 2);
   scene.add(key);
+  if (chrome) {
+    // Cool rim light from behind so the polished edges catch a hard highlight
+    const rim = new THREE.DirectionalLight(0xdfe9f5, 1.0);
+    rim.position.set(-5, 3.5, -4);
+    scene.add(rim);
+  }
 
   // Mount - swap fallback image for canvas
   renderer.domElement.className = "hg__canvas";
@@ -152,9 +317,12 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
   new ResizeObserver(resize).observe(host);
 
   // Interaction state (targets lerped in the loop)
-  let targetRotY = 0.35;
+  let targetRotY = baseRotY;
   let targetTiltX = 0.06;
-  let targetExplode = reducedMotion ? 0.6 : 0.35;
+  // The cube reads best near-flush, so it idles barely open; the rings idle wider
+  const idleExplode = chrome ? 0.12 : 0.35;
+  const idleWave = chrome ? 0.05 : 0.08;
+  let targetExplode = reducedMotion ? (chrome ? 0.35 : 0.6) : idleExplode;
   let hovering = false;
 
   if (finePointer && !reducedMotion) {
@@ -165,13 +333,13 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
       // X movement rotates the part; Y movement telescopes it inside-out
       // (mouse at the top = fully extended, at the bottom = flush - one piece)
       // and tilts the part slightly with the pointer.
-      targetRotY = 0.35 + nx * 1.3;
+      targetRotY = baseRotY + nx * 1.3;
       targetExplode = Math.max(0, ((1 - ny) / 2) * 1.05 - 0.05);
       targetTiltX = 0.06 + ny * 0.18;
       hovering = true;
     });
     interactionRoot.addEventListener("pointerleave", () => {
-      targetRotY = 0.35;
+      targetRotY = baseRotY;
       targetTiltX = 0.06;
       hovering = false;
     });
@@ -213,14 +381,6 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
   let tiltX = targetTiltX;
   let explode = targetExplode;
 
-  const applyExplode = (e: number) => {
-    // "Inside out": the innermost cut travels furthest. At e = 0 every offset
-    // is exactly zero so the three pieces sit flush - one solid blank.
-    starCore.position.y = e * 1.5;
-    gearRing.position.y = e * 0.72;
-    starCore.rotation.y = -e * 0.45;
-    gearRing.rotation.y = e * 0.26;
-  };
   applyExplode(explode);
 
   const frame = () => {
@@ -231,7 +391,7 @@ export function initSamplePart(host: HTMLElement, interactionRoot: HTMLElement):
 
     if (!reducedMotion) {
       // Idle breathing when the pointer is elsewhere; proximity-driven when hovering
-      if (!hovering) targetExplode = 0.35 + Math.sin(t * 0.6) * 0.08;
+      if (!hovering) targetExplode = idleExplode + Math.sin(t * 0.6) * idleWave;
       const k = 1 - Math.exp(-dt * 5);
       rotY += (targetRotY - rotY) * k;
       tiltX += (targetTiltX - tiltX) * k;

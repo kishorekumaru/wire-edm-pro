@@ -2,11 +2,15 @@
 import ServicePage from "../components/ServicePage.astro";
 
 const specs = [
+  { name: "Maximum height of the work piece", value: "420 mm", note: "Makino with H.E.A.T technology handles our tallest, heaviest wire-cutting jobs" },
   { name: "Positional tolerance", value: "±0.005 mm", note: "typical for finish passes on stable material" },
-  { name: "Kerf width", value: "≈ 0.25–0.33 mm", note: "wire diameter plus spark gap" },
+  { name: "Taper cutting", value: "4-axis", note: "programmed tapers, sharp internal corners and fine detail" },
+  { name: "Wire size", value: "0.1–0.3 mm", note: "wire diameter selected to suit the profile and finish" },
   { name: "Hardness", value: "to 60+ HRC", note: "cuts fully hardened material. No annealing, no re-heat-treat" },
   { name: "Surface finish", value: "to Ra 0.4 µm", note: "with multiple skim passes" },
+  { name: "Edge condition", value: "burr-free", note: "spark-eroded edges need no deburring pass" },
   { name: "Cutting force", value: "0 N", note: "non-contact erosion. Thin walls and delicate features stay flat" },
+  { name: "Heat-affected zone", value: "minimal", note: "skim passes remove the recast layer where the job demands it" },
   { name: "Materials", value: "any conductive metal", note: "tool steel, stainless, titanium, carbide, copper, exotic alloys" },
 ];
 
@@ -16,27 +20,35 @@ const applications = [
     body: "Punches, dies and die sections cut after heat treatment, so the profile you receive is the profile that runs. Matched punch-and-die sets from the same program guarantee clearance.",
   },
   {
+    name: "Hardened dies & die sections",
+    body: "Cutting features into dies after heat treatment, so nothing distorts afterwards. Apertures, relief and repairs in material a cutter can't touch.",
+  },
+  {
     name: "Splines, keyways & internal forms",
     body: "Forms a broach can't justify and a mill can't reach: internal splines, hexes, keyways and irregular apertures, started from a wire-threading hole anywhere in the part.",
+  },
+  {
+    name: "Slitting & segmenting hardened stock",
+    body: "Clean, square, burr-free separation of hardened and delicate material where an abrasive cut-off would burn, burr or bend the part.",
   },
   {
     name: "Medical & instrumentation components",
     body: "Burr-free edges and no mechanical stress on small stainless and titanium parts. The wire never pushes on the work, so 0.3 mm walls come off the machine straight.",
   },
   {
-    name: "Repair & modification of hardened parts",
-    body: "Opening a hardened bore, splitting a seized assembly, or adding a keyway to a finished shaft. EDM works on parts that are already too hard to machine conventionally.",
+    name: "Repair, modification & seized assemblies",
+    body: "Opening a hardened bore, adding a keyway to a finished shaft, or eroding through a seized joint without force, so the component that must survive does survive.",
   },
 ];
 ---
 <ServicePage
-  title="EDM Wire Solution, Sydney | Wire EDM Pro"
-  description="CNC wire EDM and wire cutting in Sydney: ±0.005 mm tolerances, hardened steel to 60+ HRC, burr-free profiles in any conductive metal. Quotes from drawings or STEP files."
-  heroKicker="EDM Wire Solution"
+  title="EDM Wire Cutting Solution, Sydney | Wire EDM Pro"
+  description="Wire EDM cutting in Sydney: ±0.005 mm tolerances, hardened steel to 60+ HRC, burr-free profiles in any conductive metal. Quotes from drawings or STEP files."
+  heroKicker="EDM Wire Cutting Solution"
   heroTitle="The wire never touches the work."
   heroImage="/images/fanuc-robocut-c600ia"
-  heroImageAlt="Fanuc Robocut α-C600iA wire EDM machine at Wire EDM Pro, Sydney"
-  heroLede="Wire EDM erodes metal with a spark, not a cutting edge. A charged brass wire, ≈0.25 mm thin, traces the programmed profile while dielectric water flushes the gap. So hardened steel cuts as readily as aluminium, and the part feels no force at all."
+  heroImageAlt="Fanuc RoboCut C600 wire EDM machine at Wire EDM Pro, Sydney"
+  heroLede="Wire EDM erodes metal with a spark, not a cutting edge. A charged wire traces the programmed profile while dielectric water flushes the gap, reaching what conventional tooling can't: hardened dies, splines, keyways and fine detail, cut after heat treatment. On our Makino and Fanuc RoboCut machines, hardened steel cuts as readily as aluminium, and the part feels no force at all."
   specs={specs}
   specNote="Figures are typical wire EDM process capability; tolerance and finish for your part depend on geometry, material and thickness. We confirm both at quote."
   applications={applications}
@@ -51,15 +63,18 @@ const applications = [
           Milling and turning remove metal by force; EDM removes it by spark erosion. That
           difference decides which process your part wants. Cut <em>after</em> hardening and the
           profile can't move in heat treatment. Cut without contact and thin webs don't deflect.
-          Cut with a wire and an inside corner needs only the kerf's radius. Not a cutter's.
+          Cut with a wire and an inside corner needs only the wire's radius. Not a cutter's.
+          And because the work sits submerged in a flushed dielectric bath, the surface finish
+          stays consistent from the first millimetre to the last.
         </p>
       </div>
       <ul class="edm-vs__list">
         <li>Part is already hardened, or must not be re-heat-treated</li>
         <li>Inside corners tighter than any available cutter radius</li>
         <li>Walls or webs too thin to survive clamping and cutting force</li>
-        <li>Profile accuracy matters more than removal rate</li>
+        <li>The part is finished, and one slip would scrap it</li>
         <li>Burrs are unacceptable and hand-finishing is not an option</li>
+        <li>Carbide or exotic alloys that destroy conventional tooling</li>
       </ul>
     </div>
   </section>

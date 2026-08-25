@@ -8,9 +8,59 @@ import ConsentBanner from "../components/ConsentBanner.astro";
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
 }
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  ogImage = "/images/og-default.jpg",
+  ogImageAlt = "Wire EDM Pro precision machining, Sydney",
+  jsonLd,
+  noindex = false,
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
+
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": new URL("/", Astro.site).href + "#business",
+  name: "Wire EDM Pro",
+  url: new URL("/", Astro.site).href,
+  description:
+    "Precision machining in Sydney: wire EDM, EDM hole drilling, CNC milling, CNC turning and laser cutting for defence, aerospace, medical, mining and general engineering.",
+  logo: new URL("/images/wire-edm-high-res.png", Astro.site).href,
+  image: new URL("/images/wire-edm-high-res.png", Astro.site).href,
+  telephone: ["+61 2 8604 8347", "+61 452 558 052"],
+  email: "wireedmpro@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "16/24 Garling Rd",
+    addressLocality: "Kings Park",
+    addressRegion: "NSW",
+    postalCode: "2148",
+    addressCountry: "AU",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+      opens: "08:00",
+      closes: "16:30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Friday",
+      opens: "08:00",
+      closes: "12:00",
+    },
+  ],
+  areaServed: "Sydney",
+};
+const extraJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 <!doctype html>
 <html lang="en-AU">
@@ -19,8 +69,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#172043" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="preload" href="/fonts/open-sans-var.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content="website" />
@@ -29,7 +83,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="en_AU" />
+    <meta property="og:image" content={ogImageUrl} />
+    {ogImage === "/images/og-default.jpg" && (
+      <>
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+      </>
+    )}
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+    {extraJsonLd.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+    ))}
     <GoogleAnalytics />
   </head>
   <body>
