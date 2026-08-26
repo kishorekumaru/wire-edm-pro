@@ -88,7 +88,10 @@ const industries = [
         </div>
       <div class="hero__mobileart" aria-hidden="true">
         <div class="hero__mobileart-stage">
-          <img class="hero__mobileart-part" src="/images/sample-part-3d.png" alt="" width="640" height="652" loading="eager" />
+          <picture>
+            <source srcset="/images/sample-part-3d.webp" type="image/webp" />
+            <img class="hero__mobileart-part" src="/images/sample-part-3d.png" alt="" width="640" height="652" loading="eager" fetchpriority="high" />
+          </picture>
         </div>
       </div>
       </div>

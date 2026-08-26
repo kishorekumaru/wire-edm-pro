@@ -11,6 +11,12 @@
       <pattern id="hg-grid" width="26" height="26" patternUnits="userSpaceOnUse">
         <path d="M 26 0 L 0 0 0 26" fill="none" class="hg__gridline" />
       </pattern>
+      <!-- Warps the whole graph plane as one surface: lines stay straight and
+           parallel locally, the sheet flows like gently rippled paper -->
+      <filter id="hg-warp" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="1" seed="7" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="62" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
       <linearGradient id="hg-grid-fade" x1="0" y1="0" x2="1" y2="0">
         <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
         <stop offset="0.38" stop-color="#ffffff" stop-opacity="0.15" />
@@ -23,8 +29,11 @@
         <path d="M 0 0 L 8 4 L 0 8 z" class="hg__arrowhead" />
       </marker>
     </defs>
-    <!-- Graph-paper backdrop, strongest on the right and fading out to the left -->
-    <rect width="1600" height="640" fill="url(#hg-grid)" mask="url(#hg-grid-mask)" />
+    <!-- Graph-paper backdrop, strongest on the right and fading out to the left.
+         Oversized so the warp never pulls a bare edge into view -->
+    <g mask="url(#hg-grid-mask)">
+      <rect x="-60" y="-60" width="1720" height="760" fill="url(#hg-grid)" filter="url(#hg-warp)" />
+    </g>
     <!-- Axes behind the 3D part: compact origin marker at half opacity -->
     <g class="hg__axes" opacity="0.6">
       <line x1="1120" y1="370" x2="1165" y2="393" marker-end="url(#hg-arrow)" />

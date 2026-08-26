@@ -87,7 +87,10 @@ const industries = [
         </div>
       <div class="hero__mobileart" aria-hidden="true">
         <div class="hero__mobileart-stage">
-          <img class="hero__mobileart-part" src="/images/sample-cube-3d.png" alt="" width="640" height="795" loading="eager" />
+          <picture>
+            <source srcset="/images/sample-cube-3d.webp" type="image/webp" />
+            <img class="hero__mobileart-part" src="/images/sample-cube-3d.png" alt="" width="640" height="795" loading="eager" fetchpriority="high" />
+          </picture>
         </div>
       </div>
       </div>
@@ -264,7 +267,8 @@ const industries = [
   }
   .hero__textlink:hover { color: var(--color-ink); }
 
-  .stats { border-block: var(--rule-hairline); padding-block: var(--space-lg); }
+  /* Solid deep-navy fact band anchoring the white hero above it */
+  .stats { background: var(--color-deep); padding-block: var(--space-xl); }
   /* Figures bold so the mono face renders crisp at this size */
   .stats__item dd { font-weight: 700; }
   .stats__strip {
@@ -275,16 +279,16 @@ const industries = [
   }
   .stats__item dt {
     font-size: var(--text-sm);
-    color: var(--color-muted);
+    color: var(--color-on-deep-muted);
   }
   .stats__item dd {
     margin: var(--space-2xs) 0 0;
     font-size: var(--text-lg);
     font-weight: 600;
-    color: var(--color-accent);
+    color: var(--color-accent-soft);
   }
 
-  .proc-section { background: #ffffff; }
+  .proc-section { background: var(--color-paper-2); }
   /* Rows rise in from the bottom as they scroll into view */
   .proc__row[data-reveal] {
     transform: translateY(72px);
