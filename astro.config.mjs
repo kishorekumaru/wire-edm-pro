@@ -8,5 +8,8 @@ export default defineConfig({
   build: {
     format: 'directory',
     assets: '_assets',
+    // Site CSS is ~7 KB total: inlining removes render-blocking stylesheet
+    // requests and lets fonts be discovered from the first HTML bytes
+    inlineStylesheets: 'always',
   },
 });

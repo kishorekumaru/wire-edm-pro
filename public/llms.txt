@@ -1,0 +1,19 @@
+# Wire EDM Pro
+
+> Sydney precision machining business with over 25 years of experience: wire EDM cutting, EDM hole drilling, CNC milling, CNC turning and laser cutting for manufacturing, mining, medical, defence and general engineering. Based at 16/24 Garling Rd, Kings Park NSW 2148, Australia.
+
+## Solutions
+
+- [EDM Wire Cutting Solution](https://wireedmpro.com.au/edm-wire-cutting/): Wire EDM to ±0.005 mm in hardened metal up to 420 mm tall, burr-free, any conductive metal
+- [Milling solutions](https://wireedmpro.com.au/milling/): CNC milling on a DMG MORI ecoMill 600 V, jigs, fixtures, die sets and production runs
+- [Turning solutions](https://wireedmpro.com.au/turning/): CNC turning and laser-cut sheet metal profiles
+- [EDM Drills](https://wireedmpro.com.au/edm-drills/): small hole EDM drilling from 0.3 mm to 3.0 mm in hardened metal
+- [Quality Assurance](https://wireedmpro.com.au/quality-assurance/): first-article, critical-dimension and batch inspection on calibrated instruments
+- [Reverse Engineering](https://wireedmpro.com.au/reverse-engineering/): sample measured, modelled in Mastercam and manufactured turnkey
+
+## Company
+
+- [Home](https://wireedmpro.com.au/): overview of the machine fleet and services
+- [Industries](https://wireedmpro.com.au/industries/): tool and die making, aerospace, medical, mining, automotive, electronics, robotics and more
+- [About us](https://wireedmpro.com.au/about/): who we are, purpose, working values and the machines on the floor
+- [Contact](https://wireedmpro.com.au/contact/): quotes and enquiries, phone 02 8604 8347, email wireedmpro@gmail.com

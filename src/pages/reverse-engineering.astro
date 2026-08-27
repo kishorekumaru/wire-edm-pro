@@ -41,7 +41,9 @@ const capabilities = [
 >
   <section class="re section--tight">
     <div class="re__bg" aria-hidden="true">
-      <img
+      <picture>
+              <source srcset="/images/reverse-engineering-banner-800.webp 800w, /images/reverse-engineering-banner.webp 1600w" sizes="(max-width: 56rem) 100vw, 62vw" type="image/webp" />
+              <img
         src="/images/reverse-engineering-banner.jpg"
         srcset="/images/reverse-engineering-banner-800.jpg 800w, /images/reverse-engineering-banner.jpg 1600w"
         sizes="(max-width: 56rem) 100vw, 62vw"
@@ -49,6 +51,7 @@ const capabilities = [
         alt=""
         fetchpriority="high"
       />
+            </picture>
     </div>
     <div class="container re__copy">
       <p class="re__kicker mono">Solutions · Reverse Engineering</p>

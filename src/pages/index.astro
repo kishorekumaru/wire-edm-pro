@@ -130,15 +130,22 @@ const industries = [
         {fleet.map((s, i) => (
           <a class="proc__row" href={s.href} data-reveal style={`--reveal-i: ${i % 2}`}>
             <div class="proc__figure">
-              <img
-                class="proc__img"
-                src={`${s.img}-800.jpg`}
-                srcset={`${s.img}-800.jpg 800w, ${s.img}.jpg 1600w`}
-                sizes="(max-width: 56rem) 100vw, 42vw"
-                width="800" height="450"
-                alt={s.alt}
-                loading="lazy"
-              />
+              <picture>
+                <source
+                  srcset={`${s.img}-800.webp 800w, ${s.img}.webp 1600w`}
+                  sizes="(max-width: 56rem) 100vw, 42vw"
+                  type="image/webp"
+                />
+                <img
+                  class="proc__img"
+                  src={`${s.img}-800.jpg`}
+                  srcset={`${s.img}-800.jpg 800w, ${s.img}.jpg 1600w`}
+                  sizes="(max-width: 56rem) 100vw, 42vw"
+                  width="800" height="450"
+                  alt={s.alt}
+                  loading="lazy"
+                />
+              </picture>
             </div>
             <div class="proc__text">
               <h3>{s.name}</h3>

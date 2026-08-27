@@ -25,7 +25,9 @@ const checks = [
 >
   <section class="qa section--tight">
     <div class="qa__bg" aria-hidden="true">
-      <img
+      <picture>
+              <source srcset="/images/qc-wireedm-800.webp 800w, /images/qc-wireedm.webp 1600w" sizes="(max-width: 56rem) 100vw, 62vw" type="image/webp" />
+              <img
         src="/images/qc-wireedm.jpg"
         srcset="/images/qc-wireedm-800.jpg 800w, /images/qc-wireedm.jpg 1600w"
         sizes="(max-width: 56rem) 100vw, 62vw"
@@ -33,6 +35,7 @@ const checks = [
         alt=""
         fetchpriority="high"
       />
+            </picture>
     </div>
     <div class="container qa__copy">
       <p class="qa__kicker mono">Solutions · Quality Assurance</p>

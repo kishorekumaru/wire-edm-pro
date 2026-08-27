@@ -50,7 +50,10 @@ const onIndustries = path.startsWith("/industries/");
 <header class="nav" id="site-nav">
   <div class="nav__inner container">
     <a class="nav__brand" href="/" aria-label="Wire EDM Pro. Home">
-      <img class="nav__logo" src="/images/wire-edm-high-res.png" alt="Wire EDM Pro" width="152" height="52" />
+      <picture>
+        <source srcset="/images/logo-nav.webp" type="image/webp" />
+        <img class="nav__logo" src="/images/logo-nav.png" alt="Wire EDM Pro" width="152" height="52" />
+      </picture>
     </a>
     <nav class="nav__center" aria-label="Primary">
       <div class="nav__item nav__item--menu">

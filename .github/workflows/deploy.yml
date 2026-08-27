@@ -39,8 +39,9 @@ jobs:
             --delete \
             --cache-control "public, max-age=31536000, immutable"
 
-      # Images and fonts are not fingerprinted — 7-day cache
-      - name: Deploy images & fonts (7-day cache)
+      # Images and fonts are not fingerprinted, but changed files always ship
+      # under new names - safe to cache for 30 days
+      - name: Deploy images & fonts (30-day cache)
         run: |
           aws s3 sync dist/ s3://wireedmpro.com.au-032331960224-ap-southeast-2-an/ \
             --exclude "*" \
@@ -51,7 +52,7 @@ jobs:
             --include "*.svg" \
             --include "*.ico" \
             --include "*.woff2" \
-            --cache-control "public, max-age=604800"
+            --cache-control "public, max-age=2592000"
 
       - name: Deploy HTML (must-revalidate)
         run: |
