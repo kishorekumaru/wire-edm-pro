@@ -233,8 +233,9 @@ export function initSamplePart(
 
   if (chrome) {
     // Puzzle cube: one quadrant block, rotated into all four positions.
-    // Rounded bevel softens every edge; the seams show as gentle grooves
-    const template = extrudePiece(puzzleQuadrant(0.92), steel, 1.9, 24, 0.055);
+    // Hairline bevel: top and bottom edges read sharp, vertical corners keep
+    // their radius from the 2D outline
+    const template = extrudePiece(puzzleQuadrant(0.92), steel, 1.9, 24, 0.01);
     const blocks = [0, 1, 2, 3].map((k) => {
       const m = k === 0 ? template : new THREE.Mesh(template.geometry, steel);
       m.rotation.y = (k * Math.PI) / 2;
