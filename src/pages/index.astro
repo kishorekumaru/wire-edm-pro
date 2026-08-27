@@ -1,84 +1,531 @@
 ---
-/**
- * Temporary holding page. The real home page lives at /landing/ while the
- * site is finished; swap this file out (and move landing.astro back to
- * index.astro) at launch.
- */
-import "../styles/global.css";
-import GoogleAnalytics from "../components/GoogleAnalytics.astro";
-import ConsentBanner from "../components/ConsentBanner.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import HeroGraphicLight from "../components/HeroGraphicLight.astro";
+import TurnkeyFlow from "../components/TurnkeyFlow.astro";
+
+const fleet = [
+  {
+    href: "/edm-wire-cutting/",
+    name: "Makino wire EDM",
+    body: "Equipped with H.E.A.T technology to cut jobs up to 420 mm tall. Our tallest, heaviest wire-cutting work runs here, submerged for a consistent finish top to bottom.",
+    img: "/images/makino-square",
+    alt: "Makino wire EDM machine cutting a tall hardened workpiece",
+  },
+  {
+    href: "/edm-wire-cutting/",
+    name: "Fanuc RoboCut C600",
+    body: "High-reliability, large-capacity precision wire cutting. The production workhorse for big dies, plates and matched punch-and-die sets.",
+    img: "/images/fanuc-c600ia",
+    alt: "Fanuc RoboCut C600 wire EDM machine on the floor at Wire EDM Pro",
+  },
+  {
+    href: "/edm-wire-cutting/",
+    name: "Fanuc RoboCut C400",
+    body: "High-speed, high-accuracy compact wire cutting. Fine profiles, small components and quick turnarounds in hardened metal.",
+    img: "/images/wire-edm-cutting",
+    alt: "Wire EDM machine cutting a steel workpiece, sparks at the wire in dielectric fluid",
+  },
+  {
+    href: "/milling/",
+    name: "DMG MORI ecoMill 600 V",
+    body: "High-rigidity vertical machining centre. 12,000 rpm spindle, 600 kg table load and a 600 × 560 × 510 mm envelope for jigs, fixtures, die sets and spares.",
+    img: "/images/cnc-milling",
+    alt: "ecoMill 600 V machining centre milling a fixture plate under coolant",
+  },
+  {
+    href: "/edm-drills/",
+    name: "EDM Drills",
+    body: "Fast micro-hole drilling from Ø 0.3 mm to 3.0 mm. Start holes, cooling channels and vents, drilled burr-free through fully hardened metal.",
+    img: "/images/edm-drilling",
+    alt: "EDM drilling machine ready to sink a micro hole in a steel block",
+  },
+  {
+    href: "/turning/",
+    name: "CNC lathes & laser",
+    body: "Turning and profile cutting. Shafts, bushes, pins and threads to gauge, plus laser-cut sheet metal profiles straight from your CAD file.",
+    img: "/images/cnc-turning",
+    alt: "CNC lathe turning a steel shaft in the chuck, chips flying at the insert",
+  },
+];
+
+const industries = [
+  {
+    name: "Manufacturing",
+    body: "Press tools, dies, jigs and fixtures that keep production lines running. We machine the tooling your tooling depends on. And we understand that a late die is a stopped line.",
+  },
+  {
+    name: "Mining",
+    body: "Wear parts, drive components and repairs in hardened and abrasion-resistant steels. Wire EDM cuts material that has already been through heat treatment, so critical spares don't wait on soft-state machining.",
+  },
+  {
+    name: "Medical",
+    body: "Small, exact components in stainless and titanium where surface finish and burr-free edges are not negotiable. EDM leaves no tool pressure and no work hardening on delicate features.",
+  },
+];
 ---
-<!doctype html>
-<html lang="en-AU">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Wire EDM Pro | Coming Soon</title>
-    <meta name="description" content="Wire EDM Pro, Sydney precision machining. Our new website is on its way." />
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <GoogleAnalytics />
-  </head>
-  <body class="cs">
-    <main class="cs__main">
-      <img class="cs__logo" src="/images/wire-edm-high-res.png" alt="Wire EDM Pro" width="210" height="72" />
-      <p class="cs__kicker mono">Sydney · precision machining · est. early 2000s</p>
-      <h1>Coming soon.</h1>
-      <p class="cs__lede">
-        Our new website is being finished. The business, as always, is open.
-        Wire EDM, CNC milling and turning, quoted from your drawing.
-      </p>
-      <div class="cs__contact mono">
-        <a href="tel:+61286048347">02 8604 8347</a>
-        <a href="tel:+61452558052">0452 558 052</a>
-        <span aria-hidden="true">·</span>
-        <a href="mailto:wireedmpro@gmail.com">wireedmpro@gmail.com</a>
+<BaseLayout
+  title="Wire EDM Pro | Precision Wire EDM & CNC Machining, Sydney"
+  description="Sydney precision machining for more than 25 years: EDM wire cutting, EDM drilling, CNC milling, turning and laser cutting for manufacturing, mining and medical."
+>
+  <!-- Hero: full-width animated canvas behind, copy on top -->
+  <section class="hero">
+    <HeroGraphicLight />
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="container hero__content">
+      <div class="hero__copy">
+        <p class="hero__kicker mono reveal" style="--i: 0">Australian owned &amp; operated · Trusted for 25 years</p>
+        <h1 class="reveal" style="--i: 0">Multi solutions under <span class="hero__accent">one&nbsp;roof</span>.</h1>
+        <p class="hero__lede reveal" style="--i: 1">
+          A local Sydney business machining tool steel, titanium and hardened dies for the
+          country's manufacturing, mining and medical businesses.
+        </p>
+        <div class="hero__actions reveal" style="--i: 2">
+          <a class="btn btn--fill" href="/contact/">Get a quote</a>
+          <a class="hero__textlink" href="/edm-wire-cutting/">View services</a>
+        </div>
+      <div class="hero__mobileart" aria-hidden="true">
+        <div class="hero__mobileart-stage">
+          <picture>
+            <source srcset="/images/sample-cube-3d.webp" type="image/webp" />
+            <img class="hero__mobileart-part" src="/images/sample-cube-3d.png" alt="" width="640" height="863" loading="eager" fetchpriority="high" />
+          </picture>
+        </div>
       </div>
-    </main>
-    <ConsentBanner />
-    <style>
-      .cs {
-        min-height: 100dvh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: var(--space-xl);
+      </div>
+    </div>
+  </section>
+
+  <!-- Process facts. Not marketing numbers -->
+  <section class="stats section--tight" aria-label="Wire EDM process facts">
+    <div class="container">
+      <dl class="stats__strip tnum">
+        <div class="stats__item" data-reveal style="--reveal-i: 0">
+          <dt>Positional tolerance</dt>
+          <dd class="mono" data-count="0.005" data-decimals="3" data-prefix="±" data-suffix="&#8199;mm">±0.005&nbsp;mm</dd>
+        </div>
+        <div class="stats__item" data-reveal style="--reveal-i: 1">
+          <dt>Maximum height</dt>
+          <dd class="mono" data-count="420" data-prefix="to&#8199;" data-suffix="&#8199;mm">to&nbsp;420&nbsp;mm</dd>
+        </div>
+        <div class="stats__item" data-reveal style="--reveal-i: 2">
+          <dt>Cutting force on the part</dt>
+          <dd class="mono">0&nbsp;N</dd>
+        </div>
+        <div class="stats__item" data-reveal style="--reveal-i: 3">
+          <dt>Machining in Sydney</dt>
+          <dd class="mono" data-count="25" data-suffix="+&#8199;years">25+&nbsp;years</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Machine fleet. Alternating splits on a blueprint-tinted panel -->
+  <section class="section proc-section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Our machine fleet <span class="section-head__sub">One business. Quoted, programmed and machined here.</span></h2>
+      </div>
+      <div class="proc">
+        {fleet.map((s, i) => (
+          <a class="proc__row" href={s.href} data-reveal style={`--reveal-i: ${i % 2}`}>
+            <div class="proc__figure">
+              <img
+                class="proc__img"
+                src={`${s.img}-800.jpg`}
+                srcset={`${s.img}-800.jpg 800w, ${s.img}.jpg 1600w`}
+                sizes="(max-width: 56rem) 100vw, 42vw"
+                width="800" height="450"
+                alt={s.alt}
+                loading="lazy"
+              />
+            </div>
+            <div class="proc__text">
+              <h3>{s.name}</h3>
+              <p>{s.body}</p>
+              <span class="proc__more" aria-hidden="true">View capability →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Turnkey lifecycle -->
+  <TurnkeyFlow />
+
+  <!-- Credibility. Partnership tone -->
+  <section class="section cred">
+    <div class="container">
+      <div class="cred__copy" data-reveal>
+        <h2>Twenty-five years of saying what we can hold. And holding it.</h2>
+        <p class="cred__body">
+          Wire EDM Pro has run from Sydney since the early&nbsp;2000s. The machines have changed;
+          the discipline hasn't: we quote from real information, we flag risk before the wire
+          touches the work, and we answer the phone while your job is on the machine. Most of
+          our work arrives from customers who have been sending drawings for a decade or more.
+          Because the part that comes back matches the drawing that went in.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="section industries-section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <h2>Built for hard industries <span class="section-head__sub">Manufacturing, mining and medical.</span></h2>
+        <p>Three sectors account for most of what leaves this business. <a href="/industries/">See all the industries we serve</a>.</p>
+      </div>
+      <div class="industries">
+        {industries.map((it, i) => (
+          <div class="industries__item" data-reveal style={`--reveal-i: ${i}`}>
+            <h3>{it.name}</h3>
+            <p>{it.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: calc(100dvh - 65px); /* full screen below the nav */
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-2xl);
+    overflow: hidden;
+    /* V2: pure white hero, the blueprint grid and chrome part carry the depth */
+    background: #ffffff;
+  }
+  .hero .container { width: 100%; }
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: none; /* the hero gradient itself carries the tone */
+  }
+  .hero__content { position: relative; }
+  .hero__kicker {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .hero__copy { max-width: 60ch; }
+  /* Editorial white: no panel. Oversized deep-navy display type carries the
+     left side; the steel cube carries the right */
+  .hero__copy h1 {
+    font-size: var(--text-display);
+    letter-spacing: -0.015em;
+    max-width: 14ch;
+    color: var(--color-deep);
+  }
+  .hero__accent { color: var(--color-accent-bright); }
+  /* Wordmark treatment: heavy caps in the logo's three tones, lightened for the dark hero */
+  .hero__brand {
+    font-family: "Rajdhani", var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    font-size: 1.12em; /* Rajdhani runs narrow; nudge up to sit level with Open Sans */
+    white-space: nowrap;
+  }
+  /* Exact logo colors, client-supplied. The letters are darker than the blue
+     panel, so a thin white outline separates them from the background */
+  .hero__brand span,
+  .hero__brand-wire, .hero__brand-edm, .hero__brand-pro {
+    -webkit-text-stroke: 3px rgba(255, 255, 255, 0.92);
+    paint-order: stroke fill;
+  }
+  .hero__brand-wire { color: #2c3d5f; }
+  .hero__brand-edm { color: #562d73; }
+  .hero__brand-pro { color: #646464; }
+  .hero__lede {
+    margin-top: var(--space-md);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 52ch;
+  }
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    margin-top: var(--space-xl);
+  }
+  .hero__textlink {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    white-space: nowrap;
+  }
+  .hero__textlink:hover { color: var(--color-ink); }
+
+  /* Solid deep-navy fact band anchoring the white hero above it */
+  .stats { background: var(--color-deep); padding-block: var(--space-xl); }
+  /* Figures bold so the mono face renders crisp at this size */
+  .stats__item dd { font-weight: 700; }
+  .stats__strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-lg);
+    margin: 0;
+  }
+  .stats__item dt {
+    font-size: var(--text-sm);
+    color: var(--color-on-deep-muted);
+  }
+  .stats__item dd {
+    margin: var(--space-2xs) 0 0;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-accent-soft);
+  }
+
+  .proc-section { background: var(--color-paper-2); }
+  /* Rows rise in from the bottom as they scroll into view */
+  .proc__row[data-reveal] {
+    transform: translateY(72px);
+    transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  }
+  .proc__row[data-reveal].is-revealed { transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .proc__row[data-reveal] { transform: none; transition: none; }
+  }
+
+  /* Four processes: alternating zigzag splits, image and copy swap sides */
+  .proc { display: grid; gap: var(--space-2xl); }
+  .proc__row {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-2xl);
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .proc__row:nth-child(even) .proc__figure { order: 2; }
+  .proc__row:nth-child(even) .proc__text { order: 1; }
+  .proc__text h3 { font-size: var(--text-xl); transition: color 300ms var(--ease-out); }
+  .proc__row:hover .proc__text h3 { color: var(--color-accent); }
+  .proc__text p { margin-top: var(--space-sm); color: var(--color-muted); max-width: 52ch; }
+  .proc__more {
+    display: inline-block;
+    margin-top: var(--space-md);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    white-space: nowrap;
+    transition: transform 220ms var(--ease-out);
+  }
+  .proc__row:hover .proc__more { transform: translateX(6px); }
+  .proc__figure {
+    overflow: hidden; /* contains the image zoom */
+    border-radius: var(--radius-md);
+    aspect-ratio: 16 / 9;
+  }
+  /* Image oversized inside its mask; --py (set on scroll) drifts it for a
+     parallax depth effect. Hover still adds the zoom, nothing else moves */
+  .proc__img {
+    width: 100%;
+    height: 122%;
+    margin-top: -11%;
+    object-fit: cover;
+    will-change: transform;
+    transform: translate3d(0, var(--py, 0px), 0);
+    transition: transform 120ms linear;
+  }
+  .proc__row:hover .proc__img {
+    transform: translate3d(0, var(--py, 0px), 0) scale(1.06);
+    transition: transform 700ms var(--ease-out);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .proc__img { will-change: auto; height: 100%; margin-top: 0; transform: none; }
+    .proc__row:hover .proc__img { transform: none; }
+  }
+
+  /* Full-bleed machine-floor photo behind an indigo scrim; copy sits on the solid side */
+  .cred {
+    background-image:
+      linear-gradient(90deg,
+        oklch(31.9% 0.063 267 / 0.96) 0%,
+        oklch(31.9% 0.063 267 / 0.82) 44%,
+        oklch(31.9% 0.063 267 / 0.20) 100%),
+      url("/images/wire-edm-office.jpg");
+    background-size: cover;
+    background-position: center right;
+    min-height: 34rem;
+    display: flex;
+    align-items: center;
+  }
+  .cred .container { width: 100%; }
+  .cred__copy { max-width: 56ch; }
+  .cred h2 { font-size: var(--text-xl); max-width: 26ch; color: #ffffff; }
+  .cred__body { margin-top: var(--space-lg); color: #ffffff; max-width: 56ch; }
+  .cred__machines {
+    margin: var(--space-lg) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-xs);
+  }
+  .cred__machines li {
+    padding-left: var(--space-lg);
+    position: relative;
+    font-weight: 500;
+    color: #ffffff;
+  }
+  .cred__machines li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.55rem;
+    height: 2px;
+    background: var(--color-accent-soft);
+  }
+
+  .industries-section { background: #ffffff; }
+  .industries {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2xl);
+  }
+  .industries__item h3 {
+    font-size: var(--text-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .industries__item h3::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    background: var(--color-accent-bright);
+  }
+  .industries__item p {
+    margin-top: var(--space-md);
+    color: var(--color-muted);
+  }
+
+
+  /* Mobile-only hero art: the sample part as a self-drawing blueprint,
+     a spark tracing the gear profile like the wire on its path */
+  .hero__mobileart { display: none; }
+  .hero__mobileart-stage {
+    position: relative;
+    width: min(18rem, 70vw);
+    aspect-ratio: 640 / 863; /* matches the cube capture */
+  }
+  /* The captured 3D part, drifting with scroll (--py from the parallax driver) */
+  .hero__mobileart-part {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 20px oklch(35% 0.04 262 / 0.28));
+    will-change: transform;
+    transform: translate3d(0, var(--py, 0px), 0);
+    transition: transform 120ms linear;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__mobileart-part { will-change: auto; transform: none; }
+  }
+
+  @media (max-width: 68rem) {
+    /* Stacked hero: copy on top, 3D prop below it */
+    /* Compact mobile hero: sized by its copy, not the screen */
+    .hero { align-items: center; min-height: 0; padding-block: var(--space-2xl) var(--space-lg); }
+    .hero__mobileart {
+      display: grid;
+      place-items: center;
+      margin-top: var(--space-lg);
+    }
+    .hero__content { padding-top: var(--space-xl); }
+  }
+  @media (max-width: 56rem) {
+    .hero__scrim {
+      background: none;
+    }
+    .cred {
+      background-image:
+        linear-gradient(oklch(31.9% 0.063 267 / 0.93), oklch(31.9% 0.063 267 / 0.93)),
+        url("/images/wire-edm-office.jpg");
+      min-height: 0;
+    }
+    .stats__strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .proc__row { grid-template-columns: minmax(0, 1fr); gap: var(--space-md); }
+    .proc__row:nth-child(even) .proc__figure { order: 0; }
+    .proc__row:nth-child(even) .proc__text { order: 0; }
+    .industries { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  }
+  @media (min-width: 56rem) and (max-width: 80rem) {
+    .proc__row { gap: var(--space-xl); }
+  }
+</style>
+
+<script>
+  // Count-up stat numerals on first view (template-inspired), reduced-motion aware
+  // Parallax drift on the process photos: each image slides subtly against
+  // the scroll while its row crosses the viewport
+  {
+    const imgs = Array.from(document.querySelectorAll(".proc__img, .hero__mobileart-part"));
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (imgs.length && !still) {
+      let raf = 0;
+      const update = () => {
+        raf = 0;
+        const vh = window.innerHeight;
+        for (const img of imgs) {
+          const host = img.parentElement;
+          if (!host) continue;
+          const r = host.getBoundingClientRect();
+          if (r.bottom < -120 || r.top > vh + 120) continue;
+          const progress = (r.top + r.height / 2 - vh / 2) / vh; // ~-0.7 .. 0.7
+          // hero part rides WITH the scroll direction (reversed), process photos against it
+          const factor = (img as HTMLElement).classList.contains("hero__mobileart-part") ? 48 : -34;
+          (img as HTMLElement).style.setProperty("--py", `${(progress * factor).toFixed(1)}px`);
+        }
+      };
+      window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+      window.addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+      update();
+    }
+  }
+
+  const dds = document.querySelectorAll(".stats__item dd[data-count]");
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (dds.length && !still && "IntersectionObserver" in window) {
+    const animate = (el) => {
+      const target = parseFloat(el.dataset.count ?? "0");
+      const decimals = parseInt(el.dataset.decimals ?? "0", 10);
+      const prefix = el.dataset.prefix ?? "";
+      const suffix = el.dataset.suffix ?? "";
+      const dur = 1200;
+      const t0 = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = `${prefix}${(target * eased).toFixed(decimals)}${suffix}`;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          animate(e.target);
+          io.unobserve(e.target);
+        }
       }
-      .cs__main { max-width: 40rem; }
-      .cs__logo {
-        height: 72px;
-        width: auto;
-        margin-inline: auto;
-      }
-      .cs__kicker {
-        margin-top: var(--space-lg);
-        font-size: var(--text-sm);
-        color: var(--color-muted);
-      }
-      .cs h1 {
-        margin-top: var(--space-sm);
-        font-size: var(--text-display-s);
-      }
-      .cs__lede {
-        margin: var(--space-lg) auto 0;
-        color: var(--color-muted);
-        max-width: 44ch;
-      }
-      .cs__contact {
-        margin-top: var(--space-xl);
-        display: flex;
-        justify-content: center;
-        gap: var(--space-sm);
-        flex-wrap: wrap;
-        font-size: var(--text-sm);
-      }
-      .cs__contact a {
-        color: var(--color-accent);
-        text-decoration: none;
-      }
-      .cs__contact a:hover { color: var(--color-ink); }
-      .cs__contact span { color: var(--color-rule); }
-    </style>
-  </body>
-</html>
+    }, { threshold: 0.4 });
+    dds.forEach((el) => io.observe(el));
+  }
+</script>

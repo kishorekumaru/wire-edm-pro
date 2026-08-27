@@ -5,6 +5,14 @@ Confirm or replace each one, then delete it from this list.
 Items marked done were confirmed by the client, most recently via
 `docs/WIRE EDM PRO-WEB CONTENT.pdf` (received 2026-08-23).
 
+## Launch status
+- [x] **Homepage went live** 2026-08-27: the coming-soon holding page was replaced by the
+  full home page (former `/landing-v2/` design). `/landing/` and `/landing-v2/` no longer
+  exist; the generated sitemap now lists `https://wireedmpro.com.au/` first.
+- [ ] **After the next deploy**: delete the stale S3 objects for `/landing/` and
+  `/landing-v2/`, then submit `https://wireedmpro.com.au/sitemap.xml` in Google Search
+  Console (the home URL changed from noindex to indexable).
+
 ## Business facts
 - [x] **Street address**: 16/24 Garling Rd, Kings Park NSW 2148 (live on contact page + footer).
 - [x] **Phone number**: 0452 558 052 (live).

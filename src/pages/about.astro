@@ -30,16 +30,27 @@ const trio = [
   description="Precision machining in Sydney since the early 2000s: EDM wire cutting, EDM drilling, CNC milling and turning for defence, medical, mining and engineering."
 >
   <section class="about-hero section--tight">
-    <div class="container">
+    <div class="about-hero__bg" aria-hidden="true">
+      <img
+        src="/images/building-exterior.jpg"
+        srcset="/images/building-exterior-800.jpg 800w, /images/building-exterior.jpg 1600w"
+        sizes="(max-width: 56rem) 100vw, 62vw"
+        width="1600" height="900"
+        alt=""
+        fetchpriority="high"
+      />
+    </div>
+    <div class="container about-hero__copy">
       <p class="about-hero__kicker mono">About us</p>
-      <h1>A business that answers the phone.</h1>
+      <h1>Who we are.</h1>
       <p class="about-hero__lede">
-        Wire EDM Pro has run from Sydney since the early&nbsp;2000s. We're a precision machining
-        business. EDM wire cutting, CNC milling and CNC turning, backed by press tool
-        manufacturing, EDM hole drilling and laser cutting. A trusted partner for
-        Australian manufacturers across defence, aerospace, medical, mining, automotive,
-        robotics, electrical and general engineering. Businesses that need exact parts
-        and straight answers.
+        Wire EDM Pro is a Sydney-based precision engineering company with over 25 years of
+        experience supporting the Australian manufacturing industry. Since the early 2000s,
+        we have grown into a trusted partner for manufacturers across defence, aerospace,
+        medical, mining, automotive, robotics, electrical and general engineering sectors.
+        Our foundation is built on precision, reliability, craftsmanship and integrity:
+        values that continue to guide us as we help bring Australian manufacturing back
+        to its golden era.
       </p>
     </div>
   </section>
@@ -47,21 +58,22 @@ const trio = [
   <section class="section section--panel purpose">
     <div class="container purpose__grid">
       <div>
-        <h2>Our purpose: keep your production moving.</h2>
+        <h2>Our purpose &amp; vision.</h2>
         <p class="purpose__body">
-          Most of what leaves this business is the part someone else is waiting on. A die
-          section for a stopped press line, a hardened spare the OEM quotes in months, a medical
-          component that can't carry a burr. That shapes how we work: we quote honestly, we flag
-          risk before we cut, and when a job is on the machine you can get us on the phone.
+          Our purpose is simple, powerful and deeply rooted in national pride:
+          &ldquo;Make Australian Manufacturing Great Again.&rdquo; We believe Australia
+          deserves a strong, competitive, world-class manufacturing sector. Every tool we
+          build, every component we machine and every project we deliver strengthens local
+          industry and reduces dependence on overseas production.
         </p>
         <div class="purpose__values">
           <div>
-            <h3>Reliable, honest service</h3>
-            <p>The price we quote is the price you pay, and we keep it competitive. If a job carries risk, such as thin walls, unproven material or an ambitious tolerance, we say so before we start, not after.</p>
+            <h3>Purpose</h3>
+            <p>We understand the evolving needs of modern industry, and we are committed to delivering solutions that help Australian manufacturers innovate, grow and compete globally.</p>
           </div>
           <div>
-            <h3>Precision backed by experience</h3>
-            <p>More than 25 years on the wire teaches you what a drawing doesn't say. Skilled tradespeople with deep industry knowledge machine to drawing, and ask the right questions when the drawing leaves room for doubt.</p>
+            <h3>Vision</h3>
+            <p>To keep steady and strong, continually serving the industry while building new partnerships and industrial collaborations across sectors. By combining experience, technology and trust, we look forward to a future where Australian manufacturing leads the world once again.</p>
           </div>
         </div>
       </div>
@@ -75,15 +87,6 @@ const trio = [
           alt="Inside Wire EDM Pro in Sydney"
           loading="lazy"
         />
-        <img
-          class="photo purpose__photo-offset"
-          src="/images/building-exterior-800.jpg"
-          srcset="/images/building-exterior-800.jpg 800w, /images/building-exterior.jpg 1600w"
-          sizes="(max-width: 56rem) 60vw, 25vw"
-          width="800" height="450"
-          alt="The Wire EDM Pro premises, unit 16, Sydney"
-          loading="lazy"
-        />
       </div>
     </div>
   </section>
@@ -91,43 +94,36 @@ const trio = [
   <section class="section creed">
     <div class="container">
       <div class="section-head" data-reveal>
-        <h2>Why we do it.</h2>
-        <p>Our purpose is simple, and it is rooted in national pride.</p>
+        <h2>Our working values.</h2>
+        <p>They shape the way we work, the way we serve, and the way we build long-term relationships with our customers.</p>
       </div>
-      <blockquote class="creed__slogan" data-reveal>
-        <p>&ldquo;Make Australian Manufacturing Great Again.&rdquo;</p>
-      </blockquote>
-      <p class="creed__body" data-reveal>
-        We believe Australia deserves a strong, competitive, world-class manufacturing sector.
-        Every tool we build and every component we machine strengthens local industry and
-        reduces dependence on overseas production. Our vision is to keep serving that industry
-        while building new partnerships and industrial collaborations across sectors,
-        connecting the market leaders, innovators and manufacturers who make up Australia's
-        production ecosystem. By combining experience, technology and trust, we're working
-        toward a future where Australian manufacturing is back in its golden era, leading
-        the world once again.
-      </p>
       <div class="creed__values">
-        <div class="creed__value" data-reveal style="--reveal-i: 0">
+        <div class="creed__value creed__value--lead" data-reveal style="--reveal-i: 0">
           <h3>Customer first. Always.</h3>
+          <blockquote class="creed__quote">
+            <p>
+              &ldquo;A customer is the most important visitor on our premises... He is not
+              dependent on us. We are dependent on him.&rdquo;
+            </p>
+            <footer>- Mahatma Gandhi</footer>
+          </blockquote>
           <p>
-            We follow the philosophy of Mahatma Gandhi: &ldquo;A customer is the most important
-            visitor on our premises... He is not dependent on us. We are dependent on him.&rdquo;
-            That principle guides every decision we make.
+            This principle guides every decision we make. To us, the customer is everything:
+            the reason we exist, the reason we improve, and the reason we continue to innovate.
           </p>
         </div>
         <div class="creed__value" data-reveal style="--reveal-i: 1">
           <h3>Precision is our identity</h3>
           <p>
             As toolmakers, we understand that every micron matters. Accuracy, consistency and
-            craftsmanship are not goals we chase; they are who we are.
+            craftsmanship are not just goals; they are our identity.
           </p>
         </div>
         <div class="creed__value" data-reveal style="--reveal-i: 2">
           <h3>Integrity &amp; trust</h3>
           <p>
-            Design secrets, technical drawings and patented concepts are handled under strict
-            confidentiality. Your intellectual property never travels beyond authorised hands.
+            We protect your intellectual property with strict confidentiality. Design secrets,
+            technical drawings and patented concepts are handled with absolute care and respect.
           </p>
         </div>
         <div class="creed__value" data-reveal style="--reveal-i: 3">
@@ -168,8 +164,8 @@ const trio = [
         <figure class="machines__row" data-reveal>
           <div class="machines__frame"><div class="machines__media">
             <img
-              src="/images/fanuc-robocut-c600ia.jpg"
-              srcset="/images/fanuc-robocut-c600ia-800.jpg 800w, /images/fanuc-robocut-c600ia.jpg 1600w"
+              src="/images/fanuc-c600ia.jpg"
+              srcset="/images/fanuc-c600ia-800.jpg 800w, /images/fanuc-c600ia.jpg 1600w"
               sizes="(max-width: 56rem) 100vw, 62vw"
               width="1600" height="900"
               alt="Fanuc RoboCut C600 wire EDM machine"
@@ -340,7 +336,26 @@ const trio = [
 </script>
 
 <style>
-  .about-hero { padding-block: var(--space-2xl) var(--space-2xl); }
+  .about-hero {
+    padding-block: var(--space-2xl) var(--space-2xl);
+    position: relative;
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+  /* Office photo bleeds in from the right and dissolves before the copy */
+  .about-hero__bg {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 62%;
+  }
+  .about-hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(to left, rgb(0 0 0) 42%, transparent 97%);
+    mask-image: linear-gradient(to left, rgb(0 0 0) 42%, transparent 97%);
+  }
+  .about-hero__copy { position: relative; }
   .about-hero__kicker {
     font-size: var(--text-sm);
     color: var(--color-accent);
@@ -381,30 +396,34 @@ const trio = [
     box-shadow: 0 1px 2px oklch(20% 0.01 251 / 0.08);
   }
 
-  /* Vision, purpose and values (client copy) */
-  .creed__slogan {
-    margin: var(--space-xl) 0 0;
-    padding-left: var(--space-lg);
-    border-left: 4px solid var(--color-accent-2);
-  }
-  .creed__slogan p {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--text-2xl);
-    line-height: 1.15;
-    color: var(--color-ink);
-    max-width: 22ch;
-  }
-  .creed__body {
-    margin-top: var(--space-lg);
-    color: var(--color-muted);
-    max-width: 62ch;
-  }
+  /* Working values (client copy): the customer-first value leads with the
+     Gandhi quote in a tall featured cell; the other three stack beside it */
+  .creed { background: var(--color-surface); }
   .creed__values {
     margin-top: var(--space-2xl);
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     gap: var(--space-xl) var(--space-2xl);
+  }
+  .creed__value--lead { grid-row: 1 / 4; }
+  .creed__value--lead h3 { font-size: var(--text-lg); }
+  .creed__quote {
+    margin: var(--space-lg) 0 0;
+    padding-left: var(--space-lg);
+    border-left: 4px solid var(--color-accent-2);
+  }
+  .creed__quote p {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    line-height: 1.35;
+    color: var(--color-ink);
+    max-width: 30ch;
+  }
+  .creed__quote footer {
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
   }
   .creed__value {
     padding-top: var(--space-md);
@@ -424,10 +443,14 @@ const trio = [
   .creed__value p { margin-top: var(--space-sm); color: var(--color-muted); }
   @media (max-width: 56rem) {
     .creed__values { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+    .creed__value--lead { grid-row: auto; }
+    .about-hero__bg { width: 100%; opacity: 0.22; }
   }
 
   /* Machines: wide photo rows with a caption plate overlapping the image,
-     plate side alternating row by row */
+     plate side alternating row by row. Platinum band separates it from the
+     white values section above */
+  .machines { background: var(--color-paper-2); }
   .machines__list { display: grid; gap: var(--space-xl); }
   .machines__row {
     position: relative;

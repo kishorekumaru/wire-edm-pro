@@ -1,47 +1,54 @@
 ---
 /**
  * Light variant of HeroGraphic for the white-background landing (v2):
- * same XYZ grid, DRO readout and interactive 3D sample part, but drawn for a
- * pure white hero. Loads the 3D part with the polished chrome finish.
+ * DRO readout, upright XYZ marker and the interactive chrome part sit over a
+ * one-point-perspective ground plane, 3ds-max viewport style: depth lines
+ * converge on a vanishing point, rows pack harmonically toward the horizon.
  */
+const HORIZON = 185; // horizon line, in viewBox units - above the hero's midpoint
+const VPX = 1180; // vanishing point x, sitting behind the part
+const rows = Array.from({ length: 40 }, (_, i) => HORIZON + 910 / (i + 2));
+const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset at the bottom edge
 ---
 <div class="hg" id="hero-graphic" aria-hidden="true">
   <svg class="hg__bg" viewBox="0 0 1600 640" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <pattern id="hg-grid" width="26" height="26" patternUnits="userSpaceOnUse">
-        <path d="M 26 0 L 0 0 0 26" fill="none" class="hg__gridline" />
-      </pattern>
-      <!-- Warps the whole graph plane as one surface: lines stay straight and
-           parallel locally, the sheet flows like gently rippled paper -->
-      <filter id="hg-warp" x="-10%" y="-10%" width="120%" height="120%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="1" seed="7" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="62" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-      <linearGradient id="hg-grid-fade" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
-        <stop offset="0.38" stop-color="#ffffff" stop-opacity="0.15" />
-        <stop offset="1" stop-color="#ffffff" stop-opacity="1" />
+      <linearGradient id="hg-fade-v" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0.30" stop-color="#ffffff" stop-opacity="0" />
+        <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.5" />
+        <stop offset="0.7" stop-color="#ffffff" stop-opacity="1" />
       </linearGradient>
-      <mask id="hg-grid-mask">
-        <rect width="1600" height="640" fill="url(#hg-grid-fade)" />
-      </mask>
-      <marker id="hg-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <linearGradient id="hg-fade-h" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
+        <stop offset="0.28" stop-color="#ffffff" stop-opacity="0.18" />
+        <stop offset="0.7" stop-color="#ffffff" stop-opacity="1" />
+      </linearGradient>
+      <mask id="hg-mask-v"><rect width="1600" height="640" fill="url(#hg-fade-v)" /></mask>
+      <mask id="hg-mask-h"><rect width="1600" height="640" fill="url(#hg-fade-h)" /></mask>
+    </defs>
+    <!-- Perspective floor: strongest bottom-right, fading at the horizon -->
+    <g mask="url(#hg-mask-v)">
+      <g mask="url(#hg-mask-h)">
+        {rows.map((y) => <line x1="0" y1={y} x2="1600" y2={y} class="hg__gridline" />)}
+        {spokes.map((dx) => <line x1={VPX} y1={HORIZON} x2={VPX + dx} y2="640" class="hg__gridline" />)}
+      </g>
+    </g>
+  </svg>
+
+  <!-- Axes beside the 3D part: kept upright, outside the tilted floor plane -->
+  <svg class="hg__axes" viewBox="0 0 130 120" aria-hidden="true">
+    <defs>
+      <marker id="hg-arrow2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
         <path d="M 0 0 L 8 4 L 0 8 z" class="hg__arrowhead" />
       </marker>
     </defs>
-    <!-- Graph-paper backdrop, strongest on the right and fading out to the left.
-         Oversized so the warp never pulls a bare edge into view -->
-    <g mask="url(#hg-grid-mask)">
-      <rect x="-60" y="-60" width="1720" height="760" fill="url(#hg-grid)" filter="url(#hg-warp)" />
-    </g>
-    <!-- Axes behind the 3D part: compact origin marker at half opacity -->
-    <g class="hg__axes" opacity="0.6">
-      <line x1="1120" y1="370" x2="1165" y2="393" marker-end="url(#hg-arrow)" />
-      <line x1="1120" y1="370" x2="1078" y2="392" marker-end="url(#hg-arrow)" />
-      <line x1="1120" y1="370" x2="1120" y2="307" marker-end="url(#hg-arrow)" />
-      <text x="1173" y="404" class="hg__axis-label">X</text>
-      <text x="1061" y="404" class="hg__axis-label">Y</text>
-      <text x="1115" y="296" class="hg__axis-label">Z</text>
+    <g opacity="0.6">
+      <line x1="60" y1="80" x2="105" y2="103" marker-end="url(#hg-arrow2)" />
+      <line x1="60" y1="80" x2="18" y2="102" marker-end="url(#hg-arrow2)" />
+      <line x1="60" y1="80" x2="60" y2="17" marker-end="url(#hg-arrow2)" />
+      <text x="110" y="114" class="hg__axis-label">X</text>
+      <text x="3" y="114" class="hg__axis-label">Y</text>
+      <text x="55" y="10" class="hg__axis-label">Z</text>
     </g>
   </svg>
 
@@ -72,17 +79,19 @@
     inset: 0;
     width: 100%;
     height: 100%;
+    /* Drift is eased per-frame in the script below; a CSS transition here
+       would restart on every pointer event and read as rubber-banding */
     transform: translate(calc(var(--mx, 0) * -10px), calc(var(--my, 0) * -7px));
-    transition: transform 200ms var(--ease-out);
+    will-change: transform;
   }
 
   /* Blueprint lines inverted for the white hero: ink-blue at low opacity */
-  .hg__gridline { stroke: var(--color-accent); stroke-width: 1; stroke-opacity: 0.3; }
-  .hg__waves path {
-    fill: none;
-    stroke: var(--color-accent);
-    stroke-width: 1.5;
-    stroke-opacity: 0.22;
+  .hg__gridline { stroke: var(--color-accent-bright); stroke-width: 1; stroke-opacity: 0.5; }
+  .hg__axes {
+    position: absolute;
+    top: 64%;
+    right: 13.5vw;
+    width: 8.5rem;
   }
   .hg__axes line { stroke: var(--color-accent); stroke-width: 1.75; }
   .hg__arrowhead { fill: var(--color-accent); }
@@ -106,10 +115,10 @@
 
   .hg__stage {
     position: absolute;
-    top: 47%;
+    top: 53%;
     right: max(10vw, calc((100vw - 100rem) / 2 + 6vw));
     transform: translateY(-50%);
-    width: clamp(19rem, 31vw, 32rem);
+    width: clamp(21rem, 36vw, 37rem);
   }
   .hg__part3d {
     position: relative;
@@ -158,7 +167,9 @@
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Background grid parallax + live DRO readout tracking the pointer
+  // Background grid parallax + live DRO readout tracking the pointer.
+  // Targets come from pointer events; an rAF loop eases the actual values
+  // toward them so the drift stays fluid instead of stepping with the mouse
   if (hg && hero && fine && !still) {
     const droX = document.getElementById("dro-x");
     const droY = document.getElementById("dro-y");
@@ -166,26 +177,37 @@
     const FIGURE_SPACE = " ";
     const fmt = (v: number) => v.toFixed(3).padStart(7, "0");
     let raf = 0;
-    let nx = 0, ny = 0;
-    const apply = () => {
-      raf = 0;
-      hg.style.setProperty("--mx", nx.toFixed(3));
-      hg.style.setProperty("--my", ny.toFixed(3));
+    let tx = 0, ty = 0; // pointer targets
+    let cx = 0, cy = 0; // eased values
+    const step = () => {
+      cx += (tx - cx) * 0.1;
+      cy += (ty - cy) * 0.1;
+      hg.style.setProperty("--mx", cx.toFixed(4));
+      hg.style.setProperty("--my", cy.toFixed(4));
       // Machine-style coordinates: centre of travel matches the resting values
       // (X 142.500 / Y 036.250 / Z 084.000)
-      if (droX) droX.textContent = `X${FIGURE_SPACE}${fmt(((nx + 1) / 2) * 285)}`;
-      if (droY) droY.textContent = `Y${FIGURE_SPACE}${fmt(((1 - ny) / 2) * 72.5)}`;
-      if (droZ) droZ.textContent = `Z${FIGURE_SPACE}${fmt(((1 - ny) / 2) * 168)}`;
+      if (droX) droX.textContent = `X${FIGURE_SPACE}${fmt(((cx + 1) / 2) * 285)}`;
+      if (droY) droY.textContent = `Y${FIGURE_SPACE}${fmt(((1 - cy) / 2) * 72.5)}`;
+      if (droZ) droZ.textContent = `Z${FIGURE_SPACE}${fmt(((1 - cy) / 2) * 168)}`;
+      if (Math.abs(tx - cx) > 0.0005 || Math.abs(ty - cy) > 0.0005) {
+        raf = requestAnimationFrame(step);
+      } else {
+        raf = 0;
+      }
+    };
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(step);
     };
     hero.addEventListener("pointermove", (e) => {
       const r = hero.getBoundingClientRect();
-      nx = ((e.clientX - r.left) / r.width) * 2 - 1;
-      ny = ((e.clientY - r.top) / r.height) * 2 - 1;
-      if (!raf) raf = requestAnimationFrame(apply);
+      tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+      wake();
     });
     hero.addEventListener("pointerleave", () => {
-      nx = 0; ny = 0;
-      if (!raf) raf = requestAnimationFrame(apply);
+      tx = 0;
+      ty = 0;
+      wake();
     });
   }
 

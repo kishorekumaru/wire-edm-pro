@@ -81,13 +81,13 @@ function chromeStudio(): THREE.Scene {
     m.rotation.set(...rot);
     s.add(m);
   };
-  strip(12, 5, [0, 7, 0], [-Math.PI / 2, 0, 0], 14); // overhead softbox
-  strip(3.5, 9, [-7, 2, 1], [0, Math.PI / 2, 0], 9); // tall left strip
-  strip(2.5, 7, [6.5, 1, -2], [0, -Math.PI / 2, 0], 7); // dimmer right strip
-  strip(9, 1.4, [0, -0.5, -7], [0, 0, 0], 2.5); // low back fill
-  strip(8, 3, [1, 2, 7], [0, 0, 0], 4); // front fill so camera-facing flats stay silver
-  // Dark floor panel so downward-facing surfaces keep contrast
-  strip(14, 14, [0, -3, 0], [Math.PI / 2, 0, 0], 0.12);
+  strip(12, 5, [0, 7, 0], [-Math.PI / 2, 0, 0], 6.5); // overhead softbox, kept gentle
+  strip(3.5, 9, [-7, 2, 1], [0, Math.PI / 2, 0], 8); // tall left strip
+  strip(2.5, 7, [6.5, 1, -2], [0, -Math.PI / 2, 0], 8); // right strip
+  strip(9, 1.4, [0, -0.5, -7], [0, 0, 0], 3); // low back fill
+  strip(8, 3, [1, 2, 7], [0, 0, 0], 8); // front fill so camera-facing flats stay silver
+  // Mid floor panel so downward-facing surfaces stay in the same family
+  strip(14, 14, [0, -3, 0], [Math.PI / 2, 0, 0], 0.35);
   return s;
 }
 
@@ -103,7 +103,8 @@ function extrudePiece(
     bevelEnabled: true,
     bevelThickness: bevel,
     bevelSize: bevel * 0.8,
-    bevelSegments: 1,
+    // A generous bevel gets extra segments so the edge reads rounded, not chamfered
+    bevelSegments: bevel >= 0.02 ? 3 : 1,
     curveSegments,
   });
   geo.rotateX(-Math.PI / 2); // extrude along +Y (part stands upright)
@@ -156,10 +157,12 @@ function seamWithKnob(
  * grips the next, releasing only along the cutting axis.
  */
 function puzzleQuadrant(S: number): THREE.Shape {
+  const r = 0.17; // rounded outer corner, so the cube's vertical edges read soft
   const q = new THREE.Shape();
   q.moveTo(0, 0);
   seamWithKnob(q, 0, 0, S, 0, -1); // out to the east rim, neighbour's notch
-  q.lineTo(S, S);
+  q.lineTo(S, S - r);
+  q.absarc(S - r, S - r, r, 0, Math.PI / 2, false);
   q.lineTo(0, S);
   seamWithKnob(q, 0, S, 0, 0, 1); // back to centre, own tab bulging sideways
   q.closePath();
@@ -230,8 +233,8 @@ export function initSamplePart(
 
   if (chrome) {
     // Puzzle cube: one quadrant block, rotated into all four positions.
-    // Near-zero bevel so the closed cube reads solid, seams as hairlines
-    const template = extrudePiece(puzzleQuadrant(0.92), steel, 1.9, 24, 0.005);
+    // Rounded bevel softens every edge; the seams show as gentle grooves
+    const template = extrudePiece(puzzleQuadrant(0.92), steel, 1.9, 24, 0.055);
     const blocks = [0, 1, 2, 3].map((k) => {
       const m = k === 0 ? template : new THREE.Mesh(template.geometry, steel);
       m.rotation.y = (k * Math.PI) / 2;
@@ -265,29 +268,51 @@ export function initSamplePart(
     };
   }
 
-  part.position.y = 0.1;
-  if (chrome) part.scale.setScalar(1.18); // the cube sits a little larger in frame
+  part.position.y = chrome ? -0.1 : 0.1;
+  if (chrome) part.scale.setScalar(1.53); // the cube fills the frame
   scene.add(part);
 
   // Resting yaw: the cube sits turned 45° to the right, corner to the camera
   const baseRotY = chrome ? 0.35 - Math.PI / 4 : 0.35;
 
-  // Ground shadow (fake, cheap). A square under the cube, matching its resting
-  // yaw and dropped a little below the base; a soft disc under the rings
+  // Ground shadow (fake, cheap). A rounded square under the cube, matching its
+  // resting yaw and soft corners; a soft disc under the rings
+  const shadowShape = new THREE.Shape();
+  {
+    const w = 2.5;
+    const r = 0.42;
+    const x = -w / 2;
+    shadowShape.moveTo(x + r, x);
+    shadowShape.lineTo(x + w - r, x);
+    shadowShape.quadraticCurveTo(x + w, x, x + w, x + r);
+    shadowShape.lineTo(x + w, x + w - r);
+    shadowShape.quadraticCurveTo(x + w, x + w, x + w - r, x + w);
+    shadowShape.lineTo(x + r, x + w);
+    shadowShape.quadraticCurveTo(x, x + w, x, x + w - r);
+    shadowShape.lineTo(x, x + r);
+    shadowShape.quadraticCurveTo(x, x, x + r, x);
+  }
   const shadow = new THREE.Mesh(
-    chrome ? new THREE.PlaneGeometry(2.5, 2.5) : new THREE.CircleGeometry(1.35, 40),
+    chrome ? new THREE.ShapeGeometry(shadowShape, 12) : new THREE.CircleGeometry(1.35, 40),
     new THREE.MeshBasicMaterial({
       color: chrome ? 0x0b0e16 : 0x10162e,
       transparent: true,
       opacity: chrome ? 0.16 : 0.28,
     }),
   );
-  shadow.rotation.set(-Math.PI / 2, 0, chrome ? baseRotY : 0);
-  shadow.position.y = chrome ? -1.18 : -BLANK_HEIGHT / 2 - 0.02;
+  // Yaw nudged past the cube's resting angle to line up with its tilted
+  // footprint, and offset toward the lean so it reads as cast by the cube
+  shadow.rotation.set(-Math.PI / 2, 0, chrome ? baseRotY + 0.18 : 0);
+  if (chrome) {
+    shadow.position.set(0.3, -2.15, 0.15);
+    shadow.scale.setScalar(1.3); // grows with the cube
+  } else {
+    shadow.position.y = -BLANK_HEIGHT / 2 - 0.02;
+  }
   scene.add(shadow);
 
   scene.add(new THREE.HemisphereLight(0xe7ecef, 0x25406b, chrome ? 0.15 : 0.35));
-  const key = new THREE.DirectionalLight(0xffffff, chrome ? 1.4 : 1.1);
+  const key = new THREE.DirectionalLight(0xffffff, chrome ? 0.9 : 1.1);
   key.position.set(4, 6, 2);
   scene.add(key);
   if (chrome) {
@@ -318,11 +343,14 @@ export function initSamplePart(
 
   // Interaction state (targets lerped in the loop)
   let targetRotY = baseRotY;
-  let targetTiltX = 0.06;
-  // The cube reads best near-flush, so it idles barely open; the rings idle wider
-  const idleExplode = chrome ? 0.12 : 0.35;
-  const idleWave = chrome ? 0.05 : 0.08;
-  let targetExplode = reducedMotion ? (chrome ? 0.35 : 0.6) : idleExplode;
+  // The cube rests tipped a touch further forward, showing more of its face
+  const baseTiltX = chrome ? 0.28 : 0.06;
+  let targetTiltX = baseTiltX;
+  // The cube rests closed: one solid blank until the pointer opens it.
+  // The rings idle wider so their nesting reads at a glance
+  const idleExplode = chrome ? 0 : 0.35;
+  const idleWave = chrome ? 0 : 0.08;
+  let targetExplode = reducedMotion ? (chrome ? 0 : 0.6) : idleExplode;
   let hovering = false;
 
   if (finePointer && !reducedMotion) {
@@ -335,12 +363,12 @@ export function initSamplePart(
       // and tilts the part slightly with the pointer.
       targetRotY = baseRotY + nx * 1.3;
       targetExplode = Math.max(0, ((1 - ny) / 2) * 1.05 - 0.05);
-      targetTiltX = 0.06 + ny * 0.18;
+      targetTiltX = baseTiltX + ny * 0.18;
       hovering = true;
     });
     interactionRoot.addEventListener("pointerleave", () => {
       targetRotY = baseRotY;
-      targetTiltX = 0.06;
+      targetTiltX = baseTiltX;
       hovering = false;
     });
   }
@@ -392,7 +420,10 @@ export function initSamplePart(
     if (!reducedMotion) {
       // Idle breathing when the pointer is elsewhere; proximity-driven when hovering
       if (!hovering) targetExplode = idleExplode + Math.sin(t * 0.6) * idleWave;
-      const k = 1 - Math.exp(-dt * 5);
+      // The cube tracks the pointer a touch more eagerly than the rings, but
+      // glides home gently once the pointer leaves the hero
+      const rate = hovering ? (chrome ? 6.5 : 5) : chrome ? 2.2 : 5;
+      const k = 1 - Math.exp(-dt * rate);
       rotY += (targetRotY - rotY) * k;
       tiltX += (targetTiltX - tiltX) * k;
       explode += (targetExplode - explode) * k;
