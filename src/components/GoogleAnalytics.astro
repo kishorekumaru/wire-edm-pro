@@ -22,15 +22,28 @@ const enabled = import.meta.env.PROD && GA_MEASUREMENT_ID.startsWith("G-");
       ad_user_data: "denied",
       ad_personalization: "denied",
     });
+    gtag("js", new Date());
+    gtag("config", id);
+    // gtag.js (164 KB) only downloads once consent exists: immediately (at
+    // idle) for returning visitors who accepted, or when Accept is clicked
+    // (ConsentBanner calls window.__loadGtag). Declined visitors never pay it.
+    window.__loadGtag = function () {
+      if (window.__gtagLoaded) return;
+      window.__gtagLoaded = true;
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+      document.head.appendChild(s);
+    };
     try {
       if (localStorage.getItem("wep-consent") === "granted") {
         gtag("consent", "update", { analytics_storage: "granted" });
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(window.__loadGtag, { timeout: 3000 });
+        } else {
+          setTimeout(window.__loadGtag, 1500);
+        }
       }
-    } catch (e) { /* storage blocked: stay denied */ }
-    gtag("js", new Date());
-    gtag("config", id);
+    } catch (e) { /* storage blocked: stay denied, no load */ }
   </script>
-)}
-{enabled && (
-  <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
 )}

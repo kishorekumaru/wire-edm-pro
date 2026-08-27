@@ -365,11 +365,13 @@ export function initSamplePart(
       targetExplode = Math.max(0, ((1 - ny) / 2) * 1.05 - 0.05);
       targetTiltX = baseTiltX + ny * 0.18;
       hovering = true;
+      start(); // wake the render loop if it parked
     });
     interactionRoot.addEventListener("pointerleave", () => {
       targetRotY = baseRotY;
       targetTiltX = baseTiltX;
       hovering = false;
+      start();
     });
   }
 
@@ -385,6 +387,7 @@ export function initSamplePart(
       lastY = e.clientY;
       hovering = true;
       host.setPointerCapture(e.pointerId);
+      start(); // wake the render loop if it parked
     });
     host.addEventListener("pointermove", (e) => {
       if (!dragging) return;
@@ -392,6 +395,7 @@ export function initSamplePart(
       targetExplode = Math.min(1, Math.max(0, targetExplode - (e.clientY - lastY) * 0.005));
       lastX = e.clientX;
       lastY = e.clientY;
+      start();
     });
     const release = () => {
       dragging = false;
@@ -427,13 +431,23 @@ export function initSamplePart(
       rotY += (targetRotY - rotY) * k;
       tiltX += (targetTiltX - tiltX) * k;
       explode += (targetExplode - explode) * k;
-      if (!hovering) rotY += dt * 0.12; // slow idle turn
+      if (!hovering && !chrome) rotY += dt * 0.12; // slow idle turn (rings only)
       part.rotation.set(tiltX, rotY, 0);
       applyExplode(explode);
     }
 
     renderer.render(scene, camera);
-    rafId = requestAnimationFrame(frame);
+
+    // The cube parks once it settles at its targets, freeing the main thread;
+    // any pointer event (or re-entering the viewport) wakes it via start()
+    const settled =
+      chrome &&
+      !hovering &&
+      (reducedMotion ||
+        (Math.abs(targetRotY - rotY) < 5e-4 &&
+          Math.abs(targetTiltX - tiltX) < 5e-4 &&
+          Math.abs(targetExplode - explode) < 5e-4));
+    if (!settled) rafId = requestAnimationFrame(frame);
   };
   const start = () => {
     if (!rafId && inView && pageVisible) {

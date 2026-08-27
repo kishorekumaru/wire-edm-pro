@@ -364,6 +364,13 @@ const industries = [
         oklch(31.9% 0.063 267 / 0.82) 44%,
         oklch(31.9% 0.063 267 / 0.20) 100%),
       url("/images/wire-edm-office.jpg");
+    /* WebP where supported (roughly half the bytes); JPG declaration above is the fallback */
+    background-image:
+      linear-gradient(90deg,
+        oklch(31.9% 0.063 267 / 0.96) 0%,
+        oklch(31.9% 0.063 267 / 0.82) 44%,
+        oklch(31.9% 0.063 267 / 0.20) 100%),
+      image-set(url("/images/wire-edm-office.webp") type("image/webp"), url("/images/wire-edm-office.jpg") type("image/jpeg"));
     background-size: cover;
     background-position: center right;
     min-height: 34rem;
@@ -465,6 +472,9 @@ const industries = [
       background-image:
         linear-gradient(oklch(31.9% 0.063 267 / 0.93), oklch(31.9% 0.063 267 / 0.93)),
         url("/images/wire-edm-office.jpg");
+      background-image:
+        linear-gradient(oklch(31.9% 0.063 267 / 0.93), oklch(31.9% 0.063 267 / 0.93)),
+        image-set(url("/images/wire-edm-office-800.webp") type("image/webp"), url("/images/wire-edm-office.jpg") type("image/jpeg"));
       min-height: 0;
     }
     .stats__strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -490,16 +500,21 @@ const industries = [
       const update = () => {
         raf = 0;
         const vh = window.innerHeight;
+        // Read all rects first, then write all styles: interleaving the two
+        // forces a reflow per image. The sized container is looked up with
+        // closest() because the imgs sit inside <picture> wrappers.
+        const writes: Array<[HTMLElement, string]> = [];
         for (const img of imgs) {
-          const host = img.parentElement;
+          const host = (img as HTMLElement).closest(".proc__figure, .hero__mobileart-stage");
           if (!host) continue;
           const r = host.getBoundingClientRect();
           if (r.bottom < -120 || r.top > vh + 120) continue;
           const progress = (r.top + r.height / 2 - vh / 2) / vh; // ~-0.7 .. 0.7
           // hero part rides WITH the scroll direction (reversed), process photos against it
           const factor = (img as HTMLElement).classList.contains("hero__mobileart-part") ? 48 : -34;
-          (img as HTMLElement).style.setProperty("--py", `${(progress * factor).toFixed(1)}px`);
+          writes.push([img as HTMLElement, `${(progress * factor).toFixed(1)}px`]);
         }
+        for (const [el, py] of writes) el.style.setProperty("--py", py);
       };
       window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
       window.addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });

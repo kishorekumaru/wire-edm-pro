@@ -347,14 +347,18 @@ const trio = [
     const update = () => {
       raf = 0;
       const vh = window.innerHeight;
+      // Reads first, writes after (avoids per-image forced reflows); the imgs
+      // sit inside <picture> wrappers, so the sized container needs closest()
+      const writes: Array<[HTMLElement, string]> = [];
       for (const img of imgs) {
-        const host = img.parentElement;
+        const host = (img as HTMLElement).closest(".machines__media");
         if (!host) continue;
         const r = host.getBoundingClientRect();
         if (r.bottom < -120 || r.top > vh + 120) continue;
         const progress = (r.top + r.height / 2 - vh / 2) / vh;
-        (img as HTMLElement).style.setProperty("--py", `${(progress * -34).toFixed(1)}px`);
+        writes.push([img as HTMLElement, `${(progress * -34).toFixed(1)}px`]);
       }
+      for (const [el, py] of writes) el.style.setProperty("--py", py);
     };
     window.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
     window.addEventListener("resize", () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });

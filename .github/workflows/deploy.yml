@@ -40,10 +40,12 @@ jobs:
             --cache-control "public, max-age=31536000, immutable"
 
       # Images and fonts are not fingerprinted, but changed files always ship
-      # under new names - safe to cache for 30 days
+      # under new names - safe to cache for 30 days. cp (not sync) so existing
+      # objects get their Cache-Control metadata refreshed too
       - name: Deploy images & fonts (30-day cache)
         run: |
-          aws s3 sync dist/ s3://wireedmpro.com.au-032331960224-ap-southeast-2-an/ \
+          aws s3 cp dist/ s3://wireedmpro.com.au-032331960224-ap-southeast-2-an/ \
+            --recursive \
             --exclude "*" \
             --include "*.webp" \
             --include "*.png" \

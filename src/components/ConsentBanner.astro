@@ -11,7 +11,7 @@ import { GA_MEASUREMENT_ID } from "../config";
 const enabled = GA_MEASUREMENT_ID.startsWith("G-");
 ---
 {enabled && (
-  <aside class="consent" id="consent-banner" hidden role="dialog" aria-live="polite" aria-label="Cookie consent">
+  <aside class="consent" id="consent-banner" hidden aria-live="polite" aria-label="Cookie consent">
     <p class="consent__text">
       We use Google Analytics cookies to understand how visitors use this site.
       Nothing is stored until you choose.
@@ -101,9 +101,13 @@ const enabled = GA_MEASUREMENT_ID.startsWith("G-");
     const choose = (value: "granted" | "denied") => {
       try { localStorage.setItem(KEY, value); } catch (e) { /* storage blocked */ }
       banner.hidden = true;
-      const g = (window as any).gtag;
-      if (value === "granted" && typeof g === "function") {
-        g("consent", "update", { analytics_storage: "granted" });
+      const w = window as any;
+      if (value === "granted") {
+        // The consent update queues in the dataLayer; gtag.js processes it on load
+        if (typeof w.gtag === "function") {
+          w.gtag("consent", "update", { analytics_storage: "granted" });
+        }
+        w.__loadGtag?.();
       }
     };
     document.getElementById("consent-accept")?.addEventListener("click", () => choose("granted"));
