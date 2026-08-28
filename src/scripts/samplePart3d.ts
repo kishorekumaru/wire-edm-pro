@@ -260,14 +260,46 @@ export async function initSamplePart(
 
   // One shared steel material - identical colour on every piece so the
   // assembled part reads as a single solid blank with no visible layers.
+  // Machining streaks for the steel: faint parallel lines in a roughness map
+  // break the mirror finish into the brushed look of ground tool steel
+  const brushedRoughness = () => {
+    const c = document.createElement("canvas");
+    c.width = c.height = 512;
+    const g = c.getContext("2d");
+    if (g) {
+      g.fillStyle = "#d4d4d4";
+      g.fillRect(0, 0, c.width, c.height);
+      for (let i = 0; i < 1100; i++) {
+        const y = Math.random() * c.height;
+        const len = 60 + Math.random() * 280;
+        const x = Math.random() * (c.width + len) - len;
+        const shade = 175 + Math.floor(Math.random() * 80);
+        g.strokeStyle = `rgba(${shade},${shade},${shade},0.55)`;
+        g.lineWidth = 0.5 + Math.random();
+        g.beginPath();
+        g.moveTo(x, y);
+        g.lineTo(x + len, y);
+        g.stroke();
+      }
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    // Extrude UVs are in shape units (~1.8 across a face), so a few repeats
+    // keep the streaks fine-grained instead of stretching into blotches
+    t.repeat.set(3, 3);
+    return t;
+  };
+
   const steel = chrome
     ? new THREE.MeshPhysicalMaterial({
         // Silver-grey brushed steel, a shade darker than the reference photo
         color: 0xa8b0b8,
         metalness: 1.0,
-        roughness: 0.32,
-        clearcoat: 0.25,
-        clearcoatRoughness: 0.3,
+        // Brushed steel scatters more than chrome; the map varies it per streak
+        roughness: 0.4,
+        roughnessMap: brushedRoughness(),
+        clearcoat: 0.15,
+        clearcoatRoughness: 0.35,
       })
     : new THREE.MeshStandardMaterial({
         color: 0xffffff, // pure white, pops on the blue hero
