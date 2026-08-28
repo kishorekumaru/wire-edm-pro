@@ -26,9 +26,9 @@ Items marked done were confirmed by the client, most recently via
 - [x] **Cutting height 420 mm**: confirmed by the content doc as wire EDM cutting height (Makino with H.E.A.T function). Home stat strip relabelled, wire-edm spec table row added (2026-08-23).
 - [x] **Machine models**: confirmed by the content doc: Makino wire EDM (H.E.A.T), Fanuc RoboCut C600 and C400, DMG MORI ecoMill 600 V, EDM drills Ø 0.3–3.0 mm, CNC lathes and laser cutting. Old photo-derived names (α-C600iA, α-0iD, U-series) replaced site-wide (2026-08-23).
 - [x] **Milling work envelope**: 600 × 560 × 510 mm travel, 600 kg table, 12,000 rpm spindle per the content doc (2026-08-23).
-- [ ] **Tool changer stations**: the content doc says 32 in one place and 30 in two others; the site uses **30** (matches the published ecoMill 600 V spec). Confirm.
-- [ ] Wire EDM positional tolerance **±0.005 mm** (home stat strip + wire-edm page). The doc says only "micron accuracy"; the specific figure is still unconfirmed.
-- [ ] Surface finish **Ra 0.4 µm** with skim passes (wire-edm page). Unconfirmed.
+- [x] **Tool changer stations**: client confirmed **32** (2026-08-28); site updated from 30.
+- [x] Wire EDM positional tolerance: client confirmed **±0.003 mm** (2026-08-28); site updated from ±0.005 mm everywhere.
+- [x] Surface roughness: client confirmed **2 µm** (2026-08-28); replaced the old "Surface finish Ra 0.4 µm" row and the home "25+ years" stat tile.
 - [ ] Kerf width **≈0.25–0.33 mm** (wire-edm page). Unconfirmed.
 - [ ] Milling/turning general tolerance **±0.01 mm** (milling + turning pages). Unconfirmed.
 - [ ] **Laser cutting**: promoted on the turning page per the content doc, but no machine brand, power or maximum sheet size is claimed anywhere. Add capacity figures if the client wants them public.

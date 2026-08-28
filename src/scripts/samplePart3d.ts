@@ -236,6 +236,11 @@ export async function initSamplePart(
 
   const chrome = opts.finish === "chrome";
 
+  // Safari's WebGL layer is slower and it rasterizes CSS filters on the CPU,
+  // so it gets a lighter scene: lower pixel ratio, leaner geometry, simpler
+  // shading. navigator.vendor is "Apple Computer, Inc." only in real Safari.
+  const safari = /apple/i.test(navigator.vendor);
+
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(33, 1, 0.1, 30);
   camera.position.set(6.15, 6.0, 9.3); // ~50% further back
@@ -243,7 +248,7 @@ export async function initSamplePart(
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   // 1.5x is visually identical to 2x on a ~26rem canvas and renders half the pixels
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, chrome ? 1.5 : 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, chrome ? (safari ? 1.25 : 1.5) : 2));
   renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
@@ -298,7 +303,7 @@ export async function initSamplePart(
         // Brushed steel scatters more than chrome; the map varies it per streak
         roughness: 0.4,
         roughnessMap: brushedRoughness(),
-        clearcoat: 0.15,
+        clearcoat: safari ? 0 : 0.15,
         clearcoatRoughness: 0.35,
       })
     : new THREE.MeshStandardMaterial({
@@ -326,8 +331,9 @@ export async function initSamplePart(
       bevelEnabled: false,
       curveSegments: 24,
       // Wall rings every ~0.025 so the rim displacement forms a short chamfer
-      // band instead of tapering the whole wall
-      steps: 78,
+      // band instead of tapering the whole wall. Safari gets a third of the
+      // rings (a slightly steeper chamfer) to keep old GPUs fluid
+      steps: safari ? 26 : 78,
     });
     chamferOuterRim(geo, CUBE_S, CUBE_R, CUBE_DEPTH, 0.0245);
     geo.rotateX(-Math.PI / 2);

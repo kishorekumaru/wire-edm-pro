@@ -4,7 +4,7 @@
 
 ## Solutions
 
-- [EDM Wire Cutting Solution](https://wireedmpro.com.au/edm-wire-cutting/): Wire EDM to ±0.005 mm in hardened metal up to 420 mm tall, burr-free, any conductive metal
+- [EDM Wire Cutting Solution](https://wireedmpro.com.au/edm-wire-cutting/): Wire EDM to ±0.003 mm in hardened metal up to 420 mm tall, burr-free, any conductive metal
 - [Milling solutions](https://wireedmpro.com.au/milling/): CNC milling on a DMG MORI ecoMill 600 V, jigs, fixtures, die sets and production runs
 - [Turning solutions](https://wireedmpro.com.au/turning/): CNC turning and laser-cut sheet metal profiles
 - [EDM Drills](https://wireedmpro.com.au/edm-drills/): small hole EDM drilling from 0.3 mm to 3.0 mm in hardened metal

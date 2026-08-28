@@ -73,7 +73,7 @@ const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset 
         <img class="hg__poster" src="/images/cube-poster.png" alt="" width="864" height="880" loading="eager" fetchpriority="high" />
       </picture>
     </div>
-    <span class="hg__tag" style="top: 8%; left: -4%;">inner form · ±0.005&nbsp;mm</span>
+    <span class="hg__tag" style="top: 8%; left: -4%;">inner form · ±0.003&nbsp;mm</span>
     <span class="hg__tag" style="top: 48%; right: -8%;">4-axis taper cutting</span>
     <span class="hg__tag" style="bottom: 4%; left: 6%;">cut after hardening</span>
   </div>
@@ -148,6 +148,12 @@ const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset 
     height: 100%;
     filter: drop-shadow(0 16px 24px oklch(35% 0.04 262 / 0.28));
   }
+  /* Safari rasterizes this filter on the CPU on every canvas repaint, which
+     stalls the 3D on weaker machines; the in-scene ground shadow stays */
+  .hg--nofilter .hg__part3d :global(.hg__canvas),
+  .hg--nofilter .hg__poster {
+    filter: none;
+  }
   .hg__tag {
     position: absolute;
     background: var(--color-paper);
@@ -173,6 +179,9 @@ const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset 
 <script>
   const hg = document.getElementById("hero-graphic");
   const hero = hg?.closest("section");
+  // Real Safari only (vendor stays "Google Inc." in Chrome/Edge): drop the
+  // CSS canvas shadow there - WebKit re-rasterizes it per frame on the CPU
+  if (/apple/i.test(navigator.vendor)) hg?.classList.add("hg--nofilter");
   const partHost = document.getElementById("hero-part");
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

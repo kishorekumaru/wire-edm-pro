@@ -126,7 +126,7 @@ const trio = [
           </p>
         </div>
         <div class="creed__value" data-reveal style="--reveal-i: 2">
-          <h3>Integrity &amp; trust</h3>
+          <h3>Integrity &amp; Trust</h3>
           <p>
             We protect your intellectual property with strict confidentiality. Design secrets,
             technical drawings and patented concepts are handled with absolute care and respect.
@@ -516,8 +516,9 @@ const trio = [
     margin-top: -11%;
     object-fit: cover;
     will-change: transform;
+    /* No transition: easing toward per-frame --py targets rubber-bands on
+       mobile momentum scroll */
     transform: translate3d(0, var(--py, 0px), 0);
-    transition: transform 120ms linear;
   }
   @media (prefers-reduced-motion: reduce) {
     .machines__media img { will-change: auto; height: 100%; margin-top: 0; transform: none; }

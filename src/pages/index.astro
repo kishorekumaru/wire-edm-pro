@@ -105,7 +105,7 @@ const industries = [
       <dl class="stats__strip tnum">
         <div class="stats__item" data-reveal style="--reveal-i: 0">
           <dt>Positional tolerance</dt>
-          <dd class="mono" data-count="0.005" data-decimals="3" data-prefix="±" data-suffix="&#8199;mm">±0.005&nbsp;mm</dd>
+          <dd class="mono" data-count="0.003" data-decimals="3" data-prefix="±" data-suffix="&#8199;mm">±0.003&nbsp;mm</dd>
         </div>
         <div class="stats__item" data-reveal style="--reveal-i: 1">
           <dt>Maximum height</dt>
@@ -116,8 +116,8 @@ const industries = [
           <dd class="mono">0&nbsp;N</dd>
         </div>
         <div class="stats__item" data-reveal style="--reveal-i: 3">
-          <dt>Machining in Sydney</dt>
-          <dd class="mono" data-count="25" data-suffix="+&#8199;years">25+&nbsp;years</dd>
+          <dt>Surface roughness</dt>
+          <dd class="mono" data-count="2" data-suffix="&#8199;µm">2&nbsp;µm</dd>
         </div>
       </dl>
     </div>
@@ -168,13 +168,15 @@ const industries = [
   <section class="section cred">
     <div class="container">
       <div class="cred__copy" data-reveal>
-        <h2>Twenty-five years of saying what we can hold. And holding it.</h2>
+        <h2>Turning toughest designs into precise shape for 25&nbsp;years</h2>
         <p class="cred__body">
-          Wire EDM Pro has run from Sydney since the early&nbsp;2000s. The machines have changed;
-          the discipline hasn't: we quote from real information, we flag risk before the wire
-          touches the work, and we answer the phone while your job is on the machine. Most of
-          our work arrives from customers who have been sending drawings for a decade or more.
-          Because the part that comes back matches the drawing that went in.
+          For more than two decades, Wire EDM Pro has operated in Sydney, earning the trust of
+          customers who return year after year. That trust is built one job at a time. We quote
+          from real information, apply advanced engineering expertise to complex requirements,
+          identify risks before cutting begins, and deliver finished parts that match the
+          drawings. The machines have changed, but our discipline has not. Customers keep coming
+          back because they know what to expect: honest advice, clear communication, and
+          precision they can depend on.
         </p>
       </div>
     </div>
@@ -348,7 +350,11 @@ const industries = [
     object-fit: cover;
     will-change: transform;
     transform: translate3d(0, var(--py, 0px), 0);
-    transition: transform 120ms linear;
+  }
+  /* The base transition eases the hover zoom back out, but it fights the
+     per-frame parallax on touch devices (rubber-banding), so hover-only */
+  @media (hover: hover) and (pointer: fine) {
+    .proc__img { transition: transform 120ms linear; }
   }
   .proc__row:hover .proc__img {
     transform: translate3d(0, var(--py, 0px), 0) scale(1.06);
@@ -449,8 +455,9 @@ const industries = [
     object-fit: contain;
     filter: drop-shadow(0 14px 20px oklch(35% 0.04 262 / 0.28));
     will-change: transform;
+    /* No transition here: --py updates once per frame, and easing toward a
+       per-frame target rubber-bands on mobile momentum scroll */
     transform: translate3d(0, var(--py, 0px), 0);
-    transition: transform 120ms linear;
   }
   @media (prefers-reduced-motion: reduce) {
     .hero__mobileart-part { will-change: auto; transform: none; }
