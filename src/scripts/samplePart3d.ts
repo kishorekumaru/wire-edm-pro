@@ -156,17 +156,58 @@ function seamWithKnob(
  * The full cube is this shape rotated into all four quadrants - each piece
  * grips the next, releasing only along the cutting axis.
  */
-function puzzleQuadrant(S: number): THREE.Shape {
-  const r = 0.17; // rounded outer corner, so the cube's vertical edges read soft
+function puzzleQuadrant(S: number, r: number): THREE.Shape {
   const q = new THREE.Shape();
   q.moveTo(0, 0);
   seamWithKnob(q, 0, 0, S, 0, -1); // out to the east rim, neighbour's notch
   q.lineTo(S, S - r);
-  q.absarc(S - r, S - r, r, 0, Math.PI / 2, false);
+  q.absarc(S - r, S - r, r, 0, Math.PI / 2, false); // smooth rounded vertical edge
   q.lineTo(0, S);
   seamWithKnob(q, 0, S, 0, 0, 1); // back to centre, own tab bulging sideways
   q.closePath();
   return q;
+}
+
+/**
+ * Chamfer the outer rim of the extruded block only. The cap-plane vertices
+ * that sit on the outer walls (x = S, y = S, or the rounded corner arc) move
+ * inward by `ch`, so the first and last wall slice become a flat chamfer band.
+ * The seam and knob contours never match the outer-wall tests, so the
+ * wire-cut faces keep their dead-sharp edges. Runs in shape space, before the
+ * geometry is rotated upright.
+ */
+function chamferOuterRim(
+  geo: THREE.BufferGeometry,
+  S: number,
+  r: number,
+  depth: number,
+  ch: number,
+) {
+  const pos = geo.getAttribute("position") as THREE.BufferAttribute;
+  const eps = 1e-3;
+  const c = S - r; // corner arc centre (c, c)
+  for (let i = 0; i < pos.count; i++) {
+    const z = pos.getZ(i);
+    if (z > eps && z < depth - eps) continue; // only the two cap-plane rings
+    const x = pos.getX(i);
+    const y = pos.getY(i);
+    let nx = 0;
+    let ny = 0;
+    if (Math.abs(x - S) < eps) nx = -1;
+    else if (Math.abs(y - S) < eps) ny = -1;
+    else if (x > c - eps && y > c - eps) {
+      const dx = x - c;
+      const dy = y - c;
+      const d = Math.hypot(dx, dy);
+      if (Math.abs(d - r) < eps) {
+        nx = -dx / d;
+        ny = -dy / d;
+      }
+    }
+    if (nx || ny) pos.setXY(i, x + nx * ch, y + ny * ch);
+  }
+  pos.needsUpdate = true;
+  geo.computeVertexNormals();
 }
 
 export interface SamplePartOptions {
@@ -242,9 +283,24 @@ export async function initSamplePart(
 
   if (chrome) {
     // Puzzle cube: one quadrant block, rotated into all four positions.
-    // No extrude bevel: seam and knob edges stay dead sharp; vertical corners keep
-    // their radius from the 2D outline
-    const template = extrudePiece(puzzleQuadrant(0.92), steel, 1.9, 24, 0);
+    // No extrude bevel (seam and knob edges stay dead sharp); the outer rim
+    // gets its machined chamfer from chamferOuterRim instead, and the vertical
+    // edges keep their smooth radius from the 2D outline
+    const CUBE_S = 0.92;
+    const CUBE_R = 0.17;
+    const CUBE_DEPTH = 1.9;
+    const geo = new THREE.ExtrudeGeometry(puzzleQuadrant(CUBE_S, CUBE_R), {
+      depth: CUBE_DEPTH,
+      bevelEnabled: false,
+      curveSegments: 24,
+      // Wall rings every ~0.025 so the rim displacement forms a short chamfer
+      // band instead of tapering the whole wall
+      steps: 78,
+    });
+    chamferOuterRim(geo, CUBE_S, CUBE_R, CUBE_DEPTH, 0.0245);
+    geo.rotateX(-Math.PI / 2);
+    geo.translate(0, -CUBE_DEPTH / 2, 0);
+    const template = new THREE.Mesh(geo, steel);
     const blocks = [0, 1, 2, 3].map((k) => {
       const m = k === 0 ? template : new THREE.Mesh(template.geometry, steel);
       m.rotation.y = (k * Math.PI) / 2;
@@ -285,8 +341,8 @@ export async function initSamplePart(
   // Resting yaw: the cube sits turned 45° to the right, corner to the camera
   const baseRotY = chrome ? 0.35 - Math.PI / 4 : 0.35;
 
-  // Ground shadow (fake, cheap). A rounded square under the cube, matching its
-  // resting yaw and soft corners; a soft disc under the rings
+  // Ground shadow (fake, cheap). A rounded square under the cube, matching
+  // its resting yaw and soft corners; a soft disc under the rings
   const shadowShape = new THREE.Shape();
   {
     const w = 2.5;
@@ -307,15 +363,16 @@ export async function initSamplePart(
     new THREE.MeshBasicMaterial({
       color: chrome ? 0x0b0e16 : 0x10162e,
       transparent: true,
-      opacity: chrome ? 0.16 : 0.28,
+      opacity: chrome ? 0.1 : 0.28,
+      depthWrite: false,
     }),
   );
   // Yaw nudged past the cube's resting angle to line up with its tilted
   // footprint, and offset toward the lean so it reads as cast by the cube
   shadow.rotation.set(-Math.PI / 2, 0, chrome ? baseRotY + 0.18 : 0);
   if (chrome) {
-    shadow.position.set(0.3, -2.15, 0.15);
-    shadow.scale.setScalar(1.3); // grows with the cube
+    shadow.position.set(0.3, -2.4, -0.25);
+    shadow.scale.setScalar(1.1); // grows with the cube
   } else {
     shadow.position.y = -BLANK_HEIGHT / 2 - 0.02;
   }
@@ -458,6 +515,16 @@ export async function initSamplePart(
       explode += (targetExplode - explode) * k;
       if (!hovering && !chrome) rotY += dt * 0.12; // slow idle turn (rings only)
       part.rotation.set(tiltX, rotY, 0);
+      // The square ground shadow follows the cube: it turns with the yaw
+      // (+0.18 keeps its resting offset) and, as the cube leans with the
+      // pointer, stretches toward the camera and slides with the lean the way
+      // a cast silhouette would. Local y maps to world z once laid flat.
+      if (chrome) {
+        shadow.rotation.z = rotY + 0.18;
+        const lean = tiltX - baseTiltX;
+        shadow.scale.set(1.1, 1.1 * (1 + lean * 0.9), 1.1);
+        shadow.position.z = -0.25 + lean * 1.1;
+      }
       applyExplode(explode);
     }
 
