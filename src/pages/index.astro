@@ -87,6 +87,9 @@ const industries = [
       <div class="hero__mobileart" aria-hidden="true">
         <div class="hero__mobileart-stage">
           <picture>
+            <!-- Desktop hides this block, so its source resolves to the hero's
+                 cube poster - already in cache - instead of a second download -->
+            <source media="(min-width: 68rem)" srcset="/images/cube-poster.webp" type="image/webp" />
             <source srcset="/images/sample-cube-3d.webp" type="image/webp" />
             <img class="hero__mobileart-part" src="/images/sample-cube-3d.png" alt="" width="640" height="869" loading="eager" fetchpriority="high" />
           </picture>

@@ -100,7 +100,7 @@ function extrudePiece(
 ): THREE.Mesh {
   const geo = new THREE.ExtrudeGeometry(shape, {
     depth,
-    bevelEnabled: true,
+    bevelEnabled: bevel > 0,
     bevelThickness: bevel,
     bevelSize: bevel * 0.8,
     // A generous bevel gets extra segments so the edge reads rounded, not chamfered
@@ -174,11 +174,15 @@ export interface SamplePartOptions {
   finish?: "white" | "chrome";
 }
 
-export function initSamplePart(
+// Total Blocking Time counts only the slice of each main-thread task beyond
+// 50ms, so the init is split into sub-50ms phases with a yield between them
+const yieldToMain = () => new Promise<void>((r) => setTimeout(r, 0));
+
+export async function initSamplePart(
   host: HTMLElement,
   interactionRoot: HTMLElement,
   opts: SamplePartOptions = {},
-): void {
+): Promise<void> {
   try {
     const probe = document.createElement("canvas");
     if (!(probe.getContext("webgl2") ?? probe.getContext("webgl"))) return;
@@ -189,17 +193,20 @@ export function initSamplePart(
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+  const chrome = opts.finish === "chrome";
+
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(33, 1, 0.1, 30);
   camera.position.set(6.15, 6.0, 9.3); // ~50% further back
   camera.lookAt(0, 0.3, 0);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // 1.5x is visually identical to 2x on a ~26rem canvas and renders half the pixels
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, chrome ? 1.5 : 2));
   renderer.setClearColor(0x000000, 0);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-  const chrome = opts.finish === "chrome";
+  await yieldToMain();
 
   // Soft studio reflections so the steel reads as steel. Chrome is almost
   // entirely reflection-driven, so it gets a high-contrast studio instead of
@@ -207,6 +214,8 @@ export function initSamplePart(
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(chrome ? chromeStudio() : new RoomEnvironment(), 0.04).texture;
   scene.environmentIntensity = chrome ? 0.85 : 0.35;
+
+  await yieldToMain();
 
   // One shared steel material - identical colour on every piece so the
   // assembled part reads as a single solid blank with no visible layers.
@@ -233,9 +242,9 @@ export function initSamplePart(
 
   if (chrome) {
     // Puzzle cube: one quadrant block, rotated into all four positions.
-    // Hairline bevel: top and bottom edges read sharp, vertical corners keep
+    // No extrude bevel: seam and knob edges stay dead sharp; vertical corners keep
     // their radius from the 2D outline
-    const template = extrudePiece(puzzleQuadrant(0.92), steel, 1.9, 24, 0.01);
+    const template = extrudePiece(puzzleQuadrant(0.92), steel, 1.9, 24, 0);
     const blocks = [0, 1, 2, 3].map((k) => {
       const m = k === 0 ? template : new THREE.Mesh(template.geometry, steel);
       m.rotation.y = (k * Math.PI) / 2;
@@ -323,13 +332,8 @@ export function initSamplePart(
     scene.add(rim);
   }
 
-  // Mount - swap fallback image for canvas
   renderer.domElement.className = "hg__canvas";
   renderer.domElement.setAttribute("aria-hidden", "true");
-  host.appendChild(renderer.domElement);
-  const fallback = host.querySelector<HTMLElement>("[data-part-fallback]");
-  if (fallback) fallback.hidden = true;
-  host.dataset.live = "true";
 
   const resize = () => {
     const w = host.clientWidth;
@@ -340,7 +344,8 @@ export function initSamplePart(
     renderer.setSize(w, h);
   };
   resize();
-  new ResizeObserver(resize).observe(host);
+
+  await yieldToMain();
 
   // Interaction state (targets lerped in the loop)
   let targetRotY = baseRotY;
@@ -355,8 +360,16 @@ export function initSamplePart(
   let hovering = false;
 
   if (finePointer && !reducedMotion) {
+    // Rect cached outside the handler: a getBoundingClientRect on every
+    // pointermove forces layout against the rAF loop's style writes
+    let rootRect = interactionRoot.getBoundingClientRect();
+    const refreshRect = () => {
+      rootRect = interactionRoot.getBoundingClientRect();
+    };
+    window.addEventListener("resize", refreshRect);
+    window.addEventListener("scroll", refreshRect, { passive: true });
     interactionRoot.addEventListener("pointermove", (e) => {
-      const r = interactionRoot.getBoundingClientRect();
+      const r = rootRect;
       const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
       const ny = ((e.clientY - r.top) / r.height) * 2 - 1;
       // X movement rotates the part; Y movement telescopes it inside-out
@@ -416,9 +429,20 @@ export function initSamplePart(
 
   applyExplode(explode);
 
+  let lastRender = 0;
   const frame = () => {
     rafId = 0;
     if (!inView || !pageVisible) return;
+    // Cap the cube at ~60fps: on 120Hz displays every other tick is skipped,
+    // halving render cost during hover with no visible difference
+    if (chrome) {
+      const now = performance.now();
+      if (now - lastRender < 15) {
+        rafId = requestAnimationFrame(frame);
+        return;
+      }
+      lastRender = now;
+    }
     const dt = Math.min(clock.getDelta(), 0.05);
     const t = clock.elapsedTime;
 
@@ -457,9 +481,24 @@ export function initSamplePart(
     }
   };
 
-  // Guarantee one painted frame even when the tab loads hidden
+  // Compile the shaders off the main thread (KHR_parallel_shader_compile)
+  // instead of letting the first render() do it synchronously
   part.rotation.set(tiltX, rotY, 0);
+  try {
+    await renderer.compileAsync(scene, camera);
+  } catch {
+    /* falls through - render() compiles synchronously */
+  }
+  await yieldToMain();
+
+  // Guarantee one painted frame even when the tab loads hidden, then swap
+  // the static poster for the live canvas - identical pose, seamless switch
   renderer.render(scene, camera);
+  host.appendChild(renderer.domElement);
+  const fallback = host.querySelector<HTMLElement>("[data-part-fallback]");
+  if (fallback) fallback.hidden = true;
+  host.dataset.live = "true";
+  new ResizeObserver(resize).observe(host);
 
   new IntersectionObserver(
     (entries) => {

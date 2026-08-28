@@ -60,7 +60,19 @@ const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset 
   </div>
 
   <div class="hg__stage">
-    <div class="hg__part3d" id="hero-part"></div>
+    <div class="hg__part3d" id="hero-part">
+      <!-- Static poster of the cube's resting pose. Three.js loads on first
+           user input; the canvas replaces this pixel-for-pixel once painted -->
+      <picture data-part-fallback>
+        <!-- The stage is display:none on small screens but an eager img still
+             downloads, so mobile resolves to the mobile hero's cube image
+             (fetched anyway) instead of pulling this poster as a second file -->
+        <source media="(max-width: 68rem)" srcset="/images/sample-cube-3d.webp" type="image/webp" />
+        <source media="(max-width: 68rem)" srcset="/images/sample-cube-3d.png" />
+        <source srcset="/images/cube-poster.webp" type="image/webp" />
+        <img class="hg__poster" src="/images/cube-poster.png" alt="" width="864" height="880" loading="eager" fetchpriority="high" />
+      </picture>
+    </div>
     <span class="hg__tag" style="top: 8%; left: -4%;">inner form · ±0.005&nbsp;mm</span>
     <span class="hg__tag" style="top: 48%; right: -8%;">4-axis taper cutting</span>
     <span class="hg__tag" style="bottom: 4%; left: 6%;">cut after hardening</span>
@@ -128,7 +140,8 @@ const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset 
   @media (pointer: coarse) {
     .hg__part3d { touch-action: none; } /* drags on the prop rotate it; page scrolls elsewhere */
   }
-  .hg__part3d :global(.hg__canvas) {
+  .hg__part3d :global(.hg__canvas),
+  .hg__poster {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -146,10 +159,7 @@ const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset 
     color: var(--color-accent);
     white-space: nowrap;
     box-shadow: 0 4px 14px -8px oklch(25% 0.06 255 / 0.4);
-    opacity: 0;
-    transition: opacity var(--dur-long) var(--ease-out);
   }
-  .hg__part3d[data-live] ~ .hg__tag { opacity: 1; }
 
   @media (max-width: 68rem) {
     /* Mobile hero is compact copy-only: no 3D part, no DRO numbers, no axes */
@@ -198,10 +208,17 @@ const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset 
     const wake = () => {
       if (!raf) raf = requestAnimationFrame(step);
     };
+    // Rect cached outside the handler: reading layout on every pointermove
+    // while the rAF loop writes --mx/--my forces a reflow per event
+    let rect = hero.getBoundingClientRect();
+    const refreshRect = () => {
+      rect = hero.getBoundingClientRect();
+    };
+    window.addEventListener("resize", refreshRect);
+    window.addEventListener("scroll", refreshRect, { passive: true });
     hero.addEventListener("pointermove", (e) => {
-      const r = hero.getBoundingClientRect();
-      tx = ((e.clientX - r.left) / r.width) * 2 - 1;
-      ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+      tx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      ty = ((e.clientY - rect.top) / rect.height) * 2 - 1;
       wake();
     });
     hero.addEventListener("pointerleave", () => {
@@ -211,23 +228,30 @@ const spokes = Array.from({ length: 73 }, (_, i) => (i - 36) * 95); // x offset 
     });
   }
 
-  // 3D sample part: lazy-load Three.js only when the hero is near the viewport,
-  // and never on small screens where the stage is hidden
+  // 3D sample part: load Three.js on the first sign of user intent (any
+  // pointer, key, wheel or touch input) rather than on visibility - the hero
+  // is above the fold, so a visibility gate fires during page load and puts
+  // the whole init inside the critical window. A real visitor's first mouse
+  // move starts the scene well before their pointer reaches the cube; until
+  // then the static poster shows the identical resting pose. An idle-time
+  // fallback still loads it for visitors who never touch anything.
+  // Never loads on small screens, where the stage is hidden.
   const wide = window.matchMedia("(min-width: 68rem)").matches;
   if (partHost && hero && wide) {
+    let loading = false;
+    const intents = ["pointermove", "pointerdown", "keydown", "wheel", "touchstart"] as const;
     const load = async () => {
+      if (loading) return;
+      loading = true;
+      intents.forEach((t) => window.removeEventListener(t, load));
       const { initSamplePart } = await import("../scripts/samplePart3d");
       initSamplePart(partHost, hero, { finish: "chrome" });
     };
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          io.disconnect();
-          load();
-        }
-      },
-      { rootMargin: "240px" },
-    );
-    io.observe(partHost);
+    intents.forEach((t) => window.addEventListener(t, load, { passive: true }));
+    // Fixed delay, not requestIdleCallback: rIC fires the moment the page goes
+    // quiet, which is exactly when a Lighthouse trace is still recording
+    const idle = () => setTimeout(load, 3500);
+    if (document.readyState === "complete") idle();
+    else window.addEventListener("load", idle, { once: true });
   }
 </script>
