@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          # Full history: scripts/gen-sitemap.mjs reads each page's last commit
+          # date for sitemap lastmod. A shallow clone would date every page to
+          # the newest commit, which is the false-freshness signal we removed.
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3

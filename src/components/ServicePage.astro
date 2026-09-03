@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBand from "./CtaBand.astro";
+import { otherSolutions } from "../data/solutions";
+import { industries } from "../data/industries";
+import { breadcrumbList } from "../lib/breadcrumbs";
 
 interface Spec {
   name: string;
@@ -19,6 +22,10 @@ interface Props {
   heroLede: string;
   heroImage?: string;
   heroImageAlt?: string;
+  /** Plain service name for schema.org and the breadcrumb; the h1 is a slogan. */
+  serviceName: string;
+  /** Industry slugs this process most often serves, for cross-linking. */
+  relatedIndustries?: string[];
   specs: Spec[];
   specNote?: string;
   applications: Application[];
@@ -27,35 +34,43 @@ interface Props {
 }
 const {
   title, description, heroKicker, heroTitle, heroLede,
-  heroImage, heroImageAlt,
+  heroImage, heroImageAlt, serviceName, relatedIndustries = [],
   specs, specNote, applications, ctaHeading, ctaBody,
 } = Astro.props;
+
+const related = otherSolutions(Astro.url.pathname);
+const relatedInd = relatedIndustries
+  .map((slug) => industries.find((i) => i.slug === slug))
+  .filter((i): i is NonNullable<typeof i> => Boolean(i));
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: heroKicker,
-  name: heroTitle,
+  name: serviceName,
   description: heroLede,
   url: new URL(Astro.url.pathname, Astro.site).href,
-  provider: {
-    "@type": "LocalBusiness",
-    name: "Wire EDM Pro",
-    url: new URL("/", Astro.site).href,
-  },
+  // Reference the site-wide Organization node instead of declaring a second,
+  // unlinked business (see BaseLayout.astro)
+  provider: { "@id": new URL("/", Astro.site).href + "#organization" },
   areaServed: "Sydney",
 };
+
+const breadcrumbs = breadcrumbList(
+  [{ name: serviceName, href: Astro.url.pathname }],
+  Astro.site,
+);
 ---
 <BaseLayout
   title={title}
   description={description}
   ogImage={heroImage ? `${heroImage}.jpg` : undefined}
   ogImageAlt={heroImage ? heroImageAlt : undefined}
-  jsonLd={serviceSchema}
+  jsonLd={[serviceSchema, breadcrumbs]}
 >
   <section class="svc-hero">
     {heroImage && (
-      <div class="svc-hero__bg" aria-hidden="true">
+      <div class="svc-hero__bg">
         <picture>
           <source
             srcset={`${heroImage}-800.webp 800w, ${heroImage}.webp 1600w`}
@@ -67,7 +82,7 @@ const serviceSchema = {
             srcset={`${heroImage}-800.jpg 800w, ${heroImage}.jpg 1600w`}
             sizes="(max-width: 56rem) 100vw, 62vw"
             width="1600" height="900"
-            alt=""
+            alt={heroImageAlt ?? ""}
             fetchpriority="high"
           />
         </picture>
@@ -122,6 +137,39 @@ const serviceSchema = {
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section svc-more">
+    <div class="container">
+      <div class="section-head">
+        <h2>The rest of the shop<span class="section-head__sub">One business, quoted and machined here</span></h2>
+      </div>
+      <ul class="svc-more__list">
+        {related.map((s) => (
+          <li>
+            <a class="svc-more__link" href={s.href}>
+              <svg class="svc-more__icon" viewBox="0 0 24 24" aria-hidden="true" set:html={s.icon} />
+              <span>
+                <strong>{s.label}</strong>
+                <span class="svc-more__note">{s.note}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      {relatedInd.length > 0 && (
+        <p class="svc-more__ind">
+          Common in{" "}
+          {relatedInd.map((ind, i) => (
+            <>
+              {i > 0 && (i === relatedInd.length - 1 ? " and " : ", ")}
+              <a href={`/industries/${ind.slug}/`}>{ind.name.toLowerCase()}</a>
+            </>
+          ))}
+          . <a href="/industries/">See all industries</a>.
+        </p>
+      )}
     </div>
   </section>
 
@@ -224,6 +272,58 @@ const serviceSchema = {
   .apps__row:last-child { border-bottom: var(--rule-hairline); }
   .apps__row h3 { font-size: var(--text-lg); }
   .apps__row p { color: var(--color-muted); }
+
+  .svc-more__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: var(--space-md);
+  }
+  .svc-more__link {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+    height: 100%;
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: var(--rule-hairline);
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: border-color var(--dur-short) var(--ease-out),
+                transform var(--dur-short) var(--ease-out);
+  }
+  .svc-more__link:hover {
+    border-color: var(--color-accent-bright);
+    transform: translateY(-2px);
+  }
+  .svc-more__icon {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: var(--color-accent-bright);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .svc-more__link strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+  }
+  .svc-more__note {
+    display: block;
+    margin-top: var(--space-2xs);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+  .svc-more__ind {
+    margin-top: var(--space-xl);
+    color: var(--color-muted);
+    max-width: none;
+  }
 
   .visually-hidden {
     position: absolute;

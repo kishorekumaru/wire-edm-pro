@@ -1,11 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { breadcrumbList } from "../lib/breadcrumbs";
+import { ADDRESS_LINE } from "../data/site";
 
 const contactEmail = "wireedmpro@gmail.com";
+
+const breadcrumbs = breadcrumbList([{ name: "Contact", href: "/contact/" }], Astro.site);
 ---
 <BaseLayout
   title="Contact Wire EDM Pro | Quotes & Enquiries, Sydney"
   description="Get a machining quote from Wire EDM Pro in Sydney. Call or email a drawing, STEP file or sketch for EDM wire cutting, CNC milling, turning or reverse engineering."
+  jsonLd={breadcrumbs}
 >
   <section class="contact section--tight">
     <div class="container">
@@ -20,7 +25,7 @@ const contactEmail = "wireedmpro@gmail.com";
           <dl class="contact__details">
             <div>
               <dt>Address</dt>
-              <dd>16/24 Garling Rd, Kings Park NSW 2148</dd>
+              <dd>{ADDRESS_LINE}</dd>
             </div>
             <div>
               <dt>Landline</dt>
@@ -55,9 +60,17 @@ const contactEmail = "wireedmpro@gmail.com";
             alt="The Wire EDM Pro premises in Sydney. Unit 16, with signage above the roller door"
             loading="lazy"
           />
-          <figcaption>16/24 Garling Rd, Kings Park NSW 2148</figcaption>
+          <figcaption>{ADDRESS_LINE}</figcaption>
         </figure>
       </div>
+
+      <p class="contact__foot">
+        Not sure which process your part needs? Start with
+        <a href="/edm-wire-cutting/">EDM wire cutting</a>,
+        <a href="/milling/">milling</a> or <a href="/turning/">turning</a>, see the
+        <a href="/industries/">industries we work for</a>, or read
+        <a href="/about/">about the business</a>.
+      </p>
     </div>
   </section>
 </BaseLayout>
@@ -70,6 +83,13 @@ const contactEmail = "wireedmpro@gmail.com";
     font-size: var(--text-md);
     color: var(--color-muted);
     max-width: 54ch;
+  }
+  .contact__foot {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: var(--rule-hairline);
+    color: var(--color-muted);
+    max-width: none;
   }
   .contact__grid {
     display: grid;

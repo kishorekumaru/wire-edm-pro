@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { breadcrumbList } from "../lib/breadcrumbs";
 import CtaBand from "../components/CtaBand.astro";
 
 // Equipment list confirmed by the client content doc (docs/WIRE EDM PRO-WEB CONTENT.pdf).
@@ -16,15 +17,18 @@ const checks = [
   { name: "Every critical dimension", body: "Every critical dimension is measured against the approved design before a part leaves. Not a sample. Every critical dimension." },
   { name: "Batch inspection", body: "Every production run gets systematic batch checks through to final packaging, so parts arrive consistent, defect-free and ready to assemble." },
 ];
+
+const breadcrumbs = breadcrumbList([{ name: "Quality Assurance", href: "/quality-assurance/" }], Astro.site);
 ---
 <BaseLayout
   title="Quality Assurance, Sydney | Wire EDM Pro"
   description="Quality assurance at Wire EDM Pro, Sydney: optical profile projectors, calibrated metrology instruments, first-article and batch inspection on every job."
+  jsonLd={breadcrumbs}
   ogImage="/images/qc-wireedm.jpg"
   ogImageAlt="Optical profile projector inspecting a machined component at Wire EDM Pro, Sydney"
 >
   <section class="qa section--tight">
-    <div class="qa__bg" aria-hidden="true">
+    <div class="qa__bg">
       <picture>
               <source srcset="/images/qc-wireedm-800.webp 800w, /images/qc-wireedm.webp 1600w" sizes="(max-width: 56rem) 100vw, 62vw" type="image/webp" />
               <img
@@ -32,7 +36,7 @@ const checks = [
         srcset="/images/qc-wireedm-800.jpg 800w, /images/qc-wireedm.jpg 1600w"
         sizes="(max-width: 56rem) 100vw, 62vw"
         width="1600" height="900"
-        alt=""
+        alt="Optical profile projector inspecting a machined component at Wire EDM Pro, Sydney"
         fetchpriority="high"
       />
             </picture>

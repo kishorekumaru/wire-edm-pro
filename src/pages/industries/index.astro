@@ -1,11 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { breadcrumbList } from "../../lib/breadcrumbs";
 import CtaBand from "../../components/CtaBand.astro";
 import { industries } from "../../data/industries";
+
+const breadcrumbs = breadcrumbList([{ name: "Industries", href: "/industries/" }], Astro.site);
 ---
 <BaseLayout
-  title="Industries We Serve | Wire EDM Pro, Sydney"
+  title="Industries We Serve, Sydney | Wire EDM Pro"
   description="Precision machining for every industry: tool and die making, aerospace, medical, mining, automotive, electronics, robotics and general engineering. Sydney business."
+  jsonLd={breadcrumbs}
 >
   <section class="ind-hub section--tight">
     <div class="container">

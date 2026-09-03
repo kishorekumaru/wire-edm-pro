@@ -3,6 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaBand from "../components/CtaBand.astro";
 import HeroGraphicLight from "../components/HeroGraphicLight.astro";
 import TurnkeyFlow from "../components/TurnkeyFlow.astro";
+import { solutions } from "../data/solutions";
+
+const support = solutions.filter((s) =>
+  ["/reverse-engineering/", "/quality-assurance/"].includes(s.href),
+);
 
 const fleet = [
   {
@@ -75,14 +80,20 @@ const industries = [
     <div class="container hero__content">
       <div class="hero__copy">
         <p class="hero__kicker mono reveal" style="--i: 0">Australian owned &amp; operated · Trusted for 25 years</p>
-        <h1 class="reveal" style="--i: 0">Multi solutions under <span class="hero__accent">one&nbsp;roof</span>.</h1>
+        <h1 class="reveal" style="--i: 0">
+          <span class="hero__h1-lead">
+            <span class="hero__brand"><span class="hero__brand-wire">Wire</span> <span class="hero__brand-edm">EDM</span> <span class="hero__brand-pro">Pro</span></span>
+            <span class="hero__h1-desc">Wire EDM &amp; CNC machining, Sydney</span>
+          </span>
+          <span class="hero__h1-main">Multi solutions under <span class="hero__accent">one&nbsp;roof</span>.</span>
+        </h1>
         <p class="hero__lede reveal" style="--i: 1">
           A local Sydney business machining tool steel, titanium and hardened dies for the
           country's manufacturing, mining and medical businesses.
         </p>
         <div class="hero__actions reveal" style="--i: 2">
           <a class="btn btn--fill" href="/contact/">Get a quote</a>
-          <a class="hero__textlink" href="/edm-wire-cutting/">View services</a>
+          <a class="hero__textlink" href="/edm-wire-cutting/">EDM wire cutting →</a>
         </div>
       <div class="hero__mobileart" aria-hidden="true">
         <div class="hero__mobileart-stage">
@@ -161,6 +172,20 @@ const industries = [
     </div>
   </section>
 
+  <!-- The two solutions that aren't a machine, so they miss the fleet list above -->
+  <section class="section--tight around">
+    <div class="container around__grid">
+      {support.map((s, i) => (
+        <a class="around__card" href={s.href} data-reveal style={`--reveal-i: ${i}`}>
+          <svg class="around__icon" viewBox="0 0 24 24" aria-hidden="true" set:html={s.icon} />
+          <h2>{s.label}</h2>
+          <p>{s.note}</p>
+          <span class="around__more" aria-hidden="true">Read more →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
   <!-- Turnkey lifecycle -->
   <TurnkeyFlow />
 
@@ -178,6 +203,7 @@ const industries = [
           back because they know what to expect: honest advice, clear communication, and
           precision they can depend on.
         </p>
+        <p class="cred__more"><a href="/about/">More about the business →</a></p>
       </div>
     </div>
   </section>
@@ -233,11 +259,36 @@ const industries = [
   .hero__copy h1 {
     font-size: var(--text-display);
     letter-spacing: -0.015em;
-    max-width: 14ch;
     color: var(--color-deep);
   }
+  /* The 14ch measure belongs to the display line only. Left on the h1 it is
+     computed at display size and would wrap the small brand line above */
+  .hero__h1-main {
+    display: block;
+    max-width: 14ch;
+  }
   .hero__accent { color: var(--color-accent-bright); }
-  /* Wordmark treatment: heavy caps in the logo's three tones, lightened for the dark hero */
+  /* Brand line inside the h1. The h1 previously carried no brand, service or
+     location, which left the page's strongest element saying nothing a search
+     engine could attach to the business */
+  .hero__h1-lead {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-size: var(--text-md);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
+  .hero__h1-desc {
+    color: var(--color-muted);
+    font-weight: 400;
+  }
+  .hero__h1-desc::before {
+    content: " · ";
+    color: var(--color-rule);
+  }
+  /* Wordmark treatment: heavy caps in the logo's three tones. No white stroke:
+     that was for the retired dark hero and would eat the letters on white */
   .hero__brand {
     font-family: "Rajdhani", var(--font-display);
     font-weight: 700;
@@ -245,16 +296,54 @@ const industries = [
     font-size: 1.12em; /* Rajdhani runs narrow; nudge up to sit level with Open Sans */
     white-space: nowrap;
   }
-  /* Exact logo colors, client-supplied. The letters are darker than the blue
-     panel, so a thin white outline separates them from the background */
-  .hero__brand span,
-  .hero__brand-wire, .hero__brand-edm, .hero__brand-pro {
-    -webkit-text-stroke: 3px rgba(255, 255, 255, 0.92);
-    paint-order: stroke fill;
-  }
   .hero__brand-wire { color: #2c3d5f; }
   .hero__brand-edm { color: #562d73; }
   .hero__brand-pro { color: #646464; }
+  .around__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: var(--space-lg);
+  }
+  .around__card {
+    display: block;
+    padding: var(--space-xl);
+    background: var(--color-surface);
+    border: var(--rule-hairline);
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: border-color var(--dur-short) var(--ease-out),
+                transform var(--dur-short) var(--ease-out);
+  }
+  .around__card:hover {
+    border-color: var(--color-accent-bright);
+    transform: translateY(-2px);
+  }
+  .around__icon {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: var(--color-accent-bright);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .around__card h2 {
+    margin-top: var(--space-md);
+    font-size: var(--text-lg);
+  }
+  .around__card p {
+    margin-top: var(--space-xs);
+    color: var(--color-muted);
+  }
+  .around__more {
+    display: block;
+    margin-top: var(--space-md);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+  .cred__more { margin-top: var(--space-lg); font-weight: 600; }
+
   .hero__lede {
     margin-top: var(--space-md);
     font-size: var(--text-md);
