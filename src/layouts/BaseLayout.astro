@@ -4,6 +4,15 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import ConsentBanner from "../components/ConsentBanner.astro";
+import {
+  ADDRESS,
+  BUSINESS_DESCRIPTION,
+  EMAIL,
+  PHONE_LANDLINE,
+  PHONE_MOBILE,
+  SAME_AS,
+  SITE_NAME,
+} from "../data/site";
 
 interface Props {
   title: string;
@@ -24,41 +33,70 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = new URL(ogImage, Astro.site);
 
-const localBusiness = {
+const home = new URL("/", Astro.site).href;
+const orgId = `${home}#organization`;
+const logoUrl = new URL("/images/wire-edm-high-res.png", Astro.site).href;
+const postalAddress = { "@type": "PostalAddress", ...ADDRESS };
+
+/**
+ * One connected entity graph rather than a floating LocalBusiness node. The
+ * Organization is the node other pages reference (see ServicePage.astro), and
+ * its sameAs list is what tells Google the domain, the Google Business Profile
+ * and the directory listings are all the same company. Without that, a brand
+ * name that is also an industry term ("wire EDM") does not resolve to a business.
+ */
+const entityGraph = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": new URL("/", Astro.site).href + "#business",
-  name: "Wire EDM Pro",
-  url: new URL("/", Astro.site).href,
-  description:
-    "Precision machining in Sydney: wire EDM, EDM hole drilling, CNC milling, CNC turning and laser cutting for defence, aerospace, medical, mining and general engineering.",
-  logo: new URL("/images/wire-edm-high-res.png", Astro.site).href,
-  image: new URL("/images/wire-edm-high-res.png", Astro.site).href,
-  telephone: ["+61 2 8604 8347", "+61 452 558 052"],
-  email: "wireedmpro@gmail.com",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "16/24 Garling Rd",
-    addressLocality: "Kings Park",
-    addressRegion: "NSW",
-    postalCode: "2148",
-    addressCountry: "AU",
-  },
-  openingHoursSpecification: [
+  "@graph": [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "08:00",
-      closes: "16:30",
+      "@type": "Organization",
+      "@id": orgId,
+      name: SITE_NAME,
+      url: home,
+      description: BUSINESS_DESCRIPTION,
+      logo: { "@type": "ImageObject", url: logoUrl, caption: SITE_NAME },
+      image: logoUrl,
+      telephone: [PHONE_LANDLINE.intl, PHONE_MOBILE.intl],
+      email: EMAIL,
+      address: postalAddress,
+      ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
     },
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Friday",
-      opens: "08:00",
-      closes: "12:00",
+      "@type": "LocalBusiness",
+      "@id": `${home}#business`,
+      name: SITE_NAME,
+      url: home,
+      description: BUSINESS_DESCRIPTION,
+      parentOrganization: { "@id": orgId },
+      image: logoUrl,
+      telephone: [PHONE_LANDLINE.intl, PHONE_MOBILE.intl],
+      email: EMAIL,
+      address: postalAddress,
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          opens: "08:00",
+          closes: "16:30",
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: "Friday",
+          opens: "08:00",
+          closes: "12:00",
+        },
+      ],
+      areaServed: "Sydney",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${home}#website`,
+      name: SITE_NAME,
+      url: home,
+      inLanguage: "en-AU",
+      publisher: { "@id": orgId },
     },
   ],
-  areaServed: "Sydney",
 };
 const extraJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
@@ -97,7 +135,7 @@ const extraJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="generator" content={Astro.generator} />
-    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+    <script type="application/ld+json" set:html={JSON.stringify(entityGraph)} />
     {extraJsonLd.map((entry) => (
       <script type="application/ld+json" set:html={JSON.stringify(entry)} />
     ))}

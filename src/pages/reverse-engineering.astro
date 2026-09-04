@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { breadcrumbList } from "../lib/breadcrumbs";
 import CtaBand from "../components/CtaBand.astro";
 import TurnkeyFlow from "../components/TurnkeyFlow.astro";
 
@@ -32,15 +33,18 @@ const capabilities = [
     body: "Once reversed, the part moves directly into our wire EDM, milling and turning workflows. From a single replacement through to high-volume manufacture.",
   },
 ];
+
+const breadcrumbs = breadcrumbList([{ name: "Reverse Engineering", href: "/reverse-engineering/" }], Astro.site);
 ---
 <BaseLayout
   title="Reverse Engineering, Sydney | Wire EDM Pro"
   description="No drawing? Bring the part. Wire EDM Pro in Sydney measures your sample, models it in Mastercam and manufactures the replacement, design to delivery."
+  jsonLd={breadcrumbs}
   ogImage="/images/reverse-engineering-banner.jpg"
   ogImageAlt="Reverse engineering a sample part at Wire EDM Pro, Sydney"
 >
   <section class="re section--tight">
-    <div class="re__bg" aria-hidden="true">
+    <div class="re__bg">
       <picture>
               <source srcset="/images/reverse-engineering-banner-800.webp 800w, /images/reverse-engineering-banner.webp 1600w" sizes="(max-width: 56rem) 100vw, 62vw" type="image/webp" />
               <img
@@ -48,7 +52,7 @@ const capabilities = [
         srcset="/images/reverse-engineering-banner-800.jpg 800w, /images/reverse-engineering-banner.jpg 1600w"
         sizes="(max-width: 56rem) 100vw, 62vw"
         width="1600" height="900"
-        alt=""
+        alt="Worn component measured for reverse engineering at Wire EDM Pro, Sydney"
         fetchpriority="high"
       />
             </picture>

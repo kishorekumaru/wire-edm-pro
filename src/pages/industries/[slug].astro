@@ -2,6 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import { industries } from "../../data/industries";
+import { solutions } from "../../data/solutions";
+import { breadcrumbList } from "../../lib/breadcrumbs";
 
 export function getStaticPaths() {
   return industries.map((ind) => ({ params: { slug: ind.slug }, props: { ind } }));
@@ -9,34 +11,16 @@ export function getStaticPaths() {
 
 const { ind } = Astro.props;
 
-const breadcrumbs = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Industries",
-      item: new URL("/industries/", Astro.site).href,
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: ind.name,
-      item: new URL(`/industries/${ind.slug}/`, Astro.site).href,
-    },
+const breadcrumbs = breadcrumbList(
+  [
+    { name: "Industries", href: "/industries/" },
+    { name: ind.name, href: `/industries/${ind.slug}/` },
   ],
-};
-
-const services = [
-  { href: "/edm-wire-cutting/", name: "EDM Wire Cutting Solution", note: "±0.003 mm profiles in hardened metal, zero cutting force" },
-  { href: "/milling/", name: "CNC milling", note: "jigs, fixtures, die sets and machined details" },
-  { href: "/turning/", name: "CNC turning", note: "shafts, bushes, pins and threaded components" },
-  { href: "/edm-drills/", name: "EDM Drills", note: "small hole EDM from Ø 0.3 mm, burr-free" },
-];
+  Astro.site,
+);
 ---
 <BaseLayout
-  title={`${ind.name} Machining | Wire EDM Pro, Sydney`}
+  title={`${ind.name} Machining, Sydney | Wire EDM Pro`}
   description={`${ind.short}. EDM wire cutting, CNC milling and turning for ${ind.name.toLowerCase()}, from our Sydney business.`}
   jsonLd={breadcrumbs}
 >
@@ -65,9 +49,9 @@ const services = [
         <h2>Why the process fits</h2>
         <p class="ind__fit">{ind.fit}</p>
         <div class="ind__services">
-          {services.map((s) => (
+          {solutions.map((s) => (
             <a class="ind__service" href={s.href}>
-              <b>{s.name}</b>
+              <b>{s.label}</b>
               <span>{s.note}</span>
             </a>
           ))}

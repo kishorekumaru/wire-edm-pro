@@ -2,15 +2,51 @@
 import ServicePage from "../components/ServicePage.astro";
 
 const specs = [
-  { name: "Maximum height of the work piece", value: "420 mm", note: "Makino with H.E.A.T technology handles our tallest, heaviest wire-cutting jobs" },
-  { name: "Positional tolerance", value: "±0.003 mm", note: "typical for finish passes on stable material" },
-  { name: "Taper cutting", value: "4-axis", note: "programmed tapers, sharp internal corners and fine detail" },
-  { name: "Wire size", value: "0.1–0.3 mm", note: "wire diameter selected to suit the profile and finish" },
-  { name: "Surface roughness", value: "2 µm", note: "with multiple skim passes" },
-  { name: "Edge condition", value: "burr-free", note: "spark-eroded edges need no deburring pass" },
-  { name: "Cutting force", value: "0 N", note: "non-contact erosion. Thin walls and delicate features stay flat" },
-  { name: "Heat-affected zone", value: "minimal", note: "skim passes remove the recast layer where the job demands it" },
-  { name: "Materials", value: "any conductive metal", note: "tool steel, stainless, titanium, carbide, copper, exotic alloys (and many more)" },
+  {
+    name: "Maximum height of the work piece",
+    value: "420 mm",
+    note: "Makino with H.E.A.T technology handles our tallest, heaviest wire-cutting jobs",
+  },
+  {
+    name: "Positional tolerance",
+    value: "±0.003 mm",
+    note: "typical for finish passes on stable material",
+  },
+  {
+    name: "Taper cutting",
+    value: "4-axis",
+    note: "programmed tapers, sharp internal corners and fine detail",
+  },
+  {
+    name: "Wire size",
+    value: "0.1–0.3 mm",
+    note: "wire diameter selected to suit the profile and finish",
+  },
+  {
+    name: "Surface roughness",
+    value: "2 µm",
+    note: "with multiple skim passes",
+  },
+  {
+    name: "Edge condition",
+    value: "burr-free",
+    note: "spark-eroded edges need no deburring pass",
+  },
+  {
+    name: "Cutting force",
+    value: "0 N",
+    note: "non-contact erosion. Thin walls and delicate features stay flat",
+  },
+  {
+    name: "Heat-affected zone",
+    value: "minimal",
+    note: "skim passes remove the recast layer where the job demands it",
+  },
+  {
+    name: "Materials",
+    value: "any conductive metal",
+    note: "tool steel, stainless, titanium, carbide, copper, exotic alloys (and many more)",
+  },
 ];
 
 const applications = [
@@ -40,6 +76,7 @@ const applications = [
   },
 ];
 ---
+
 <ServicePage
   title="EDM Wire Cutting Solution, Sydney | Wire EDM Pro"
   description="Wire EDM cutting in Sydney: ±0.003 mm tolerances, hardened steel to 60+ HRC, burr-free profiles in any conductive metal. Quotes from drawings or STEP files."
@@ -47,6 +84,8 @@ const applications = [
   heroTitle="The wire never touches the work."
   heroImage="/images/fanuc-c600ia"
   heroImageAlt="Fanuc RoboCut C600 wire EDM machine at Wire EDM Pro, Sydney"
+  serviceName="EDM Wire Cutting"
+  relatedIndustries={["tool-die-making", "aerospace-defence", "medical"]}
   heroLede="Wire EDM erodes metal with a spark, not a cutting edge. A charged wire traces the programmed profile while dielectric water flushes the gap, reaching what conventional tooling can't: hardened dies, splines, keyways and fine detail, cut after heat treatment. On our Makino and Fanuc RoboCut machines, hardened steel cuts as readily as aluminium, and the part feels no force at all."
   specs={specs}
   specNote="Figures are typical wire EDM process capability; tolerance and finish for your part depend on geometry, material and thickness. We confirm both at quote."
@@ -59,16 +98,21 @@ const applications = [
       <div>
         <h2>When wire EDM beats the mill</h2>
         <p class="edm-vs__body">
-          Milling and turning remove metal by force; EDM removes it by spark erosion. That
-          difference decides which process your part wants. Cut <em>after</em> hardening and the
-          profile can't move in heat treatment. Cut without contact and thin webs don't deflect.
-          Cut with a wire and an inside corner needs only the wire's radius. Not a cutter's.
-          And because the work sits submerged in a flushed dielectric bath, the surface finish
-          stays consistent from the first millimetre to the last.
+          Milling and turning remove metal by force; EDM removes it by spark
+          erosion. That difference decides which process your part wants. Cut <em
+            >after</em
+          > hardening and the profile can't move in heat treatment. Cut without contact
+          and thin webs don't deflect. Cut with a wire and an inside corner needs
+          only the wire's radius. Not a cutter's. And because the work sits submerged
+          in a flushed dielectric bath, the surface finish stays consistent from the
+          first millimetre to the last.
         </p>
       </div>
       <ul class="edm-vs__list">
-        <li>Part is already hardened, or must not be re-heat-treated</li>
+        <li>
+          Capable of cutting all metals hardened, soft, ferrous, and
+          non‑ferrous
+        </li>
         <li>Inside corners tighter than any available cutter radius</li>
         <li>Walls or webs too thin to survive clamping and cutting force</li>
         <li>Burrs are unacceptable and hand-finishing is not an option</li>
@@ -79,15 +123,23 @@ const applications = [
 </ServicePage>
 
 <style>
-  .edm-vs { padding-block: var(--space-2xl); }
+  .edm-vs {
+    padding-block: var(--space-2xl);
+  }
   .edm-vs__grid {
     display: grid;
     grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
     gap: var(--space-2xl);
     align-items: start;
   }
-  .edm-vs h2 { font-size: var(--text-xl); max-width: 22ch; }
-  .edm-vs__body { margin-top: var(--space-md); color: var(--color-muted); }
+  .edm-vs h2 {
+    font-size: var(--text-xl);
+    max-width: 22ch;
+  }
+  .edm-vs__body {
+    margin-top: var(--space-md);
+    color: var(--color-muted);
+  }
   .edm-vs__list {
     margin: 0;
     padding: 0;
@@ -108,6 +160,9 @@ const applications = [
     background: var(--color-accent);
   }
   @media (max-width: 56rem) {
-    .edm-vs__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+    .edm-vs__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-lg);
+    }
   }
 </style>
