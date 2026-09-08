@@ -1,0 +1,68 @@
+---
+/**
+ * Directions prompt for the contact page.
+ *
+ * No embedded map: Google Maps would contact Google before the consent banner
+ * had been answered, needs a billing account on file for a key, and is not a
+ * ranking signal. The link below uses the Maps URLs API, which needs no key and
+ * opens the native Maps app on a phone, which is what someone driving here
+ * actually wants.
+ */
+import { ADDRESS_LINE, SITE_NAME } from "../data/site";
+
+const query = `${SITE_NAME}, ${ADDRESS_LINE}`;
+const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
+---
+<aside class="findus">
+  <svg class="findus__mark" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" />
+    <circle cx="12" cy="10" r="2.6" />
+  </svg>
+  <p class="findus__copy">
+    <strong>Kings Park, Western Sydney.</strong>
+    Unit 16 on Garling Rd, signage above the roller door.
+  </p>
+  <a class="btn btn--outline findus__cta" href={directions} target="_blank" rel="noopener">
+    Get directions
+  </a>
+</aside>
+
+<style>
+  .findus {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-top: var(--space-2xl);
+    padding: var(--space-lg);
+    background: var(--color-surface);
+    border: var(--rule-hairline);
+    border-left: 4px solid var(--color-accent-2);
+    border-radius: var(--radius-sm);
+  }
+  .findus__mark {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: var(--color-accent-2);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .findus__copy {
+    flex: 1 1 18rem;
+    margin: 0;
+    color: var(--color-muted);
+    max-width: none;
+  }
+  .findus__copy strong {
+    color: var(--color-ink);
+    font-family: var(--font-display);
+  }
+  .findus__cta { flex: none; }
+
+  @media (max-width: 40rem) {
+    .findus__cta { width: 100%; justify-content: center; }
+  }
+</style>

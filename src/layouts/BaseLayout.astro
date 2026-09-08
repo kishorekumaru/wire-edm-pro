@@ -8,6 +8,7 @@ import {
   ADDRESS,
   BUSINESS_DESCRIPTION,
   EMAIL,
+  GEO,
   PHONE_LANDLINE,
   PHONE_MOBILE,
   SAME_AS,
@@ -72,6 +73,7 @@ const entityGraph = {
       telephone: [PHONE_LANDLINE.intl, PHONE_MOBILE.intl],
       email: EMAIL,
       address: postalAddress,
+      geo: { "@type": "GeoCoordinates", ...GEO },
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
