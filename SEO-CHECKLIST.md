@@ -169,11 +169,10 @@ anything else.
 - [ ] **Grab the profile's share link** (GBP > Share your Business Profile). It looks
       like `https://g.page/...` or `https://maps.app.goo.gl/...`. It goes in
       section 5.
-- [ ] **Get the exact coordinates.** Right-click the pin in Google Maps and copy the
-      lat/long. Paste them here so they can be added to the `LocalBusiness` schema as
-      `geo`. They were deliberately left out of the code rather than estimated:
-
-      lat: ______________  long: ______________
+- [x] **Exact coordinates captured** (2026-09-08): `-33.743658, 150.911435`. Now live
+      in `GEO` in `src/data/site.ts` and emitted as `geo` on the `LocalBusiness` node
+      of all 22 pages. `geo` is a recommended property in Google's Local Business
+      structured data reference.
 
 - [ ] Ask three or four long-standing customers for a Google review. Reviews are a
       brand-query ranking factor and they are the hardest item here to fake, which
@@ -257,8 +256,10 @@ Order does not matter. Only add URLs that actually resolve to a live profile for
 this business. A wrong or dead `sameAs` weakens the signal rather than adding to it.
 
 - [ ] Add each URL as its profile goes live.
-- [ ] Add the `geo` coordinates from section 1 to the `LocalBusiness` node in
-      `src/layouts/BaseLayout.astro`.
+- [x] ~~Add the `geo` coordinates to the `LocalBusiness` node.~~ Done 2026-09-08.
+- [ ] Get the **Place ID or share link of the business listing** (not the address).
+      The Quick Builder output geocoded the street address instead, so its place ID
+      is not the profile. Needed for `hasMap` and for `SAME_AS`.
 - [ ] Redeploy, then re-run Google's
       [Rich Results Test](https://search.google.com/test/rich-results) against
       `https://wireedmpro.com.au/` to confirm the graph parses.

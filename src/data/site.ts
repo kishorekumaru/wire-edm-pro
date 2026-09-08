@@ -25,6 +25,17 @@ export const PHONE_LANDLINE = { display: "02 8604 8347", e164: "+61286048347", i
 export const PHONE_MOBILE = { display: "0452 558 052", e164: "+61452558052", intl: "+61 452 558 052" } as const;
 export const EMAIL = "wireedmpro@gmail.com";
 
+/**
+ * Coordinates of the Garling Rd premises, taken from the business's own Google
+ * Maps pin. `geo` is a recommended property on Google's Local Business
+ * structured data reference, which is why it is here and the map embed is not:
+ * the coordinates are a ranking input, an embedded map is not.
+ *
+ * Six decimal places is roughly 0.1 m. The pin reported more; the extra digits
+ * were false precision.
+ */
+export const GEO = { latitude: -33.743658, longitude: 150.911435 } as const;
+
 export const BUSINESS_DESCRIPTION =
   "Precision machining in Sydney: wire EDM, EDM hole drilling, CNC milling, CNC turning and laser cutting for defence, aerospace, medical, mining and general engineering.";
 
