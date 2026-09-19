@@ -9,6 +9,8 @@ import {
   BUSINESS_DESCRIPTION,
   EMAIL,
   GEO,
+  GOOGLE_BUSINESS_PROFILE,
+  LEGAL_NAME,
   PHONE_LANDLINE,
   PHONE_MOBILE,
   SAME_AS,
@@ -53,6 +55,7 @@ const entityGraph = {
       "@type": "Organization",
       "@id": orgId,
       name: SITE_NAME,
+      legalName: LEGAL_NAME,
       url: home,
       description: BUSINESS_DESCRIPTION,
       logo: { "@type": "ImageObject", url: logoUrl, caption: SITE_NAME },
@@ -74,6 +77,7 @@ const entityGraph = {
       email: EMAIL,
       address: postalAddress,
       geo: { "@type": "GeoCoordinates", ...GEO },
+      hasMap: GOOGLE_BUSINESS_PROFILE,
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",

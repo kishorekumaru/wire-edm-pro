@@ -257,9 +257,14 @@ this business. A wrong or dead `sameAs` weakens the signal rather than adding to
 
 - [ ] Add each URL as its profile goes live.
 - [x] ~~Add the `geo` coordinates to the `LocalBusiness` node.~~ Done 2026-09-08.
-- [ ] Get the **Place ID or share link of the business listing** (not the address).
-      The Quick Builder output geocoded the street address instead, so its place ID
-      is not the profile. Needed for `hasMap` and for `SAME_AS`.
+- [x] ~~Get the Place ID or share link of the business listing.~~ Done 2026-09-08:
+      `https://www.google.com/maps?cid=14387595335186080408`. Now live in `SAME_AS`
+      and as `hasMap`. The `geo` coordinates were corrected to the listing pin at the
+      same time; the earlier address geocode was ~167 m off.
+- [ ] **Decide on the name mismatch.** The profile lists **Wire EDM Pro Pty Ltd**;
+      the site trades as **Wire EDM Pro**. Both are now declared in schema (`name` +
+      `legalName`), so this is handled, but every directory listing in section 3 must
+      use **one** of them consistently. Pick the one on your signage and stick to it.
 - [ ] Redeploy, then re-run Google's
       [Rich Results Test](https://search.google.com/test/rich-results) against
       `https://wireedmpro.com.au/` to confirm the graph parses.
