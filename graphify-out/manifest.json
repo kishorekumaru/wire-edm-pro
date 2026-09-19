@@ -1,0 +1,1376 @@
+{
+  ".claude/.headroom_wrap_marker.json": {
+    "mtime": 1789784277.1422658,
+    "seen": 1789785678.921222,
+    "ast_hash": "77da9debce6c5cf661a63968e041eafe",
+    "semantic_hash": "77da9debce6c5cf661a63968e041eafe"
+  },
+  ".claude/.headroom_wrap_owners.json": {
+    "mtime": 1789784277.1429026,
+    "seen": 1789785678.921225,
+    "ast_hash": "51fa6ec60fcce989554f8ece43aac54a",
+    "semantic_hash": "51fa6ec60fcce989554f8ece43aac54a"
+  },
+  ".claude/settings.json": {
+    "mtime": 1789784276.3154917,
+    "seen": 1789785678.921226,
+    "ast_hash": "c2e9d9fc1aa9329624202d5ade4451fc",
+    "semantic_hash": "c2e9d9fc1aa9329624202d5ade4451fc"
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1789784277.1432977,
+    "seen": 1789785678.921226,
+    "ast_hash": "412bb3b44baaf61b30206e1971c65f78",
+    "semantic_hash": "412bb3b44baaf61b30206e1971c65f78"
+  },
+  ".graphlean/config.json": {
+    "mtime": 1789784276.3826792,
+    "seen": 1789785678.921227,
+    "ast_hash": "86135eb4b0595863197177a0d013329a",
+    "semantic_hash": "86135eb4b0595863197177a0d013329a"
+  },
+  ".hallmark/log.json": {
+    "mtime": 1789783775.3003597,
+    "seen": 1789785678.921227,
+    "ast_hash": "2b36cc09d4f99c35a16a05950b659741",
+    "semantic_hash": "2b36cc09d4f99c35a16a05950b659741"
+  },
+  "astro.config.mjs": {
+    "mtime": 1789783775.3007975,
+    "seen": 1789785678.921228,
+    "ast_hash": "20334a062bb091b258b49eb58231d0e5",
+    "semantic_hash": "20334a062bb091b258b49eb58231d0e5"
+  },
+  "package.json": {
+    "mtime": 1789783775.3762643,
+    "seen": 1789785678.921228,
+    "ast_hash": "3002d93accd926bbfbc4dd40a83cf17a",
+    "semantic_hash": "3002d93accd926bbfbc4dd40a83cf17a"
+  },
+  "scripts/gen-sitemap.mjs": {
+    "mtime": 1789783775.3984375,
+    "seen": 1789785678.921228,
+    "ast_hash": "b71eb331bd2e23f7a40c1695c7ecf434",
+    "semantic_hash": "b71eb331bd2e23f7a40c1695c7ecf434"
+  },
+  "skills-lock.json": {
+    "mtime": 1789783775.3984928,
+    "seen": 1789785678.9212291,
+    "ast_hash": "1fdb54277684f41969c8d0aad8f2329f",
+    "semantic_hash": "1fdb54277684f41969c8d0aad8f2329f"
+  },
+  "src/components/ConsentBanner.astro": {
+    "mtime": 1789783775.398616,
+    "seen": 1789785678.9212291,
+    "ast_hash": "dc449ec2824147baf5b0617099ab73c0",
+    "semantic_hash": "dc449ec2824147baf5b0617099ab73c0"
+  },
+  "src/components/CtaBand.astro": {
+    "mtime": 1789783775.398674,
+    "seen": 1789785678.9212291,
+    "ast_hash": "ffa63289ad21b2375ada813b32d6c6fd",
+    "semantic_hash": "ffa63289ad21b2375ada813b32d6c6fd"
+  },
+  "src/components/FindUs.astro": {
+    "mtime": 1789784112.9017963,
+    "seen": 1789785678.92123,
+    "ast_hash": "71ad4942385cb251d332adedd8129807",
+    "semantic_hash": "71ad4942385cb251d332adedd8129807"
+  },
+  "src/components/Footer.astro": {
+    "mtime": 1789783775.3987846,
+    "seen": 1789785678.92123,
+    "ast_hash": "fd444f548627e6cf34ccc46f9f7ea25f",
+    "semantic_hash": "fd444f548627e6cf34ccc46f9f7ea25f"
+  },
+  "src/components/GoogleAnalytics.astro": {
+    "mtime": 1789783775.3988378,
+    "seen": 1789785678.92123,
+    "ast_hash": "a19747d0846741dbbcbf0cedd26a3f16",
+    "semantic_hash": "a19747d0846741dbbcbf0cedd26a3f16"
+  },
+  "src/components/Header.astro": {
+    "mtime": 1789783775.3989108,
+    "seen": 1789785678.921231,
+    "ast_hash": "c64de08495dfe1aee0a8138610823957",
+    "semantic_hash": "c64de08495dfe1aee0a8138610823957"
+  },
+  "src/components/HeroGraphicLight.astro": {
+    "mtime": 1789783775.3990486,
+    "seen": 1789785678.921231,
+    "ast_hash": "e08e44e87d41ef4a0ea43713eeb0f1ce",
+    "semantic_hash": "e08e44e87d41ef4a0ea43713eeb0f1ce"
+  },
+  "src/components/ServicePage.astro": {
+    "mtime": 1789783775.3992176,
+    "seen": 1789785678.921231,
+    "ast_hash": "4e6e70809671ed3b12668c7f083e08ea",
+    "semantic_hash": "4e6e70809671ed3b12668c7f083e08ea"
+  },
+  "src/components/TurnkeyFlow.astro": {
+    "mtime": 1789783775.3992796,
+    "seen": 1789785678.921232,
+    "ast_hash": "2f65228cc45052f76ff9083b6882fca1",
+    "semantic_hash": "2f65228cc45052f76ff9083b6882fca1"
+  },
+  "src/config.ts": {
+    "mtime": 1789783775.3993309,
+    "seen": 1789785678.921232,
+    "ast_hash": "6d1fc869c4e3cdc3a0339adf1c771165",
+    "semantic_hash": "6d1fc869c4e3cdc3a0339adf1c771165"
+  },
+  "src/data/industries.ts": {
+    "mtime": 1789783775.399506,
+    "seen": 1789785678.921232,
+    "ast_hash": "f8853cd0b8dfb250b6fb19498d412134",
+    "semantic_hash": "f8853cd0b8dfb250b6fb19498d412134"
+  },
+  "src/data/site.ts": {
+    "mtime": 1789784112.9020925,
+    "seen": 1789785678.921233,
+    "ast_hash": "6aafdc819a30cce2e11e8b7fca9e1baf",
+    "semantic_hash": "6aafdc819a30cce2e11e8b7fca9e1baf"
+  },
+  "src/data/solutions.ts": {
+    "mtime": 1789783775.3996096,
+    "seen": 1789785678.921233,
+    "ast_hash": "b479832d22de35b38d24eefa72533996",
+    "semantic_hash": "b479832d22de35b38d24eefa72533996"
+  },
+  "src/layouts/BaseLayout.astro": {
+    "mtime": 1789784112.9023385,
+    "seen": 1789785678.921234,
+    "ast_hash": "e057554bf0d79b4a10ae498d8c727386",
+    "semantic_hash": "e057554bf0d79b4a10ae498d8c727386"
+  },
+  "src/lib/breadcrumbs.ts": {
+    "mtime": 1789783775.3997831,
+    "seen": 1789785678.921234,
+    "ast_hash": "6d33bb61f421c39895c3b142048aefda",
+    "semantic_hash": "6d33bb61f421c39895c3b142048aefda"
+  },
+  "src/pages/404.astro": {
+    "mtime": 1789783775.3998568,
+    "seen": 1789785678.921234,
+    "ast_hash": "4584759f8e886cefd46e99d65cb3fbea",
+    "semantic_hash": "4584759f8e886cefd46e99d65cb3fbea"
+  },
+  "src/pages/about.astro": {
+    "mtime": 1789783775.3999274,
+    "seen": 1789785678.921234,
+    "ast_hash": "eab30b9a91cb9d3a691a2c94950a97d3",
+    "semantic_hash": "eab30b9a91cb9d3a691a2c94950a97d3"
+  },
+  "src/pages/contact.astro": {
+    "mtime": 1789784112.9024498,
+    "seen": 1789785678.9212348,
+    "ast_hash": "397b2f81921ab58479407545aba9eb10",
+    "semantic_hash": "397b2f81921ab58479407545aba9eb10"
+  },
+  "src/pages/edm-drills.astro": {
+    "mtime": 1789783775.4000382,
+    "seen": 1789785678.9212348,
+    "ast_hash": "6ba35f5ada24bc11b278b41306682d73",
+    "semantic_hash": "6ba35f5ada24bc11b278b41306682d73"
+  },
+  "src/pages/edm-wire-cutting.astro": {
+    "mtime": 1789783775.4001062,
+    "seen": 1789785678.9212348,
+    "ast_hash": "d218d8cbb41765db28efba10e5013b43",
+    "semantic_hash": "d218d8cbb41765db28efba10e5013b43"
+  },
+  "src/pages/index.astro": {
+    "mtime": 1789783775.4001799,
+    "seen": 1789785678.921236,
+    "ast_hash": "47141d684bf10eca00ec737abf1d9fe2",
+    "semantic_hash": "47141d684bf10eca00ec737abf1d9fe2"
+  },
+  "src/pages/industries/[slug].astro": {
+    "mtime": 1789783775.4002688,
+    "seen": 1789785678.921236,
+    "ast_hash": "d52a759de3f54273650dbb207944fad7",
+    "semantic_hash": "d52a759de3f54273650dbb207944fad7"
+  },
+  "src/pages/industries/index.astro": {
+    "mtime": 1789783775.400319,
+    "seen": 1789785678.921236,
+    "ast_hash": "5abc91868907150b514643e0b4b641f2",
+    "semantic_hash": "5abc91868907150b514643e0b4b641f2"
+  },
+  "src/pages/milling.astro": {
+    "mtime": 1789783775.400377,
+    "seen": 1789785678.921237,
+    "ast_hash": "9dc1cb24cd2d0087a50f7672c1cb80a8",
+    "semantic_hash": "9dc1cb24cd2d0087a50f7672c1cb80a8"
+  },
+  "src/pages/quality-assurance.astro": {
+    "mtime": 1789783775.4004383,
+    "seen": 1789785678.921237,
+    "ast_hash": "6c04e858023e9290ba35a718bc68e487",
+    "semantic_hash": "6c04e858023e9290ba35a718bc68e487"
+  },
+  "src/pages/reverse-engineering.astro": {
+    "mtime": 1789783775.4004955,
+    "seen": 1789785678.921237,
+    "ast_hash": "b158b7c54f3461174fc35e5871fb67f2",
+    "semantic_hash": "b158b7c54f3461174fc35e5871fb67f2"
+  },
+  "src/pages/turning.astro": {
+    "mtime": 1789783775.4005504,
+    "seen": 1789785678.921237,
+    "ast_hash": "86c4b07397632e1ec9170bdc8db90cad",
+    "semantic_hash": "86c4b07397632e1ec9170bdc8db90cad"
+  },
+  "src/scripts/samplePart3d.ts": {
+    "mtime": 1789783775.4006815,
+    "seen": 1789785678.921238,
+    "ast_hash": "a12cce111f6a739682044184bae72da4",
+    "semantic_hash": "a12cce111f6a739682044184bae72da4"
+  },
+  "tsconfig.json": {
+    "mtime": 1789783775.4008777,
+    "seen": 1789785678.921238,
+    "ast_hash": "07348a6635ab5032e9c380c7c090d92b",
+    "semantic_hash": "07348a6635ab5032e9c380c7c090d92b"
+  },
+  ".agents/skills/brandkit/SKILL.md": {
+    "mtime": 1789783775.2960165,
+    "seen": 1789785678.921238,
+    "ast_hash": "cd3701c774e9bd7ce4fc9078377d517f",
+    "semantic_hash": "cd3701c774e9bd7ce4fc9078377d517f"
+  },
+  ".agents/skills/design-taste-frontend-v1/SKILL.md": {
+    "mtime": 1789783775.2961695,
+    "seen": 1789785678.9212391,
+    "ast_hash": "d0ee97b35983cf5e786e5b65994a2ecb",
+    "semantic_hash": "d0ee97b35983cf5e786e5b65994a2ecb"
+  },
+  ".agents/skills/design-taste-frontend/SKILL.md": {
+    "mtime": 1789783775.2964256,
+    "seen": 1789785678.9212391,
+    "ast_hash": "6f73606d20cd948b471b1ce1767aab50",
+    "semantic_hash": "6f73606d20cd948b471b1ce1767aab50"
+  },
+  ".agents/skills/full-output-enforcement/SKILL.md": {
+    "mtime": 1789783775.2967854,
+    "seen": 1789785678.9212391,
+    "ast_hash": "5ed528ceb72c5d089757ba70c5a434e8",
+    "semantic_hash": "5ed528ceb72c5d089757ba70c5a434e8"
+  },
+  ".agents/skills/gpt-taste/SKILL.md": {
+    "mtime": 1789783775.296912,
+    "seen": 1789785678.92124,
+    "ast_hash": "0968d17fda872b36dc35e6bcc0c9af36",
+    "semantic_hash": "0968d17fda872b36dc35e6bcc0c9af36"
+  },
+  ".github/workflows/deploy.yml": {
+    "mtime": 1789786135.2327876,
+    "seen": 1789786142.44353,
+    "ast_hash": "88b600820cd330f02ea5a8f6a3fb7035",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1789784276.315296,
+    "seen": 1789785678.92124,
+    "ast_hash": "76ccd3bfd5881ac0e9179e3e11e9676c",
+    "semantic_hash": "76ccd3bfd5881ac0e9179e3e11e9676c"
+  },
+  "CONTENT-TODO.md": {
+    "mtime": 1789783775.300502,
+    "seen": 1789785678.921241,
+    "ast_hash": "790f108820595f9651ef3bfe41c40148",
+    "semantic_hash": "790f108820595f9651ef3bfe41c40148"
+  },
+  "DEPLOYMENT.md": {
+    "mtime": 1789786136.5164924,
+    "seen": 1789786142.443533,
+    "ast_hash": "9c7aba7fb017026eea4a378318ed493c",
+    "semantic_hash": ""
+  },
+  "SEO-CHECKLIST.md": {
+    "mtime": 1789784112.9016964,
+    "seen": 1789785678.921241,
+    "ast_hash": "e40331f89f9ce65dd7a99bc0ffd22b16",
+    "semantic_hash": "e40331f89f9ce65dd7a99bc0ffd22b16"
+  },
+  "openspec/changes/create-corporate-website/.openspec.yaml": {
+    "mtime": 1789783775.374399,
+    "seen": 1789785678.921241,
+    "ast_hash": "f50867b969d879995a8679e4daa5f361",
+    "semantic_hash": "f50867b969d879995a8679e4daa5f361"
+  },
+  "openspec/changes/create-corporate-website/design.md": {
+    "mtime": 1789783775.3744762,
+    "seen": 1789785678.921242,
+    "ast_hash": "9fcd2d8a6e1c330b68842f06ab13bb28",
+    "semantic_hash": "9fcd2d8a6e1c330b68842f06ab13bb28"
+  },
+  "openspec/changes/create-corporate-website/proposal.md": {
+    "mtime": 1789783775.3745377,
+    "seen": 1789785678.921242,
+    "ast_hash": "04d1e3260f2c65f8b916bf44213b07bb",
+    "semantic_hash": "04d1e3260f2c65f8b916bf44213b07bb"
+  },
+  "openspec/changes/create-corporate-website/specs/company-pages/spec.md": {
+    "mtime": 1789783775.374649,
+    "seen": 1789785678.921242,
+    "ast_hash": "bb972cc6e3f69b2ebcfc723fa7da6cc6",
+    "semantic_hash": "bb972cc6e3f69b2ebcfc723fa7da6cc6"
+  },
+  "openspec/changes/create-corporate-website/specs/contact-page/spec.md": {
+    "mtime": 1789783775.3747313,
+    "seen": 1789785678.921243,
+    "ast_hash": "55ca9776f3cf189bf738264ae0cb6177",
+    "semantic_hash": "55ca9776f3cf189bf738264ae0cb6177"
+  },
+  "openspec/changes/create-corporate-website/specs/design-system/spec.md": {
+    "mtime": 1789783775.374816,
+    "seen": 1789785678.921243,
+    "ast_hash": "ba061ce23d2f38e8fdf3e4598198d4c5",
+    "semantic_hash": "ba061ce23d2f38e8fdf3e4598198d4c5"
+  },
+  "openspec/changes/create-corporate-website/specs/hero-visualization/spec.md": {
+    "mtime": 1789783775.374905,
+    "seen": 1789785678.921243,
+    "ast_hash": "2af2abfa1a91dfafcb8031b1c06ade89",
+    "semantic_hash": "2af2abfa1a91dfafcb8031b1c06ade89"
+  },
+  "openspec/changes/create-corporate-website/specs/home-page/spec.md": {
+    "mtime": 1789783775.3749914,
+    "seen": 1789785678.921243,
+    "ast_hash": "c4df1fdf749eaa75e108b11de52c4250",
+    "semantic_hash": "c4df1fdf749eaa75e108b11de52c4250"
+  },
+  "openspec/changes/create-corporate-website/specs/industry-pages/spec.md": {
+    "mtime": 1789783775.375083,
+    "seen": 1789785678.921244,
+    "ast_hash": "1656735ef693162667bfdff3090d795a",
+    "semantic_hash": "1656735ef693162667bfdff3090d795a"
+  },
+  "openspec/changes/create-corporate-website/specs/service-pages/spec.md": {
+    "mtime": 1789783775.375175,
+    "seen": 1789785678.921244,
+    "ast_hash": "6538375895551af89f75836f838bb12c",
+    "semantic_hash": "6538375895551af89f75836f838bb12c"
+  },
+  "openspec/changes/create-corporate-website/specs/static-deployment/spec.md": {
+    "mtime": 1789783775.3752508,
+    "seen": 1789785678.921244,
+    "ast_hash": "72457a228ab0c21a7469a768f7e4df3e",
+    "semantic_hash": "72457a228ab0c21a7469a768f7e4df3e"
+  },
+  "openspec/changes/create-corporate-website/tasks.md": {
+    "mtime": 1789783775.3753123,
+    "seen": 1789785678.9212449,
+    "ast_hash": "b0f64e6a53631bc88a14d3da479568a8",
+    "semantic_hash": "b0f64e6a53631bc88a14d3da479568a8"
+  },
+  "openspec/changes/turnkey-solutions-update/.openspec.yaml": {
+    "mtime": 1789783775.3754022,
+    "seen": 1789785678.9212449,
+    "ast_hash": "2aff0556fc211137f182b8a31bcc3fe0",
+    "semantic_hash": "2aff0556fc211137f182b8a31bcc3fe0"
+  },
+  "openspec/changes/turnkey-solutions-update/design.md": {
+    "mtime": 1789783775.3754625,
+    "seen": 1789785678.9212449,
+    "ast_hash": "e90f39dbe3799f0c58b713a024646cd1",
+    "semantic_hash": "e90f39dbe3799f0c58b713a024646cd1"
+  },
+  "openspec/changes/turnkey-solutions-update/proposal.md": {
+    "mtime": 1789783775.3755238,
+    "seen": 1789785678.921246,
+    "ast_hash": "09fa09a80f2d86dade92c5633b9dc931",
+    "semantic_hash": "09fa09a80f2d86dade92c5633b9dc931"
+  },
+  "openspec/changes/turnkey-solutions-update/specs/quality-assurance-page/spec.md": {
+    "mtime": 1789783775.3756375,
+    "seen": 1789785678.921246,
+    "ast_hash": "1a355a8aae8a88346ce64d9c27c985a4",
+    "semantic_hash": "1a355a8aae8a88346ce64d9c27c985a4"
+  },
+  "openspec/changes/turnkey-solutions-update/specs/reverse-engineering-page/spec.md": {
+    "mtime": 1789783775.3757195,
+    "seen": 1789785678.921246,
+    "ast_hash": "43fe0ab615e0173d1bebae2172db03fe",
+    "semantic_hash": "43fe0ab615e0173d1bebae2172db03fe"
+  },
+  "openspec/changes/turnkey-solutions-update/specs/site-revisions/spec.md": {
+    "mtime": 1789783775.3758078,
+    "seen": 1789785678.921246,
+    "ast_hash": "f7e3bf6640492eea3cf3572b4ded0a23",
+    "semantic_hash": "f7e3bf6640492eea3cf3572b4ded0a23"
+  },
+  "openspec/changes/turnkey-solutions-update/specs/turnkey-lifecycle/spec.md": {
+    "mtime": 1789783775.375888,
+    "seen": 1789785678.921247,
+    "ast_hash": "48fbc314ce0f014257863352df07ba5d",
+    "semantic_hash": "48fbc314ce0f014257863352df07ba5d"
+  },
+  "openspec/changes/turnkey-solutions-update/tasks.md": {
+    "mtime": 1789783775.3759398,
+    "seen": 1789785678.921247,
+    "ast_hash": "ce1998079ac6f4dfd27fc89cd6124c39",
+    "semantic_hash": "ce1998079ac6f4dfd27fc89cd6124c39"
+  },
+  "openspec/config.yaml": {
+    "mtime": 1789783775.375995,
+    "seen": 1789785678.921247,
+    "ast_hash": "9e3e7672b387a282583011181ab35f9a",
+    "semantic_hash": "9e3e7672b387a282583011181ab35f9a"
+  },
+  "public/llms.txt": {
+    "mtime": 1789783775.398308,
+    "seen": 1789785678.921248,
+    "ast_hash": "2849888fb0a9c0e7b3f2b12ba06b860c",
+    "semantic_hash": "2849888fb0a9c0e7b3f2b12ba06b860c"
+  },
+  "public/robots.txt": {
+    "mtime": 1789783775.3983507,
+    "seen": 1789785678.921248,
+    "ast_hash": "baad4f4648a1e04f00a1b4b1ce41ca23",
+    "semantic_hash": "baad4f4648a1e04f00a1b4b1ce41ca23"
+  },
+  "docs/WIRE EDM PRO-WEB CONTENT.pdf": {
+    "mtime": 1789783775.301671,
+    "seen": 1789785678.921248,
+    "ast_hash": "80d9a23eea8fad866d82388bd88e3697",
+    "semantic_hash": "80d9a23eea8fad866d82388bd88e3697"
+  },
+  "docs/wire-edm-pro-website-overview.pdf": {
+    "mtime": 1789783775.3027627,
+    "seen": 1789785678.921249,
+    "ast_hash": "8b095799cb672536a67ab0e7cf91dc07",
+    "semantic_hash": "8b095799cb672536a67ab0e7cf91dc07"
+  },
+  "images/CNC-turning.png": {
+    "mtime": 1789783775.3039992,
+    "seen": 1789785678.921249,
+    "ast_hash": "3622a8a350a5d27e8ece5cbf312a664c",
+    "semantic_hash": "3622a8a350a5d27e8ece5cbf312a664c"
+  },
+  "images/CNC.png": {
+    "mtime": 1789783775.3049192,
+    "seen": 1789785678.921249,
+    "ast_hash": "f6689fe61be9a22d590e5ba08212f303",
+    "semantic_hash": "f6689fe61be9a22d590e5ba08212f303"
+  },
+  "images/EcoMill-updated.png": {
+    "mtime": 1789783775.3058362,
+    "seen": 1789785678.921249,
+    "ast_hash": "4c82ab188a3cda5e5e2ed8836d101a92",
+    "semantic_hash": "4c82ab188a3cda5e5e2ed8836d101a92"
+  },
+  "images/IMG_2313.jpg": {
+    "mtime": 1789783775.3093174,
+    "seen": 1789785678.921251,
+    "ast_hash": "0a1f9fce9644d233fa0a81d07a16ff2c",
+    "semantic_hash": "0a1f9fce9644d233fa0a81d07a16ff2c"
+  },
+  "images/IMG_2314.jpg": {
+    "mtime": 1789783775.311128,
+    "seen": 1789785678.921252,
+    "ast_hash": "a66447e98bf22a3d2c6ebc11a972042f",
+    "semantic_hash": "a66447e98bf22a3d2c6ebc11a972042f"
+  },
+  "images/IMG_2315.jpg": {
+    "mtime": 1789783775.3134108,
+    "seen": 1789785678.921252,
+    "ast_hash": "eb132052009a13204798274e704eba12",
+    "semantic_hash": "eb132052009a13204798274e704eba12"
+  },
+  "images/IMG_2316.jpg": {
+    "mtime": 1789783775.3167818,
+    "seen": 1789785678.921252,
+    "ast_hash": "669fdf40a198fc7b5821aef424a7be32",
+    "semantic_hash": "669fdf40a198fc7b5821aef424a7be32"
+  },
+  "images/IMG_2317.jpg": {
+    "mtime": 1789783775.3183177,
+    "seen": 1789785678.921252,
+    "ast_hash": "ab0a053d5cfad59a1dc1fdbf8113ca2c",
+    "semantic_hash": "ab0a053d5cfad59a1dc1fdbf8113ca2c"
+  },
+  "images/IMG_2318.jpg": {
+    "mtime": 1789783775.3205662,
+    "seen": 1789785678.9212532,
+    "ast_hash": "efffefa27067d07f01532f6640f28129",
+    "semantic_hash": "efffefa27067d07f01532f6640f28129"
+  },
+  "images/IMG_2319.jpg": {
+    "mtime": 1789783775.3223298,
+    "seen": 1789785678.9212532,
+    "ast_hash": "69b5c94af45f41d24f5969dce8a75bf0",
+    "semantic_hash": "69b5c94af45f41d24f5969dce8a75bf0"
+  },
+  "images/IMG_2320.jpg": {
+    "mtime": 1789783775.3264184,
+    "seen": 1789785678.9212532,
+    "ast_hash": "bb47f0e34414fd20945156b4f246a083",
+    "semantic_hash": "bb47f0e34414fd20945156b4f246a083"
+  },
+  "images/Makino-latest.png": {
+    "mtime": 1789783775.3281183,
+    "seen": 1789785678.921254,
+    "ast_hash": "fa5eaa4e69c6b85c8dfaa54dc6789d0c",
+    "semantic_hash": "fa5eaa4e69c6b85c8dfaa54dc6789d0c"
+  },
+  "images/Office internal.png": {
+    "mtime": 1789783775.3291495,
+    "seen": 1789785678.921254,
+    "ast_hash": "a65ed4fec73ce57e68c36dd3718898fa",
+    "semantic_hash": "a65ed4fec73ce57e68c36dd3718898fa"
+  },
+  "images/Quality Assurance.png": {
+    "mtime": 1789783775.3307416,
+    "seen": 1789785678.9212549,
+    "ast_hash": "9de3bbf4e16df7e540ee9727df59b71a",
+    "semantic_hash": "9de3bbf4e16df7e540ee9727df59b71a"
+  },
+  "images/Reverse-eng-banner.png": {
+    "mtime": 1789783775.3338377,
+    "seen": 1789785678.9212549,
+    "ast_hash": "bb44cfe9d8709a656b1eb36bff6bb22d",
+    "semantic_hash": "bb44cfe9d8709a656b1eb36bff6bb22d"
+  },
+  "images/WireEDM-2-actual.png": {
+    "mtime": 1789783775.3350835,
+    "seen": 1789785678.9212549,
+    "ast_hash": "5f32afb250b39eab4be72ae33ebc0dd2",
+    "semantic_hash": "5f32afb250b39eab4be72ae33ebc0dd2"
+  },
+  "images/WireEDM1-actual.png": {
+    "mtime": 1789783775.3442247,
+    "seen": 1789785678.9212558,
+    "ast_hash": "ff614033d2f8cc190a07724de0eb6d5c",
+    "semantic_hash": "ff614033d2f8cc190a07724de0eb6d5c"
+  },
+  "images/WireEdm-Office.png": {
+    "mtime": 1789783775.3520188,
+    "seen": 1789785678.9212558,
+    "ast_hash": "7a80b28712f763b1f0eff33a0f9d23a3",
+    "semantic_hash": "7a80b28712f763b1f0eff33a0f9d23a3"
+  },
+  "images/WireEdm2.png": {
+    "mtime": 1789783775.3543699,
+    "seen": 1789785678.9212558,
+    "ast_hash": "0061958e357769041a9ba48b27bc4410",
+    "semantic_hash": "0061958e357769041a9ba48b27bc4410"
+  },
+  "images/WireEdmOffice.png": {
+    "mtime": 1789783775.3555713,
+    "seen": 1789785678.921257,
+    "ast_hash": "3d614b3e3aab2e7e34c72b8585788dcd",
+    "semantic_hash": "3d614b3e3aab2e7e34c72b8585788dcd"
+  },
+  "images/WiredEdm1.png": {
+    "mtime": 1789783775.356654,
+    "seen": 1789785678.921257,
+    "ast_hash": "556186eb65cd74489f11cb095bfacbc7",
+    "semantic_hash": "556186eb65cd74489f11cb095bfacbc7"
+  },
+  "images/circle-edm.jpg": {
+    "mtime": 1789783775.3568833,
+    "seen": 1789785678.921257,
+    "ast_hash": "4fdef88b9c206f40e8ff9d29fe4cfc18",
+    "semantic_hash": "4fdef88b9c206f40e8ff9d29fe4cfc18"
+  },
+  "images/cnc-milling.png": {
+    "mtime": 1789783775.3581781,
+    "seen": 1789785678.921258,
+    "ast_hash": "b0b0b77f66ecf076669148db5ce12ed8",
+    "semantic_hash": "b0b0b77f66ecf076669148db5ce12ed8"
+  },
+  "images/drill-wire-edm-pro.png": {
+    "mtime": 1789783775.3594446,
+    "seen": 1789785678.921258,
+    "ast_hash": "4dcd637b4f44f16ffc34f7d8e7a9f07a",
+    "semantic_hash": "4dcd637b4f44f16ffc34f7d8e7a9f07a"
+  },
+  "images/makino-rectangle.png": {
+    "mtime": 1789783775.3602948,
+    "seen": 1789785678.921258,
+    "ast_hash": "d2c1a1519452f8c647b9b2fa27379a0a",
+    "semantic_hash": "d2c1a1519452f8c647b9b2fa27379a0a"
+  },
+  "images/makino-square.png": {
+    "mtime": 1789783775.3613713,
+    "seen": 1789785678.921258,
+    "ast_hash": "bbccb9a250500a8b8560145e879a31f4",
+    "semantic_hash": "bbccb9a250500a8b8560145e879a31f4"
+  },
+  "images/qc-wireedm-pro.png": {
+    "mtime": 1789783775.362169,
+    "seen": 1789785678.921259,
+    "ast_hash": "25c3bba18adf9f68833fb65719277f50",
+    "semantic_hash": "25c3bba18adf9f68833fb65719277f50"
+  },
+  "images/wire-edm-high-res.png": {
+    "mtime": 1789783775.373936,
+    "seen": 1789785678.921259,
+    "ast_hash": "be72b9d9e9a25fbf6bf11947fb1bd968",
+    "semantic_hash": "be72b9d9e9a25fbf6bf11947fb1bd968"
+  },
+  "images/wire-edm-logo.png": {
+    "mtime": 1789783775.3742206,
+    "seen": 1789785678.921259,
+    "ast_hash": "719840b3eda859c012a6403f453b3657",
+    "semantic_hash": "719840b3eda859c012a6403f453b3657"
+  },
+  "public/apple-touch-icon.png": {
+    "mtime": 1789783775.376375,
+    "seen": 1789785678.92126,
+    "ast_hash": "9027f6b7ab7dfa3558b573a9dc26942e",
+    "semantic_hash": "9027f6b7ab7dfa3558b573a9dc26942e"
+  },
+  "public/favicon-32.png": {
+    "mtime": 1789783775.376446,
+    "seen": 1789785678.92126,
+    "ast_hash": "dc28602cdd919e6e677b63bed1c4b3ef",
+    "semantic_hash": "dc28602cdd919e6e677b63bed1c4b3ef"
+  },
+  "public/favicon.svg": {
+    "mtime": 1789783775.3765028,
+    "seen": 1789785678.92126,
+    "ast_hash": "0b0899232ea744cfe4aefcfe0d89d3f4",
+    "semantic_hash": "0b0899232ea744cfe4aefcfe0d89d3f4"
+  },
+  "public/images/building-exterior-800.jpg": {
+    "mtime": 1789783775.376969,
+    "seen": 1789785678.921261,
+    "ast_hash": "4aa5b6bb1f62c5d4904cab963fa78a56",
+    "semantic_hash": "4aa5b6bb1f62c5d4904cab963fa78a56"
+  },
+  "public/images/building-exterior-800.webp": {
+    "mtime": 1789783775.3770394,
+    "seen": 1789785678.921261,
+    "ast_hash": "e6077186d9617b89b7ad129ea5d42a8b",
+    "semantic_hash": "e6077186d9617b89b7ad129ea5d42a8b"
+  },
+  "public/images/building-exterior.jpg": {
+    "mtime": 1789783775.3775158,
+    "seen": 1789785678.921261,
+    "ast_hash": "288962f57be55427580944bcdd97d8c7",
+    "semantic_hash": "288962f57be55427580944bcdd97d8c7"
+  },
+  "public/images/building-exterior.webp": {
+    "mtime": 1789783775.377684,
+    "seen": 1789785678.921262,
+    "ast_hash": "55943f287831ca3ae92d9165451e2843",
+    "semantic_hash": "55943f287831ca3ae92d9165451e2843"
+  },
+  "public/images/cnc-machining-centre-800.jpg": {
+    "mtime": 1789783775.3778675,
+    "seen": 1789785678.921262,
+    "ast_hash": "fe9e4ac57430a611483e5738d35a040f",
+    "semantic_hash": "fe9e4ac57430a611483e5738d35a040f"
+  },
+  "public/images/cnc-machining-centre-800.webp": {
+    "mtime": 1789783775.3782308,
+    "seen": 1789785678.921262,
+    "ast_hash": "9c811cf2b6da8ddd1ab1f5854c4977be",
+    "semantic_hash": "9c811cf2b6da8ddd1ab1f5854c4977be"
+  },
+  "public/images/cnc-machining-centre.jpg": {
+    "mtime": 1789783775.3786654,
+    "seen": 1789785678.921262,
+    "ast_hash": "9b44aa69898286e69d3a9f8cb81e4c04",
+    "semantic_hash": "9b44aa69898286e69d3a9f8cb81e4c04"
+  },
+  "public/images/cnc-machining-centre.webp": {
+    "mtime": 1789783775.3787956,
+    "seen": 1789785678.9212632,
+    "ast_hash": "099cc849c256edc37b6c435295086287",
+    "semantic_hash": "099cc849c256edc37b6c435295086287"
+  },
+  "public/images/cnc-milling-800.jpg": {
+    "mtime": 1789783775.3789287,
+    "seen": 1789785678.9212632,
+    "ast_hash": "83bd473b47919cc7e9ec0ca6c07badc8",
+    "semantic_hash": "83bd473b47919cc7e9ec0ca6c07badc8"
+  },
+  "public/images/cnc-milling-800.webp": {
+    "mtime": 1789783775.3790286,
+    "seen": 1789785678.9212632,
+    "ast_hash": "b4ef46318bce398718a9b626bec7be78",
+    "semantic_hash": "b4ef46318bce398718a9b626bec7be78"
+  },
+  "public/images/cnc-milling.jpg": {
+    "mtime": 1789783775.3813581,
+    "seen": 1789785678.9212642,
+    "ast_hash": "fe8b0c023b54e1d647fc077676d10274",
+    "semantic_hash": "fe8b0c023b54e1d647fc077676d10274"
+  },
+  "public/images/cnc-milling.webp": {
+    "mtime": 1789783775.381746,
+    "seen": 1789785678.9212642,
+    "ast_hash": "e812debf11e14679807a2fe750e94cb5",
+    "semantic_hash": "e812debf11e14679807a2fe750e94cb5"
+  },
+  "public/images/cnc-turning-800.jpg": {
+    "mtime": 1789783775.381882,
+    "seen": 1789785678.9212642,
+    "ast_hash": "2aa09251b942594ad7e72db118781e41",
+    "semantic_hash": "2aa09251b942594ad7e72db118781e41"
+  },
+  "public/images/cnc-turning-800.webp": {
+    "mtime": 1789783775.3819675,
+    "seen": 1789785678.921265,
+    "ast_hash": "fb496532017e7697a5a7efc57348e251",
+    "semantic_hash": "fb496532017e7697a5a7efc57348e251"
+  },
+  "public/images/cnc-turning.jpg": {
+    "mtime": 1789783775.382183,
+    "seen": 1789785678.921265,
+    "ast_hash": "cf4c3d303b5b51ef85503b768b2784de",
+    "semantic_hash": "cf4c3d303b5b51ef85503b768b2784de"
+  },
+  "public/images/cnc-turning.webp": {
+    "mtime": 1789783775.3822901,
+    "seen": 1789785678.921265,
+    "ast_hash": "53db25c523745bf701043a6f20201e64",
+    "semantic_hash": "53db25c523745bf701043a6f20201e64"
+  },
+  "public/images/cube-poster.png": {
+    "mtime": 1789783775.382654,
+    "seen": 1789785678.9212658,
+    "ast_hash": "5f8aa92c114049feb29415b1c92ac1e2",
+    "semantic_hash": "5f8aa92c114049feb29415b1c92ac1e2"
+  },
+  "public/images/cube-poster.webp": {
+    "mtime": 1789783775.3827646,
+    "seen": 1789785678.9212658,
+    "ast_hash": "a6e3597834251ce21d4914f025b8eee9",
+    "semantic_hash": "a6e3597834251ce21d4914f025b8eee9"
+  },
+  "public/images/ecomill-600v-800.jpg": {
+    "mtime": 1789783775.3828704,
+    "seen": 1789785678.9212658,
+    "ast_hash": "46bbb76122094183f8bd393b72b7bec0",
+    "semantic_hash": "46bbb76122094183f8bd393b72b7bec0"
+  },
+  "public/images/ecomill-600v-800.webp": {
+    "mtime": 1789783775.382936,
+    "seen": 1789785678.921267,
+    "ast_hash": "cce2c5843ba78e422a0ce593d6b9702f",
+    "semantic_hash": "cce2c5843ba78e422a0ce593d6b9702f"
+  },
+  "public/images/ecomill-600v.jpg": {
+    "mtime": 1789783775.3830616,
+    "seen": 1789785678.921267,
+    "ast_hash": "c659403b400a9f180400fac3acd7f430",
+    "semantic_hash": "c659403b400a9f180400fac3acd7f430"
+  },
+  "public/images/ecomill-600v.webp": {
+    "mtime": 1789783775.3831415,
+    "seen": 1789785678.921267,
+    "ast_hash": "277b85ad5b9e894b026af55f80c87308",
+    "semantic_hash": "277b85ad5b9e894b026af55f80c87308"
+  },
+  "public/images/edm-drilling-800.jpg": {
+    "mtime": 1789783775.3843179,
+    "seen": 1789785678.921267,
+    "ast_hash": "8e1da32c70270268c098c994933cfedf",
+    "semantic_hash": "8e1da32c70270268c098c994933cfedf"
+  },
+  "public/images/edm-drilling-800.webp": {
+    "mtime": 1789783775.3846154,
+    "seen": 1789785678.921268,
+    "ast_hash": "fdaa928442e67c6f22d4eb1461ee5d4a",
+    "semantic_hash": "fdaa928442e67c6f22d4eb1461ee5d4a"
+  },
+  "public/images/edm-drilling.jpg": {
+    "mtime": 1789783775.3849363,
+    "seen": 1789785678.921268,
+    "ast_hash": "b4d617ad60f77491e8af114e7830f7b7",
+    "semantic_hash": "b4d617ad60f77491e8af114e7830f7b7"
+  },
+  "public/images/edm-drilling.webp": {
+    "mtime": 1789783775.3850365,
+    "seen": 1789785678.921268,
+    "ast_hash": "d94605ed6c552a1bc4aff8789846d7c7",
+    "semantic_hash": "d94605ed6c552a1bc4aff8789846d7c7"
+  },
+  "public/images/edm-spark-closeup-800.jpg": {
+    "mtime": 1789783775.3851638,
+    "seen": 1789785678.921269,
+    "ast_hash": "8da4ac9b9a5dbd6883707fbe52aa55a4",
+    "semantic_hash": "8da4ac9b9a5dbd6883707fbe52aa55a4"
+  },
+  "public/images/edm-spark-closeup-800.webp": {
+    "mtime": 1789783775.3852465,
+    "seen": 1789785678.921269,
+    "ast_hash": "bf11d5bac302fc93df97a690d418f7af",
+    "semantic_hash": "bf11d5bac302fc93df97a690d418f7af"
+  },
+  "public/images/edm-spark-closeup.jpg": {
+    "mtime": 1789783775.3856442,
+    "seen": 1789785678.921269,
+    "ast_hash": "3bb98a34e5bc3cf5aa42185c09b32e2a",
+    "semantic_hash": "3bb98a34e5bc3cf5aa42185c09b32e2a"
+  },
+  "public/images/edm-spark-closeup.webp": {
+    "mtime": 1789783775.3857586,
+    "seen": 1789785678.9212701,
+    "ast_hash": "bec092c507dc89f1c8fee5d96e3a3af8",
+    "semantic_hash": "bec092c507dc89f1c8fee5d96e3a3af8"
+  },
+  "public/images/fanuc-c600ia-800.jpg": {
+    "mtime": 1789783775.3858638,
+    "seen": 1789785678.9212701,
+    "ast_hash": "8414e89624ad8143d03485e5319a4498",
+    "semantic_hash": "8414e89624ad8143d03485e5319a4498"
+  },
+  "public/images/fanuc-c600ia-800.webp": {
+    "mtime": 1789783775.3859327,
+    "seen": 1789785678.9212701,
+    "ast_hash": "4a28a9dfe610b0836d72a22abc767a02",
+    "semantic_hash": "4a28a9dfe610b0836d72a22abc767a02"
+  },
+  "public/images/fanuc-c600ia.jpg": {
+    "mtime": 1789783775.386257,
+    "seen": 1789785678.921271,
+    "ast_hash": "3d55bed660f834156148f1630b15fe60",
+    "semantic_hash": "3d55bed660f834156148f1630b15fe60"
+  },
+  "public/images/fanuc-c600ia.webp": {
+    "mtime": 1789783775.3863385,
+    "seen": 1789785678.921271,
+    "ast_hash": "ba13a2c0cf44cb909bb46c58ddb8ea55",
+    "semantic_hash": "ba13a2c0cf44cb909bb46c58ddb8ea55"
+  },
+  "public/images/fanuc-robocut-0id-800.jpg": {
+    "mtime": 1789783775.3866153,
+    "seen": 1789785678.921271,
+    "ast_hash": "ffa236d59b8db08e494d37a3663f59e4",
+    "semantic_hash": "ffa236d59b8db08e494d37a3663f59e4"
+  },
+  "public/images/fanuc-robocut-0id-800.webp": {
+    "mtime": 1789783775.386686,
+    "seen": 1789785678.921272,
+    "ast_hash": "9a9c12dab9fc21725b6d6ea00166e4ff",
+    "semantic_hash": "9a9c12dab9fc21725b6d6ea00166e4ff"
+  },
+  "public/images/fanuc-robocut-0id.jpg": {
+    "mtime": 1789783775.3868647,
+    "seen": 1789785678.921272,
+    "ast_hash": "0da2b6285e97c6be3e54fcdf13c7a2d3",
+    "semantic_hash": "0da2b6285e97c6be3e54fcdf13c7a2d3"
+  },
+  "public/images/fanuc-robocut-0id.webp": {
+    "mtime": 1789783775.387055,
+    "seen": 1789785678.921272,
+    "ast_hash": "746b679438435847da63ac256c1b74f6",
+    "semantic_hash": "746b679438435847da63ac256c1b74f6"
+  },
+  "public/images/fanuc-robocut-c600ia-800.jpg": {
+    "mtime": 1789783775.3871586,
+    "seen": 1789785678.921272,
+    "ast_hash": "689721adfe8e8d41a3901a4b53d9e6ee",
+    "semantic_hash": "689721adfe8e8d41a3901a4b53d9e6ee"
+  },
+  "public/images/fanuc-robocut-c600ia-800.webp": {
+    "mtime": 1789783775.387221,
+    "seen": 1789785678.921273,
+    "ast_hash": "f56f7f8240c458e740b840cf7842341e",
+    "semantic_hash": "f56f7f8240c458e740b840cf7842341e"
+  },
+  "public/images/fanuc-robocut-c600ia.jpg": {
+    "mtime": 1789783775.387478,
+    "seen": 1789785678.921273,
+    "ast_hash": "373693ac6e86e95df88a46d094a285e4",
+    "semantic_hash": "373693ac6e86e95df88a46d094a285e4"
+  },
+  "public/images/fanuc-robocut-c600ia.webp": {
+    "mtime": 1789783775.3875833,
+    "seen": 1789785678.921273,
+    "ast_hash": "d2d2fb3031c439b9968564fcaf5b4742",
+    "semantic_hash": "d2d2fb3031c439b9968564fcaf5b4742"
+  },
+  "public/images/logo-nav-160.webp": {
+    "mtime": 1789783775.3876536,
+    "seen": 1789785678.9212742,
+    "ast_hash": "83c243cc92f759360dbd90c9d0761371",
+    "semantic_hash": "83c243cc92f759360dbd90c9d0761371"
+  },
+  "public/images/logo-nav.png": {
+    "mtime": 1789783775.3877192,
+    "seen": 1789785678.9212742,
+    "ast_hash": "1fcca61e292bc223b16bcb6c2343b89c",
+    "semantic_hash": "1fcca61e292bc223b16bcb6c2343b89c"
+  },
+  "public/images/logo-nav.webp": {
+    "mtime": 1789783775.3878422,
+    "seen": 1789785678.9212742,
+    "ast_hash": "0c66dfb550b22a3357078546c27fc55b",
+    "semantic_hash": "0c66dfb550b22a3357078546c27fc55b"
+  },
+  "public/images/makino-square-800.jpg": {
+    "mtime": 1789783775.3879585,
+    "seen": 1789785678.921275,
+    "ast_hash": "ea839ef357b46d045b39a656b2a3ab79",
+    "semantic_hash": "ea839ef357b46d045b39a656b2a3ab79"
+  },
+  "public/images/makino-square-800.webp": {
+    "mtime": 1789783775.3880277,
+    "seen": 1789785678.921275,
+    "ast_hash": "04051559477db19bc04d509db7c3f8ae",
+    "semantic_hash": "04051559477db19bc04d509db7c3f8ae"
+  },
+  "public/images/makino-square.jpg": {
+    "mtime": 1789783775.3882608,
+    "seen": 1789785678.921275,
+    "ast_hash": "a3bff2b80d1b034429cfacdd0782c630",
+    "semantic_hash": "a3bff2b80d1b034429cfacdd0782c630"
+  },
+  "public/images/makino-square.png": {
+    "mtime": 1789783775.38932,
+    "seen": 1789785678.9212759,
+    "ast_hash": "36479d4b7e20adda2ef5f7c1f7a34ffc",
+    "semantic_hash": "36479d4b7e20adda2ef5f7c1f7a34ffc"
+  },
+  "public/images/makino-square.webp": {
+    "mtime": 1789783775.3894439,
+    "seen": 1789785678.9212759,
+    "ast_hash": "0a96dbfba7906186ce57cc00a253da21",
+    "semantic_hash": "0a96dbfba7906186ce57cc00a253da21"
+  },
+  "public/images/makino-wire-edm-800.jpg": {
+    "mtime": 1789783775.3895743,
+    "seen": 1789785678.9212759,
+    "ast_hash": "c1878394e5ba283585f5ad06e0f8390f",
+    "semantic_hash": "c1878394e5ba283585f5ad06e0f8390f"
+  },
+  "public/images/makino-wire-edm-800.webp": {
+    "mtime": 1789783775.3896396,
+    "seen": 1789785678.921277,
+    "ast_hash": "29bcd2a62c131f5fb9d2d412e640ef3d",
+    "semantic_hash": "29bcd2a62c131f5fb9d2d412e640ef3d"
+  },
+  "public/images/makino-wire-edm.jpg": {
+    "mtime": 1789783775.389884,
+    "seen": 1789785678.921277,
+    "ast_hash": "add68b7ddb348603c4942acec13f6dfd",
+    "semantic_hash": "add68b7ddb348603c4942acec13f6dfd"
+  },
+  "public/images/makino-wire-edm.webp": {
+    "mtime": 1789783775.3899677,
+    "seen": 1789785678.921277,
+    "ast_hash": "f3ff32be8480cfd0aacbc707474062bb",
+    "semantic_hash": "f3ff32be8480cfd0aacbc707474062bb"
+  },
+  "public/images/og-default.jpg": {
+    "mtime": 1789783775.390159,
+    "seen": 1789785678.921278,
+    "ast_hash": "6dbc212d43d3cbeb262d146f5c77800f",
+    "semantic_hash": "6dbc212d43d3cbeb262d146f5c77800f"
+  },
+  "public/images/og-default.webp": {
+    "mtime": 1789783775.39023,
+    "seen": 1789785678.921278,
+    "ast_hash": "63beb0b76aacccfda12363d755200eea",
+    "semantic_hash": "63beb0b76aacccfda12363d755200eea"
+  },
+  "public/images/qc-wireedm-800.jpg": {
+    "mtime": 1789783775.3903222,
+    "seen": 1789785678.921278,
+    "ast_hash": "5c4b9b889997750bf19f5dad28f86145",
+    "semantic_hash": "5c4b9b889997750bf19f5dad28f86145"
+  },
+  "public/images/qc-wireedm-800.webp": {
+    "mtime": 1789783775.3903773,
+    "seen": 1789785678.921279,
+    "ast_hash": "2164af9b83eb8317dea4a418032888fa",
+    "semantic_hash": "2164af9b83eb8317dea4a418032888fa"
+  },
+  "public/images/qc-wireedm.jpg": {
+    "mtime": 1789783775.390618,
+    "seen": 1789785678.921279,
+    "ast_hash": "b93478713ca51a4eea396a6a3edf7011",
+    "semantic_hash": "b93478713ca51a4eea396a6a3edf7011"
+  },
+  "public/images/qc-wireedm.webp": {
+    "mtime": 1789783775.3906844,
+    "seen": 1789785678.921279,
+    "ast_hash": "9c80e1f4fb24fd0a733a570a2d68aab6",
+    "semantic_hash": "9c80e1f4fb24fd0a733a570a2d68aab6"
+  },
+  "public/images/quality-assurance-banner-800.jpg": {
+    "mtime": 1789783775.3907712,
+    "seen": 1789785678.921279,
+    "ast_hash": "dd380e0216b5ba9e025123f5773b88b5",
+    "semantic_hash": "dd380e0216b5ba9e025123f5773b88b5"
+  },
+  "public/images/quality-assurance-banner-800.webp": {
+    "mtime": 1789783775.3908446,
+    "seen": 1789785678.92128,
+    "ast_hash": "f81986ab7f5b96933b277c2a27d659ad",
+    "semantic_hash": "f81986ab7f5b96933b277c2a27d659ad"
+  },
+  "public/images/quality-assurance-banner.jpg": {
+    "mtime": 1789783775.3910265,
+    "seen": 1789785678.92128,
+    "ast_hash": "4be065451801a09d4d8281ce031e3369",
+    "semantic_hash": "4be065451801a09d4d8281ce031e3369"
+  },
+  "public/images/quality-assurance-banner.webp": {
+    "mtime": 1789783775.3911018,
+    "seen": 1789785678.92128,
+    "ast_hash": "00128ea129f34c4084ef9d20660dd2ac",
+    "semantic_hash": "00128ea129f34c4084ef9d20660dd2ac"
+  },
+  "public/images/reverse-engineering-banner-800.jpg": {
+    "mtime": 1789783775.3912008,
+    "seen": 1789785678.921281,
+    "ast_hash": "6fec9db40af2f0f3beb7729f74928f79",
+    "semantic_hash": "6fec9db40af2f0f3beb7729f74928f79"
+  },
+  "public/images/reverse-engineering-banner-800.webp": {
+    "mtime": 1789783775.391264,
+    "seen": 1789785678.921281,
+    "ast_hash": "eaf256fc1365b6c2203227793022945d",
+    "semantic_hash": "eaf256fc1365b6c2203227793022945d"
+  },
+  "public/images/reverse-engineering-banner.jpg": {
+    "mtime": 1789783775.3914003,
+    "seen": 1789785678.921282,
+    "ast_hash": "277b13f273b59f266d1cf0064850e763",
+    "semantic_hash": "277b13f273b59f266d1cf0064850e763"
+  },
+  "public/images/reverse-engineering-banner.webp": {
+    "mtime": 1789783775.3916333,
+    "seen": 1789785678.921282,
+    "ast_hash": "25555dd5b037ad81d17bd1fa20d6315c",
+    "semantic_hash": "25555dd5b037ad81d17bd1fa20d6315c"
+  },
+  "public/images/sample-cube-3d.png": {
+    "mtime": 1789783775.392987,
+    "seen": 1789785678.921282,
+    "ast_hash": "3345e7aea60a39634b46a015a93a0be2",
+    "semantic_hash": "3345e7aea60a39634b46a015a93a0be2"
+  },
+  "public/images/sample-cube-3d.webp": {
+    "mtime": 1789783775.3934696,
+    "seen": 1789785678.921283,
+    "ast_hash": "951f22a732c8bbee23ceb19a7fce5f88",
+    "semantic_hash": "951f22a732c8bbee23ceb19a7fce5f88"
+  },
+  "public/images/sample-part-3d.png": {
+    "mtime": 1789783775.3937383,
+    "seen": 1789785678.921283,
+    "ast_hash": "c797199910f220554d079532856bd0ed",
+    "semantic_hash": "c797199910f220554d079532856bd0ed"
+  },
+  "public/images/sample-part-3d.webp": {
+    "mtime": 1789783775.393859,
+    "seen": 1789785678.921283,
+    "ast_hash": "a55c7dd295df9560346cc05ab0f708ff",
+    "semantic_hash": "a55c7dd295df9560346cc05ab0f708ff"
+  },
+  "public/images/square-mesh.jpeg": {
+    "mtime": 1789783775.3941061,
+    "seen": 1789785678.9212842,
+    "ast_hash": "dff2143f6c891fff08a529c02b593f6f",
+    "semantic_hash": "dff2143f6c891fff08a529c02b593f6f"
+  },
+  "public/images/wire-edm-cutting-800.jpg": {
+    "mtime": 1789783775.394227,
+    "seen": 1789785678.9212842,
+    "ast_hash": "7c632aba0ef835f82b31588be8088344",
+    "semantic_hash": "7c632aba0ef835f82b31588be8088344"
+  },
+  "public/images/wire-edm-cutting-800.webp": {
+    "mtime": 1789783775.3943079,
+    "seen": 1789785678.9212842,
+    "ast_hash": "99f557070efdffe4a13bccfe80a40b98",
+    "semantic_hash": "99f557070efdffe4a13bccfe80a40b98"
+  },
+  "public/images/wire-edm-cutting.jpg": {
+    "mtime": 1789783775.3946123,
+    "seen": 1789785678.9212852,
+    "ast_hash": "ce297f0f569ab9269cc5c99feb8913a2",
+    "semantic_hash": "ce297f0f569ab9269cc5c99feb8913a2"
+  },
+  "public/images/wire-edm-cutting.webp": {
+    "mtime": 1789783775.3947365,
+    "seen": 1789785678.9212852,
+    "ast_hash": "b439142a9abf50c1bb1dc36a4303cf0d",
+    "semantic_hash": "b439142a9abf50c1bb1dc36a4303cf0d"
+  },
+  "public/images/wire-edm-high-res.png": {
+    "mtime": 1789783775.3949814,
+    "seen": 1789785678.9212852,
+    "ast_hash": "0493235d0db1ab3abefbec893908b356",
+    "semantic_hash": "0493235d0db1ab3abefbec893908b356"
+  },
+  "public/images/wire-edm-logo.png": {
+    "mtime": 1789783775.3950775,
+    "seen": 1789785678.9212852,
+    "ast_hash": "c43e26f70dd34d01956a12dd8906a9c8",
+    "semantic_hash": "c43e26f70dd34d01956a12dd8906a9c8"
+  },
+  "public/images/wire-edm-office-800.jpg": {
+    "mtime": 1789783775.3953161,
+    "seen": 1789785678.9212859,
+    "ast_hash": "aa5db5da483328921322c51b4ec427da",
+    "semantic_hash": "aa5db5da483328921322c51b4ec427da"
+  },
+  "public/images/wire-edm-office-800.webp": {
+    "mtime": 1789783775.3953743,
+    "seen": 1789785678.9212859,
+    "ast_hash": "99a2ded9a73a2b1d74b5b1b685113976",
+    "semantic_hash": "99a2ded9a73a2b1d74b5b1b685113976"
+  },
+  "public/images/wire-edm-office.jpg": {
+    "mtime": 1789783775.39565,
+    "seen": 1789785678.9212859,
+    "ast_hash": "102325cde5794439b84766b8f40869f9",
+    "semantic_hash": "102325cde5794439b84766b8f40869f9"
+  },
+  "public/images/wire-edm-office.webp": {
+    "mtime": 1789783775.3957286,
+    "seen": 1789785678.9212868,
+    "ast_hash": "8cb24c0d19ef3166fad63f9c8f0694b6",
+    "semantic_hash": "8cb24c0d19ef3166fad63f9c8f0694b6"
+  },
+  "public/images/workshop-bench-800.jpg": {
+    "mtime": 1789783775.395847,
+    "seen": 1789785678.9212868,
+    "ast_hash": "49a89186e4d332f94583d682dc027ce5",
+    "semantic_hash": "49a89186e4d332f94583d682dc027ce5"
+  },
+  "public/images/workshop-bench-800.webp": {
+    "mtime": 1789783775.3959637,
+    "seen": 1789785678.9212868,
+    "ast_hash": "1f24993782a04016de7691dc3b9ea33f",
+    "semantic_hash": "1f24993782a04016de7691dc3b9ea33f"
+  },
+  "public/images/workshop-bench.jpg": {
+    "mtime": 1789783775.396177,
+    "seen": 1789785678.921288,
+    "ast_hash": "ae6447196359509227914a30fb8f77f7",
+    "semantic_hash": "ae6447196359509227914a30fb8f77f7"
+  },
+  "public/images/workshop-bench.webp": {
+    "mtime": 1789783775.396322,
+    "seen": 1789785678.921288,
+    "ast_hash": "3026cca04b6bc46e3164fa2ab5e2bb02",
+    "semantic_hash": "3026cca04b6bc46e3164fa2ab5e2bb02"
+  },
+  "public/images/workshop-floor-800.jpg": {
+    "mtime": 1789783775.396449,
+    "seen": 1789785678.921288,
+    "ast_hash": "006bf4161a4fadc230ee218f0975bdc7",
+    "semantic_hash": "006bf4161a4fadc230ee218f0975bdc7"
+  },
+  "public/images/workshop-floor-800.webp": {
+    "mtime": 1789783775.3970785,
+    "seen": 1789785678.921289,
+    "ast_hash": "af70542ccbccb7fdbe6312918fb4c378",
+    "semantic_hash": "af70542ccbccb7fdbe6312918fb4c378"
+  },
+  "public/images/workshop-floor.jpg": {
+    "mtime": 1789783775.3973112,
+    "seen": 1789785678.921289,
+    "ast_hash": "493634c3adcad739cc57308b13777d31",
+    "semantic_hash": "493634c3adcad739cc57308b13777d31"
+  },
+  "public/images/workshop-floor.webp": {
+    "mtime": 1789783775.3974497,
+    "seen": 1789785678.921289,
+    "ast_hash": "b97d8bc15ebc02ee9abe302b86d6a988",
+    "semantic_hash": "b97d8bc15ebc02ee9abe302b86d6a988"
+  },
+  "public/images/workshop-mezzanine-800.jpg": {
+    "mtime": 1789783775.397573,
+    "seen": 1789785678.92129,
+    "ast_hash": "303a83e97c47f99ccca97581d86677f9",
+    "semantic_hash": "303a83e97c47f99ccca97581d86677f9"
+  },
+  "public/images/workshop-mezzanine-800.webp": {
+    "mtime": 1789783775.3976824,
+    "seen": 1789785678.92129,
+    "ast_hash": "a3c4df9dafdfb77ea7cacbd686a33ff2",
+    "semantic_hash": "a3c4df9dafdfb77ea7cacbd686a33ff2"
+  },
+  "public/images/workshop-mezzanine.jpg": {
+    "mtime": 1789783775.3980794,
+    "seen": 1789785678.92129,
+    "ast_hash": "e6ed0075d7194083fec43d9185cc47eb",
+    "semantic_hash": "e6ed0075d7194083fec43d9185cc47eb"
+  },
+  "public/images/workshop-mezzanine.webp": {
+    "mtime": 1789783775.3982306,
+    "seen": 1789785678.92129,
+    "ast_hash": "b158937d8b8326b00d40240c9b0fa7df",
+    "semantic_hash": "b158937d8b8326b00d40240c9b0fa7df"
+  },
+  ".agents/skills/high-end-visual-design/SKILL.md": {
+    "mtime": 1789783775.2972279,
+    "seen": 1789786142.443517,
+    "ast_hash": "269e37851b3a17693d8052f5f8002cfc",
+    "semantic_hash": ""
+  },
+  ".agents/skills/image-to-code/SKILL.md": {
+    "mtime": 1789783775.2973862,
+    "seen": 1789786142.443517,
+    "ast_hash": "442613e4710f0005b94f1c4b1d3ac246",
+    "semantic_hash": ""
+  },
+  ".agents/skills/imagegen-frontend-mobile/SKILL.md": {
+    "mtime": 1789783775.2975543,
+    "seen": 1789786142.443518,
+    "ast_hash": "4c84e37e50e610779a71e0fb0a198963",
+    "semantic_hash": ""
+  },
+  ".agents/skills/imagegen-frontend-web/SKILL.md": {
+    "mtime": 1789783775.2979403,
+    "seen": 1789786142.4435189,
+    "ast_hash": "208c5866f7320c7f842283b312a00e17",
+    "semantic_hash": ""
+  },
+  ".agents/skills/industrial-brutalist-ui/SKILL.md": {
+    "mtime": 1789783775.298099,
+    "seen": 1789786142.4435189,
+    "ast_hash": "9e673477ecc2eaf4a230c8326cbc2f0d",
+    "semantic_hash": ""
+  },
+  ".agents/skills/minimalist-ui/SKILL.md": {
+    "mtime": 1789783775.2982109,
+    "seen": 1789786142.44352,
+    "ast_hash": "c7f814d7df4b1b0e3eebf706a6d74adf",
+    "semantic_hash": ""
+  },
+  ".agents/skills/redesign-existing-projects/SKILL.md": {
+    "mtime": 1789783775.2984257,
+    "seen": 1789786142.44352,
+    "ast_hash": "31d802d02ccb9f5da82d99156af36317",
+    "semantic_hash": ""
+  },
+  ".agents/skills/stitch-design-taste/DESIGN.md": {
+    "mtime": 1789783775.298571,
+    "seen": 1789786142.443521,
+    "ast_hash": "ee7cc02dcc99eda38299a5a6f6727563",
+    "semantic_hash": ""
+  },
+  ".agents/skills/stitch-design-taste/SKILL.md": {
+    "mtime": 1789783775.2986937,
+    "seen": 1789786142.443521,
+    "ast_hash": "82dc71a62461f956b5666c1041efc886",
+    "semantic_hash": ""
+  },
+  ".claude/CLAUDE.md": {
+    "mtime": 1789784276.3147612,
+    "seen": 1789786142.443522,
+    "ast_hash": "9b31786b637be3c13978bec4c2330752",
+    "semantic_hash": ""
+  },
+  ".claude/commands/opsx/apply.md": {
+    "mtime": 1789783775.298868,
+    "seen": 1789786142.443522,
+    "ast_hash": "1678894a7cfd1ea31917ed6ebeabc11b",
+    "semantic_hash": ""
+  },
+  ".claude/commands/opsx/archive.md": {
+    "mtime": 1789783775.2989383,
+    "seen": 1789786142.4435232,
+    "ast_hash": "622fed432675ead218192e24f3343e19",
+    "semantic_hash": ""
+  },
+  ".claude/commands/opsx/explore.md": {
+    "mtime": 1789783775.299003,
+    "seen": 1789786142.4435232,
+    "ast_hash": "bca6fe1d095ba5a832abed55072b9def",
+    "semantic_hash": ""
+  },
+  ".claude/commands/opsx/propose.md": {
+    "mtime": 1789783775.2990642,
+    "seen": 1789786142.4435241,
+    "ast_hash": "0997adc1ed0af0a068544bc87a177770",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/SKILL.md": {
+    "mtime": 1789784276.3144665,
+    "seen": 1789786142.4435241,
+    "ast_hash": "1656a8a8e4a05bbe69f32cd15de81e87",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/add-watch.md": {
+    "mtime": 1789601078.2545078,
+    "seen": 1789786142.4435241,
+    "ast_hash": "d59d027fe449f06aa03905a01184e779",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/exports.md": {
+    "mtime": 1789601078.25463,
+    "seen": 1789786142.443525,
+    "ast_hash": "9da2a2152e60a22f07f05fed5158f287",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/extraction-spec.md": {
+    "mtime": 1789601078.2547567,
+    "seen": 1789786142.443525,
+    "ast_hash": "42fef56a01698118f7fd722acdadea34",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/github-and-merge.md": {
+    "mtime": 1789601078.2548754,
+    "seen": 1789786142.4435258,
+    "ast_hash": "cde13df085e4c492aeb7ba298a996d0d",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/hooks.md": {
+    "mtime": 1789601078.2549593,
+    "seen": 1789786142.4435258,
+    "ast_hash": "3f545db6ce646650bb9de588f5512a27",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/query.md": {
+    "mtime": 1789601078.255079,
+    "seen": 1789786142.443527,
+    "ast_hash": "3c46f8ad006874260614ed8657d02307",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/transcribe.md": {
+    "mtime": 1789601078.255176,
+    "seen": 1789786142.443527,
+    "ast_hash": "67b6a5fa6c0974e18f60db9f8932fbd8",
+    "semantic_hash": ""
+  },
+  ".claude/skills/graphify/references/update.md": {
+    "mtime": 1789601078.2553463,
+    "seen": 1789786142.443528,
+    "ast_hash": "9378bd03d56baaf78bd738ab3848f142",
+    "semantic_hash": ""
+  },
+  ".claude/skills/openspec-apply-change/SKILL.md": {
+    "mtime": 1789783775.2995799,
+    "seen": 1789786142.443528,
+    "ast_hash": "113ad4a13c30634311141d6dadcc0464",
+    "semantic_hash": ""
+  },
+  ".claude/skills/openspec-archive-change/SKILL.md": {
+    "mtime": 1789783775.2996924,
+    "seen": 1789786142.443529,
+    "ast_hash": "f010cb3292d101742592bcad1abfe762",
+    "semantic_hash": ""
+  },
+  ".claude/skills/openspec-explore/SKILL.md": {
+    "mtime": 1789783775.2998405,
+    "seen": 1789786142.443529,
+    "ast_hash": "d160105373f4fe54bfbe1790b343c51b",
+    "semantic_hash": ""
+  },
+  ".claude/skills/openspec-propose/SKILL.md": {
+    "mtime": 1789783775.3000016,
+    "seen": 1789786142.44353,
+    "ast_hash": "0753f4a4ce92da2b27bef07c994bef17",
+    "semantic_hash": ""
+  },
+  ".serena/project.yml": {
+    "mtime": 1789784283.2802608,
+    "seen": 1789786142.443531,
+    "ast_hash": "2a70241476b0fb6205564a44abd397fb",
+    "semantic_hash": ""
+  }
+}

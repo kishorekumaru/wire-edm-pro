@@ -1,0 +1,1 @@
+{"nodes": [{"id": "$graphify-root$_src_components_ctaband_astro", "label": "CtaBand.astro", "file_type": "code", "source_file": "src/components/CtaBand.astro", "source_location": "L1"}], "edges": [], "raw_calls": [], "parse_errors": {"first_error_line": 2, "multiline_error": true}}

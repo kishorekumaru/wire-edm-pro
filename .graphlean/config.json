@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "strictGraphify": true,
+  "headroomTelemetry": true,
+  "autoUpdateGraph": true,
+  "headroomPort": 8787
+}
