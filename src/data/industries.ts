@@ -13,6 +13,12 @@ export interface Industry {
   machined: string[]; // typical parts we machine
   fit: string; // why our processes suit this industry
   icon: string; // inner SVG markup (24x24, stroke-based)
+  /**
+   * Soft-launched page: builds and is reachable by URL and the footer link,
+   * but stays out of the header menus and the industries hub grid until it
+   * is promoted. Omit or set false for normal listed industries.
+   */
+  unlisted?: boolean;
 }
 
 export const industries: Industry[] = [
@@ -138,20 +144,6 @@ export const industries: Industry[] = [
     fit: "Spark erosion doesn't care how hard or heat-resistant the alloy is. The parts that are hardest to source are the ones EDM handles best.",
   },
   {
-    slug: "machine-building",
-    icon: '<circle cx="12" cy="12" r="3.2"/><path d="M12 5.2V2.8M12 21.2v-2.4M18.8 12h2.4M2.8 12h2.4M16.8 7.2l1.7-1.7M5.5 18.5l1.7-1.7M16.8 16.8l1.7 1.7M5.5 5.5l1.7 1.7"/>',
-    name: "Machine Building",
-    short: "The precision details inside custom machines",
-    lede: "Machine builders need dozens of accurate one-offs on a schedule: shafts, gears, cams, fixtures and the hardened details in between. We machine them to drawing, in sequence, under one roof.",
-    machined: [
-      "Shafts, bushes, cams and custom fasteners",
-      "Gears, splines and keyways. Including hardened, by EDM",
-      "Base plates, jigs and locating fixtures",
-      "Guarding and bracketry machined to fit",
-    ],
-    fit: "Milling, turning and EDM in one business means a hardened keyway or spline doesn't add a second supplier to your build schedule.",
-  },
-  {
     slug: "robotics-automation",
     icon: '<path d="M4 21h9M8.5 21v-5.5L14 10l3.5 3.5"/><circle cx="8.5" cy="15" r="1.6"/><circle cx="17.5" cy="13.5" r="1.6"/><circle cx="14" cy="10" r="1.6"/><path d="M14 8.4V4.5h4"/>',
     name: "Robotics & Automation",
@@ -194,5 +186,21 @@ export const industries: Industry[] = [
       "Small production batches to drawing",
     ],
     fit: "One part is a normal order here. Send a drawing, a STEP file or the broken part itself. We quote from real information and machine to it.",
+  },
+  {
+    slug: "research-development",
+    icon: '<path d="M9.5 3.5h5"/><path d="M10.5 3.5v5.2l-5.2 9.5a2.4 2.4 0 0 0 2.1 3.6h9.2a2.4 2.4 0 0 0 2.1-3.6l-5.2-9.5V3.5"/><path d="M7.2 15h9.6"/>',
+    name: "Research & Development",
+    short: "Prototypes, test rigs and one-offs for R&D teams",
+    lede: "Research and development work arrives as a sketch, a STEP file or a half-formed idea. And it changes between revisions. We machine the prototypes, rigs and one-off mechanisms that let a design prove itself, with proprietary concepts handled under strict confidentiality at every stage.",
+    machined: [
+      "Prototype and proof-of-concept components to drawing or STEP file",
+      "Test rigs, jigs and experimental fixtures for lab and bench work",
+      "One-off mechanisms, linkages and actuator details",
+      "Iterated revisions of the same part as the design evolves",
+      "Small-batch pre-production runs before tooling commits",
+      "Hardened and exotic alloy details cut after heat treatment",
+    ],
+    fit: "With no press tool or mould to amortise, revision four costs the same to cut as revision one, and a design change is a program edit, not a new tool. Wire EDM holds the fine features and tight tolerances a test needs to be meaningful, and every drawing and concept stays confidential. R&D intellectual property is the whole point of the exercise.",
   },
 ];

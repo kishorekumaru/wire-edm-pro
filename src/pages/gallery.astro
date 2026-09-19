@@ -1,0 +1,323 @@
+---
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TurnkeyFlow from "../components/TurnkeyFlow.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { breadcrumbList } from "../lib/breadcrumbs";
+import slidesData from "../data/gallery.json";
+
+const breadcrumbs = breadcrumbList([{ name: "Gallery", href: "/gallery/" }], Astro.site);
+
+/**
+ * Slides come from src/data/gallery.json; imageURL is relative to
+ * public/images/gallery/. When the four standard variants of that file exist
+ * (name-800.webp, name.webp, name-800.jpg, name.jpg at 800w/1600w) the stage
+ * renders responsive srcset; a single dropped-in file renders as a plain img.
+ */
+const galleryDir = join(process.cwd(), "public", "images", "gallery");
+const slides = slidesData.map((s) => {
+  const base = s.imageURL.replace(/\.(jpg|jpeg|png|webp)$/i, "");
+  const hasVariants = ["-800.webp", ".webp", "-800.jpg", ".jpg"].every((v) =>
+    existsSync(join(galleryDir, base + v)),
+  );
+  return { ...s, base, hasVariants };
+});
+---
+<BaseLayout
+  title="Gallery, Inside the Shop, Sydney | Wire EDM Pro"
+  description="Inside Wire EDM Pro: the Kings Park machine shop, Makino and Fanuc RoboCut wire EDMs, DMG MORI milling, CNC turning and quality control, plus the seven-step turnkey process."
+  ogImage="/images/gallery/workshop-floor.jpg"
+  ogImageAlt="The machine shop floor at Wire EDM Pro, Sydney"
+  jsonLd={breadcrumbs}
+>
+  <section class="gal-hero section--tight">
+    <div class="container">
+      <p class="gal-hero__kicker mono">Gallery</p>
+      <h1>Inside the shop.</h1>
+      <p class="gal-hero__lede">
+        The machines and the floor of a Sydney precision machining business, and the seven-step
+        process every job runs through.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--panel gal" aria-label="Shop gallery">
+    <div class="container">
+      <div
+        class="gal__viewer"
+        id="gal-viewer"
+        data-reveal
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Machines and shop floor"
+      >
+        <div class="gal__stage">
+          {slides.map((s, i) => (
+            <picture class:list={["gal__slide", i === 0 && "is-active"]}>
+              {s.hasVariants && (
+                <source
+                  srcset={`/images/gallery/${s.base}-800.webp 800w, /images/gallery/${s.base}.webp 1600w`}
+                  sizes="(max-width: 56rem) 100vw, 64vw"
+                  type="image/webp"
+                />
+              )}
+              <img
+                src={`/images/gallery/${s.imageURL}`}
+                srcset={s.hasVariants ? `/images/gallery/${s.base}-800.jpg 800w, /images/gallery/${s.base}.jpg 1600w` : undefined}
+                sizes={s.hasVariants ? "(max-width: 56rem) 100vw, 64vw" : undefined}
+                width="1600"
+                height="900"
+                alt={s.imageAlt}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </picture>
+          ))}
+        </div>
+        <div class="gal__panel">
+          <div class="gal__text" aria-live="polite">
+            <h2 class="gal__title" id="gal-title">{slides[0].title}</h2>
+            <p class="gal__caption" id="gal-caption">{slides[0].description}</p>
+          </div>
+          <div class="gal__controls">
+            <button class="gal__btn" id="gal-prev" type="button" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>
+            </button>
+            <button class="gal__btn" id="gal-next" type="button" aria-label="Next image">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="gal__strip" data-reveal>
+        {slides.map((s, i) => (
+          <button
+            class:list={["gal__thumb", i === 0 && "is-active"]}
+            type="button"
+            aria-label={`Show image: ${s.title}`}
+            aria-current={i === 0 ? "true" : undefined}
+            data-title={s.title}
+            data-caption={s.description}
+          >
+            <img
+              src={s.hasVariants ? `/images/gallery/${s.base}-800.jpg` : `/images/gallery/${s.imageURL}`}
+              width="800"
+              height="450"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TurnkeyFlow heading="The process" sub="Every job, the same seven steps." />
+
+  <CtaBand
+    heading="Send us the drawing."
+    body="Everything in this gallery started as a drawing, a STEP file or a worn sample. Yours gets quoted from real information, within one business day."
+  />
+</BaseLayout>
+
+<style is:global>
+  /* Gallery: white hero banner, matching the industries and solutions pages */
+  body { background: var(--color-paper-2); }
+  main > .gal-hero { background: #ffffff; border-bottom: var(--rule-hairline); }
+</style>
+
+<style>
+  .gal-hero { padding-block: var(--space-2xl) var(--space-3xl); }
+  .gal-hero__kicker {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .gal-hero h1 { font-size: var(--text-display-s); }
+  .gal-hero__lede {
+    margin-top: var(--space-md);
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 56ch;
+  }
+
+  /* Viewer: stage + info panel split (asymmetric 7/4), hairline frame */
+  .gal__viewer {
+    display: grid;
+    grid-template-columns: 7fr 4fr;
+    background: #ffffff;
+    border: var(--rule-hairline);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .gal__stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--color-paper-2);
+  }
+  .gal__slide {
+    position: absolute;
+    inset: 0;
+    display: block;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 420ms var(--ease-out);
+  }
+  .gal__slide.is-active { opacity: 1; }
+  .gal__slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gal__panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+    border-left: var(--rule-hairline);
+  }
+  .gal__title { font-size: var(--text-lg); }
+  .gal__caption {
+    margin-top: var(--space-sm);
+    color: var(--color-muted);
+    max-width: 44ch;
+  }
+  .gal__controls { display: flex; gap: var(--space-sm); }
+  .gal__btn {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: none;
+    border: var(--rule-hairline);
+    border-radius: var(--radius-sm);
+    color: var(--color-ink);
+    cursor: pointer;
+    transition:
+      border-color var(--dur-micro) var(--ease-out),
+      color var(--dur-micro) var(--ease-out),
+      transform var(--dur-micro) var(--ease-out);
+  }
+  .gal__btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .gal__btn:active { transform: translateY(1px); }
+
+  /* Filmstrip: horizontal scroll-snap thumbs double as position indicator */
+  .gal__strip {
+    margin-top: var(--space-md);
+    display: flex;
+    gap: var(--space-sm);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: var(--space-2xs);
+    scrollbar-width: thin;
+  }
+  .gal__thumb {
+    flex: 0 0 auto;
+    width: 7.5rem;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: none;
+    cursor: pointer;
+    scroll-snap-align: start;
+    opacity: 0.6;
+    transition:
+      opacity var(--dur-short) var(--ease-out),
+      border-color var(--dur-short) var(--ease-out);
+  }
+  .gal__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .gal__thumb:hover { opacity: 1; }
+  .gal__thumb.is-active { border-color: var(--color-accent); opacity: 1; }
+
+  @media (max-width: 56rem) {
+    .gal__viewer { grid-template-columns: minmax(0, 1fr); }
+    .gal__panel {
+      border-left: 0;
+      border-top: var(--rule-hairline);
+      padding: var(--space-lg);
+      gap: var(--space-lg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gal__slide,
+    .gal__thumb,
+    .gal__btn { transition: none; }
+  }
+</style>
+
+<script>
+  const viewer = document.getElementById("gal-viewer");
+  if (viewer) {
+    const slides = Array.from(viewer.querySelectorAll<HTMLElement>(".gal__slide"));
+    const titleEl = document.getElementById("gal-title")!;
+    const captionEl = document.getElementById("gal-caption")!;
+    const thumbs = Array.from(
+      document.querySelectorAll<HTMLButtonElement>(".gal__thumb"),
+    );
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let current = 0;
+
+    const show = (n: number) => {
+      current = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle("is-active", k === current));
+      thumbs.forEach((t, k) => {
+        const on = k === current;
+        t.classList.toggle("is-active", on);
+        if (on) t.setAttribute("aria-current", "true");
+        else t.removeAttribute("aria-current");
+      });
+      const active = thumbs[current];
+      titleEl.textContent = active.dataset.title ?? "";
+      captionEl.textContent = active.dataset.caption ?? "";
+      active.scrollIntoView({
+        behavior: reduced ? "instant" : "smooth",
+        block: "nearest",
+        inline: "nearest",
+      });
+    };
+
+    document.getElementById("gal-prev")!.addEventListener("click", () => show(current - 1));
+    document.getElementById("gal-next")!.addEventListener("click", () => show(current + 1));
+    thumbs.forEach((t, k) => t.addEventListener("click", () => show(k)));
+
+    viewer.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        show(current - 1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        show(current + 1);
+      }
+    });
+
+    // Pointer swipe on the stage (mouse and touch); threshold avoids hijacking taps
+    let swipeX: number | null = null;
+    const stage = viewer.querySelector<HTMLElement>(".gal__stage")!;
+    stage.style.touchAction = "pan-y";
+    stage.addEventListener("pointerdown", (e) => {
+      swipeX = e.clientX;
+    });
+    stage.addEventListener("pointerup", (e) => {
+      if (swipeX === null) return;
+      const dx = e.clientX - swipeX;
+      swipeX = null;
+      if (Math.abs(dx) > 48) show(current + (dx < 0 ? 1 : -1));
+    });
+    stage.addEventListener("pointercancel", () => {
+      swipeX = null;
+    });
+  }
+</script>

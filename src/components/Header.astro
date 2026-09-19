@@ -73,7 +73,7 @@ const onIndustries = path.startsWith("/industries/");
           <div class="nav__dropdown-inner container">
             <p class="nav__drophead">Solutions for every industry</p>
             <div class="nav__dropgrid nav__dropgrid--industries">
-              {industries.map((ind) => (
+              {industries.filter((ind) => !ind.unlisted).map((ind) => (
                 <a
                   class="nav__dropitem nav__dropitem--compact"
                   href={`/industries/${ind.slug}/`}
@@ -125,7 +125,7 @@ const onIndustries = path.startsWith("/industries/");
     </button>
     <div class="nav__sheet-panel" id="sheet-industries" hidden>
       <a class="nav__sheet-link nav__sheet-link--sub" href="/industries/" aria-current={path === "/industries/" ? "page" : undefined}>All industries</a>
-      {industries.map((ind) => (
+      {industries.filter((ind) => !ind.unlisted).map((ind) => (
         <a class="nav__sheet-link nav__sheet-link--sub" href={`/industries/${ind.slug}/`} aria-current={isCurrent(`/industries/${ind.slug}/`) ? "page" : undefined}>{ind.name}</a>
       ))}
     </div>

@@ -1,0 +1,74 @@
+[
+  {
+    "imageURL": "building-exterior.jpg",
+    "imageAlt": "The Wire EDM Pro premises at Kings Park, Sydney",
+    "title": "16/24 Garling Rd, Kings Park",
+    "description": "The shop has run from this Western Sydney industrial estate for more than 25 years. Every job is quoted, programmed and machined here, under one roof."
+  },
+  {
+    "imageURL": "workshop-floor.jpg",
+    "imageAlt": "The machine shop floor at Wire EDM Pro: Easson optical profile projector and DMG MORI machining centre",
+    "title": "The machine shop floor",
+    "description": "Wire EDM, milling and turning sit a few steps apart, so a part moves between processes without leaving the building or the machinist responsible for it."
+  },
+  {
+    "imageURL": "workshop-mezzanine.jpg",
+    "imageAlt": "Workshop interior with mezzanine storage above the machine bays",
+    "title": "Material and tooling store",
+    "description": "The mezzanine keeps stock material, tooling and work in progress organised above the floor, close enough that a job never waits on the stores."
+  },
+  {
+    "imageURL": "makino-wire-edm.jpg",
+    "imageAlt": "Makino U6 H.E.A.T. wire EDM machine cutting a hardened component",
+    "title": "Makino U6 H.E.A.T. wire EDM",
+    "description": "The large-travel wire cutter. Profiles to ±0.003 mm in hardened metal up to 420 mm tall, cut after heat treatment so the profile that leaves the machine is the profile that runs."
+  },
+  {
+    "imageURL": "fanuc-robocut-c600ia.jpg",
+    "imageAlt": "Fanuc RoboCut C600iA wire EDM on the shop floor",
+    "title": "Fanuc RoboCut α-C600iA",
+    "description": "Production wire EDM with automatic wire threading, so repeat profiles keep running between checks instead of waiting for an operator to re-thread."
+  },
+  {
+    "imageURL": "fanuc-robocut-0id.jpg",
+    "imageAlt": "Second Fanuc RoboCut wire EDM machine with 0iD control",
+    "title": "The Fanuc wire EDM fleet",
+    "description": "More than one RoboCut means a long job never queues behind a short one. One-offs, regrinds and small batches keep moving in parallel."
+  },
+  {
+    "imageURL": "ecomill-600v.jpg",
+    "imageAlt": "DMG MORI ecoMill 600 V vertical machining centre",
+    "title": "DMG MORI ecoMill 600 V",
+    "description": "CNC milling with a 12,000 rpm spindle and a 600 × 560 × 510 mm working envelope. Jigs, fixtures, die sets and production runs."
+  },
+  {
+    "imageURL": "cnc-turning.jpg",
+    "imageAlt": "CNC turning: 3-jaw chuck, carbide insert and spiral chips",
+    "title": "CNC turning",
+    "description": "Shafts, bushes, pins and couplings turned to drawing, then finished with wire-cut keyways and splines where the job calls for them."
+  },
+  {
+    "imageURL": "edm-spark-closeup.jpg",
+    "imageAlt": "Close-up of wire EDM spark erosion with dielectric flush",
+    "title": "Spark erosion, up close",
+    "description": "The wire never touches the part. Erosion happens across the spark gap under dielectric flush, which is why there is no cutting force, no work hardening and no burr."
+  },
+  {
+    "imageURL": "edm-drilling.jpg",
+    "imageAlt": "EDM drill cutting a fine hole in hardened metal",
+    "title": "EDM hole drilling",
+    "description": "Start holes and fine apertures from 0.3 mm to 3.0 mm, eroded in hardened metal without a cutting edge to wander or break."
+  },
+  {
+    "imageURL": "workshop-bench.jpg",
+    "imageAlt": "Workshop bench where finished parts are checked and packed",
+    "title": "The bench",
+    "description": "Parts are checked, deburred and packed by hand. The last step before dispatch is always a person, not a machine."
+  },
+  {
+    "imageURL": "qc-wireedm.jpg",
+    "imageAlt": "Quality assurance measurement on a wire EDM component",
+    "title": "Quality control",
+    "description": "Dimensions, finish and fit verified against the drawing on calibrated instruments. First-article, critical-dimension and batch inspection, before anything leaves the shop."
+  }
+]

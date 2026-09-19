@@ -28,7 +28,7 @@
 - [Automotive](https://wireedmpro.com.au/industries/automotive/): Prototypes, tooling and motorsport one-offs
 - [Electronics](https://wireedmpro.com.au/industries/electronics/): Fine-feature tooling for connectors and stampings
 - [Energy](https://wireedmpro.com.au/industries/energy/): Power generation and renewables spares
-- [Machine Building](https://wireedmpro.com.au/industries/machine-building/): The precision details inside custom machines
+- [Research & Development](https://wireedmpro.com.au/industries/research-development/): Prototypes, test rigs and one-offs for R&D teams
 - [Robotics & Automation](https://wireedmpro.com.au/industries/robotics-automation/): Exact fits for moving assemblies
 - [Manufacturers](https://wireedmpro.com.au/industries/manufacturers/): Food lid containers, packaging tooling and production parts
 - [General Engineering](https://wireedmpro.com.au/industries/general-engineering/): One-offs, repairs and everything between

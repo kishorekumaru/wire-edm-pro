@@ -22,7 +22,7 @@ const breadcrumbs = breadcrumbList([{ name: "Industries", href: "/industries/" }
       </p>
 
       <div class="ind-hub__grid">
-        {industries.map((ind) => (
+        {industries.filter((ind) => !ind.unlisted).map((ind) => (
           <a class="ind-hub__card" href={`/industries/${ind.slug}/`}>
             <h2>{ind.name}</h2>
             <p>{ind.short}</p>
